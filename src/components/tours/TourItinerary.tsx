@@ -50,7 +50,7 @@ export function TourItinerary({
                   <span
                     className={cn(
                       "ordinal mt-1.5 shrink-0 transition-colors",
-                      isActive ? "text-accent" : "text-ink-faint",
+                      isActive ? "text-accent-text" : "text-ink-faint",
                     )}
                   >
                     {String(d.n).padStart(2, "0")}

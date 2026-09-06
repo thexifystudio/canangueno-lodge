@@ -31,6 +31,7 @@
   --color-accent: var(--c-accent);
   --color-accent-ink: var(--c-accent-ink);
   --color-accent-soft: var(--c-accent-soft);
+  --color-accent-text: var(--c-accent-text);
 
   --color-line: var(--c-line);
   --color-line-deep: var(--c-line-deep);
@@ -88,10 +89,14 @@
   h4 {
     font-family: var(--ff-display), "Iowan Old Style", Georgia, serif;
     font-weight: 400;
-    line-height: 1.04;
-    letter-spacing: -0.015em;
+    line-height: 1.06;
+    letter-spacing: -0.01em;
     text-wrap: balance;
     margin: 0;
+    /* Fraunces trae ejes propios: SOFT redondea los terminales y WONK activa
+       las formas irregulares. Es lo que le da carácter y la aleja de una
+       serif de catálogo. */
+    font-variation-settings: "SOFT" 28, "WONK" 1;
   }
 
   p {
@@ -205,6 +210,17 @@
   opacity: var(--grain-strength, 0.045);
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+}
+
+/* Cinta de fauna: la lista va duplicada, así que mover el 50 % es un bucle
+   perfecto. Ver `components/sections/FaunaMarquee.tsx`. */
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
 }
 
 /* Barra de scroll discreta, en tono de marca */

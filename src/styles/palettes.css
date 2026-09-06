@@ -33,23 +33,31 @@
   --raw-terracotta: #a96645;
   --raw-charcoal: #171a17;
 
-  /* — semánticos — */
+  /* — semánticos —
+     Los valores de texto están elegidos por CONTRASTE medido, no a ojo.
+     Contra el ivory de fondo: ink 14:1 · ink-soft 9:1 · ink-faint 5,1:1
+     Contra el jungle profundo: on-deep 13:1 · on-deep-soft 8,4:1 · faint 5:1 */
   --c-bg: var(--raw-ivory);
   --c-bg-warm: var(--raw-sand);
   --c-bg-deep: var(--raw-jungle);
   --c-surface: #fdfcf8;
 
   --c-ink: var(--raw-charcoal);
-  --c-ink-soft: #4c534a;
-  --c-ink-faint: #7f867b;
+  --c-ink-soft: #3f4740;
+  --c-ink-faint: #5f6a5e;
 
   --c-on-deep: #f2f0e8;
-  --c-on-deep-soft: #b9c3b5;
-  --c-on-deep-faint: #7e8c7d;
+  --c-on-deep-soft: #c3cdbf;
+  --c-on-deep-faint: #8b9a88;
 
-  --c-accent: var(--raw-terracotta);
+  /* Terracota. El #A96645 original quedaba apagado para un botón y no llegaba
+     a contraste AA con texto blanco; se oscureció para el relleno y se
+     reservó una variante más clara para el hover. */
+  --c-accent: #a0512e;
   --c-accent-ink: #fffdf8;
-  --c-accent-soft: #c48a6d;
+  --c-accent-soft: #c06b40;
+  /* Para texto en terracota sobre fondo claro (el relleno no da AA en 14px). */
+  --c-accent-text: #8a4526;
 
   --c-line: #dcd5c1;
   --c-line-deep: #2f4d3d;
@@ -88,6 +96,7 @@
   --c-accent: #c9a227;
   --c-accent-ink: #0b1610;
   --c-accent-soft: #dcbd5e;
+  --c-accent-text: #dcbd5e;
 
   --c-line: #22362a;
   --c-line-deep: #1a2b21;
@@ -123,9 +132,10 @@
   --c-on-deep-soft: #b0c0b8;
   --c-on-deep-faint: #7c8c85;
 
-  --c-accent: var(--raw-terracotta);
+  --c-accent: #b25668;
   --c-accent-ink: #ffffff;
-  --c-accent-soft: #d68b9a;
+  --c-accent-soft: #c97387;
+  --c-accent-text: #9c4457;
 
   --c-line: #d6ddd6;
   --c-line-deep: #245c53;

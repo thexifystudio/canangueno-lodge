@@ -85,7 +85,7 @@ export default async function JourneyPage({
                     <h3 className="mt-3 font-display text-[1.5rem] leading-tight text-ink">
                       {pick(step.place, l)}
                     </h3>
-                    <p className="mt-2 text-xs uppercase tracking-[0.14em] text-accent">
+                    <p className="mt-2 text-xs uppercase tracking-[0.14em] text-accent-text">
                       {pick(step.duration, l)}
                     </p>
                     <p className="mt-4 text-sm leading-relaxed text-ink-soft">

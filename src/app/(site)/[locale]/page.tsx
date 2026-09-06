@@ -4,10 +4,12 @@ import { getDictionary } from "@/i18n";
 
 import { Hero } from "@/components/sections/Hero";
 import { Statement } from "@/components/sections/Statement";
+import { FaunaMarquee } from "@/components/sections/FaunaMarquee";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
 import { ToursSection } from "@/components/sections/ToursSection";
 import { StorySection } from "@/components/sections/StorySection";
 import { LodgeSection } from "@/components/sections/LodgeSection";
+import { VideoSection } from "@/components/sections/VideoSection";
 import { ReviewsSection } from "@/components/sections/ReviewsSection";
 import { BookingCta } from "@/components/sections/BookingCta";
 import { LocationSection } from "@/components/sections/LocationSection";
@@ -36,12 +38,16 @@ export default async function HomePage({
 
   return (
     <>
+      {/* El ritmo alterna claro / arena / oscuro a propósito: si todas las
+          secciones se ven igual, la página se lee como una plantilla. */}
       <Hero locale={l} dict={dict} />
       <Statement locale={l} dict={dict} />
+      <FaunaMarquee locale={l} dict={dict} />
       <ExperienceSection locale={l} dict={dict} />
       <ToursSection locale={l} dict={dict} />
       <StorySection locale={l} dict={dict} />
       <LodgeSection locale={l} dict={dict} />
+      <VideoSection locale={l} dict={dict} />
       <ReviewsSection locale={l} dict={dict} />
       <BookingCta locale={l} dict={dict} />
       <LocationSection locale={l} dict={dict} />

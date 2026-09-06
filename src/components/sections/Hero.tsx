@@ -10,6 +10,8 @@ import type { Dictionary } from "@/i18n";
 import { routes } from "@/lib/routes";
 import { Media } from "@/components/ui/Media";
 import { ButtonLink } from "@/components/ui/Button";
+import { VideoLightbox } from "@/components/video/VideoLightbox";
+import { Ambient } from "@/components/motion/Ambient";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -74,7 +76,11 @@ export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   return (
     <section
       ref={root}
-      className="relative flex h-[100svh] min-h-[36rem] flex-col justify-end overflow-hidden bg-bg-deep"
+      // `isolate` no es decorativo: sin él, el contenedor de la imagen con
+      // z-index negativo se va detrás del `bg-bg-deep` de esta misma sección
+      // y la fotografía queda tapada por el color de fondo. Con `isolate` la
+      // sección crea su propio contexto de apilamiento y la foto se ve.
+      className="relative isolate flex h-[100svh] min-h-[36rem] flex-col justify-end overflow-hidden bg-bg-deep"
     >
       {/* Imagen */}
       <div className="absolute inset-0 -z-10">
@@ -86,6 +92,7 @@ export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           aria-hidden
           className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,18,13,0.28)_0%,rgba(8,18,13,0.10)_32%,rgba(8,18,13,0.70)_72%,rgba(8,18,13,0.90)_100%)]"
         />
+        <Ambient variant="haze" />
       </div>
 
       <div className="shell relative pb-10 md:pb-14">
@@ -120,6 +127,13 @@ export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
                 {dict.hero.ctaSecondary}
               </ButtonLink>
             </span>
+            {/* El video real del lodge, disponible desde la primera pantalla. */}
+            <span className="hero-cta sm:ml-4">
+              <VideoLightbox
+                label={dict.video.playShort}
+                closeLabel={dict.video.close}
+              />
+            </span>
           </div>
         </div>
       </div>
@@ -127,7 +141,7 @@ export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
       {/* Franja de datos en el borde inferior */}
       <div className="hero-meta relative border-t border-on-deep/20">
         <div className="shell flex items-center justify-between gap-6 py-5">
-          <dl className="flex flex-wrap items-center gap-x-10 gap-y-2 text-on-deep-soft">
+          <dl className="flex flex-wrap items-center gap-x-6 gap-y-1.5 text-on-deep-soft sm:gap-x-10">
             <div className="flex items-baseline gap-2.5">
               <dt className="sr-only">{dict.location.eyebrow}</dt>
               <dd className="eyebrow">{dict.hero.metaLocation}</dd>

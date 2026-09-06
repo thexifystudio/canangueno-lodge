@@ -45,7 +45,26 @@ seguí la misma regla.
 
 ---
 
-## 📸 Fotos: cómo pasar de placeholder a real
+## 🎬 El video
+
+El lodge tiene un video propio en YouTube (`Auj1H9UziKM`, toma de dron sobre el
+río Cuyabeno). Se usa en tres lugares y es el activo visual más fuerte que hay
+hoy:
+
+1. **La foto del hero es un fotograma de ese video** (`public/fotos/rio-cuyabeno-canoa.jpg`).
+   Material real del cliente — ni banco de imágenes ni IA.
+2. **Botón "Ver video" en el hero**, desde la primera pantalla.
+3. **Sección cinematográfica** antes de las reseñas.
+
+Se incrusta con técnica de **fachada**: la página sólo pinta un botón y el
+iframe de YouTube se crea recién al hacer clic. Así el video no suma peso ni
+cookies de terceros a la carga inicial. Se usa `youtube-nocookie.com`.
+
+Para cambiar el video: `src/config/site.ts` → `video.youtubeId`.
+
+---
+
+## 🖼️ Fotos: cómo pasar de placeholder a real
 
 Hoy **no hay fotos reales**. Cada imagen se dibuja como un degradado compuesto
 con los colores de la paleta activa (`src/styles/media.css`), con su etiqueta
@@ -118,6 +137,27 @@ GSAP + ScrollTrigger + Lenis (scroll suave).
 - **`?nosmooth=1`** en cualquier URL desactiva Lenis. Sirve para QA y para
   herramientas que no se llevan bien con el scroll sintético.
 
+- `<Ambient>` — capa de polen/luciérnagas en canvas sobre los bloques oscuros.
+  Toma los colores de la paleta, pesa cero KB, se pausa cuando la sección no
+  está a la vista y se apaga con `prefers-reduced-motion`.
+  **Por qué no es un video generado con IA:** el fondo de esas secciones es la
+  fotografía real del lodge; superponerle material inventado la ensucia y la
+  contradice.
+- `<FaunaMarquee>` — cinta con las especies que nombran los itinerarios reales.
+  Existe para romper la cadencia "etiqueta → título → párrafo → grilla" que se
+  repetía en todas las secciones, que es lo que hace que una web se lea como
+  plantilla.
+
+### Trampa de apilamiento que ya nos mordió una vez
+
+Un contenedor de imagen con `-z-10` dentro de una sección que tiene color de
+fondo **se va detrás de ese color** si la sección no crea contexto de
+apilamiento (`position: relative` sola NO lo crea). Resultado: la fotografía
+desaparece y la sección se ve como un bloque de color plano.
+
+La solución es `isolate` en la sección. Está aplicado en `Hero` y en
+`VideoSection`. **Si agregás una sección con imagen de fondo, acordate.**
+
 ### Dos decisiones que conviene no revertir
 
 1. **Nada se esconde desde CSS.** El estado inicial de cada animación lo pone
@@ -173,6 +213,20 @@ GSAP + ScrollTrigger + Lenis (scroll suave).
 - **No se publican los datos bancarios** (banco, número de cuenta, RUC) aunque
   hoy estén en la web actual: publicar una cuenta en abierto invita a
   suplantación. Se envían por canal privado junto al voucher.
+
+---
+
+## 📷 Capturas de revisión
+
+```bash
+npm run build && npx next start -p 3010
+node scripts/shots.mjs http://localhost:3010
+```
+
+Usa el Chrome que ya está instalado en la máquina (no descarga nada) y guarda
+en `.shots/` una captura de página completa de cada página, en escritorio
+(1440) y en móvil (390). Sirve para revisar diseño y responsive de verdad, sin
+depender de un panel de preview.
 
 ---
 

@@ -91,7 +91,7 @@ export function StorySection({ locale, dict }: { locale: Locale; dict: Dictionar
               </div>
 
               <div className="mt-6 flex items-baseline gap-5 border-t border-line-deep pt-5">
-                <span className="font-display text-[1.9rem] leading-none tabular-nums text-accent">
+                <span className="font-display text-[1.9rem] leading-none tabular-nums text-accent-soft">
                   {m.time}
                 </span>
                 <h3 className="text-[length:var(--text-lg)] text-on-deep">{m.title}</h3>

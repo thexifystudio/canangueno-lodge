@@ -73,13 +73,16 @@ export function GalleryGrid({ locale, dict }: { locale: Locale; dict: Dictionary
         ))}
       </div>
 
-      {/* Mosaico */}
-      <ul className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6">
+      {/* Mosaico.
+          Va con `columns` y no con `grid`: una grilla con `row-span` deja
+          celdas vacías cuando las fotos tienen alturas distintas, y se ven
+          agujeros. Con multi-columna las piezas se acomodan solas sin huecos,
+          y cada una conserva su proporción real. */}
+      <ul className="mt-12 columns-2 gap-4 md:columns-3 md:gap-6 [column-fill:balance]">
         {items.map((id, i) => {
           const entry = getMedia(id);
-          const tall = entry.ratio === "2/3";
           return (
-            <li key={id} className={cn(tall && "row-span-2")}>
+            <li key={id} className="mb-4 break-inside-avoid md:mb-6">
               <button
                 type="button"
                 onClick={() => setOpen(i)}

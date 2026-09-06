@@ -131,6 +131,20 @@ export const en: Dictionary = {
     ],
   },
 
+  video: {
+    eyebrow: "The film",
+    title: "Three hours upriver",
+    titleEmphasis: "and the signal is gone",
+    lead: "Filmed on the Cuyabeno river, on the way to the lodge.",
+    play: "Watch the film",
+    playShort: "Watch",
+    close: "Close the video",
+  },
+
+  fauna: {
+    eyebrow: "What crosses your path",
+  },
+
   lodge: {
     eyebrow: "The lodge",
     title: "A house in the middle",

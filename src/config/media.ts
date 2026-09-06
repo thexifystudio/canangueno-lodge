@@ -41,12 +41,18 @@ export type MediaEntry = {
 
 export const media = {
   /* ─── Portada ─── */
+  /**
+   * ✅ FOTO REAL. Fotograma del video oficial del propio lodge
+   * (youtube.com/watch?v=Auj1H9UziKM): toma aérea de una canoa navegando el
+   * río Cuyabeno. Es material del cliente, no una imagen de banco ni de IA.
+   */
   hero: {
+    src: "/fotos/rio-cuyabeno-canoa.jpg",
     alt: {
-      es: "Amanecer sobre el río Cuyabeno visto desde una canoa",
-      en: "Sunrise over the Cuyabeno river seen from a canoe",
+      es: "Vista aérea de una canoa navegando el río Cuyabeno entre la selva",
+      en: "Aerial view of a canoe travelling the Cuyabeno river through the rainforest",
     },
-    tone: "dawn",
+    tone: "river",
     ratio: "16/9",
   },
   "home-statement": {

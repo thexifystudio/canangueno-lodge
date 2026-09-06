@@ -71,7 +71,18 @@ export function Header({ locale, dict }: Props) {
             : "border-b border-transparent bg-transparent",
         )}
       >
-        <div className="shell flex h-[68px] items-center justify-between gap-6 md:h-[76px]">
+        {/* Sobre la foto del hero el cielo es casi blanco y el menú se perdía.
+            Este velo con caída larga le devuelve contraste sin ensuciar la
+            imagen — y desaparece apenas la barra se vuelve sólida. */}
+        <div
+          aria-hidden
+          className={cn(
+            "pointer-events-none absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-black/60 via-black/25 to-transparent transition-opacity duration-500",
+            scrolled ? "opacity-0" : "opacity-100",
+          )}
+        />
+
+        <div className="shell relative flex h-[68px] items-center justify-between gap-6 md:h-[76px]">
           {/* Marca */}
           <Link
             href={routes.home(locale)}
@@ -93,7 +104,7 @@ export function Header({ locale, dict }: Props) {
                   "text-[0.82rem] font-medium tracking-wide transition-colors duration-300",
                   scrolled
                     ? "text-ink-soft hover:text-ink"
-                    : "text-on-deep-soft hover:text-on-deep",
+                    : "text-on-deep/90 hover:text-on-deep",
                 )}
               >
                 {l.label}
@@ -106,7 +117,7 @@ export function Header({ locale, dict }: Props) {
             <div
               className={cn(
                 "hidden items-center gap-1.5 text-[0.72rem] font-medium tracking-[0.14em] sm:flex",
-                scrolled ? "text-ink-faint" : "text-on-deep-faint",
+                scrolled ? "text-ink-faint" : "text-on-deep/70",
               )}
             >
               {LOCALES.map((l, i) => (

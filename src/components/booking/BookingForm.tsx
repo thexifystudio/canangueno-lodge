@@ -295,7 +295,7 @@ export function BookingForm({ locale, dict }: { locale: Locale; dict: Dictionary
         </div>
 
         {status === "error" && (
-          <p role="alert" className="text-sm text-accent">
+          <p role="alert" className="text-sm text-accent-text">
             <strong className="font-medium">{dict.booking.errorTitle}.</strong>{" "}
             {dict.booking.errorBody}
           </p>

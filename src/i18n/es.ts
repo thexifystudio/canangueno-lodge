@@ -135,6 +135,20 @@ export const es = {
     ],
   },
 
+  video: {
+    eyebrow: "El video",
+    title: "Tres horas río adentro",
+    titleEmphasis: "y ya no hay señal",
+    lead: "Grabado en el río Cuyabeno, camino al lodge.",
+    play: "Ver el video",
+    playShort: "Ver video",
+    close: "Cerrar el video",
+  },
+
+  fauna: {
+    eyebrow: "Lo que se cruza en el camino",
+  },
+
   lodge: {
     eyebrow: "El lodge",
     title: "Una casa en medio",

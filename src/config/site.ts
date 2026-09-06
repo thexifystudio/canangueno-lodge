@@ -57,6 +57,17 @@ export const site = {
     lng: -76.18,
   },
 
+  /**
+   * Video oficial del lodge en YouTube (material propio del cliente).
+   * Se incrusta con la técnica de "fachada": primero se muestra el póster y
+   * el iframe se carga recién al hacer clic. Así el video no penaliza el
+   * tiempo de carga ni mete cookies de terceros a todo el que entra.
+   */
+  video: {
+    youtubeId: "Auj1H9UziKM",
+    title: "Canangueno Lodge — Cuyabeno Tours Ecuador",
+  },
+
   social: {
     instagram: "https://www.instagram.com/cananguenolodge/",
     facebook: "https://www.facebook.com/cananguenolodge",

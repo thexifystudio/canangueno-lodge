@@ -1,30 +1,42 @@
-import { Cormorant_Garamond, Manrope } from "next/font/google";
+import { Fraunces, Manrope } from "next/font/google";
 
 /**
  * ────────────────────────────────────────────────────────────────────────────
  *  TIPOGRAFÍAS
  * ────────────────────────────────────────────────────────────────────────────
- *  Dos familias, nada más. El contraste sale del tamaño y del peso.
  *
- *  Para cambiar el par tipográfico: cambiá los dos `import` de arriba y los
- *  dos bloques de abajo. Los nombres de las variables CSS (`--ff-display` y
- *  `--ff-sans`) NO se tocan — el resto del sitio depende de ellas.
+ *  DISPLAY · Fraunces (variable)
+ *  Es una "soft serif" con ejes propios: `SOFT` redondea los terminales y
+ *  `WONK` activa formas ligeramente irregulares. Se eligió a propósito por
+ *  encima de Cormorant Garamond:
  *
- *  Alternativas ya evaluadas para la dirección "Amazon Luxury":
- *    Display · Instrument_Serif  (más dramática, un solo peso)
- *             · Fraunces          (orgánica, eje soft opcional)
- *             · DM_Serif_Display  (más comercial, muy legible en grande)
- *    UI      · Plus_Jakarta_Sans  (geométrica)
- *             · Inter             (neutra)
+ *    · Cormorant es LA serif de lujo de internet — está en cada web de hotel
+ *      boutique. Cumple, pero no distingue a nadie.
+ *    · Cormorant tiene un contraste altísimo y trazos muy finos: sobre fondos
+ *      oscuros y en pantallas chicas se debilita y pierde legibilidad.
+ *    · Fraunces es orgánica y botánica —encaja con la selva sin ser literal—,
+ *      tiene rango de peso real (200-900) y aguanta bien en oscuro y en móvil.
  *
- *  Se auto-hospedan vía next/font: cero pedidos a Google en cada visita y
- *  cero layout shift.
+ *  UI · Manrope
+ *  Geométrica, limpia, buena en tamaños chicos. Se queda.
+ *
+ *  ── PARA CAMBIAR EL PAR TIPOGRÁFICO ──
+ *  Cambiá el `import` de arriba y el bloque `display` de abajo. El nombre de
+ *  la variable CSS (`--ff-display`) NO se toca: todo el sitio depende de ella.
+ *
+ *  Alternativas ya evaluadas para esta dirección:
+ *    · Instrument_Serif  → más dramática y editorial, un solo peso
+ *    · Cormorant_Garamond → la opción clásica de lujo (la anterior)
+ *    · Newsreader        → con tamaño óptico, más cálida y periodística
  */
 
-export const display = Cormorant_Garamond({
+// Sin `weight`: así next/font sirve la fuente VARIABLE completa, que es la
+// única forma de poder pedir los ejes SOFT y WONK. Con una lista de pesos
+// fijos, `axes` no está permitido.
+export const display = Fraunces({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
   style: ["normal", "italic"],
+  axes: ["SOFT", "WONK", "opsz"],
   variable: "--ff-display",
   display: "swap",
 });
