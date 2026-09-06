@@ -1,0 +1,112 @@
+/*
+ * ───────────────────────────────────────────────────────────────────────────
+ *  PLACEHOLDERS DE IMAGEN
+ * ───────────────────────────────────────────────────────────────────────────
+ *  Mientras no haya fotos reales, cada `<Media>` dibuja una composición de
+ *  degradados construida con los tokens de la paleta activa. Ventajas:
+ *   · cambian de color solos si cambiás de paleta
+ *   · pesan cero (no hay archivos que administrar)
+ *   · cada `tone` se ve distinto, así se lee la maqueta como maqueta real
+ *
+ *  Cuando llegue la foto, se agrega `src` en `src/config/media.ts` y este
+ *  bloque deja de usarse para esa imagen. No hay que tocar ningún componente.
+ */
+
+.media-ph {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background-color: var(--c-img-2);
+  isolation: isolate;
+}
+
+.media-ph::after {
+  /* grano de película, para que no se lea como un bloque plano */
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Etiqueta discreta — sólo visible mientras sea placeholder */
+.media-ph__label {
+  position: absolute;
+  left: 0.75rem;
+  bottom: 0.7rem;
+  z-index: 2;
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--c-img-4) 82%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c-img-4) 26%, transparent);
+  padding: 0.2rem 0.45rem;
+  backdrop-filter: blur(3px);
+}
+
+/* ── Dosel: luz que baja entre los árboles ── */
+.media-ph[data-tone="canopy"] {
+  background-image:
+    radial-gradient(120% 70% at 30% -10%, color-mix(in srgb, var(--c-img-4) 30%, transparent), transparent 62%),
+    radial-gradient(60% 50% at 78% 18%, color-mix(in srgb, var(--c-img-3) 55%, transparent), transparent 70%),
+    linear-gradient(168deg, var(--c-img-2) 0%, var(--c-img-1) 78%);
+}
+
+/* ── Río: agua oscura con una línea de horizonte y reflejo ── */
+.media-ph[data-tone="river"] {
+  background-image:
+    linear-gradient(180deg, transparent 46%, color-mix(in srgb, var(--c-img-4) 16%, transparent) 47%, transparent 48.5%),
+    radial-gradient(80% 46% at 50% 96%, color-mix(in srgb, var(--c-img-3) 42%, transparent), transparent 72%),
+    linear-gradient(180deg, var(--c-img-2) 0%, var(--c-img-1) 52%, var(--c-img-2) 100%);
+}
+
+/* ── Amanecer: resplandor cálido arriba y niebla baja ── */
+.media-ph[data-tone="dawn"] {
+  background-image:
+    radial-gradient(90% 62% at 68% 8%, color-mix(in srgb, var(--c-img-4) 62%, transparent), transparent 66%),
+    linear-gradient(180deg, transparent 52%, color-mix(in srgb, var(--c-img-4) 22%, transparent) 68%, transparent 84%),
+    linear-gradient(178deg, var(--c-img-3) 0%, var(--c-img-2) 44%, var(--c-img-1) 100%);
+}
+
+/* ── Noche: casi todo negro, una sola fuente de luz ── */
+.media-ph[data-tone="night"] {
+  background-image:
+    radial-gradient(34% 26% at 74% 22%, color-mix(in srgb, var(--c-img-4) 34%, transparent), transparent 70%),
+    radial-gradient(120% 90% at 40% 110%, color-mix(in srgb, var(--c-img-3) 26%, transparent), transparent 66%),
+    linear-gradient(180deg, var(--c-img-1) 0%, #05100b 100%);
+}
+
+/* ── Laguna: horizonte ancho, sol bajo ── */
+.media-ph[data-tone="lagoon"] {
+  background-image:
+    radial-gradient(46% 30% at 26% 40%, color-mix(in srgb, var(--c-img-4) 72%, transparent), transparent 72%),
+    linear-gradient(180deg, transparent 55%, color-mix(in srgb, var(--c-img-1) 60%, transparent) 56%),
+    linear-gradient(184deg, var(--c-img-3) 0%, var(--c-img-2) 50%, var(--c-img-1) 100%);
+}
+
+/* ── Comunidad: tierra, madera, algo más cálido ── */
+.media-ph[data-tone="community"] {
+  background-image:
+    radial-gradient(78% 58% at 22% 78%, color-mix(in srgb, var(--c-img-4) 46%, transparent), transparent 70%),
+    radial-gradient(52% 40% at 82% 22%, color-mix(in srgb, var(--c-img-3) 44%, transparent), transparent 72%),
+    linear-gradient(160deg, var(--c-img-2) 0%, var(--c-img-1) 88%);
+}
+
+/* ── Lodge: interior, luz cálida difusa ── */
+.media-ph[data-tone="lodge"] {
+  background-image:
+    linear-gradient(102deg, transparent 38%, color-mix(in srgb, var(--c-img-4) 24%, transparent) 52%, transparent 66%),
+    radial-gradient(70% 56% at 76% 34%, color-mix(in srgb, var(--c-img-4) 40%, transparent), transparent 74%),
+    linear-gradient(172deg, var(--c-img-3) 0%, var(--c-img-2) 56%, var(--c-img-1) 100%);
+}
+
+/* ── Fauna: fondo desenfocado con un punto de foco ── */
+.media-ph[data-tone="fauna"] {
+  background-image:
+    radial-gradient(22% 18% at 62% 44%, color-mix(in srgb, var(--c-img-4) 58%, transparent), transparent 76%),
+    radial-gradient(90% 70% at 18% 84%, color-mix(in srgb, var(--c-img-3) 50%, transparent), transparent 68%),
+    linear-gradient(150deg, var(--c-img-2) 0%, var(--c-img-1) 82%);
+}

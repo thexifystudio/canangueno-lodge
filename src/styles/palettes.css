@@ -1,0 +1,137 @@
+/*
+ * ───────────────────────────────────────────────────────────────────────────
+ *  PALETAS
+ * ───────────────────────────────────────────────────────────────────────────
+ *
+ *  Cada paleta define primero sus colores CRUDOS (los hex de marca) y después
+ *  los TOKENS SEMÁNTICOS, que son los únicos que usan los componentes.
+ *
+ *  Para cambiar de paleta: `src/config/theme.ts` → `palette: "..."`.
+ *  Para retocar un color puntual: editá el hex crudo acá y se propaga solo.
+ *
+ *  Tokens semánticos (usar SIEMPRE estos en los componentes, nunca un hex):
+ *    Fondos      --c-bg  --c-bg-warm  --c-bg-deep  --c-surface
+ *    Texto       --c-ink  --c-ink-soft  --c-ink-faint
+ *    Sobre deep  --c-on-deep  --c-on-deep-soft  --c-on-deep-faint
+ *    Acento      --c-accent  --c-accent-ink  --c-accent-soft
+ *    Líneas      --c-line  --c-line-deep
+ *    Imagen      --c-img-1 … --c-img-4   (capas de los placeholders)
+ */
+
+/* ══════════════════════════════════════════════════════════════════════════
+   1 · ECO-LUXURY · Amazon Luxury / Boutique Lodge                  [ACTIVA]
+   Proporción: 60% ivory+arena · 25% jungle+forest · 10% foto · 5% acento
+   ══════════════════════════════════════════════════════════════════════════ */
+:root,
+[data-palette="eco-luxury"] {
+  /* — crudos — */
+  --raw-jungle: #102a20;
+  --raw-forest: #294c3a;
+  --raw-moss: #65765b;
+  --raw-sand: #e8dfc9;
+  --raw-ivory: #f5f3ed;
+  --raw-terracotta: #a96645;
+  --raw-charcoal: #171a17;
+
+  /* — semánticos — */
+  --c-bg: var(--raw-ivory);
+  --c-bg-warm: var(--raw-sand);
+  --c-bg-deep: var(--raw-jungle);
+  --c-surface: #fdfcf8;
+
+  --c-ink: var(--raw-charcoal);
+  --c-ink-soft: #4c534a;
+  --c-ink-faint: #7f867b;
+
+  --c-on-deep: #f2f0e8;
+  --c-on-deep-soft: #b9c3b5;
+  --c-on-deep-faint: #7e8c7d;
+
+  --c-accent: var(--raw-terracotta);
+  --c-accent-ink: #fffdf8;
+  --c-accent-soft: #c48a6d;
+
+  --c-line: #dcd5c1;
+  --c-line-deep: #2f4d3d;
+
+  --c-img-1: var(--raw-jungle);
+  --c-img-2: var(--raw-forest);
+  --c-img-3: var(--raw-moss);
+  --c-img-4: var(--raw-sand);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   2 · NIGHT CANOPY · oscuro cinematográfico, la foto es la única luz
+   ══════════════════════════════════════════════════════════════════════════ */
+[data-palette="night-canopy"] {
+  --raw-jungle: #08130e;
+  --raw-forest: #14291e;
+  --raw-moss: #48604f;
+  --raw-sand: #1c2b22;
+  --raw-ivory: #e9efe7;
+  --raw-terracotta: #c9a227;
+  --raw-charcoal: #e9efe7;
+
+  --c-bg: #08130e;
+  --c-bg-warm: #102018;
+  --c-bg-deep: #050d09;
+  --c-surface: #12211a;
+
+  --c-ink: #e9efe7;
+  --c-ink-soft: #b3c1b4;
+  --c-ink-faint: #7d8c7f;
+
+  --c-on-deep: #e9efe7;
+  --c-on-deep-soft: #b3c1b4;
+  --c-on-deep-faint: #7d8c7f;
+
+  --c-accent: #c9a227;
+  --c-accent-ink: #0b1610;
+  --c-accent-soft: #dcbd5e;
+
+  --c-line: #22362a;
+  --c-line-deep: #1a2b21;
+
+  --c-img-1: #050d09;
+  --c-img-2: #14291e;
+  --c-img-3: #2e6b5e;
+  --c-img-4: #4a6154;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   3 · RIVER MIST · claro editorial frío, acento delfín rosado
+   ══════════════════════════════════════════════════════════════════════════ */
+[data-palette="river-mist"] {
+  --raw-jungle: #0e211b;
+  --raw-forest: #1d5a52;
+  --raw-moss: #5a6f63;
+  --raw-sand: #e3e8e2;
+  --raw-ivory: #f2f4f0;
+  --raw-terracotta: #c46b7e;
+  --raw-charcoal: #101c18;
+
+  --c-bg: var(--raw-ivory);
+  --c-bg-warm: var(--raw-sand);
+  --c-bg-deep: var(--raw-jungle);
+  --c-surface: #ffffff;
+
+  --c-ink: var(--raw-charcoal);
+  --c-ink-soft: #46534d;
+  --c-ink-faint: #798379;
+
+  --c-on-deep: #eef2ec;
+  --c-on-deep-soft: #b0c0b8;
+  --c-on-deep-faint: #7c8c85;
+
+  --c-accent: var(--raw-terracotta);
+  --c-accent-ink: #ffffff;
+  --c-accent-soft: #d68b9a;
+
+  --c-line: #d6ddd6;
+  --c-line-deep: #245c53;
+
+  --c-img-1: var(--raw-jungle);
+  --c-img-2: var(--raw-forest);
+  --c-img-3: var(--raw-moss);
+  --c-img-4: var(--raw-sand);
+}

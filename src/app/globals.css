@@ -1,0 +1,216 @@
+@import "tailwindcss";
+@import "../styles/palettes.css";
+@import "../styles/media.css";
+
+/*
+ * ───────────────────────────────────────────────────────────────────────────
+ *  PUENTE TOKENS → TAILWIND
+ * ───────────────────────────────────────────────────────────────────────────
+ *  Acá los tokens semánticos de `palettes.css` se convierten en utilidades de
+ *  Tailwind. Gracias a esto los componentes escriben `bg-surface text-ink
+ *  border-line` y nunca un color literal — cambiar de paleta no toca ni un
+ *  componente.
+ *
+ *  Nota: las variables de tipografía usan el prefijo propio `--ff-*` porque
+ *  Tailwind v4 ya define `--font-sans` y chocarían.
+ */
+@theme inline {
+  --color-bg: var(--c-bg);
+  --color-bg-warm: var(--c-bg-warm);
+  --color-bg-deep: var(--c-bg-deep);
+  --color-surface: var(--c-surface);
+
+  --color-ink: var(--c-ink);
+  --color-ink-soft: var(--c-ink-soft);
+  --color-ink-faint: var(--c-ink-faint);
+
+  --color-on-deep: var(--c-on-deep);
+  --color-on-deep-soft: var(--c-on-deep-soft);
+  --color-on-deep-faint: var(--c-on-deep-faint);
+
+  --color-accent: var(--c-accent);
+  --color-accent-ink: var(--c-accent-ink);
+  --color-accent-soft: var(--c-accent-soft);
+
+  --color-line: var(--c-line);
+  --color-line-deep: var(--c-line-deep);
+
+  --font-display: var(--ff-display), "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--ff-sans), "Segoe UI", system-ui, sans-serif;
+}
+
+/* ───────────────────────────────────────────────────────────────────────────
+   ESCALA TIPOGRÁFICA — editorial, con mucho salto entre display y cuerpo
+   ─────────────────────────────────────────────────────────────────────────── */
+:root {
+  --radius: 2px;
+
+  --text-eyebrow: 0.72rem;
+  --text-xs: 0.8rem;
+  --text-sm: 0.9rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.2rem;
+  --text-xl: clamp(1.4rem, 1.1rem + 1vw, 1.9rem);
+  --text-2xl: clamp(1.9rem, 1.4rem + 2vw, 3rem);
+  --text-3xl: clamp(2.5rem, 1.6rem + 3.6vw, 4.6rem);
+  --text-hero: clamp(3rem, 1.4rem + 6.4vw, 7.5rem);
+
+  --gutter: clamp(1.25rem, 5vw, 5rem);
+  --section-y: clamp(4.5rem, 10vw, 9.5rem);
+}
+
+/* ───────────────────────────────────────────────────────────────────────────
+   BASE
+   ─────────────────────────────────────────────────────────────────────────── */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--c-bg);
+    color: var(--c-ink);
+    font-family: var(--ff-sans), "Segoe UI", system-ui, sans-serif;
+    font-size: var(--text-base);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--ff-display), "Iowan Old Style", Georgia, serif;
+    font-weight: 400;
+    line-height: 1.04;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--c-accent);
+    color: var(--c-accent-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--c-accent);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+
+  /* Cuando Lenis está activo maneja él el scroll. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ───────────────────────────────────────────────────────────────────────────
+   REVEALS — arranque seguro
+   ───────────────────────────────────────────────────────────────────────────
+   Lección del vault: si el estado inicial de la animación se escribe en el
+   HTML del servidor, sin JS la página queda invisible para siempre.
+
+   Acá NADA se esconde desde CSS. El estado inicial lo pone GSAP dentro de un
+   layout effect (antes del primer pintado), así que:
+     · con JS   → hay animación y no hay parpadeo
+     · sin JS   → la página se ve entera, simplemente sin animar
+   ─────────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  [data-reveal] > * {
+    opacity: 1 !important;
+    clip-path: none !important;
+    transform: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ───────────────────────────────────────────────────────────────────────────
+   UTILIDADES DEL PROYECTO
+   ─────────────────────────────────────────────────────────────────────────── */
+@utility shell {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 90rem;
+  padding-inline: var(--gutter);
+}
+
+@utility shell-narrow {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 58rem;
+  padding-inline: var(--gutter);
+}
+
+@utility section-y {
+  padding-block: var(--section-y);
+}
+
+/* Etiqueta pequeña en versalitas: el recurso de jerarquía del sitio */
+@utility eyebrow {
+  font-family: var(--ff-sans), system-ui, sans-serif;
+  font-size: var(--text-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* Números de secuencia (01 — 02 — 03) */
+@utility ordinal {
+  font-family: var(--ff-sans), system-ui, sans-serif;
+  font-size: var(--text-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  font-variant-numeric: tabular-nums;
+}
+
+@utility display-hero {
+  font-family: var(--ff-display), Georgia, serif;
+  font-size: var(--text-hero);
+  line-height: 0.94;
+  letter-spacing: -0.025em;
+}
+
+/* Grano de película: se aplica sobre fotos y bloques oscuros */
+@utility grain {
+  position: relative;
+}
+@utility grain-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--grain-strength, 0.045);
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+}
+
+/* Barra de scroll discreta, en tono de marca */
+@supports (scrollbar-color: auto) {
+  html {
+    scrollbar-color: var(--c-line) transparent;
+    scrollbar-width: thin;
+  }
+}
