@@ -24,7 +24,8 @@ export function SmoothScroll() {
     if (reduce || disabled) return;
 
     const lenis = new Lenis({
-      duration: 1.05,
+      // Más corto que el default: el scroll suave se nota apenas, no flota.
+      duration: 0.8,
       smoothWheel: true,
       // Sin esto los enlaces con ancla (#experiencia) dejan de funcionar:
       // Lenis se queda con el control del scroll y el salto nativo no ocurre.

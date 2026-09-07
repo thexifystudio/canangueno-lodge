@@ -2,45 +2,45 @@ import type { Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/i18n";
 import { Media } from "@/components/ui/Media";
 import { Reveal } from "@/components/motion/Reveal";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { VideoLightbox } from "@/components/video/VideoLightbox";
-import { Ambient } from "@/components/motion/Ambient";
 
 /**
- * El momento cinematográfico: el video real del lodge a pantalla ancha.
+ * "El video" — su propia sección, tranquila y editorial.
  *
- * Rompe a propósito el patrón del resto del sitio — acá no hay etiqueta,
- * título, párrafo y grilla. Hay una imagen enorme, dos líneas y un botón.
+ * La miniatura es un fotograma real del video del lodge; el iframe de YouTube
+ * se carga recién al hacer clic (ver VideoLightbox). Sin partículas ni
+ * vignette dramática — la foto se sostiene sola.
  */
 export function VideoSection({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   return (
-    <section className="relative isolate flex min-h-[86svh] items-center overflow-hidden bg-bg-deep">
-      <div className="absolute inset-0 -z-10">
-        <Media id="hero" locale={locale} hideLabel sizes="100vw" />
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-[radial-gradient(75%_60%_at_50%_50%,rgba(8,18,13,0.45),rgba(8,18,13,0.86))]"
+    <section className="section-y bg-bg-deep text-on-deep">
+      <div className="shell">
+        <SectionHeading
+          onDeep
+          eyebrow={dict.video.eyebrow}
+          title={dict.video.title}
+          emphasis={dict.video.titleEmphasis}
+          lead={dict.video.lead}
+          className="max-w-[46rem]"
         />
-        <Ambient variant="motes" />
-      </div>
 
-      <div className="shell relative w-full py-24">
-        <Reveal stagger={0.1} className="flex flex-col items-center text-center">
-          <span className="eyebrow text-on-deep-faint">{dict.video.eyebrow}</span>
-
-          <h2 className="mt-7 max-w-[17ch] text-[length:var(--text-3xl)] text-on-deep">
-            {dict.video.title}{" "}
-            <em className="font-light italic">{dict.video.titleEmphasis}</em>
-          </h2>
-
-          <div className="mt-14">
+        <Reveal
+          clip
+          className="relative mt-12 aspect-[16/9] w-full overflow-hidden bg-bg-deep md:mt-16"
+        >
+          <Media id="hero" locale={locale} hideLabel sizes="100vw" />
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,18,13,0.12),rgba(8,18,13,0.44))]"
+          />
+          <div className="absolute inset-0 flex items-center justify-center">
             <VideoLightbox
-              variant="circle"
+              variant="cover"
               label={dict.video.play}
               closeLabel={dict.video.close}
             />
           </div>
-
-          <p className="mt-14 text-sm text-on-deep-faint">{dict.video.lead}</p>
         </Reveal>
       </div>
     </section>

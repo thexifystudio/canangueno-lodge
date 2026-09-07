@@ -6,67 +6,85 @@ import { site } from "@/config/site";
 import { Reveal } from "@/components/motion/Reveal";
 
 /**
- * Reseñas reales. Carrusel horizontal con scroll nativo (con snap): no
- * necesita JS, funciona con teclado y en móvil es lo que la gente espera.
+ * Reseñas reales con tratamiento editorial: la nota grande a un lado, una cita
+ * destacada en display, y el resto en dos columnas tranquilas. Sin carrusel
+ * horizontal — eso se veía barato.
  */
 export function ReviewsSection({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+  const [featured, ...rest] = reviews;
+
   return (
-    <section className="section-y bg-bg-warm">
+    <section className="section-y bg-bg-deep text-on-deep">
       <div className="shell">
-        <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-          <Reveal stagger={0.1}>
-            <span className="eyebrow block text-ink-faint">{dict.reviews.eyebrow}</span>
-            <h2 className="mt-6 max-w-[20ch] text-[length:var(--text-2xl)] text-ink">
+        {/* Encabezado + nota */}
+        <div className="grid gap-x-16 gap-y-10 md:grid-cols-12 md:items-end">
+          <Reveal stagger={0.1} className="md:col-span-8">
+            <span className="eyebrow block text-on-deep-faint">{dict.reviews.eyebrow}</span>
+            <h2 className="mt-6 max-w-[16ch] text-[length:var(--text-3xl)] text-on-deep">
               {dict.reviews.title}{" "}
               <em className="font-light italic">{dict.reviews.titleEmphasis}</em>
             </h2>
           </Reveal>
 
-          <Reveal className="flex items-center gap-3 md:pb-2">
-            <span className="flex gap-0.5" aria-hidden>
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} size={15} className="fill-accent text-accent" strokeWidth={0} />
-              ))}
-            </span>
-            <span className="text-sm text-ink-soft">
-              {site.rating.value.toFixed(1)} {dict.reviews.source}
-            </span>
+          <Reveal className="md:col-span-4 md:justify-self-end">
+            <div className="flex items-end gap-3">
+              <span className="font-display text-[3.4rem] leading-[0.8] text-on-deep tabular-nums">
+                {site.rating.value.toFixed(1)}
+              </span>
+              <div className="pb-1.5">
+                <span className="flex gap-0.5" aria-hidden>
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      size={14}
+                      className="fill-accent-soft text-accent-soft"
+                      strokeWidth={0}
+                    />
+                  ))}
+                </span>
+                <p className="mt-1.5 text-xs text-on-deep-faint">{dict.reviews.source}</p>
+              </div>
+            </div>
           </Reveal>
         </div>
-      </div>
 
-      <Reveal className="mt-14 md:mt-20">
-        <ul
-          className="flex snap-x snap-mandatory gap-6 overflow-x-auto px-[var(--gutter)] pb-6 [scrollbar-width:thin]"
-          tabIndex={0}
-          aria-label={dict.reviews.eyebrow}
-        >
-          {reviews.map((r) => (
-            <li
-              key={r.id}
-              className="flex w-[19rem] shrink-0 snap-start flex-col justify-between border-t border-ink/20 pt-6 sm:w-[22rem]"
-            >
-              <blockquote className="font-display text-[1.35rem] font-light leading-snug text-ink">
-                “{r.quote}”
-              </blockquote>
+        {/* Cita destacada */}
+        <Reveal className="mt-14 border-t border-line-deep pt-12 md:mt-20 md:pt-16">
+          <blockquote className="max-w-[26ch] font-display text-[length:var(--text-2xl)] font-light leading-[1.16] text-on-deep">
+            <span className="text-accent-soft" aria-hidden>
+              &ldquo;
+            </span>
+            {featured.quote}
+            <span className="text-accent-soft" aria-hidden>
+              &rdquo;
+            </span>
+          </blockquote>
+          <footer className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
+            <span className="font-medium text-on-deep">{featured.author}</span>
+            <span className="hidden h-px w-8 bg-line-deep sm:block" aria-hidden />
+            <span className="text-on-deep-faint">
+              {pick(featured.date, locale)} &middot; {featured.source}
+            </span>
+          </footer>
+        </Reveal>
 
-              <footer className="mt-7 flex items-baseline justify-between gap-4">
-                <div>
-                  <p className="text-sm font-medium text-ink">{r.author}</p>
-                  <p className="mt-0.5 text-xs text-ink-faint">
-                    {pick(r.date, locale)} · {r.source}
-                  </p>
-                </div>
-                {r.excerpt && (
-                  <span className="text-[0.6rem] uppercase tracking-[0.14em] text-ink-faint">
-                    {dict.reviews.excerptNote}
-                  </span>
-                )}
-              </footer>
-            </li>
+        {/* Resto */}
+        <div className="mt-14 grid gap-x-16 gap-y-12 md:mt-20 md:grid-cols-2">
+          {rest.map((r) => (
+            <Reveal key={r.id} y={26}>
+              <div className="h-full border-t border-line-deep pt-7">
+                <blockquote className="font-display text-[1.3rem] font-light leading-snug text-on-deep-soft">
+                  {r.quote}
+                </blockquote>
+                <footer className="mt-5 flex items-baseline justify-between gap-4 text-xs">
+                  <span className="font-medium text-on-deep">{r.author}</span>
+                  <span className="text-on-deep-faint">{pick(r.date, locale)}</span>
+                </footer>
+              </div>
+            </Reveal>
           ))}
-        </ul>
-      </Reveal>
+        </div>
+      </div>
     </section>
   );
 }

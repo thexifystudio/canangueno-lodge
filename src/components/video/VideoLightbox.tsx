@@ -8,7 +8,7 @@ import { cn } from "@/lib/cn";
 type Props = {
   label: string;
   closeLabel: string;
-  variant?: "pill" | "circle";
+  variant?: "pill" | "circle" | "cover";
   onDeep?: boolean;
   className?: string;
 };
@@ -58,33 +58,40 @@ export function VideoLightbox({
         onClick={() => setOpen(true)}
         className={cn(
           "group inline-flex items-center transition-colors duration-300",
-          variant === "pill"
-            ? cn(
-                "gap-3 rounded-full border py-2.5 pl-2.5 pr-6 text-sm font-medium backdrop-blur-sm",
-                onDeep
-                  ? "border-on-deep/35 text-on-deep hover:border-on-deep hover:bg-on-deep/10"
-                  : "border-ink/25 text-ink hover:border-ink hover:bg-ink/[0.04]",
-              )
-            : "flex-col gap-4",
+          variant === "pill" &&
+            cn(
+              "gap-3 rounded-full border py-2.5 pl-2.5 pr-6 text-sm font-medium backdrop-blur-sm",
+              onDeep
+                ? "border-on-deep/35 text-on-deep hover:border-on-deep hover:bg-on-deep/10"
+                : "border-ink/25 text-ink hover:border-ink hover:bg-ink/[0.04]",
+            ),
+          variant === "circle" && "flex-col gap-4",
+          variant === "cover" && "flex-col gap-3.5 text-on-deep",
           className,
         )}
       >
         <span
           className={cn(
             "flex shrink-0 items-center justify-center rounded-full transition-transform duration-500 group-hover:scale-105",
-            variant === "pill"
-              ? "h-9 w-9 bg-accent text-accent-ink"
-              : "h-20 w-20 border border-on-deep/50 bg-on-deep/10 text-on-deep backdrop-blur-md md:h-28 md:w-28",
+            variant === "pill" && "h-9 w-9 bg-accent text-accent-ink",
+            variant === "circle" &&
+              "h-20 w-20 border border-on-deep/50 bg-on-deep/10 text-on-deep backdrop-blur-md md:h-28 md:w-28",
+            variant === "cover" &&
+              "h-16 w-16 bg-accent text-accent-ink shadow-[0_16px_44px_-10px_rgba(0,0,0,0.55)] md:h-20 md:w-20",
           )}
         >
           <Play
-            size={variant === "pill" ? 15 : 26}
+            size={variant === "pill" ? 15 : variant === "cover" ? 22 : 26}
             strokeWidth={1.4}
             className="ml-0.5 fill-current"
           />
         </span>
         {variant === "circle" ? (
           <span className="eyebrow text-on-deep-soft">{label}</span>
+        ) : variant === "cover" ? (
+          <span className="eyebrow text-on-deep drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)]">
+            {label}
+          </span>
         ) : (
           label
         )}

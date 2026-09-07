@@ -70,11 +70,6 @@ export const en: Dictionary = {
     title: "The rainforest isn't visited.",
     titleEmphasis: "It's lived.",
     body: "Six hundred thousand hectares of flooded forest in north-east Ecuador. Pink dolphins in the river, caimans on the bank at dusk, and a Siona community that has been there for generations. Canangueno Lodge sits in the middle of all of it — not beside it.",
-    stats: [
-      { value: "40", label: "guests maximum" },
-      { value: "3 h", label: "upriver by canoe" },
-      { value: "2006", label: "operating in Cuyabeno" },
-    ],
   },
 
   experience: {
@@ -133,12 +128,20 @@ export const en: Dictionary = {
 
   video: {
     eyebrow: "The film",
-    title: "Three hours upriver",
-    titleEmphasis: "and the signal is gone",
-    lead: "Filmed on the Cuyabeno river, on the way to the lodge.",
-    play: "Watch the film",
+    title: "Watch it",
+    titleEmphasis: "before you book",
+    lead: "A short film, shot by the lodge team on the way into Cuyabeno.",
+    play: "Play",
     playShort: "Watch",
     close: "Close the video",
+  },
+
+  photos: {
+    eyebrow: "Gallery",
+    title: "The photos",
+    titleEmphasis: "we have",
+    lead: "The river, the cabins, the wildlife and the Cuyabeno communities.",
+    cta: "See the full gallery",
   },
 
   fauna: {
@@ -164,7 +167,6 @@ export const en: Dictionary = {
     title: "What the people who",
     titleEmphasis: "have been here say",
     source: "on TripAdvisor",
-    excerptNote: "Excerpt",
   },
 
   gallery: {

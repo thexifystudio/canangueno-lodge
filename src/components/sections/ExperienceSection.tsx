@@ -6,14 +6,9 @@ import { Reveal } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 /**
- * Las cuatro experiencias.
- *
- * Cada tarjeta baja un poco más que la anterior, formando una diagonal. Un
- * desfase alternado (una sí, una no) se lee como un error de maquetación; una
- * escalera progresiva se lee como una decisión. Sólo aplica en escritorio: en
- * móvil van una debajo de otra, sin trucos.
+ * Las cuatro experiencias: selva, río, vida salvaje y comunidad. Son
+ * categorías paralelas, no una secuencia — por eso no van numeradas.
  */
-const OFFSET = ["lg:mt-0", "lg:mt-10", "lg:mt-20", "lg:mt-30"];
 export function ExperienceSection({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   return (
     <section id="experiencia" className="section-y bg-bg-warm scroll-mt-24">
@@ -27,7 +22,7 @@ export function ExperienceSection({ locale, dict }: { locale: Locale; dict: Dict
 
         <div className="mt-16 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-4 md:mt-24">
           {experiences.map((exp, i) => (
-            <Reveal key={exp.id} y={38} delay={i * 0.06} className={OFFSET[i]}>
+            <Reveal key={exp.id} y={38} delay={i * 0.06}>
               <article>
                 <div className="relative aspect-[4/5] overflow-hidden">
                   <Media
@@ -37,12 +32,9 @@ export function ExperienceSection({ locale, dict }: { locale: Locale; dict: Dict
                   />
                 </div>
 
-                <div className="mt-6 flex items-baseline gap-4">
-                  <span className="ordinal text-ink-faint">{exp.n}</span>
-                  <h3 className="text-[length:var(--text-xl)] text-ink">
-                    {pick(exp.title, locale)}
-                  </h3>
-                </div>
+                <h3 className="mt-6 text-[length:var(--text-xl)] text-ink">
+                  {pick(exp.title, locale)}
+                </h3>
 
                 <p className="mt-4 text-sm leading-relaxed text-ink-soft">
                   {pick(exp.body, locale)}

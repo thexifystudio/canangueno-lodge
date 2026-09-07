@@ -74,11 +74,6 @@ export const es = {
     title: "La selva no se visita.",
     titleEmphasis: "Se vive.",
     body: "Seiscientas mil hectáreas de bosque inundado en el noreste del Ecuador. Delfines rosados en el río, caimanes en la orilla al anochecer, y una comunidad Siona que lleva generaciones ahí. Canangueno Lodge está en el medio de todo eso — no al lado.",
-    stats: [
-      { value: "40", label: "huéspedes como máximo" },
-      { value: "3 h", label: "de canoa río adentro" },
-      { value: "2006", label: "operando en Cuyabeno" },
-    ],
   },
 
   experience: {
@@ -137,12 +132,20 @@ export const es = {
 
   video: {
     eyebrow: "El video",
-    title: "Tres horas río adentro",
-    titleEmphasis: "y ya no hay señal",
-    lead: "Grabado en el río Cuyabeno, camino al lodge.",
-    play: "Ver el video",
+    title: "Míralo antes",
+    titleEmphasis: "de reservar",
+    lead: "Un video corto, grabado por el equipo del lodge camino al Cuyabeno.",
+    play: "Reproducir",
     playShort: "Ver video",
     close: "Cerrar el video",
+  },
+
+  photos: {
+    eyebrow: "Galería",
+    title: "Las fotos",
+    titleEmphasis: "que tenemos",
+    lead: "El río, las cabañas, la fauna y las comunidades del Cuyabeno.",
+    cta: "Ver la galería completa",
   },
 
   fauna: {
@@ -168,7 +171,6 @@ export const es = {
     title: "Lo que dicen quienes",
     titleEmphasis: "ya estuvieron aquí",
     source: "en TripAdvisor",
-    excerptNote: "Extracto",
   },
 
   gallery: {
