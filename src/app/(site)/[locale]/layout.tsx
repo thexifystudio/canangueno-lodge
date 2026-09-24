@@ -4,21 +4,30 @@ import "@/app/globals.css";
 
 import { LOCALES, isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/i18n";
+import { pageMetadata } from "@/lib/seo";
+import { routes } from "@/lib/routes";
 import { fontVariables } from "@/lib/fonts";
 import { theme } from "@/config/theme";
 import { site } from "@/config/site";
+import { tours } from "@/content/tours";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
-import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { OrganizationJsonLd } from "@/components/seo/JsonLd";
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
 }
 
+/* Sólo los cuatro idiomas existen como segmento: `/xx` no entra a este
+   layout (que no sabría en qué idioma hablar) y lo atiende
+   `app/global-not-found.tsx`. */
+export const dynamicParams = false;
+
 export const viewport: Viewport = {
-  themeColor: "#102a20",
+  /* El verde del dosel (`--raw-canopy` de "selva viva"): la barra del
+     navegador toma el color de la cabecera sobre el hero. */
+  themeColor: "#10291c",
   width: "device-width",
   initialScale: 1,
 };
@@ -32,25 +41,19 @@ export async function generateMetadata({
   if (!isLocale(locale)) return {};
   const dict = getDictionary(locale);
 
-  return {
-    metadataBase: new URL(site.url),
-    title: {
-      default: dict.meta.homeTitle,
-      template: `%s · ${site.name}`,
-    },
+  const home = pageMetadata(locale, {
+    title: dict.meta.homeTitle,
     description: dict.meta.homeDescription,
-    alternates: {
-      canonical: `/${locale}`,
-      languages: { es: "/es", en: "/en" },
-    },
-    openGraph: {
-      type: "website",
-      siteName: site.name,
-      locale: locale === "es" ? "es_EC" : "en_US",
-      title: dict.meta.homeTitle,
-      description: dict.meta.homeDescription,
-      url: `/${locale}`,
-    },
+    path: (l) => routes.home(l),
+  });
+
+  return {
+    ...home,
+    metadataBase: new URL(site.url),
+    /* La portada usa su título tal cual (ya lleva la marca); las demás
+       páginas pasan por el `template`. */
+    title: { default: dict.meta.homeTitle, template: `%s · ${site.name}` },
+    openGraph: { ...home.openGraph, title: dict.meta.homeTitle },
     robots: { index: true, follow: true },
   };
 }
@@ -77,11 +80,24 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <body>
-        <SmoothScroll />
-        <Header locale={typedLocale} dict={dict} />
+        <Header
+          locale={typedLocale}
+          nav={dict.nav}
+          aboutLabel={dict.about.navLabel}
+          tourSlugs={tours.map((t) => t.slug)}
+        />
         <main id="main">{children}</main>
         <Footer locale={typedLocale} dict={dict} />
-        <WhatsAppFab locale={typedLocale} dict={dict} />
+        <WhatsAppFab
+          locale={typedLocale}
+          label={dict.common.whatsapp}
+          tours={tours.map((t) => ({
+            id: t.id,
+            days: t.days,
+            featured: Boolean(t.featured),
+            slugs: Object.values(t.slug),
+          }))}
+        />
         <OrganizationJsonLd locale={typedLocale} />
       </body>
     </html>

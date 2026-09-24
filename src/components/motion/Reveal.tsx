@@ -1,98 +1,110 @@
 "use client";
 
-import { useRef, type ElementType, type ReactNode } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { useEffect, useRef, type ElementType, type ReactNode } from "react";
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+/**
+ * Revelado al entrar en pantalla.
+ *
+ * Se hace con IntersectionObserver + una transición CSS, sin GSAP: son ~40
+ * líneas contra ~80 KB de librería, y evita el bug que ya nos mordió antes
+ * (si el navegador no corre `requestAnimationFrame`, una animación por JS deja
+ * el contenido invisible para siempre).
+ *
+ * El estado inicial lo pone el propio efecto, no el CSS del servidor: si el
+ * JavaScript falla, la página se ve entera, sólo que sin animación.
+ */
 
 type Props = {
   children: ReactNode;
   className?: string;
   as?: ElementType;
-  /** Desplazamiento vertical inicial, en px. */
-  y?: number;
+  /** Retardo en ms; sirve para escalonar hermanos. */
   delay?: number;
-  /** Si es > 0, anima los hijos directos en cascada en vez del bloque entero. */
+  /** Desplazamiento inicial en px. */
+  y?: number;
+  /** Anima los hijos directos en cascada en lugar del bloque entero. */
   stagger?: number;
-  /** Revelado con máscara, de abajo hacia arriba. Ideal para imágenes. */
-  clip?: boolean;
-  /** Punto del viewport donde dispara. */
-  start?: string;
 };
 
-/**
- * Revelado al hacer scroll.
- *
- * El estado inicial se aplica dentro de `useGSAP` (layout effect, antes del
- * primer pintado): con JS no hay parpadeo y sin JS no hay nada escondido.
- */
+const DURATION = "760ms";
+const EASE = "cubic-bezier(0.22, 0.68, 0.24, 1)";
+
 export function Reveal({
   children,
   className,
   as: Tag = "div",
-  y = 30,
   delay = 0,
+  y = 18,
   stagger = 0,
-  clip = false,
-  start = "top 86%",
 }: Props) {
   const ref = useRef<HTMLElement>(null);
 
-  useGSAP(
-    () => {
-      const el = ref.current;
-      if (!el) return;
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  useEffect(() => {
+    const host = ref.current;
+    if (!host) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-      const targets: Element[] = stagger > 0 ? Array.from(el.children) : [el];
-      if (targets.length === 0) return;
+    const targets: HTMLElement[] =
+      stagger > 0
+        ? (Array.from(host.children) as HTMLElement[])
+        : [host as unknown as HTMLElement];
+    if (targets.length === 0) return;
 
-      const from = clip
-        ? { clipPath: "inset(0% 0% 100% 0%)", scale: 1.06 }
-        : { opacity: 0, y };
-      const to = clip
-        ? { clipPath: "inset(0% 0% 0% 0%)", scale: 1 }
-        : { opacity: 1, y: 0 };
+    targets.forEach((el, i) => {
+      el.style.opacity = "0";
+      el.style.transform = "translate3d(0," + y + "px,0)";
+      el.style.transition =
+        "opacity " +
+        DURATION +
+        " " +
+        EASE +
+        ", transform " +
+        DURATION +
+        " " +
+        EASE;
+      el.style.transitionDelay = delay + i * stagger + "ms";
+      el.style.willChange = "opacity, transform";
+    });
 
-      gsap.set(targets, from);
-
-      const tween = gsap.to(targets, {
-        ...to,
-        duration: clip ? 1.15 : 0.85,
-        ease: clip ? "power2.out" : "power3.out",
-        delay,
-        stagger,
-        scrollTrigger: { trigger: el, start, once: true },
+    const show = () => {
+      targets.forEach((el) => {
+        el.style.opacity = "1";
+        el.style.transform = "none";
       });
+      // `will-change` sostenido cuesta memoria; se suelta al terminar.
+      window.setTimeout(
+        () => {
+          targets.forEach((el) => {
+            el.style.willChange = "";
+          });
+        },
+        1200 + delay + targets.length * stagger,
+      );
+    };
 
-      /**
-       * Red de seguridad.
-       *
-       * Si por lo que sea el navegador no está corriendo `requestAnimationFrame`
-       * (pestaña en segundo plano, throttling agresivo, algún panel embebido),
-       * GSAP deja el estado inicial puesto y el bloque queda invisible para
-       * siempre. Este temporizador —que NO depende de rAF— revisa a los 2,5 s
-       * si el elemento está a la vista y la animación no arrancó, y en ese caso
-       * lo muestra sin animar.
-       *
-       * Regla del proyecto: preferimos perder la animación antes que perder el
-       * contenido.
-       */
-      const safety = window.setTimeout(() => {
-        const rect = el.getBoundingClientRect();
-        const inView = rect.top < window.innerHeight && rect.bottom > 0;
-        if (inView && tween.progress() === 0) gsap.set(targets, to);
-      }, 2500);
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (!entries[0].isIntersecting) return;
+        show();
+        io.disconnect();
+      },
+      { rootMargin: "0px 0px -12% 0px" },
+    );
+    io.observe(host);
 
-      return () => window.clearTimeout(safety);
-    },
-    { scope: ref, dependencies: [] },
-  );
+    // Red de seguridad: si el observer nunca dispara (pestaña en segundo
+    // plano, navegador raro), a los 2,5 s se muestra igual. Preferimos perder
+    // la animación antes que perder el contenido.
+    const safety = window.setTimeout(show, 2500);
+
+    return () => {
+      io.disconnect();
+      window.clearTimeout(safety);
+    };
+  }, [delay, y, stagger]);
 
   return (
-    <Tag ref={ref} data-reveal className={className}>
+    <Tag ref={ref} className={className}>
       {children}
     </Tag>
   );

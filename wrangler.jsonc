@@ -1,0 +1,22 @@
+/**
+ * Cloudflare Workers — el sitio compilado con OpenNext.
+ *
+ *   npm run deploy     → build + subida a Cloudflare
+ *   npm run preview    → build + prueba local en el runtime de Workers
+ *
+ * Mientras no se conecte el dominio real, el sitio vive en
+ * https://canangueno.<cuenta>.workers.dev y va con `noindex` (ver
+ * `SITE_LIVE` en `src/config/site.ts`).
+ */
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "canangueno",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2025-09-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": { "enabled": true }
+}

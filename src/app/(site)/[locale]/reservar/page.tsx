@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+import { routes } from "@/lib/routes";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
-
-import { isLocale, pick, type Locale } from "@/lib/i18n";
+import { isLocale, pick } from "@/lib/i18n";
 import { getDictionary } from "@/i18n";
-import { bookingPolicy } from "@/content/tours";
-import { PageHeader } from "@/components/layout/PageHeader";
+import { tours } from "@/content/tours";
+import { validTravelDate } from "@/lib/travel-date";
 import { BookingForm } from "@/components/booking/BookingForm";
-import { Reveal } from "@/components/motion/Reveal";
-
 export async function generateMetadata({
   params,
 }: {
@@ -18,63 +16,68 @@ export async function generateMetadata({
   if (!isLocale(locale)) return {};
   const dict = getDictionary(locale);
   return {
-    title: dict.meta.bookTitle,
-    description: dict.meta.bookDescription,
-    alternates: {
-      canonical: `/${locale}/reservar`,
-      languages: { es: "/es/reservar", en: "/en/reservar" },
-    },
+    ...pageMetadata(locale, {
+      title: dict.booking.metaTitle,
+      description: dict.meta.bookDescription,
+      path: (l) => routes.book(l),
+    }),
     robots: { index: false, follow: true },
   };
 }
+/* Lee `?tour=…&date=…&pax=…` en el servidor: la página no puede ser estática,
+   o el formulario saldría siempre con los valores por defecto. */
+export const dynamic = "force-dynamic";
 
-export default async function BookPage({
+type Search = Record<string, string | string[] | undefined>;
+const one = (v: Search[string]) => (Array.isArray(v) ? v[0] : v) ?? "";
+
+export default async function Page({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<Search>;
 }) {
-  const { locale } = await params;
-  if (!isLocale(locale)) notFound();
-  const l = locale as Locale;
+  const { locale: l } = await params;
+  if (!isLocale(l)) notFound();
+  const q = await searchParams;
   const dict = getDictionary(l);
-
+  const t9n = dict.booking;
+  /* Lo que llega de "Planifica tu viaje", saneado: un dato raro en la URL
+     cae al valor por defecto en vez de romper el formulario. */
+  const pax = Number(one(q.pax));
+  const initial = {
+    tour: tours.some((t) => t.id === one(q.tour)) ? one(q.tour) : "4-dias",
+    date: validTravelDate(one(q.date)) ? one(q.date) : "",
+    pax: Number.isInteger(pax) && pax >= 1 && pax <= 40 ? String(pax) : "2",
+  };
   return (
-    <>
-      <PageHeader
-        locale={l}
-        mediaId="story-canoe"
-        eyebrow={dict.booking.eyebrow}
-        title={dict.booking.title}
-        emphasis={dict.booking.titleEmphasis}
-        lead={dict.booking.lead}
-      />
-
-      <section className="section-y bg-bg">
-        <div className="shell">
-          <Suspense fallback={<p className="text-ink-faint">{dict.common.loading}…</p>}>
-            <BookingForm locale={l} dict={dict} />
-          </Suspense>
+    <div className="exp-detail">
+      <section className="shell exp-page-intro">
+        <h1>{t9n.pageTitle}</h1>
+        <p>{t9n.pageLead}</p>
+      </section>
+      <section className="shell" style={{ paddingBottom: "var(--section-y)" }}>
+        <BookingForm
+          locale={l}
+          t9n={t9n}
+          units={{ days: dict.common.days, nights: dict.common.nights }}
+          tours={tours.map((t) => ({
+            id: t.id,
+            days: t.days,
+            nights: t.nights,
+            name: pick(t.name, l),
+            tagline: pick(t.tagline, l),
+          }))}
+          initial={initial}
+        />
+      </section>
+      <section className="exp-inclusions">
+        <div className="shell exp-heading" style={{ marginBottom: 0 }}>
+          <h2>{t9n.beforeTitle}</h2>
+          <p>{t9n.beforeBody}</p>
         </div>
       </section>
-
-      <section className="bg-bg-warm">
-        <div className="shell section-y">
-          <Reveal>
-            <h2 className="text-[length:var(--text-2xl)] text-ink">
-              {dict.booking.policyTitle}
-            </h2>
-          </Reveal>
-
-          <Reveal stagger={0.07} className="mt-12 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
-            {pick(bookingPolicy, l).map((p) => (
-              <div key={p.title} className="border-t border-line pt-6">
-                <h3 className="text-base font-medium text-ink">{p.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-ink-soft">{p.body}</p>
-              </div>
-            ))}
-          </Reveal>
-        </div>
-      </section>
-    </>
+    </div>
   );
 }

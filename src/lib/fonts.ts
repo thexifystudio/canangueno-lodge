@@ -1,49 +1,37 @@
-import { Fraunces, Manrope } from "next/font/google";
+import { Instrument_Serif, Archivo } from "next/font/google";
 
 /**
  * ────────────────────────────────────────────────────────────────────────────
  *  TIPOGRAFÍAS
  * ────────────────────────────────────────────────────────────────────────────
  *
- *  DISPLAY · Fraunces (variable)
- *  Es una "soft serif" con ejes propios: `SOFT` redondea los terminales y
- *  `WONK` activa formas ligeramente irregulares. Se eligió a propósito por
- *  encima de Cormorant Garamond:
+ *  DISPLAY · Instrument Serif
+ *  Serif de alto contraste y aire editorial. Se eligió por descarte razonado:
+ *  Cormorant Garamond y Fraunces son las dos serif que usan absolutamente
+ *  todos los hoteles boutique y lodges; con cualquiera de las dos el sitio se
+ *  parece a la competencia antes de escribir una línea. Instrument tiene más
+ *  drama, aguanta muy bien en tamaños grandes sobre fondo oscuro y casi nadie
+ *  la usa en turismo.
  *
- *    · Cormorant es LA serif de lujo de internet — está en cada web de hotel
- *      boutique. Cumple, pero no distingue a nadie.
- *    · Cormorant tiene un contraste altísimo y trazos muy finos: sobre fondos
- *      oscuros y en pantallas chicas se debilita y pierde legibilidad.
- *    · Fraunces es orgánica y botánica —encaja con la selva sin ser literal—,
- *      tiene rango de peso real (200-900) y aguanta bien en oscuro y en móvil.
+ *  UI · Archivo
+ *  Grotesca de aperturas cerradas y buen color de texto en cuerpos chicos.
+ *  Da el aire de "cuaderno de campo" que buscamos, sin caer en Inter.
  *
- *  UI · Manrope
- *  Geométrica, limpia, buena en tamaños chicos. Se queda.
- *
- *  ── PARA CAMBIAR EL PAR TIPOGRÁFICO ──
- *  Cambiá el `import` de arriba y el bloque `display` de abajo. El nombre de
- *  la variable CSS (`--ff-display`) NO se toca: todo el sitio depende de ella.
- *
- *  Alternativas ya evaluadas para esta dirección:
- *    · Instrument_Serif  → más dramática y editorial, un solo peso
- *    · Cormorant_Garamond → la opción clásica de lujo (la anterior)
- *    · Newsreader        → con tamaño óptico, más cálida y periodística
+ *  ── PARA CAMBIAR EL PAR ──
+ *  Cambiá los dos import y los dos bloques. Los nombres de variable CSS
+ *  (`--ff-display`, `--ff-sans`) NO se tocan: todo el sitio depende de ellas.
  */
 
-// Sin `weight`: así next/font sirve la fuente VARIABLE completa, que es la
-// única forma de poder pedir los ejes SOFT y WONK. Con una lista de pesos
-// fijos, `axes` no está permitido.
-export const display = Fraunces({
+export const display = Instrument_Serif({
   subsets: ["latin"],
-  style: ["normal", "italic"],
-  axes: ["SOFT", "WONK", "opsz"],
+  weight: "400",
   variable: "--ff-display",
   display: "swap",
 });
 
-export const sans = Manrope({
+export const sans = Archivo({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
   variable: "--ff-sans",
   display: "swap",
 });

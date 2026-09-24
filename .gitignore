@@ -40,3 +40,11 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .shots/
+
+# cloudflare / opennext
+.open-next/
+.wrangler/
+.dev.vars*
+
+# caché de la herramienta de diseño
+.impeccable/

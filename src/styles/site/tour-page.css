@@ -1,0 +1,238 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   PÁGINA DE UN TOUR
+   ───────────────────────────────────────────────────────────────────────────
+   El itinerario ES la página: título, los días uno debajo del otro con su
+   fotografía, qué incluye, reservar, y dos salidas (el lodge y la galería).
+   Se acabó. Sin acordeones, sin reseñas en medio y sin repetir el bloque del
+   lodge que ya está en la home.
+   ═════════════════════════════════════════════════════════════════════════ */
+.exp-tourpage-head {
+  padding-top: clamp(120px, 14vh, 190px);
+  padding-bottom: clamp(38px, 5vh, 62px);
+}
+.exp-tourpage-eyebrow {
+  margin-top: 34px;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-accent-text);
+  font-weight: 600;
+}
+/* El título es la duración ("3 días / 2 noches"): corta, así que puede ir
+   grande sin partirse en tres renglones. */
+.exp-tourpage-head h1 {
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  font-weight: 400;
+  margin-top: 14px;
+  text-wrap: balance;
+}
+.exp-tourpage-lead {
+  margin-top: 24px;
+  max-width: 54ch;
+  font-size: 1.12rem;
+  line-height: 1.6;
+  color: var(--c-ink-soft);
+  text-wrap: pretty;
+}
+.exp-bookband-actions.exp-tourpage-actions {
+  justify-content: start;
+  gap: 28px;
+}
+
+/* ── Los días ───────────────────────────────────────────────────────────────
+   Texto y fotografía a dos columnas, y la imagen cambia de lado en los días
+   pares: leídos en fila, tres bloques idénticos se sienten como un formulario;
+   alternados, se leen como un viaje que avanza. */
+.exp-days {
+  padding-bottom: var(--section-y);
+}
+.exp-dayblock {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 76px);
+  align-items: center;
+  padding-block: clamp(38px, 5vw, 66px);
+  border-top: 1px solid var(--c-line);
+}
+.exp-dayblock:nth-child(even) .exp-dayblock-media {
+  order: -1;
+}
+/* "Día 1" es el título del bloque; lo que se hace ese día va debajo, chico. */
+.exp-dayblock-copy h2 {
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 400;
+}
+.exp-dayblock-title {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-accent-text);
+  font-weight: 600;
+}
+.exp-dayblock-text {
+  margin-top: 18px;
+  color: var(--c-ink-soft);
+  font-size: 0.97rem;
+  max-width: 56ch;
+}
+.exp-dayblock-media {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c-ink) 12%, transparent);
+}
+.exp-dayblock-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.exp-tourpage-note {
+  margin-top: 30px;
+  max-width: 70ch;
+}
+
+/* ── Qué incluye ────────────────────────────────────────────────────────── */
+.exp-includes {
+  background: var(--c-band);
+  border-top: 1px solid var(--c-line);
+  padding-block: var(--section-y);
+}
+.exp-includes h2 {
+  font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+.exp-includes ul {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px clamp(28px, 4vw, 60px);
+}
+.exp-includes li {
+  display: flex;
+  gap: 13px;
+  align-items: start;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.exp-includes svg {
+  color: var(--c-accent-text);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+.exp-includes-extra {
+  margin-top: 34px;
+  padding-top: 20px;
+  border-top: 1px solid var(--c-line);
+  max-width: 90ch;
+}
+.exp-includes-extra strong {
+  color: var(--c-ink);
+  font-weight: 600;
+}
+
+/* ── Reservar ───────────────────────────────────────────────────────────── */
+.exp-bookband {
+  padding-block: var(--section-y);
+  text-align: center;
+}
+.exp-bookband h2 {
+  font-size: clamp(2rem, 3.6vw, 3.2rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+}
+.exp-bookband p {
+  margin: 20px auto 0;
+  max-width: 52ch;
+  color: var(--c-ink-soft);
+}
+.exp-bookband-actions {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+/* ── Dos salidas y se acabó ─────────────────────────────────────────────── */
+.exp-nextup {
+  padding-bottom: var(--section-y);
+}
+.exp-nextup-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+.exp-nextup-card {
+  display: block;
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  transition:
+    transform 0.4s cubic-bezier(0.22, 0.68, 0.24, 1),
+    border-color 0.4s,
+    box-shadow 0.4s;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .exp-nextup-card:hover {
+    transform: translateY(-6px);
+  }
+}
+.exp-nextup-card:hover {
+  border-color: color-mix(in srgb, var(--c-accent) 42%, var(--c-line));
+  box-shadow: 0 22px 42px -18px
+    color-mix(in srgb, var(--c-ink) 30%, transparent);
+}
+/* 16/10 y no 16/9: es la proporción de la foto de las cabañas, y a 16/9 el
+   recorte se comía el techo y dejaba sólo el césped y la gente. */
+.exp-nextup-media {
+  position: relative;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+}
+.exp-nextup-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.22, 0.68, 0.24, 1);
+}
+.exp-nextup-card:hover .exp-nextup-media img {
+  transform: scale(1.045);
+}
+.exp-nextup-body {
+  padding: 26px 26px 28px;
+}
+.exp-nextup-body h2 {
+  font-size: clamp(1.3rem, 2vw, 1.75rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+.exp-nextup-body p {
+  margin-top: 10px;
+  color: var(--c-ink-soft);
+  font-size: 0.93rem;
+}
+.exp-nextup-body .exp-text-link {
+  margin-top: 20px;
+}
+
+@media (max-width: 900px) {
+  .exp-dayblock {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+  /* Apilado, la foto va SIEMPRE debajo del texto: alternar el orden acá sólo
+     lograba que un día empezara por una imagen sin contexto. */
+  .exp-dayblock:nth-child(even) .exp-dayblock-media {
+    order: 0;
+  }
+  .exp-includes ul,
+  .exp-nextup-grid {
+    grid-template-columns: 1fr;
+  }
+}

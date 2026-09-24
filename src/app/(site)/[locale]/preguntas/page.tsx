@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+import { routes } from "@/lib/routes";
 import { notFound } from "next/navigation";
 import { isLocale, pick, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/i18n";
@@ -18,14 +20,11 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!isLocale(locale)) return {};
   const dict = getDictionary(locale);
-  return {
+  return pageMetadata(locale, {
     title: dict.meta.faqTitle,
     description: dict.meta.faqDescription,
-    alternates: {
-      canonical: `/${locale}/preguntas`,
-      languages: { es: "/es/preguntas", en: "/en/preguntas" },
-    },
-  };
+    path: (l) => routes.faq(l),
+  });
 }
 
 export default async function FaqPage({
@@ -38,10 +37,7 @@ export default async function FaqPage({
   const l = locale as Locale;
   const dict = getDictionary(l);
 
-  const waMessage =
-    l === "es"
-      ? "Hola, tengo una pregunta sobre los tours a Cuyabeno."
-      : "Hi, I have a question about the Cuyabeno tours.";
+  const waMessage = dict.faq.whatsappMessage;
 
   return (
     <>
@@ -54,10 +50,13 @@ export default async function FaqPage({
         lead={dict.faq.lead}
       />
 
-      <section className="section-y bg-bg">
+      <section className="bg-bg" style={{ paddingBottom: "var(--section-y)" }}>
         <div className="shell flex flex-col gap-20">
           {faqGroups.map((group) => (
-            <div key={group.id} className="grid gap-x-16 gap-y-8 lg:grid-cols-12">
+            <div
+              key={group.id}
+              className="grid gap-x-16 gap-y-8 lg:grid-cols-12"
+            >
               <Reveal className="lg:col-span-4">
                 <h2 className="text-[length:var(--text-xl)] text-ink lg:sticky lg:top-32">
                   {pick(group.title, l)}
@@ -81,16 +80,26 @@ export default async function FaqPage({
       <section className="bg-bg-warm">
         <div className="shell flex flex-wrap items-center justify-between gap-8 py-16">
           <p className="max-w-[34ch] font-display text-[length:var(--text-xl)] text-ink">
-            {l === "es"
-              ? "¿No encontraste lo que buscabas?"
-              : "Didn't find what you were looking for?"}
+            {dict.faq.notFound}
           </p>
-          <ButtonLink href={whatsappLink(waMessage)} external variant="primary" size="lg">
+          <ButtonLink
+            href={whatsappLink(waMessage)}
+            external
+            variant="primary"
+            size="lg"
+          >
             {dict.common.whatsapp}
           </ButtonLink>
+          <a
+            href="https://wwwnc.cdc.gov/travel/destinations/traveler/none/ecuador/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-11 basis-full items-center text-sm text-ink-soft underline underline-offset-4 hover:text-accent-text"
+          >
+            {dict.faq.cdcLink}
+          </a>
         </div>
       </section>
-
       <FaqJsonLd locale={l} />
     </>
   );

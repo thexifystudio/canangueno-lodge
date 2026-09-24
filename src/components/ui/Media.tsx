@@ -1,11 +1,13 @@
 import Image from "next/image";
 import { getMedia, type MediaId } from "@/config/media";
-import type { Locale } from "@/lib/i18n";
+import { pick, type Locale } from "@/lib/i18n";
 import { cn } from "@/lib/cn";
 
 const PENDING_LABEL: Record<Locale, string> = {
   es: "Foto pendiente",
   en: "Photo pending",
+  de: "Foto folgt",
+  fr: "Photo à venir",
 };
 
 type Props = {
@@ -28,9 +30,16 @@ type Props = {
  *
  * Siempre llena a su contenedor, que tiene que ser `relative` + tener alto.
  */
-export function Media({ id, locale, className, priority, sizes, hideLabel }: Props) {
+export function Media({
+  id,
+  locale,
+  className,
+  priority,
+  sizes,
+  hideLabel,
+}: Props) {
   const entry = getMedia(id);
-  const alt = entry.alt[locale];
+  const alt = pick(entry.alt, locale);
 
   if (entry.src) {
     return (
@@ -50,9 +59,14 @@ export function Media({ id, locale, className, priority, sizes, hideLabel }: Pro
       className={cn("media-ph", className)}
       data-tone={entry.tone}
       role="img"
-      aria-label={alt}
+      aria-label={PENDING_LABEL[locale] + ": " + alt}
     >
-      {!hideLabel && <span className="media-ph__label">{PENDING_LABEL[locale]}</span>}
+      {!hideLabel && (
+        <span className="media-ph__label">
+          <strong>{PENDING_LABEL[locale]}</strong>
+          <small>{alt}</small>
+        </span>
+      )}
     </div>
   );
 }

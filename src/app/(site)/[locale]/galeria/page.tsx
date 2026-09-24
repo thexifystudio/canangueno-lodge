@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+import { routes } from "@/lib/routes";
 import { notFound } from "next/navigation";
 import { isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/i18n";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { GalleryGrid } from "@/components/gallery/GalleryGrid";
-import { BookingCta } from "@/components/sections/BookingCta";
+import { ClosingBand } from "@/components/expedition/ClosingBand";
 
 export async function generateMetadata({
   params,
@@ -14,14 +16,12 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!isLocale(locale)) return {};
   const dict = getDictionary(locale);
-  return {
+  return pageMetadata(locale, {
     title: dict.meta.galleryTitle,
     description: dict.meta.galleryDescription,
-    alternates: {
-      canonical: `/${locale}/galeria`,
-      languages: { es: "/es/galeria", en: "/en/galeria" },
-    },
-  };
+    path: (l) => routes.gallery(l),
+    image: "gal-lagoon-1",
+  });
 }
 
 export default async function GalleryPage({
@@ -45,13 +45,22 @@ export default async function GalleryPage({
         lead={dict.gallery.lead}
       />
 
-      <section className="section-y bg-bg">
+      <section className="bg-bg" style={{ paddingBottom: "var(--section-y)" }}>
         <div className="shell">
-          <GalleryGrid locale={l} dict={dict} />
+          <GalleryGrid
+            locale={l}
+            labels={{
+              filter: dict.gallery.filterLabel,
+              all: dict.common.all,
+              gallery: dict.nav.gallery,
+              close: dict.common.close,
+              previous: dict.common.previous,
+              next: dict.common.next,
+            }}
+          />
         </div>
       </section>
-
-      <BookingCta locale={l} dict={dict} />
+      <ClosingBand locale={l} />
     </>
   );
 }

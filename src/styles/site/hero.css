@@ -1,0 +1,268 @@
+/* ── Hero ──────────────────────────────────────────────────────────────────
+   El video del lodge, el titular, el botón "Ver el video" y su lightbox. */
+.exp-hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 760px;
+  height: 94svh;
+  max-height: 1100px;
+  background: var(--c-bg-deep);
+  color: var(--c-on-deep);
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+.exp-hero-media,
+.exp-hero-veil {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+.exp-hero-media img {
+  object-position: center 52%;
+}
+/*
+ * Tres capas y nada más: con el video de fondo, el velo tiene que dejar
+ * pasar la selva. Sólo oscurece lo justo para que se lea el titular y para
+ * que el borde inferior se funda con la franja verde de abajo.
+ */
+.exp-hero-veil {
+  background:
+    linear-gradient(
+      96deg,
+      color-mix(in srgb, var(--c-bg-deep) 84%, transparent) 0%,
+      color-mix(in srgb, var(--c-bg-deep) 40%, transparent) 38%,
+      transparent 72%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--c-bg-deep) 55%, transparent),
+      transparent 26%
+    ),
+    linear-gradient(0deg, var(--c-bg-deep) 1%, transparent 44%);
+}
+
+/*
+ * El iframe del video es 16:9 fijo: para que CUBRA el hero se lo estira al
+ * mayor de los dos ejes y se centra.
+ *
+ * Arranca invisible y sólo se funde sobre la foto cuando el reproductor avisa
+ * que EMPEZÓ a reproducir (`data-playing`, lo pone HeroVideo.tsx). Si el
+ * navegador bloquea el autoplay, el iframe se queda en cero y arriba manda la
+ * foto: nunca se ve un video en pausa con los botones de YouTube encima.
+ */
+/* El iframe se agranda 160 px más que el hero (80 arriba y 80 abajo) y el
+   contenedor recorta: así quedan afuera la barra de título que YouTube pinta
+   arriba y su marca de agua de abajo a la derecha, que se veían encima del
+   hero aun con `controls=0`. */
+.exp-hero-media {
+  overflow: hidden;
+}
+.exp-hero-video {
+  --crop: 160px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(100vw + var(--crop) * 1.7778);
+  height: calc(56.25vw + var(--crop));
+  min-height: calc(100% + var(--crop));
+  min-width: calc((100svh + var(--crop)) * 1.7778);
+  transform: translate(-50%, -50%);
+  border: 0;
+  pointer-events: none;
+  opacity: 0;
+  /* Entra suave, SALE INSTANTÁNEO. La asimetría es a propósito: cuando el
+     reproductor se pausa, lo que queda debajo del iframe es el título del
+     video y los botones de YouTube, y con un fundido de 1,4 s eso se ve
+     durante segundo y medio encima del hero. Se vio en pantalla. */
+  transition: opacity 0s;
+}
+.exp-hero-video[data-playing] {
+  opacity: 1;
+  transition: opacity 1.4s ease;
+}
+
+.exp-hero-content {
+  padding-top: 130px;
+  padding-bottom: 65px;
+}
+.exp-hero-eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--c-accent-gold);
+  text-shadow: 0 1px 12px color-mix(in srgb, var(--c-bg-deep) 80%, transparent);
+}
+.exp-hero h1 {
+  margin-top: 18px;
+  font-size: clamp(3rem, 6.4vw, 6.4rem);
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  max-width: 19ch;
+  font-weight: 350;
+  text-wrap: balance;
+}
+.exp-hero-actions {
+  margin-top: 34px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 30px;
+}
+.exp-hero-actions .exp-video-trigger {
+  margin-top: 0;
+}
+.exp-hero-intro {
+  max-width: 46ch;
+  margin-top: 27px;
+  font-size: 1.03rem;
+  color: var(--c-on-deep-soft);
+  /* Un halo del mismo verde del velo: el texto se sostiene sobre cualquier
+     fotograma, incluso los claros del cielo. */
+  text-shadow: 0 1px 14px color-mix(in srgb, var(--c-bg-deep) 80%, transparent);
+}
+
+/* ── Botón "Ver el video" ────────────────────────────────────────────────────
+   Un círculo de play + la etiqueta, sobre el hero oscuro. Discreto a
+   propósito: es un extra, no compite con "Ver los tours" porque ese botón ya
+   no existe — el hero sólo tiene este control. */
+.exp-video-trigger {
+  margin-top: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+  color: var(--c-on-deep);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+.exp-video-trigger > span {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--c-on-deep) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c-on-deep) 40%, transparent);
+  transition:
+    background 0.25s,
+    transform 0.25s;
+}
+.exp-video-trigger:hover > span {
+  background: var(--c-accent);
+  color: var(--c-accent-ink);
+  border-color: var(--c-accent);
+  transform: scale(1.06);
+}
+
+/* ── El lightbox ──────────────────────────────────────────────────────────
+   `<dialog>` nativo, centrado, sobre un fondo casi negro. El navegador se
+   encarga de `Esc`, del foco atrapado y de que el resto de la página quede
+   inerte (`inert` automático fuera de un `<dialog>` abierto con
+   `showModal()`) — nada de eso se reinventa acá. */
+.exp-video-dialog {
+  position: fixed;
+  inset: 0;
+  max-width: none;
+  max-height: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--c-on-deep);
+}
+.exp-video-dialog::backdrop {
+  background: color-mix(in srgb, var(--c-bg-deep) 94%, black);
+  backdrop-filter: blur(6px);
+}
+.exp-video-dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+.exp-video-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px var(--gutter);
+  flex-shrink: 0;
+}
+.exp-video-bar p {
+  font-size: 0.85rem;
+  color: var(--c-on-deep-soft);
+}
+.exp-video-bar button {
+  color: var(--c-on-deep);
+  padding: 8px;
+  transition: opacity 0.2s;
+}
+.exp-video-bar button:hover {
+  opacity: 0.7;
+}
+.exp-video-stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--gutter) clamp(24px, 5vh, 56px);
+  min-height: 0;
+}
+.exp-video-stage iframe {
+  width: 100%;
+  max-width: 76rem;
+  aspect-ratio: 16/9;
+  border: 0;
+  background: color-mix(in srgb, var(--c-bg-deep) 40%, black);
+}
+@media (max-width: 640px) {
+  .exp-video-trigger {
+    gap: 10px;
+    font-size: 0.8rem;
+  }
+  .exp-video-trigger > span {
+    width: 36px;
+    height: 36px;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .exp-hero-media img {
+    animation: river-drift 24s ease-in-out infinite alternate;
+  }
+}
+@keyframes river-drift {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.035);
+  }
+}
+@media (min-width: 1600px) {
+  .exp-hero-content {
+    padding-bottom: 90px;
+  }
+}
+@media (max-width: 760px) {
+  .exp-hero {
+    height: auto;
+    min-height: 90svh;
+    max-height: none;
+  }
+  .exp-hero-content {
+    padding-top: 138px;
+    padding-bottom: 44px;
+  }
+  .exp-hero h1 {
+    font-size: clamp(3.3rem, 12.2vw, 5rem);
+    line-height: 1.01;
+  }
+  .exp-hero-intro {
+    font-size: 0.95rem;
+    max-width: 34ch;
+    color: var(--c-on-deep);
+  }
+  .exp-hero-media img {
+    object-position: 64% center;
+  }
+}

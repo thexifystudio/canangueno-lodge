@@ -12,6 +12,7 @@ import type { Dictionary } from "./es";
 
 export const en: Dictionary = {
   nav: {
+    cuyabeno: "Cuyabeno",
     experience: "Experience",
     tours: "Tours",
     lodge: "The lodge",
@@ -42,7 +43,6 @@ export const en: Dictionary = {
     highlights: "What you'll see",
     bestFor: "Best for",
     itinerary: "Itinerary",
-    price: "Price",
     scroll: "Scroll",
     loading: "Loading",
     image: "Image",
@@ -62,7 +62,7 @@ export const en: Dictionary = {
     ctaSecondary: "Book now",
     metaDuration: "3 — 5 days",
     metaLocation: "Cuyabeno Reserve",
-    metaPrice: "From USD 280",
+    metaPrice: "Get a quote",
   },
 
   statement: {
@@ -84,12 +84,39 @@ export const en: Dictionary = {
     lead: "Three routes with the same lodge, the same guides and the same rainforest. What changes is how long you stay — and how much you get to see.",
     recommended: "Most recommended",
     indexTitle: "Cuyabeno tours",
-    indexLead: "Every tour starts at the Cuyabeno Bridge and continues three hours by canoe to the lodge. The difference is how many days you spend inside the reserve.",
+    indexLead:
+      "Every tour starts at the Cuyabeno Bridge and continues three hours by canoe to the lodge. The difference is how many days you spend inside the reserve.",
     compare: "Compare all three",
     tableDuration: "Length",
-    tablePrice: "Price",
+    tablePrice: "Rate",
     tableBestFor: "Best for",
     disclaimer: "A note on itineraries",
+    pageTitle: "The three routes.",
+    pageLead:
+      "The same lodge, the same guides, the same forest. What changes is how many nights you stay — and how much you get to see.",
+    priceNote:
+      "Rates are quoted based on dates, group size and room type. Message us on WhatsApp or fill in the form and we'll send you the details.",
+    metaTitle: "Cuyabeno tours: 3, 4 and 5 days",
+  },
+
+
+  tourDetail: {
+    eyebrow: "Cuyabeno tour",
+    allTours: "All tours",
+    includesTitle: "The tour includes",
+    notIncludedLabel: "Not included:",
+    bookTitle: "Book this tour.",
+    bookBody:
+      "Choose your dates and we will confirm availability, room and your quote before any payment.",
+    bookCta: "Book this tour",
+    askWhatsapp: "Ask on WhatsApp",
+    whatsappMessage:
+      "Hi, I'm interested in the {days}-day Canangueno Lodge tour. Could you send dates and availability?",
+    nextLodgeTitle: "See our lodge",
+    nextLodgeBody: "Cabins in the jungle, private bathroom and mosquito net.",
+    nextGalleryTitle: "Gallery",
+    nextGalleryBody: "The river, the forest and the communities, in photos.",
+    view: "View",
   },
 
   story: {
@@ -160,6 +187,29 @@ export const en: Dictionary = {
     registryLabel: "Forestry registration",
     companyLabel: "Registered company",
     sinceLabel: "In tourism since",
+    pageTitle: "Sleep surrounded by the forest.",
+    pageLead:
+      "Canangueno Lodge, inside the Cuyabeno Reserve. Cabins, meals and a team to look after you between each journey into the forest and along the river.",
+    lifeTitle: "Life at the lodge.",
+    peopleTitle: "People who know this place.",
+    peopleBody:
+      "Spanish- and English-speaking guides and a team working alongside the Siona-Seoqueya communities.",
+    peopleLink: "Meet Canangueno",
+  },
+
+  about: {
+    pageTitle: "A place. And its people.",
+    pageLead:
+      "Canangueno Lodge and the Siona-Seoqueya communities: a relationship woven into every journey.",
+    behindTitle: "Know who is behind your journey.",
+    operatorLabel: "Operator",
+    paceTitle: "The forest sets the pace.",
+    paceBody:
+      "We explore the reserve with Spanish- and English-speaking guides and work with local communities. Wildlife sightings depend on nature; guides adapt each outing to the conditions.",
+    navLabel: "Our story",
+    metaTitle: "The people behind Canangueno",
+    metaDescription:
+      "Who runs Canangueno Lodge and how we work alongside the Siona-Seoqueya communities inside the Cuyabeno Reserve.",
   },
 
   reviews: {
@@ -184,11 +234,41 @@ export const en: Dictionary = {
     lead: "All our tours start at the Cuyabeno Bridge, our meeting point. You need to arrive before 11:00 so we can set off on time.",
     routeTitle: "The route, step by step",
     optionsTitle: "How to reach the bridge",
-    optionsLead: "The Quito → Cuyabeno Bridge leg is not included in the tour price. These are the two ways to do it.",
+    optionsLead:
+      "The Quito → Cuyabeno Bridge leg is arranged and paid separately. These are the two ways to do it.",
     fromOtherCities: "From other cities",
     transferTitle: "Would you rather we arranged it?",
     doubtsTitle: "Not sure how to get here?",
-    doubtsBody: "Message us and we'll help you sort out transport, timing and the meeting point.",
+    doubtsBody:
+      "Message us and we'll help you sort out transport, timing and the meeting point.",
+    pageTitle: "Getting here is part of the journey.",
+    pageLead:
+      "From the road to the river. We will help you coordinate each leg so you reach Cuyabeno Bridge with a clear plan.",
+    steps: [
+      {
+        title: "Quito, the night before",
+        body: "The road journey usually takes around 8–9 hours. Confirm the departure point and schedule with the lodge before booking transport.",
+      },
+      {
+        title: "Cuyabeno Bridge",
+        body: "The meeting point for tours based at Canangueno. This is where you board the canoe with the team.",
+      },
+      {
+        title: "Three hours on the river",
+        body: "The canoe journey to the lodge takes approximately three hours, depending on river and travel conditions.",
+      },
+      {
+        title: "Canangueno Lodge",
+        body: "Arrive, settle into your room and begin the programme with your guide.",
+      },
+    ],
+    connectionTitle: "First, confirm your connection.",
+    connectionBody:
+      "Ground transport is paid separately. If arriving from El Coca, Lago Agrio or another city, check the current connections and schedules before buying tickets.",
+    connectionCta: "Arrange my arrival",
+    connectionWhatsapp:
+      "Hi, I would like to coordinate transport and the meeting point for my Canangueno Lodge tour.",
+    metaTitle: "How to reach Canangueno Lodge",
   },
 
   faq: {
@@ -196,6 +276,9 @@ export const en: Dictionary = {
     title: "Everything people",
     titleEmphasis: "usually ask us",
     lead: "And if something's missing, message us on WhatsApp — we answer right there.",
+    notFound: "Didn't find what you were looking for?",
+    whatsappMessage: "Hi, I have a question about the Cuyabeno tours.",
+    cdcLink: "Travel health: official Ecuador guidance (CDC)",
   },
 
   booking: {
@@ -221,14 +304,71 @@ export const en: Dictionary = {
     submitting: "Sending…",
     orWhatsapp: "or message us directly on WhatsApp",
     successTitle: "We got your enquiry",
-    successBody: "We'll get back to you within 24 hours with availability and the tour details.",
+    successBody:
+      "We'll get back to you within 24 hours with availability and the tour details.",
     errorTitle: "Couldn't send",
     errorBody: "Please try again or message us on WhatsApp.",
     policyTitle: "Before you book",
     required: "required",
     summaryTitle: "Your enquiry",
-    estimatedTotal: "Estimated total",
-    estimatedNote: "Indicative, per person, excluding Quito ↔ Cuyabeno Bridge transport.",
+    estimatedTotal: "Quote",
+    estimatedNote:
+      "We'll send you the exact rate based on your dates and group, excluding Quito ↔ Cuyabeno Bridge transport.",
+
+    pageTitle: "Check dates and availability.",
+    pageLead:
+      "Choose the route, the date and how many are travelling. We prepare the message and you confirm it with the Canangueno team by WhatsApp or email, with a rate tailored to your trip.",
+    preparingForm: "Preparing the form…",
+    beforeTitle: "Before you confirm.",
+    beforeBody:
+      "We will confirm your room type, transport and cancellation terms in writing. Full payment secures your booking together with the voucher issued by the lodge.",
+    metaTitle: "Plan your Cuyabeno trip",
+
+    formJourneyLegend: "Your journey",
+    formAboutLegend: "A little about you",
+    routeLabel: "Itinerary",
+    preferredDateLabel: "Preferred date",
+    yourNameLabel: "Your name",
+    notesLabel: "Room preference, children or special requirements (optional)",
+    notesPlaceholder: "For example: double room, two adults.",
+    noChargeNote:
+      "We will prepare a message for you to send via WhatsApp or email. No payment is taken.",
+    prepareCta: "Prepare my enquiry",
+    contactLabel: "Your email or WhatsApp",
+    contactHint: "So we can reply even if the message never gets sent.",
+    errDate: "Choose the date you'd like to start the tour.",
+    errDatePast: "That date has already passed. Choose one from today onwards.",
+    errPax: "Tell us how many are travelling: between 1 and 40 people.",
+    errName: "Enter your name (at least 2 letters).",
+    errContact: "Leave an email or a phone number with country code so we can reply.",
+    msgContact: "Contact: ",
+    emailSubject: "Canangueno enquiry",
+
+    msgIntro: "Hello, I would like to enquire about this Canangueno Lodge trip:",
+    msgDate: "Preferred date: ",
+    msgTravelers: "Travellers: ",
+    msgName: "Name: ",
+    msgNotes: "Notes: ",
+    msgClosing:
+      "Please confirm availability, room type, extras and payment terms.",
+
+    readyTitle: "Your enquiry is ready.",
+    readyBody:
+      "Review the details and send the message from your preferred app. The lodge has not received this enquiry yet.",
+    openWhatsapp: "Open WhatsApp",
+    openEmail: "Open email",
+
+    summaryEyebrow: "Your Canangueno itinerary",
+    subtotalNote:
+      "The final quote depends on your group size, room type and dates. The lodge confirms it before any payment.",
+    includedTitle: "Included",
+    includedBody:
+      "Private-bathroom accommodation, meals, purified water, guide and excursions.",
+    extraTitle: "Extra",
+    extraBody:
+      "Ground transport and optional activities such as the cassava-bread demonstration or the shaman visit. Drinks and tips.",
+    availabilityNote:
+      "Subject to availability. Booking requires full payment and a written lodge voucher.",
   },
 
   location: {
@@ -241,7 +381,8 @@ export const en: Dictionary = {
   },
 
   footer: {
-    tagline: "Ecuadorian Amazon tours in the Cuyabeno Wildlife Production Reserve.",
+    tagline:
+      "Ecuadorian Amazon tours in the Cuyabeno Wildlife Production Reserve.",
     explore: "Explore",
     contact: "Contact",
     legal: "Legal",
@@ -252,22 +393,24 @@ export const en: Dictionary = {
   meta: {
     homeTitle: "Canangueno Lodge · Cuyabeno & Ecuadorian Amazon Tours",
     homeDescription:
-      "Lodge in the heart of the Cuyabeno Reserve. 3, 4 and 5-day tours with bilingual guides, pink dolphins, the Siona community and all meals included. From USD 280.",
+      "Lodge in the heart of the Cuyabeno Reserve. 3, 4 and 5-day tours with bilingual guides, pink dolphins, the Siona community and all meals included. Get a quote.",
     toursTitle: "Cuyabeno Tours · 3, 4 and 5 Days · Canangueno Lodge",
     toursDescription:
-      "Compare our three routes through the Cuyabeno Reserve: full itineraries, prices and what each one includes.",
-    lodgeTitle: "The Lodge · Canangueno Lodge, Cuyabeno Reserve",
+      "Compare our three routes through the Cuyabeno Reserve: full itineraries and what each one includes.",
+    lodgeTitle: "The Lodge in the Cuyabeno Reserve",
     lodgeDescription:
       "Cabins with private bathrooms in the heart of the Cuyabeno Reserve, for a maximum of 40 guests. Licensed operator since 2006.",
-    galleryTitle: "Gallery · Canangueno Lodge, Cuyabeno",
-    galleryDescription: "Photographs of the lodge, the Cuyabeno river, the wildlife and the Siona communities.",
+    galleryTitle: "Cuyabeno Photo Gallery",
+    galleryDescription:
+      "Photographs of the lodge, the Cuyabeno river, the wildlife and the Siona communities.",
     journeyTitle: "How to Get to Cuyabeno from Quito · Canangueno Lodge",
     journeyDescription:
       "How to reach the Cuyabeno Bridge from Quito by bus or by air via El Coca, then three hours by canoe to the lodge.",
-    faqTitle: "Frequently Asked Questions · Canangueno Lodge, Cuyabeno",
+    faqTitle: "Frequently Asked Questions about Cuyabeno",
     faqDescription:
       "Weather, what to pack, vaccinations, the booking process, payment methods and the cancellation policy.",
     bookTitle: "Book Your Cuyabeno Tour · Canangueno Lodge",
-    bookDescription: "Check availability for the 3, 4 and 5-day tours in the Cuyabeno Reserve.",
+    bookDescription:
+      "Check availability for the 3, 4 and 5-day tours in the Cuyabeno Reserve.",
   },
 };

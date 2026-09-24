@@ -2,118 +2,123 @@ import Link from "next/link";
 import type { Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/i18n";
 import { routes } from "@/lib/routes";
-import { site } from "@/config/site";
-import { tours } from "@/content/tours";
-import { pick } from "@/lib/i18n";
+import { site, whatsappLink } from "@/config/site";
+import { Logo } from "@/components/layout/Logo";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  TripadvisorIcon,
+} from "@/components/ui/BrandIcons";
+
+/* Cada enlace del pie mide 44 px de alto: en el teléfono son blancos de
+   dedo, no de puntero. El espacio entre ellos lo da ese alto, no un `gap`. */
+const LINK =
+  "inline-flex min-h-11 items-center transition-colors hover:text-accent-text";
+
+const SOCIAL = [
+  { name: "Instagram", href: site.social.instagram, Icon: InstagramIcon },
+  { name: "Facebook", href: site.social.facebook, Icon: FacebookIcon },
+  { name: "Tripadvisor", href: site.social.tripadvisor, Icon: TripadvisorIcon },
+];
 
 export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const year = new Date().getFullYear();
+  const company = site.legal.companyName;
+
+  /* Los tours no se listan uno por uno: "Tours" ya lleva a los tres. */
+  const links: [string, string][] = [
+    [routes.tours(locale), dict.nav.tours],
+    [routes.cuyabeno(locale), dict.nav.cuyabeno],
+    [routes.lodge(locale), dict.nav.lodge],
+    [routes.gallery(locale), dict.nav.gallery],
+    [routes.journey(locale), dict.nav.journey],
+    [routes.about(locale), dict.about.navLabel],
+    [routes.faq(locale), dict.nav.faq],
+  ];
 
   return (
-    <footer className="bg-bg-deep text-on-deep">
-      <div className="shell grid gap-14 py-20 md:grid-cols-[1.4fr_1fr_1fr_1.2fr] md:gap-10 md:py-24">
+    <footer className="exp-footer bg-bg-warm text-ink">
+      <div className="shell grid gap-8 py-12 md:grid-cols-[auto_1fr_auto] md:items-start md:gap-12 md:py-14">
         <div>
-          <p className="font-display text-[1.6rem] leading-none tracking-[0.12em]">CANANGUENO</p>
-          <p className="mt-6 max-w-[34ch] text-sm leading-relaxed text-on-deep-soft">
+          <Link
+            href={routes.home(locale)}
+            aria-label={site.name}
+            className="exp-brand exp-brand-onlight"
+          >
+            <Logo />
+          </Link>
+          <p className="mt-4 max-w-[34ch] text-sm leading-relaxed text-ink-soft">
             {dict.footer.tagline}
           </p>
         </div>
 
+        {/* Una sola lista corrida en vez de columnas: el pie era más alto
+            que la mitad de la pantalla. */}
         <nav aria-label={dict.footer.explore}>
-          <p className="eyebrow mb-5 text-on-deep-faint">{dict.footer.explore}</p>
-          <ul className="flex flex-col gap-3 text-sm text-on-deep-soft">
-            {tours.map((t) => (
-              <li key={t.id}>
-                <Link
-                  href={routes.tour(locale, pick(t.slug, locale))}
-                  className="transition-colors hover:text-on-deep"
-                >
-                  {pick(t.name, locale)}
+          <ul className="flex flex-wrap gap-x-6 text-sm text-ink-soft md:justify-center">
+            {links.map(([href, label]) => (
+              <li key={href}>
+                <Link href={href} className={LINK}>
+                  {label}
                 </Link>
               </li>
             ))}
-            <li>
-              <Link href={routes.lodge(locale)} className="transition-colors hover:text-on-deep">
-                {dict.nav.lodge}
-              </Link>
-            </li>
-            <li>
-              <Link href={routes.gallery(locale)} className="transition-colors hover:text-on-deep">
-                {dict.nav.gallery}
-              </Link>
-            </li>
-            <li>
-              <Link href={routes.journey(locale)} className="transition-colors hover:text-on-deep">
-                {dict.nav.journey}
-              </Link>
-            </li>
-            <li>
-              <Link href={routes.faq(locale)} className="transition-colors hover:text-on-deep">
-                {dict.nav.faq}
-              </Link>
-            </li>
           </ul>
         </nav>
 
-        <div>
-          <p className="eyebrow mb-5 text-on-deep-faint">{dict.footer.contact}</p>
-          <ul className="flex flex-col gap-3 text-sm text-on-deep-soft">
+        <div className="text-sm text-ink-soft">
+          <ul className="flex flex-wrap gap-x-6 md:flex-col md:items-end">
             <li>
               <a
-                href={`mailto:${site.contact.email}`}
-                className="transition-colors hover:text-on-deep"
+                href={whatsappLink(dict.faq.whatsappMessage)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={LINK}
               >
+                WhatsApp · {site.contact.phone}
+              </a>
+            </li>
+            <li>
+              <a href={`mailto:${site.contact.email}`} className={LINK}>
                 {site.contact.email}
               </a>
             </li>
-            <li>
-              <a
-                href={`tel:${site.contact.phone.replace(/\s/g, "")}`}
-                className="transition-colors hover:text-on-deep"
-              >
-                {site.contact.phone}
-              </a>
-            </li>
-            <li>
-              <a
-                href={site.social.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-colors hover:text-on-deep"
-              >
-                Instagram
-              </a>
-            </li>
           </ul>
-        </div>
-
-        <div>
-          <p className="eyebrow mb-5 text-on-deep-faint">{dict.footer.legal}</p>
-          <dl className="flex flex-col gap-4 text-sm text-on-deep-soft">
-            <div>
-              <dt className="text-xs text-on-deep-faint">{dict.lodge.companyLabel}</dt>
-              <dd>{site.legal.companyName}</dd>
-            </div>
-            <div>
-              <dt className="text-xs text-on-deep-faint">{dict.lodge.registryLabel}</dt>
-              <dd className="tabular-nums">{site.legal.forestryRegistry}</dd>
-            </div>
-            <div>
-              <dt className="text-xs text-on-deep-faint">{site.office.label}</dt>
-              <dd>
-                {site.office.street}
-                <br />
-                {site.office.city}, {site.office.country}
-              </dd>
-            </div>
-          </dl>
+          {/* Las redes, con su nombre escrito: un ícono solo obliga a adivinar,
+              y Tripadvisor no lo reconoce todo el mundo por el búho. */}
+          <ul className="flex flex-wrap gap-x-5 md:justify-end">
+            {SOCIAL.map(({ href, name, Icon }) => (
+              <li key={name}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${LINK} gap-2`}
+                >
+                  <Icon />
+                  {name}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 
-      <div className="border-t border-line-deep/70">
-        <div className="shell flex flex-col gap-3 py-7 text-xs text-on-deep-faint sm:flex-row sm:items-center sm:justify-between">
+      {/* Lo legal va en la franja de abajo, en una línea: tiene que estar,
+          pero nadie lo busca como un bloque propio. */}
+      <div className="border-t border-line">
+        <div className="shell flex flex-col gap-2 py-5 text-xs text-ink-faint lg:flex-row lg:items-center lg:justify-between">
           <p>
-            © {year} {site.legal.companyName}. {dict.footer.rights}
+            {/* La razón social ya termina en punto ("CIA. LTDA."): no se le
+                agrega otro. */}
+            © {year} {company}
+            {company.endsWith(".") ? "" : "."} {dict.footer.rights}
+          </p>
+          <p>
+            {dict.lodge.registryLabel}{" "}
+            <span className="tabular-nums">{site.legal.forestryRegistry}</span>
+            {" · "}
+            {site.office.street}, {site.office.city}
           </p>
           <p>{dict.footer.builtBy}</p>
         </div>

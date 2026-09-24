@@ -1,87 +1,99 @@
-import { Star } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { pick, type Locale } from "@/lib/i18n";
-import type { Dictionary } from "@/i18n";
 import { reviews } from "@/content/reviews";
 import { site } from "@/config/site";
-import { Reveal } from "@/components/motion/Reveal";
+import { expeditionCopy } from "@/content/expedition-copy";
 
 /**
- * Reseñas reales con tratamiento editorial: la nota grande a un lado, una cita
- * destacada en display, y el resto en dos columnas tranquilas. Sin carrusel
- * horizontal — eso se veía barato.
+ * ────────────────────────────────────────────────────────────────────────────
+ *  LO QUE DICEN LOS HUÉSPEDES
+ * ────────────────────────────────────────────────────────────────────────────
+ *  Tres reseñas REALES de Tripadvisor, en tarjetas del mismo alto.
+ *
+ *  Lo que NO lleva, y por qué:
+ *   · Estrellas. La reseña original las tiene, pero ese dato no está en
+ *     `content/reviews.ts`. Pintar cinco estrellas "porque suena bien" es
+ *     inventarse una calificación.
+ *   · El país del huésped. Tampoco lo tenemos. Sería lo más bonito de la
+ *     tarjeta y es justo lo que no se puede fabricar.
+ *   · El logotipo de Tripadvisor. Usar la marca sin el kit oficial es
+ *     apropiación; va el nombre en texto hasta que el cliente lo entregue.
+ *
+ *  El monograma NO es una foto de perfil inventada: son las iniciales del
+ *  propio nombre de usuario, generadas del texto. Da a la tarjeta el ancla
+ *  visual que le faltaba sin fingir que sabemos quién es esa persona.
+ *
+ *  Cuando llegue el widget oficial de Tripadvisor, esto se reemplaza entero y
+ *  los datos vienen en vivo. Ver la nota en `content/reviews.ts`.
  */
-export function ReviewsSection({ locale, dict }: { locale: Locale; dict: Dictionary }) {
-  const [featured, ...rest] = reviews;
+
+/** Iniciales de un nombre de usuario: "MelanieB919" → "MB", "Cesar C" → "CC". */
+function initials(name: string) {
+  const letters = name.replace(/[^A-Za-zÁÉÍÓÚÑáéíóúñ ]/g, " ").trim();
+  const parts = letters.split(/\s+/).filter(Boolean);
+  if (parts.length > 1) return (parts[0][0] + parts[1][0]).toUpperCase();
+  const caps = letters.replace(/[^A-ZÁÉÍÓÚÑ]/g, "");
+  return (
+    caps.length > 1 ? caps.slice(0, 2) : letters.slice(0, 2)
+  ).toUpperCase();
+}
+
+/* Las reseñas van en su idioma original (traducirlas las volvería falsas);
+   en las páginas en otro idioma se avisa, para que no parezca un descuido. */
+const ORIGINAL: Record<Locale, string> = {
+  es: "Reseña original en inglés",
+  en: "",
+  de: "Originalbewertung auf Englisch",
+  fr: "Avis original en anglais",
+};
+
+export function ReviewsSection({ locale }: { locale: Locale }) {
+  const c = expeditionCopy(locale);
+  const selected = ["hamzan", "melanieb919", "cesarc"]
+    .map((id) => reviews.find((r) => r.id === id)!)
+    .filter(Boolean);
 
   return (
-    <section className="section-y bg-bg-deep text-on-deep">
+    <section className="exp-reviews">
       <div className="shell">
-        {/* Encabezado + nota */}
-        <div className="grid gap-x-16 gap-y-10 md:grid-cols-12 md:items-end">
-          <Reveal stagger={0.1} className="md:col-span-8">
-            <span className="eyebrow block text-on-deep-faint">{dict.reviews.eyebrow}</span>
-            <h2 className="mt-6 max-w-[16ch] text-[length:var(--text-3xl)] text-on-deep">
-              {dict.reviews.title}{" "}
-              <em className="font-light italic">{dict.reviews.titleEmphasis}</em>
-            </h2>
-          </Reveal>
-
-          <Reveal className="md:col-span-4 md:justify-self-end">
-            <div className="flex items-end gap-3">
-              <span className="font-display text-[3.4rem] leading-[0.8] text-on-deep tabular-nums">
-                {site.rating.value.toFixed(1)}
-              </span>
-              <div className="pb-1.5">
-                <span className="flex gap-0.5" aria-hidden>
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star
-                      key={i}
-                      size={14}
-                      className="fill-accent-soft text-accent-soft"
-                      strokeWidth={0}
-                    />
-                  ))}
-                </span>
-                <p className="mt-1.5 text-xs text-on-deep-faint">{dict.reviews.source}</p>
-              </div>
-            </div>
-          </Reveal>
+        <div className="exp-heading">
+          <h2>{c.reviewsTitle}</h2>
+          <div>
+            <p>{c.reviewsBody}</p>
+            <a
+              className="exp-text-link"
+              href={site.social.tripadvisor}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {c.reviewsCta}
+              <ArrowUpRight size={16} />
+            </a>
+          </div>
         </div>
 
-        {/* Cita destacada */}
-        <Reveal className="mt-14 border-t border-line-deep pt-12 md:mt-20 md:pt-16">
-          <blockquote className="max-w-[26ch] font-display text-[length:var(--text-2xl)] font-light leading-[1.16] text-on-deep">
-            <span className="text-accent-soft" aria-hidden>
-              &ldquo;
-            </span>
-            {featured.quote}
-            <span className="text-accent-soft" aria-hidden>
-              &rdquo;
-            </span>
-          </blockquote>
-          <footer className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
-            <span className="font-medium text-on-deep">{featured.author}</span>
-            <span className="hidden h-px w-8 bg-line-deep sm:block" aria-hidden />
-            <span className="text-on-deep-faint">
-              {pick(featured.date, locale)} &middot; {featured.source}
-            </span>
-          </footer>
-        </Reveal>
-
-        {/* Resto */}
-        <div className="mt-14 grid gap-x-16 gap-y-12 md:mt-20 md:grid-cols-2">
-          {rest.map((r) => (
-            <Reveal key={r.id} y={26}>
-              <div className="h-full border-t border-line-deep pt-7">
-                <blockquote className="font-display text-[1.3rem] font-light leading-snug text-on-deep-soft">
-                  {r.quote}
-                </blockquote>
-                <footer className="mt-5 flex items-baseline justify-between gap-4 text-xs">
-                  <span className="font-medium text-on-deep">{r.author}</span>
-                  <span className="text-on-deep-faint">{pick(r.date, locale)}</span>
-                </footer>
-              </div>
-            </Reveal>
+        <div className="exp-review-grid">
+          {selected.map((r) => (
+            <figure key={r.id} className="exp-review">
+              <blockquote lang="en">
+                {r.quote}
+                {/* Extracto: en el original sigue. Sin los puntos parecía
+                    una cita completa. */}
+                {r.excerpt && "…"}
+              </blockquote>
+              <figcaption>
+                <span className="exp-review-mono" aria-hidden>
+                  {initials(r.author)}
+                </span>
+                <span className="exp-review-who">
+                  <strong>{r.author}</strong>
+                  <small>
+                    {pick(r.date, locale)} · {r.source}
+                    {ORIGINAL[locale] && <> · {ORIGINAL[locale]}</>}
+                  </small>
+                </span>
+              </figcaption>
+            </figure>
           ))}
         </div>
       </div>

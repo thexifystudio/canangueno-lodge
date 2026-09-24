@@ -13,6 +13,13 @@ export const site = {
   shortName: "Canangueno",
   domain: "cananguenolodge.com",
   url: "https://www.cananguenolodge.com",
+  /**
+   * ⚠️ `false` mientras el sitio vive en la URL provisional de Cloudflare:
+   * todas las páginas van con `noindex` y robots.txt bloquea todo, para que
+   * Google no indexe la versión de prueba ni compita con la web actual.
+   * Se pasa a `true` el día que se conecta el dominio real.
+   */
+  live: false,
 
   legal: {
     companyName: "EMOTIONPLANET CIA. LTDA.",
@@ -20,8 +27,11 @@ export const site = {
     /** Registro forestal para operar en el Patrimonio de Áreas Naturales del Estado. */
     forestryRegistry: "RNAB20168950448",
     legalRepresentative: "Pablo Flores",
-    operatingSince: 2006,
-    authorities: ["Ministerio de Turismo del Ecuador", "Ministerio del Ambiente del Ecuador"],
+    representativeExperienceSince: 2006,
+    authorities: [
+      "Ministerio de Turismo del Ecuador",
+      "Ministerio del Ambiente del Ecuador",
+    ],
   },
 
   contact: {
@@ -39,8 +49,9 @@ export const site = {
     salesEmail: "sales@cananguenolodge.com",
   },
 
+  /* El título ("Oficina en Quito") está traducido en
+     `dict.location.officeTitle`; acá sólo la dirección. */
   office: {
-    label: "Oficina Quito",
     street: "Francisco de Caldas OE3-34 y Venezuela",
     city: "Quito",
     country: "Ecuador",
@@ -70,8 +81,9 @@ export const site = {
 
   social: {
     instagram: "https://www.instagram.com/cananguenolodge/",
-    facebook: "https://www.facebook.com/cananguenolodge",
-    tripadvisor: "https://www.tripadvisor.com/",
+    facebook: "https://www.facebook.com/CananguenoLodge",
+    tripadvisor:
+      "https://www.tripadvisor.com/Attraction_Review-g1603627-d17623241-Reviews-Tour_Cuyabeno_Canangueno_Lodge-Nueva_Loja_Sucumbios_Province.html",
   },
 
   capacity: {
@@ -80,10 +92,6 @@ export const site = {
   },
 
   /** Reseñas públicas del lodge (TripAdvisor). Ver `src/content/reviews.ts`. */
-  rating: {
-    value: 5,
-    source: "TripAdvisor",
-  },
 } as const;
 
 /** Arma un enlace de WhatsApp con mensaje pre-escrito. */

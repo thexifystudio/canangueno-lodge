@@ -1,345 +1,296 @@
 "use client";
-
-import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
-import { ArrowRight, Check, Minus, Plus } from "lucide-react";
-import { pick, type Locale } from "@/lib/i18n";
+import { useEffect, useRef, useState, type FormEvent } from "react";
+import { ArrowUpRight, Mail, MessageCircle } from "lucide-react";
+import type { Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/i18n";
-import { tours, tourById } from "@/content/tours";
-import { whatsappLink } from "@/config/site";
-import { captureAttribution, getAttribution } from "@/lib/attribution";
-import { cn } from "@/lib/cn";
+import { site, whatsappLink } from "@/config/site";
+import { localDateISO, validTravelDate } from "@/lib/travel-date";
 
-type Status = "idle" | "sending" | "sent" | "error";
+/** Lo mínimo de cada tour que necesita el formulario, ya en su idioma. */
+export type BookingTour = {
+  id: string;
+  days: number;
+  nights: number;
+  name: string;
+  tagline: string;
+};
 
-export function BookingForm({ locale, dict }: { locale: Locale; dict: Dictionary }) {
-  const params = useSearchParams();
+type Field = "date" | "pax" | "name" | "contact";
+type Errors = Partial<Record<Field, string>>;
 
-  const [tourId, setTourId] = useState(
-    () => params.get("tour") ?? tours.find((t) => t.featured)?.id ?? tours[0].id,
-  );
-  const [date, setDate] = useState(() => params.get("date") ?? "");
-  const [travelers, setTravelers] = useState(() => Number(params.get("pax")) || 2);
-  const [status, setStatus] = useState<Status>("idle");
-  const [reference, setReference] = useState<string | null>(null);
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+/** Un teléfono con código de país: al menos 7 dígitos, con o sin espacios. */
+const PHONE = /^\+?[\d\s().-]{7,}$/;
 
-  // Se guarda el origen apenas se monta, antes de que la persona navegue.
-  useEffect(() => captureAttribution(), []);
+/**
+ * El formulario llega del servidor ya con el tour, la fecha y los viajeros
+ * que vienen en la URL (desde "Planifica tu viaje"), así se ve completo en
+ * el HTML inicial. Sólo recibe los textos de su idioma, no los diccionarios
+ * de los cuatro.
+ *
+ * La validación es propia (`noValidate`): los globos nativos del navegador
+ * salen en el idioma del navegador, no en el de la página, y no dicen cómo
+ * corregir el dato.
+ */
+export function BookingForm({
+  locale: l,
+  t9n,
+  units,
+  tours,
+  initial,
+}: {
+  locale: Locale;
+  t9n: Dictionary["booking"];
+  units: { days: string; nights: string };
+  tours: BookingTour[];
+  initial: { tour: string; date: string; pax: string };
+}) {
+  const [tourId, setTourId] = useState(initial.tour);
+  const [pax, setPax] = useState(initial.pax);
+  const [today, setToday] = useState("");
+  const [errors, setErrors] = useState<Errors>({});
+  const [prepared, setPrepared] = useState("");
+  const form = useRef<HTMLFormElement>(null);
+  const result = useRef<HTMLDivElement>(null);
+  useEffect(() => setToday(localDateISO()), []);
+  useEffect(() => {
+    if (prepared) result.current?.focus();
+  }, [prepared]);
 
-  const tour = tourById(tourId) ?? tours[0];
-  const total = tour.price * travelers;
+  const tour = tours.find((t) => t.id === tourId) ?? tours[0];
+  const count = Number(pax),
+    validCount = Number.isInteger(count) && count >= 1 && count <= 40;
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setStatus("sending");
-
-    const form = new FormData(e.currentTarget);
-    const payload = {
-      tourId,
-      date,
-      travelers,
-      name: String(form.get("name") ?? ""),
-      email: String(form.get("email") ?? ""),
-      phone: String(form.get("phone") ?? ""),
-      country: String(form.get("country") ?? ""),
-      message: String(form.get("message") ?? ""),
-      locale,
-      attribution: getAttribution(),
-    };
-
-    try {
-      const res = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const data = (await res.json()) as { ok: boolean; reference?: string };
-      if (!res.ok || !data.ok) throw new Error("failed");
-      setReference(data.reference ?? null);
-      setStatus("sent");
-    } catch {
-      setStatus("error");
-    }
+  function validate(fd: FormData): Errors {
+    const e: Errors = {};
+    const date = String(fd.get("date") ?? "");
+    if (!validTravelDate(date)) e.date = t9n.errDate;
+    else if (date < localDateISO()) e.date = t9n.errDatePast;
+    if (!validCount) e.pax = t9n.errPax;
+    if (String(fd.get("name") ?? "").trim().length < 2) e.name = t9n.errName;
+    const contact = String(fd.get("contact") ?? "").trim();
+    if (!EMAIL.test(contact) && !PHONE.test(contact))
+      e.contact = t9n.errContact;
+    return e;
   }
 
-  const label = "eyebrow mb-3 block text-ink-faint";
-  const field =
-    "w-full border-b border-line bg-transparent pb-3 pt-2 text-ink outline-none " +
-    "transition-colors focus:border-ink placeholder:text-ink-faint/70";
-
-  /* ── Confirmación ── */
-  if (status === "sent") {
-    const waMessage =
-      locale === "es"
-        ? `Hola, acabo de enviar una consulta${reference ? ` (referencia ${reference})` : ""} para el ${pick(tour.name, locale)}.`
-        : `Hi, I've just sent an enquiry${reference ? ` (reference ${reference})` : ""} about the ${pick(tour.name, locale)}.`;
-
-    return (
-      <div className="border-t border-ink/20 pt-10">
-        <span className="inline-flex h-11 w-11 items-center justify-center border border-accent text-accent">
-          <Check size={20} strokeWidth={1.5} />
-        </span>
-        <h2 className="mt-7 font-display text-[length:var(--text-2xl)] text-ink">
-          {dict.booking.successTitle}
-        </h2>
-        <p className="mt-4 max-w-[52ch] text-ink-soft">{dict.booking.successBody}</p>
-
-        {reference && (
-          <p className="mt-8 border-y border-line py-5 text-sm text-ink-soft">
-            {locale === "es" ? "Tu referencia" : "Your reference"}:{" "}
-            <span className="font-medium tabular-nums text-ink">{reference}</span>
-          </p>
-        )}
-
-        <a
-          href={whatsappLink(waMessage)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-8 inline-flex items-center gap-3 rounded-[var(--radius)] bg-accent px-7 py-4 text-sm font-medium text-accent-ink transition-colors hover:bg-accent-soft"
-        >
-          {dict.common.whatsapp}
-          <ArrowRight size={16} strokeWidth={1.6} />
-        </a>
-      </div>
+  function onSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    const found = validate(fd);
+    setErrors(found);
+    const first = Object.keys(found)[0];
+    if (first) {
+      form.current
+        ?.querySelector<HTMLElement>(`[name="${first}"]`)
+        ?.focus();
+      return;
+    }
+    const date = String(fd.get("date"));
+    const readable = new Intl.DateTimeFormat(l, {
+      dateStyle: "long",
+      timeZone: "UTC",
+    }).format(new Date(date + "T12:00:00Z"));
+    const notes = String(fd.get("notes") ?? "").trim();
+    setPrepared(
+      [
+        t9n.msgIntro,
+        `${tour.name} (${tour.days} ${units.days} / ${tour.nights} ${units.nights})`,
+        t9n.msgDate + readable,
+        t9n.msgTravelers + count,
+        t9n.msgName + String(fd.get("name")).trim(),
+        t9n.msgContact + String(fd.get("contact")).trim(),
+        ...(notes ? [t9n.msgNotes + notes] : []),
+        t9n.msgClosing,
+      ].join("\n"),
     );
   }
 
-  /* ── Formulario ── */
+  /** Props de accesibilidad de un campo según tenga error o no. */
+  const a11y = (f: Field, hint?: string) => ({
+    "aria-invalid": errors[f] ? true : undefined,
+    "aria-describedby":
+      [errors[f] && `err-${f}`, hint].filter(Boolean).join(" ") || undefined,
+  });
+  const error = (f: Field) =>
+    errors[f] && (
+      <p id={`err-${f}`} className="exp-field-error">
+        {errors[f]}
+      </p>
+    );
+
   return (
-    <form onSubmit={onSubmit} className="grid gap-x-12 gap-y-14 lg:grid-cols-12">
-      <div className="flex flex-col gap-11 lg:col-span-7">
-        {/* Tour */}
+    <div className="exp-book-layout">
+      <form
+        ref={form}
+        className="exp-book-form"
+        noValidate
+        onChange={(e) => {
+          setPrepared("");
+          const name = (e.target as unknown as HTMLInputElement).name as Field;
+          if (errors[name]) setErrors((prev) => ({ ...prev, [name]: undefined }));
+        }}
+        onSubmit={onSubmit}
+      >
         <fieldset>
-          <legend className={label}>{dict.booking.tourLabel}</legend>
-          <div className="flex flex-col">
-            {tours.map((t) => (
-              <label
-                key={t.id}
-                className={cn(
-                  "flex cursor-pointer items-baseline justify-between gap-5 border-b border-line py-5 transition-colors",
-                  tourId === t.id ? "border-ink/40" : "hover:border-ink/25",
-                )}
+          <legend>{t9n.formJourneyLegend}</legend>
+          <div className="exp-book-fields">
+            <label className="exp-field-full">
+              {t9n.routeLabel}
+              <select
+                name="tour"
+                value={tourId}
+                onChange={(e) => setTourId(e.target.value)}
               >
-                <span className="flex items-baseline gap-4">
-                  <input
-                    type="radio"
-                    name="tour"
-                    value={t.id}
-                    checked={tourId === t.id}
-                    onChange={() => setTourId(t.id)}
-                    className="sr-only"
-                  />
-                  <span
-                    aria-hidden
-                    className={cn(
-                      "mt-1 h-2.5 w-2.5 shrink-0 rounded-full border transition-colors",
-                      tourId === t.id ? "border-accent bg-accent" : "border-ink/35",
-                    )}
-                  />
-                  <span>
-                    <span
-                      className={cn(
-                        "block font-display text-[1.35rem] leading-tight transition-colors",
-                        tourId === t.id ? "text-ink" : "text-ink-soft",
-                      )}
-                    >
-                      {pick(t.tagline, locale)}
-                    </span>
-                    <span className="mt-1 block text-xs text-ink-faint">
-                      {t.days} {dict.common.days} / {t.nights} {dict.common.nights}
-                    </span>
-                  </span>
-                </span>
-                <span className="shrink-0 font-display text-[1.3rem] text-ink tabular-nums">
-                  USD {t.price}
-                </span>
+                {tours.map((t) => (
+                  <option key={t.id} value={t.id}>
+                    {t.days} {units.days} / {t.nights} {units.nights}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <div>
+              <label>
+                {t9n.preferredDateLabel}
+                <input
+                  name="date"
+                  type="date"
+                  required
+                  min={today || undefined}
+                  defaultValue={initial.date}
+                  {...a11y("date")}
+                />
               </label>
-            ))}
+              {error("date")}
+            </div>
+            <div>
+              <label>
+                {t9n.travelersLabel}
+                <input
+                  name="pax"
+                  type="number"
+                  inputMode="numeric"
+                  required
+                  min={1}
+                  max={40}
+                  step={1}
+                  value={pax}
+                  onChange={(e) => setPax(e.target.value)}
+                  {...a11y("pax")}
+                />
+              </label>
+              {error("pax")}
+            </div>
           </div>
         </fieldset>
-
-        {/* Fecha y viajeros */}
-        <div className="grid gap-10 sm:grid-cols-2">
-          <div>
-            <label htmlFor="date" className={label}>
-              {dict.booking.dateLabel}
+        <fieldset>
+          <legend>{t9n.formAboutLegend}</legend>
+          <div className="exp-book-fields">
+            <div className="exp-field-full">
+              <label>
+                {t9n.yourNameLabel}
+                <input
+                  name="name"
+                  autoComplete="name"
+                  maxLength={100}
+                  required
+                  {...a11y("name")}
+                />
+              </label>
+              {error("name")}
+            </div>
+            <div className="exp-field-full">
+              <label>
+                {t9n.contactLabel}
+                <input
+                  name="contact"
+                  autoComplete="email"
+                  inputMode="email"
+                  maxLength={120}
+                  required
+                  {...a11y("contact", "hint-contact")}
+                />
+              </label>
+              <p id="hint-contact" className="exp-field-hint">
+                {t9n.contactHint}
+              </p>
+              {error("contact")}
+            </div>
+            <label className="exp-field-full">
+              {t9n.notesLabel}
+              <textarea
+                name="notes"
+                rows={3}
+                maxLength={800}
+                placeholder={t9n.notesPlaceholder}
+              />
             </label>
-            <input
-              id="date"
-              type="date"
-              required
-              value={date}
-              min={new Date().toISOString().slice(0, 10)}
-              onChange={(e) => setDate(e.target.value)}
-              className={field}
-            />
           </div>
-
-          <div>
-            <span className={label}>{dict.booking.travelersLabel}</span>
-            <div className="flex items-center justify-between border-b border-line pb-2.5 pt-1">
-              <button
-                type="button"
-                onClick={() => setTravelers((p) => Math.max(1, p - 1))}
-                aria-label="-1"
-                className="p-1.5 text-ink-soft transition-colors hover:text-ink"
+        </fieldset>
+        <p className="exp-small">{t9n.noChargeNote}</p>
+        <button type="submit" className="exp-button">
+          {t9n.prepareCta}
+          <ArrowUpRight size={17} />
+        </button>
+        {prepared && (
+          <div
+            ref={result}
+            tabIndex={-1}
+            role="status"
+            className="exp-enquiry-result"
+          >
+            <h2>{t9n.readyTitle}</h2>
+            <p>{t9n.readyBody}</p>
+            <pre>{prepared}</pre>
+            <div className="exp-detail-actions">
+              <a
+                href={whatsappLink(prepared)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="exp-button"
               >
-                <Minus size={16} strokeWidth={1.5} />
-              </button>
-              <span className="font-display text-[1.4rem] tabular-nums text-ink">
-                {travelers}
-              </span>
-              <button
-                type="button"
-                onClick={() => setTravelers((p) => Math.min(40, p + 1))}
-                aria-label="+1"
-                className="p-1.5 text-ink-soft transition-colors hover:text-ink"
+                <MessageCircle size={17} />
+                {t9n.openWhatsapp}
+              </a>
+              <a
+                className="exp-text-link"
+                href={
+                  "mailto:" +
+                  site.contact.email +
+                  "?subject=" +
+                  encodeURIComponent(
+                    `${t9n.emailSubject} · ${tour.days} ${units.days}`,
+                  ) +
+                  "&body=" +
+                  encodeURIComponent(prepared)
+                }
               >
-                <Plus size={16} strokeWidth={1.5} />
-              </button>
+                <Mail size={16} />
+                {t9n.openEmail}
+              </a>
             </div>
           </div>
-        </div>
-
-        {/* Datos */}
-        <div className="grid gap-10 sm:grid-cols-2">
-          <div>
-            <label htmlFor="name" className={label}>
-              {dict.booking.nameLabel}
-            </label>
-            <input
-              id="name"
-              name="name"
-              required
-              autoComplete="name"
-              placeholder={dict.booking.namePlaceholder}
-              className={field}
-            />
-          </div>
-          <div>
-            <label htmlFor="email" className={label}>
-              {dict.booking.emailLabel}
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              required
-              autoComplete="email"
-              placeholder={dict.booking.emailPlaceholder}
-              className={field}
-            />
-          </div>
-          <div>
-            <label htmlFor="phone" className={label}>
-              {dict.booking.phoneLabel}
-            </label>
-            <input
-              id="phone"
-              name="phone"
-              required
-              autoComplete="tel"
-              placeholder={dict.booking.phonePlaceholder}
-              className={field}
-            />
-          </div>
-          <div>
-            <label htmlFor="country" className={label}>
-              {dict.booking.countryLabel}
-            </label>
-            <input
-              id="country"
-              name="country"
-              autoComplete="country-name"
-              placeholder={dict.booking.countryPlaceholder}
-              className={field}
-            />
-          </div>
-        </div>
-
-        <div>
-          <label htmlFor="message" className={label}>
-            {dict.booking.messageLabel}
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            rows={3}
-            placeholder={dict.booking.messagePlaceholder}
-            className={cn(field, "resize-none")}
-          />
-        </div>
-
-        <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
-          <button
-            type="submit"
-            disabled={status === "sending"}
-            className="inline-flex items-center gap-3 rounded-[var(--radius)] bg-accent px-8 py-4 text-sm font-medium text-accent-ink transition-colors hover:bg-accent-soft disabled:opacity-50"
-          >
-            {status === "sending" ? dict.booking.submitting : dict.booking.submit}
-            <ArrowRight size={16} strokeWidth={1.6} />
-          </button>
-
-          <a
-            href={whatsappLink(
-              locale === "es"
-                ? "Hola, quisiera consultar disponibilidad para un tour a Cuyabeno."
-                : "Hi, I'd like to check availability for a Cuyabeno tour.",
-            )}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border-b border-ink/25 pb-1 text-sm text-ink-soft transition-colors hover:border-ink hover:text-ink"
-          >
-            {dict.booking.orWhatsapp}
-          </a>
-        </div>
-
-        {status === "error" && (
-          <p role="alert" className="text-sm text-accent-text">
-            <strong className="font-medium">{dict.booking.errorTitle}.</strong>{" "}
-            {dict.booking.errorBody}
-          </p>
         )}
-      </div>
-
-      {/* Resumen */}
-      <aside className="lg:col-span-5">
-        <div className="border-t border-ink/20 pt-7 lg:sticky lg:top-32">
-          <h2 className="eyebrow mb-7 text-ink-faint">{dict.booking.summaryTitle}</h2>
-
-          <dl className="flex flex-col gap-4">
-            <div className="flex items-baseline justify-between gap-5 border-b border-line pb-4">
-              <dt className="text-sm text-ink-faint">{dict.booking.tourLabel}</dt>
-              <dd className="text-right text-sm text-ink">{pick(tour.tagline, locale)}</dd>
-            </div>
-            <div className="flex items-baseline justify-between gap-5 border-b border-line pb-4">
-              <dt className="text-sm text-ink-faint">{dict.tours.tableDuration}</dt>
-              <dd className="text-sm text-ink tabular-nums">
-                {tour.days} {dict.common.days} / {tour.nights} {dict.common.nights}
-              </dd>
-            </div>
-            <div className="flex items-baseline justify-between gap-5 border-b border-line pb-4">
-              <dt className="text-sm text-ink-faint">{dict.booking.dateLabel}</dt>
-              <dd className="text-sm text-ink tabular-nums">{date || "—"}</dd>
-            </div>
-            <div className="flex items-baseline justify-between gap-5 border-b border-line pb-4">
-              <dt className="text-sm text-ink-faint">{dict.booking.travelersLabel}</dt>
-              <dd className="text-sm text-ink tabular-nums">{travelers}</dd>
-            </div>
-          </dl>
-
-          <div className="mt-8 flex items-baseline justify-between gap-5">
-            <span className="eyebrow text-ink-faint">{dict.booking.estimatedTotal}</span>
-            <span className="font-display text-[2rem] leading-none text-ink tabular-nums">
-              USD {total}
-            </span>
+      </form>
+      <aside className="exp-book-summary">
+        <p className="exp-small">{t9n.summaryEyebrow}</p>
+        <h2>{tour.tagline}</h2>
+        <p>
+          {tour.days} {units.days} / {tour.nights} {units.nights}
+        </p>
+        <dl>
+          <div>
+            <dt>{t9n.travelersLabel}</dt>
+            <dd>{validCount ? count : "—"}</dd>
           </div>
-
-          <p className="mt-4 text-xs leading-relaxed text-ink-faint">
-            {dict.booking.estimatedNote}
-          </p>
-        </div>
+        </dl>
+        <p className="exp-small">{t9n.subtotalNote}</p>
+        <h3>{t9n.includedTitle}</h3>
+        <p>{t9n.includedBody}</p>
+        <h3>{t9n.extraTitle}</h3>
+        <p>{t9n.extraBody}</p>
+        <p className="exp-small exp-book-availability">{t9n.availabilityNote}</p>
       </aside>
-    </form>
+    </div>
   );
 }

@@ -50,66 +50,155 @@
 /* ── Dosel: luz que se cuela entre los árboles ── */
 .media-ph[data-tone="canopy"] {
   background-image:
-    radial-gradient(58% 42% at 62% 6%, color-mix(in srgb, var(--c-img-4) 68%, transparent), transparent 62%),
-    radial-gradient(90% 60% at 18% 30%, color-mix(in srgb, var(--c-img-3) 72%, transparent), transparent 68%),
+    radial-gradient(
+      58% 42% at 62% 6%,
+      color-mix(in srgb, var(--c-img-4) 68%, transparent),
+      transparent 62%
+    ),
+    radial-gradient(
+      90% 60% at 18% 30%,
+      color-mix(in srgb, var(--c-img-3) 72%, transparent),
+      transparent 68%
+    ),
     linear-gradient(166deg, var(--c-img-2) 0%, var(--c-img-1) 82%);
 }
 
 /* ── Río: agua oscura, orilla clara y una línea de horizonte ── */
 .media-ph[data-tone="river"] {
   background-image:
-    linear-gradient(180deg, transparent 43%, color-mix(in srgb, var(--c-img-4) 42%, transparent) 44%, transparent 46%),
-    radial-gradient(70% 34% at 50% 30%, color-mix(in srgb, var(--c-img-3) 78%, transparent), transparent 72%),
-    radial-gradient(90% 50% at 50% 104%, color-mix(in srgb, var(--c-img-1) 92%, transparent), transparent 70%),
+    linear-gradient(
+      180deg,
+      transparent 43%,
+      color-mix(in srgb, var(--c-img-4) 42%, transparent) 44%,
+      transparent 46%
+    ),
+    radial-gradient(
+      70% 34% at 50% 30%,
+      color-mix(in srgb, var(--c-img-3) 78%, transparent),
+      transparent 72%
+    ),
+    radial-gradient(
+      90% 50% at 50% 104%,
+      color-mix(in srgb, var(--c-img-1) 92%, transparent),
+      transparent 70%
+    ),
     linear-gradient(180deg, var(--c-img-2) 0%, var(--c-img-1) 100%);
 }
 
 /* ── Amanecer: sol bajo, niebla en el medio ── */
 .media-ph[data-tone="dawn"] {
   background-image:
-    radial-gradient(40% 30% at 70% 22%, color-mix(in srgb, var(--c-img-4) 92%, transparent), transparent 68%),
-    linear-gradient(180deg, transparent 46%, color-mix(in srgb, var(--c-img-4) 46%, transparent) 60%, transparent 78%),
-    linear-gradient(176deg, var(--c-img-3) 0%, var(--c-img-2) 52%, var(--c-img-1) 100%);
+    radial-gradient(
+      40% 30% at 70% 22%,
+      color-mix(in srgb, var(--c-img-4) 92%, transparent),
+      transparent 68%
+    ),
+    linear-gradient(
+      180deg,
+      transparent 46%,
+      color-mix(in srgb, var(--c-img-4) 46%, transparent) 60%,
+      transparent 78%
+    ),
+    linear-gradient(
+      176deg,
+      var(--c-img-3) 0%,
+      var(--c-img-2) 52%,
+      var(--c-img-1) 100%
+    );
 }
 
 /* ── Noche: una sola fuente de luz y mucha sombra ── */
 .media-ph[data-tone="night"] {
   background-image:
-    radial-gradient(26% 20% at 72% 26%, color-mix(in srgb, var(--c-img-4) 52%, transparent), transparent 72%),
-    radial-gradient(100% 70% at 30% 100%, color-mix(in srgb, var(--c-img-3) 38%, transparent), transparent 64%),
+    radial-gradient(
+      26% 20% at 72% 26%,
+      color-mix(in srgb, var(--c-img-4) 52%, transparent),
+      transparent 72%
+    ),
+    radial-gradient(
+      100% 70% at 30% 100%,
+      color-mix(in srgb, var(--c-img-3) 38%, transparent),
+      transparent 64%
+    ),
     linear-gradient(180deg, var(--c-img-1) 0%, #050f0a 100%);
 }
 
 /* ── Laguna: cielo abierto, agua espejada ── */
 .media-ph[data-tone="lagoon"] {
   background-image:
-    radial-gradient(30% 22% at 30% 34%, color-mix(in srgb, var(--c-img-4) 96%, transparent), transparent 66%),
-    linear-gradient(180deg, color-mix(in srgb, var(--c-img-4) 34%, transparent) 0%, transparent 48%),
-    linear-gradient(180deg, transparent 52%, color-mix(in srgb, var(--c-img-1) 82%, transparent) 54%),
+    radial-gradient(
+      30% 22% at 30% 34%,
+      color-mix(in srgb, var(--c-img-4) 96%, transparent),
+      transparent 66%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--c-img-4) 34%, transparent) 0%,
+      transparent 48%
+    ),
+    linear-gradient(
+      180deg,
+      transparent 52%,
+      color-mix(in srgb, var(--c-img-1) 82%, transparent) 54%
+    ),
     linear-gradient(182deg, var(--c-img-3) 0%, var(--c-img-2) 100%);
 }
 
 /* ── Comunidad: tierra, madera, luz cálida de tarde ── */
 .media-ph[data-tone="community"] {
   background-image:
-    radial-gradient(64% 48% at 26% 74%, color-mix(in srgb, var(--c-img-4) 78%, transparent), transparent 68%),
-    radial-gradient(44% 34% at 84% 18%, color-mix(in srgb, var(--c-img-3) 70%, transparent), transparent 70%),
+    radial-gradient(
+      64% 48% at 26% 74%,
+      color-mix(in srgb, var(--c-img-4) 78%, transparent),
+      transparent 68%
+    ),
+    radial-gradient(
+      44% 34% at 84% 18%,
+      color-mix(in srgb, var(--c-img-3) 70%, transparent),
+      transparent 70%
+    ),
     linear-gradient(158deg, var(--c-img-2) 0%, var(--c-img-1) 90%);
 }
 
 /* ── Lodge: interior, una ventana entrando de costado ── */
 .media-ph[data-tone="lodge"] {
   background-image:
-    linear-gradient(104deg, transparent 30%, color-mix(in srgb, var(--c-img-4) 62%, transparent) 50%, transparent 70%),
-    radial-gradient(56% 44% at 80% 30%, color-mix(in srgb, var(--c-img-4) 58%, transparent), transparent 72%),
-    linear-gradient(172deg, var(--c-img-3) 0%, var(--c-img-2) 58%, var(--c-img-1) 100%);
+    linear-gradient(
+      104deg,
+      transparent 30%,
+      color-mix(in srgb, var(--c-img-4) 62%, transparent) 50%,
+      transparent 70%
+    ),
+    radial-gradient(
+      56% 44% at 80% 30%,
+      color-mix(in srgb, var(--c-img-4) 58%, transparent),
+      transparent 72%
+    ),
+    linear-gradient(
+      172deg,
+      var(--c-img-3) 0%,
+      var(--c-img-2) 58%,
+      var(--c-img-1) 100%
+    );
 }
 
 /* ── Fauna: fondo desenfocado y un punto de foco nítido ── */
 .media-ph[data-tone="fauna"] {
   background-image:
-    radial-gradient(15% 12% at 60% 42%, color-mix(in srgb, var(--c-img-4) 88%, transparent), transparent 74%),
-    radial-gradient(80% 62% at 22% 86%, color-mix(in srgb, var(--c-img-3) 72%, transparent), transparent 66%),
-    radial-gradient(50% 40% at 88% 8%, color-mix(in srgb, var(--c-img-3) 46%, transparent), transparent 70%),
+    radial-gradient(
+      15% 12% at 60% 42%,
+      color-mix(in srgb, var(--c-img-4) 88%, transparent),
+      transparent 74%
+    ),
+    radial-gradient(
+      80% 62% at 22% 86%,
+      color-mix(in srgb, var(--c-img-3) 72%, transparent),
+      transparent 66%
+    ),
+    radial-gradient(
+      50% 40% at 88% 8%,
+      color-mix(in srgb, var(--c-img-3) 46%, transparent),
+      transparent 70%
+    ),
     linear-gradient(150deg, var(--c-img-2) 0%, var(--c-img-1) 88%);
 }

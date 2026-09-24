@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { notFound } from "next/navigation";
-
-import { isLocale, pick, type Locale } from "@/lib/i18n";
+import { isLocale, pick } from "@/lib/i18n";
 import { getDictionary } from "@/i18n";
-import { about, facilities } from "@/content/lodge";
-import { site } from "@/config/site";
-import { PageHeader } from "@/components/layout/PageHeader";
+import { routes } from "@/lib/routes";
+import { facilities, lodgePage } from "@/content/lodge";
 import { Media } from "@/components/ui/Media";
-import { Reveal } from "@/components/motion/Reveal";
 import { ReviewsSection } from "@/components/sections/ReviewsSection";
-import { BookingCta } from "@/components/sections/BookingCta";
-
+import { ClosingBand } from "@/components/expedition/ClosingBand";
 export async function generateMetadata({
   params,
 }: {
@@ -19,130 +18,168 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!isLocale(locale)) return {};
   const dict = getDictionary(locale);
-  return {
+  return pageMetadata(locale, {
     title: dict.meta.lodgeTitle,
     description: dict.meta.lodgeDescription,
-    alternates: {
-      canonical: `/${locale}/el-lodge`,
-      languages: { es: "/es/el-lodge", en: "/en/el-lodge" },
-    },
-  };
+    path: (l) => routes.lodge(l),
+    image: "lodge-building",
+  });
 }
 
-export default async function LodgePage({
+/**
+ * ────────────────────────────────────────────────────────────────────────────
+ *  EL LODGE
+ * ────────────────────────────────────────────────────────────────────────────
+ *  Ordenada como se vive una estadía, con las fotos reales del cliente:
+ *
+ *      título + el edificio → habitaciones y baños → la mesa
+ *      → entre salida y salida (hamacas, estiramientos, charla)
+ *      → quiénes somos → opiniones → cierre
+ *
+ *  El texto vive en `content/lodge.ts` (`lodgePage`).
+ */
+export default async function Page({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
-  if (!isLocale(locale)) notFound();
-  const l = locale as Locale;
-  const dict = getDictionary(l);
+  const { locale: l } = await params;
+  if (!isLocale(l)) notFound();
+  const t9n = getDictionary(l).lodge;
+  const { rooms, table, between } = lodgePage;
+  const gear = facilities.find((f) => f.id === "equipo");
 
   return (
-    <>
-      <PageHeader
-        locale={l}
-        mediaId="lodge-exterior"
-        eyebrow={dict.lodge.eyebrow}
-        title={dict.lodge.title}
-        emphasis={dict.lodge.titleEmphasis}
-        lead={pick(about.intro, l)}
-      />
-
-      {/* Quiénes somos */}
-      <section className="section-y bg-bg">
-        <div className="shell grid gap-x-16 gap-y-12 lg:grid-cols-12">
-          <Reveal className="lg:col-span-4">
-            <h2 className="text-[length:var(--text-2xl)] text-ink lg:sticky lg:top-32">
-              {dict.lodge.aboutTitle}
-            </h2>
-          </Reveal>
-
-          <Reveal stagger={0.1} className="lg:col-span-8">
-            <p className="max-w-[62ch] text-[length:var(--text-lg)] font-light leading-relaxed text-ink-soft">
-              {pick(about.company, l)}
-            </p>
-
-            <dl className="mt-12 grid gap-x-10 gap-y-6 sm:grid-cols-3">
-              <div className="border-t border-line pt-5">
-                <dt className="eyebrow text-ink-faint">{dict.lodge.companyLabel}</dt>
-                <dd className="mt-2 text-sm text-ink">{site.legal.companyName}</dd>
+    <div className="exp-detail lodge-page">
+      {/* ── Título + el edificio ─────────────────────────────────────── */}
+      <section className="shell lodge-intro">
+        <div className="lodge-intro-copy">
+          <p className="lodge-eyebrow">{t9n.eyebrow}</p>
+          <h1>{t9n.pageTitle}</h1>
+          <p className="lodge-lead">{t9n.pageLead}</p>
+          <dl className="lodge-facts">
+            {lodgePage.facts.map((f) => (
+              <div key={f.value}>
+                <dt>{f.value}</dt>
+                <dd>{pick(f.label, l)}</dd>
               </div>
-              <div className="border-t border-line pt-5">
-                <dt className="eyebrow text-ink-faint">{dict.lodge.registryLabel}</dt>
-                <dd className="mt-2 text-sm text-ink tabular-nums">
-                  {site.legal.forestryRegistry}
-                </dd>
-              </div>
-              <div className="border-t border-line pt-5">
-                <dt className="eyebrow text-ink-faint">{dict.lodge.sinceLabel}</dt>
-                <dd className="mt-2 text-sm text-ink tabular-nums">
-                  {site.legal.operatingSince}
-                </dd>
-              </div>
-            </dl>
-
-            <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-2">
-              {site.legal.authorities.map((a) => (
-                <li key={a} className="text-xs text-ink-faint">
-                  {a}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
+            ))}
+          </dl>
+        </div>
+        <div className="lodge-intro-media">
+          <Media
+            id="lodge-building"
+            locale={l}
+            priority
+            sizes="(max-width: 900px) 100vw, 40vw"
+          />
         </div>
       </section>
 
-      {/* Instalaciones */}
-      <section className="section-y bg-bg-warm">
+      {/* ── Habitaciones y baños ─────────────────────────────────────── */}
+      <section className="lodge-rooms">
         <div className="shell">
-          <Reveal>
-            <h2 className="text-[length:var(--text-2xl)] text-ink">
-              {dict.lodge.facilitiesTitle}
-            </h2>
-          </Reveal>
-
-          <div className="mt-14 grid gap-x-8 gap-y-14 md:grid-cols-3">
-            {facilities.map((f, i) => (
-              <Reveal key={f.id} y={34} delay={i * 0.07}>
-                <div className="relative aspect-[4/3] overflow-hidden">
+          <div className="exp-heading">
+            <h2>{pick(rooms.title, l)}</h2>
+            <p>{pick(rooms.body, l)}</p>
+          </div>
+          <div className="lodge-rooms-grid">
+            {(
+              [
+                ["lodge-room-double", rooms.captions.double, "is-main"],
+                ["lodge-room-twin", rooms.captions.twin, "is-twin"],
+                ["lodge-bath-shower", rooms.captions.shower, ""],
+                ["lodge-bath-sink", rooms.captions.sink, ""],
+              ] as const
+            ).map(([id, caption, cls]) => (
+              <figure key={id} className={"lodge-shot " + cls}>
+                <div>
                   <Media
-                    id={f.mediaId}
+                    id={id}
                     locale={l}
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    sizes={
+                      cls === "is-main"
+                        ? "(max-width: 900px) 100vw, 58vw"
+                        : "(max-width: 900px) 50vw, 20vw"
+                    }
                   />
                 </div>
-                <h3 className="mt-6 text-[length:var(--text-lg)] text-ink">
-                  {pick(f.title, l)}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-ink-soft">{pick(f.body, l)}</p>
-              </Reveal>
+                <figcaption>{pick(caption, l)}</figcaption>
+              </figure>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Misión y visión */}
-      <section className="bg-bg-deep text-on-deep">
-        <div className="shell section-y grid gap-x-16 gap-y-14 md:grid-cols-2">
-          <Reveal stagger={0.08}>
-            <h2 className="eyebrow mb-6 text-on-deep-faint">{dict.lodge.missionTitle}</h2>
-            <p className="max-w-[52ch] text-[length:var(--text-lg)] font-light leading-relaxed">
-              {pick(about.mission, l)}
+      {/* ── La mesa ──────────────────────────────────────────────────── */}
+      <section className="shell section-y lodge-table">
+        <div className="lodge-table-copy">
+          <h2>{pick(table.title, l)}</h2>
+          <p>{pick(table.body, l)}</p>
+        </div>
+        {(
+          [
+            ["lodge-meal", table.captions.meal],
+            ["lodge-dinner", table.captions.dinner],
+          ] as const
+        ).map(([id, caption]) => (
+          <figure key={id} className="lodge-shot lodge-tall">
+            <div>
+              <Media id={id} locale={l} sizes="(max-width: 900px) 50vw, 28vw" />
+            </div>
+            <figcaption>{pick(caption, l)}</figcaption>
+          </figure>
+        ))}
+      </section>
+
+      {/* ── Entre salida y salida ────────────────────────────────────── */}
+      <section className="lodge-between">
+        <div className="shell">
+          <div className="exp-heading">
+            <h2>{pick(between.title, l)}</h2>
+            <p>{pick(between.body, l)}</p>
+          </div>
+          <div className="lodge-between-grid">
+            {(
+              [
+                ["lodge-hammocks", between.captions.hammocks],
+                ["lodge-stretch", between.captions.stretch],
+                ["lodge-group", between.captions.group],
+              ] as const
+            ).map(([id, caption]) => (
+              <figure key={id} className="lodge-shot lodge-tall">
+                <div>
+                  <Media
+                    id={id}
+                    locale={l}
+                    sizes="(max-width: 900px) 100vw, 33vw"
+                  />
+                </div>
+                <figcaption>{pick(caption, l)}</figcaption>
+              </figure>
+            ))}
+          </div>
+          {gear && (
+            <p className="lodge-gear">
+              <strong>{pick(lodgePage.gearTitle, l)}:</strong>{" "}
+              {pick(gear.body, l)}
             </p>
-          </Reveal>
-          <Reveal stagger={0.08}>
-            <h2 className="eyebrow mb-6 text-on-deep-faint">{dict.lodge.visionTitle}</h2>
-            <p className="max-w-[52ch] text-[length:var(--text-lg)] font-light leading-relaxed text-on-deep-soft">
-              {pick(about.vision, l)}
-            </p>
-          </Reveal>
+          )}
         </div>
       </section>
 
-      <ReviewsSection locale={l} dict={dict} />
-      <BookingCta locale={l} dict={dict} />
-    </>
+      <section className="shell section-y exp-heading">
+        <h2>{t9n.peopleTitle}</h2>
+        <div>
+          <p>{t9n.peopleBody}</p>
+          <Link href={routes.about(l)} className="exp-text-link">
+            {t9n.peopleLink}
+            <ArrowRight size={17} />
+          </Link>
+        </div>
+      </section>
+      <ReviewsSection locale={l} />
+      <ClosingBand locale={l} />
+    </div>
   );
 }

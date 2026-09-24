@@ -1,0 +1,126 @@
+/* ── WhatsApp ──────────────────────────────────────────────────────────────
+   El botón redondo en escritorio y la barra fija del teléfono. */
+.exp-sticky {
+  display: none;
+}
+/* Botón circular de WhatsApp, en su verde de marca: es el patrón que
+   cualquier visitante ya reconoce de otros sitios, mejor que inventar uno
+   propio con los colores del sitio. Ícono solo —el texto "WhatsApp" ya lo
+   dice el color y el ícono— con una etiqueta que aparece al pasar el mouse. */
+.exp-whatsapp {
+  position: fixed;
+  right: 24px;
+  bottom: 28px;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 999px;
+  background: var(--c-whatsapp);
+  box-shadow:
+    0 6px 20px color-mix(in srgb, var(--c-ink) 22%, transparent),
+    0 2px 6px color-mix(in srgb, var(--c-ink) 16%, transparent);
+  color: var(--c-whatsapp-glyph);
+  transition:
+    background 0.2s,
+    box-shadow 0.2s,
+    opacity 0.4s,
+    visibility 0s,
+    transform 0.4s cubic-bezier(0.22, 0.68, 0.24, 1);
+}
+.exp-whatsapp:hover {
+  background: var(--c-whatsapp-hover);
+  box-shadow:
+    0 8px 24px color-mix(in srgb, var(--c-ink) 26%, transparent),
+    0 2px 8px color-mix(in srgb, var(--c-ink) 18%, transparent);
+}
+.exp-whatsapp-label {
+  position: absolute;
+  right: calc(100% + 12px);
+  white-space: nowrap;
+  background: var(--c-bg-deep);
+  color: var(--c-on-deep);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: var(--radius, 8px);
+  opacity: 0;
+  transform: translateX(6px);
+  pointer-events: none;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+}
+.exp-whatsapp:hover .exp-whatsapp-label,
+.exp-whatsapp:focus-visible .exp-whatsapp-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+/* Aparece con un fundido + subida suave una vez pasado el hero. */
+/* `visibility` con retardo: el fundido de salida se ve entero y recién
+   después deja de existir para el teclado y el lector de pantalla. */
+.exp-whatsapp[data-visible="false"] {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px) scale(0.9);
+  pointer-events: none;
+  transition-delay: 0s, 0s, 0s, 0.4s, 0s;
+}
+@media (max-width: 760px) {
+  .exp-whatsapp {
+    display: none;
+  }
+  /* La barra del teléfono: WhatsApp a un toque (el botón redondo no se
+     muestra en pantallas chicas) y el camino al formulario. */
+  .exp-sticky {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    inset-inline: 0;
+    z-index: 40;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    background: var(--c-bg-deep);
+    color: var(--c-on-deep);
+    border-top: 1px solid var(--c-line-deep);
+    transition:
+      transform 0.4s cubic-bezier(0.22, 0.68, 0.24, 1),
+      visibility 0s;
+  }
+  .exp-sticky[data-visible="false"] {
+    transform: translateY(100%);
+    visibility: hidden;
+    transition-delay: 0s, 0.4s;
+  }
+  .exp-sticky-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 0 16px;
+    background: var(--c-whatsapp);
+    color: var(--c-whatsapp-ink);
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .exp-sticky-whatsapp svg {
+    width: 22px;
+    height: 22px;
+  }
+  .exp-sticky .exp-button {
+    flex: 1;
+    min-height: 48px;
+    padding: 12px 16px;
+    font-size: 0.85rem;
+    gap: 10px;
+  }
+  /* El alto exacto de la barra, reservado DENTRO del pie y no en el
+     `body`: con el `body` asomaba una franja del fondo claro bajo el pie. */
+  .exp-footer {
+    padding-bottom: calc(69px + env(safe-area-inset-bottom));
+  }
+}

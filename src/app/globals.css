@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "../styles/palettes.css";
 @import "../styles/media.css";
+@import "../styles/site.css";
 
 /*
  * ───────────────────────────────────────────────────────────────────────────
@@ -32,6 +33,7 @@
   --color-accent-ink: var(--c-accent-ink);
   --color-accent-soft: var(--c-accent-soft);
   --color-accent-text: var(--c-accent-text);
+  --color-accent-gold: var(--c-accent-gold);
 
   --color-line: var(--c-line);
   --color-line-deep: var(--c-line-deep);
@@ -57,7 +59,7 @@
   --text-hero: clamp(3rem, 1.4rem + 6.4vw, 7.5rem);
 
   --gutter: clamp(1.25rem, 5vw, 5rem);
-  --section-y: clamp(4.5rem, 10vw, 9.5rem);
+  --section-y: clamp(3.5rem, 7vw, 6.5rem);
 }
 
 /* ───────────────────────────────────────────────────────────────────────────
@@ -96,12 +98,32 @@
     /* Fraunces trae ejes propios: SOFT redondea los terminales y WONK activa
        las formas irregulares. Es lo que le da carácter y la aleja de una
        serif de catálogo. */
-    font-variation-settings: "SOFT" 28, "WONK" 1;
+    font-variation-settings:
+      "SOFT" 28,
+      "WONK" 1;
   }
 
   p {
     margin: 0;
     text-wrap: pretty;
+  }
+
+  /*
+   * ALEMÁN Y FRANCÉS: palabras largas sin romper el diseño.
+   *
+   * El alemán compone palabras de 25 caracteres ("Ernährungseinschränkungen",
+   * "Reisekrankenversicherung") que desbordan celdas de tabla, etiquetas de
+   * formulario y cualquier columna angosta en móvil. El navegador sabe
+   * dividirlas con guion correctamente SI conoce el idioma — y lo conoce,
+   * porque el layout escribe `<html lang="de">`.
+   *
+   * `hyphens` hace el corte tipográfico correcto; `overflow-wrap` es el
+   * respaldo para cuando no hay patrón de división (nombres propios, URLs).
+   * No se aplica a español ni inglés, que no tienen este problema.
+   */
+  :is(html[lang="de"], html[lang="fr"]) :is(h1, h2, h3, h4, p, li, dt, dd, th, td, label, legend) {
+    hyphens: auto;
+    overflow-wrap: break-word;
   }
 
   ::selection {
@@ -110,18 +132,10 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--c-accent);
-    outline-offset: 3px;
+    outline: 2px solid var(--c-focus);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 5px var(--c-focus-halo);
     border-radius: 1px;
-  }
-
-  /* Cuando Lenis está activo maneja él el scroll. */
-  html.lenis,
-  html.lenis body {
-    height: auto;
-  }
-  .lenis.lenis-smooth {
-    scroll-behavior: auto !important;
   }
 }
 

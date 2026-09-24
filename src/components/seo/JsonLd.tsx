@@ -9,7 +9,9 @@ function Script({ data }: { data: Record<string, unknown> }) {
     <script
       type="application/ld+json"
       // El contenido es nuestro y estático: no hay entrada de usuario acá.
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(data).replace(/</g, "\\u003c"),
+      }}
     />
   );
 }
@@ -28,37 +30,49 @@ export function OrganizationJsonLd({ locale }: { locale: Locale }) {
         legalName: site.legal.companyName,
         description: dict.meta.homeDescription,
         url: `${site.url}/${locale}`,
+        /* Google usa este logo en los resultados enriquecidos y en el panel de
+           conocimiento. Es el mismo archivo que sirve la barra de navegación. */
+        logo: `${site.url}/marca/logo.webp`,
         telephone: site.contact.phone,
         email: site.contact.email,
         priceRange: "$$",
         address: {
           "@type": "PostalAddress",
-          streetAddress: site.office.street,
-          addressLocality: site.office.city,
           addressRegion: site.location.region,
           addressCountry: "EC",
-        },
-        geo: {
-          "@type": "GeoCoordinates",
-          latitude: site.location.lat,
-          longitude: site.location.lng,
         },
         containedInPlace: {
           "@type": "TouristAttraction",
           name: "Reserva de Producción de Fauna Cuyabeno",
         },
-        sameAs: [site.social.instagram, site.social.facebook],
+        sameAs: [
+          site.social.instagram,
+          site.social.facebook,
+          site.social.tripadvisor,
+        ],
         amenityFeature: [
-          { "@type": "LocationFeatureSpecification", name: "Private bathroom", value: true },
-          { "@type": "LocationFeatureSpecification", name: "All meals included", value: true },
-          { "@type": "LocationFeatureSpecification", name: "Bilingual guides", value: true },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Private bathroom",
+            value: true,
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "All meals included",
+            value: true,
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Bilingual guides",
+            value: true,
+          },
         ],
       }}
     />
   );
 }
 
-/** Un tour concreto, con su oferta y precio real. */
+/** Un tour concreto, sin precio: la tarifa se cotiza por WhatsApp o correo. */
 export function TourJsonLd({ tour, locale }: { tour: Tour; locale: Locale }) {
   return (
     <Script
@@ -77,13 +91,6 @@ export function TourJsonLd({ tour, locale }: { tour: Tour; locale: Locale }) {
             position: d.n,
             item: { "@type": "TouristAttraction", name: pick(d.title, locale) },
           })),
-        },
-        offers: {
-          "@type": "Offer",
-          price: tour.price,
-          priceCurrency: "USD",
-          availability: "https://schema.org/InStock",
-          url: `${site.url}/${locale}/tours/${pick(tour.slug, locale)}`,
         },
         provider: { "@id": `${site.url}/#lodge` },
       }}

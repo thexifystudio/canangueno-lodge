@@ -27,7 +27,9 @@ export const reviews: Review[] = [
     quote:
       "One of the best guide I ever had in South America. The lodge it self is a beautiful place and the stuff were warm and kind people.",
     author: "NadavM47",
-    date: { es: "Octubre 2021", en: "October 2021" },
+    date: { es: "Octubre 2021", en: "October 2021",
+    de: "Oktober 2021",
+    fr: "octobre 2021" },
     source: "TripAdvisor",
   },
   {
@@ -35,7 +37,9 @@ export const reviews: Review[] = [
     quote:
       "Excellent guides, amazing experience. Me and my girlfriend had a WONDERFUL experience here. Guides were wonderful, helpful, and respectful of nature. Lovely location removed from almost all civilization.",
     author: "BenJen6352",
-    date: { es: "Febrero 2021", en: "February 2021" },
+    date: { es: "Febrero 2021", en: "February 2021",
+    de: "Februar 2021",
+    fr: "février 2021" },
     source: "TripAdvisor",
     excerpt: true,
   },
@@ -44,7 +48,9 @@ export const reviews: Review[] = [
     quote:
       "I had the best experience in Amazonia in Canangueno lodge. It is settled deep in the jungle. You really feel the special ambiance of the wildlife in here.",
     author: "Julien C",
-    date: { es: "Noviembre 2019", en: "November 2019" },
+    date: { es: "Noviembre 2019", en: "November 2019",
+    de: "November 2019",
+    fr: "novembre 2019" },
     source: "TripAdvisor",
     excerpt: true,
   },
@@ -53,7 +59,9 @@ export const reviews: Review[] = [
     quote:
       "The stuff and manager was super friendly, flexible and always willing to help. The lodge is beautiful and the rooms very clean, super nice and safe from all the bugs.",
     author: "MelanieB919",
-    date: { es: "Marzo 2022", en: "March 2022" },
+    date: { es: "Marzo 2022", en: "March 2022",
+    de: "März 2022",
+    fr: "mars 2022" },
     source: "TripAdvisor",
     excerpt: true,
   },
@@ -62,7 +70,9 @@ export const reviews: Review[] = [
     quote:
       "All was so great. The guide, Fabian is so friendly, bilingual and we quickly have confidence in him. The team was really nice, the food too.",
     author: "DavidoMV",
-    date: { es: "Enero 2021", en: "January 2021" },
+    date: { es: "Enero 2021", en: "January 2021",
+    de: "Januar 2021",
+    fr: "janvier 2021" },
     source: "TripAdvisor",
     excerpt: true,
   },
@@ -71,7 +81,9 @@ export const reviews: Review[] = [
     quote:
       "We really enjoyed our experience at the canangueno lodge this summer. The guide knew everything about the forest and we learned a lot about animals.",
     author: "MathildeD355",
-    date: { es: "Septiembre 2021", en: "September 2021" },
+    date: { es: "Septiembre 2021", en: "September 2021",
+    de: "September 2021",
+    fr: "septembre 2021" },
     source: "TripAdvisor",
     excerpt: true,
   },
@@ -80,7 +92,9 @@ export const reviews: Review[] = [
     quote:
       "Cuyabeno nice and unique place to visit, guide very polite he known a lot and people in Canangueno are so polite and all the time they made feel us at home.",
     author: "Cesar C",
-    date: { es: "Noviembre 2023", en: "November 2023" },
+    date: { es: "Noviembre 2023", en: "November 2023",
+    de: "November 2023",
+    fr: "novembre 2023" },
     source: "TripAdvisor",
     excerpt: true,
   },
@@ -89,7 +103,9 @@ export const reviews: Review[] = [
     quote:
       "The guide we had was more knowledgeable than i ever could have hoped for. You can tell that they care.",
     author: "313hamzan",
-    date: { es: "Septiembre 2022", en: "September 2022" },
+    date: { es: "Septiembre 2022", en: "September 2022",
+    de: "September 2022",
+    fr: "septembre 2022" },
     source: "TripAdvisor",
     excerpt: true,
   },

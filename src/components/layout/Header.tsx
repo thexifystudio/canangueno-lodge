@@ -1,245 +1,298 @@
 "use client";
-
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
-import type { Locale } from "@/lib/i18n";
-import { LOCALES, LOCALE_LABELS } from "@/lib/i18n";
+import { Menu, X, ArrowUpRight, Check, ChevronDown } from "lucide-react";
+import {
+  LOCALES,
+  LOCALE_LABELS,
+  pick,
+  type Locale,
+} from "@/lib/i18n";
 import type { Dictionary } from "@/i18n";
 import { routes } from "@/lib/routes";
-import { site } from "@/config/site";
-import { cn } from "@/lib/cn";
+import { Logo } from "@/components/layout/Logo";
 
-type Props = { locale: Locale; dict: Dictionary };
+function FlagIcon({ locale }: { locale: Locale }) {
+  return (
+    /* Decorativa: al lado siempre va el nombre del idioma, o el control que
+       la contiene ya tiene su etiqueta. Con nombre propio, el lector de
+       pantalla decía "English English". */
+    <svg className="exp-flag" viewBox="0 0 24 16" aria-hidden="true">
+      {locale === "es" && (
+        <>
+          <rect width="24" height="16" fill="#AA151B" />
+          <rect y="4" width="24" height="8" fill="#F1BF00" />
+        </>
+      )}
+      {locale === "en" && (
+        <>
+          <rect width="24" height="16" fill="#fff" />
+          {Array.from({ length: 7 }, (_, i) => (
+            <rect key={i} y={i * (32 / 13)} width="24" height={16 / 13} fill="#B22234" />
+          ))}
+          <rect width="10.5" height="8.7" fill="#3C3B6E" />
+          {[1.4, 3.2, 5, 6.8, 8.6].flatMap((x, column) =>
+            [1.35, 3.25, 5.15, 7.05].map((y, row) => (
+              <circle
+                key={`${column}-${row}`}
+                cx={x}
+                cy={y}
+                r="0.35"
+                fill="#fff"
+              />
+            )),
+          )}
+        </>
+      )}
+      {locale === "de" && (
+        <>
+          <rect width="24" height="16" fill="#000" />
+          <rect y="5.333" width="24" height="5.334" fill="#DD0000" />
+          <rect y="10.667" width="24" height="5.333" fill="#FFCE00" />
+        </>
+      )}
+      {locale === "fr" && (
+        <>
+          <rect width="24" height="16" fill="#fff" />
+          <rect width="8" height="16" fill="#0055A4" />
+          <rect x="16" width="8" height="16" fill="#EF4135" />
+        </>
+      )}
+    </svg>
+  );
+}
 
-/**
- * Navegación "glass": transparente sobre el hero, y al hacer scroll se vuelve
- * sólida con desenfoque. En móvil abre a pantalla completa.
- */
-export function Header({ locale, dict }: Props) {
+export function Header({
+  locale,
+  nav,
+  aboutLabel,
+  tourSlugs,
+}: {
+  locale: Locale;
+  nav: Dictionary["nav"];
+  aboutLabel: string;
+  /** Los slugs de cada tour en los cuatro idiomas, para traducir la URL. */
+  tourSlugs: Record<Locale, string>[];
+}) {
+  const pathname = usePathname(),
+    dialog = useRef<HTMLDialogElement>(null);
   const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
-  const pathname = usePathname();
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Cerrar el menú al navegar
-  useEffect(() => setOpen(false), [pathname]);
-
-  // Bloquear el scroll del fondo con el menú abierto
-  useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [open]);
-
+  const home = pathname === routes.home(locale),
+    solid = !home || scrolled;
+  const tour = tourSlugs.find((slug) =>
+    Object.values(slug).includes(pathname.split("/").pop() || ""),
+  );
+  const translatedPath = (target: Locale) =>
+    tour
+      ? routes.tour(target, pick(tour, target))
+      : "/" + [target, ...pathname.split("/").slice(2)].join("/");
+  const ui = {
+    es: {
+      skip: "Saltar al contenido",
+      main: "Principal",
+      plan: "Planificar viaje",
+      planMobile: "Planificar mi viaje",
+      language: "Cambiar idioma",
+    },
+    en: {
+      skip: "Skip to content",
+      main: "Main",
+      plan: "Plan your trip",
+      planMobile: "Plan my trip",
+      language: "Change language",
+    },
+    de: {
+      skip: "Zum Inhalt springen",
+      main: "Hauptnavigation",
+      plan: "Reise planen",
+      planMobile: "Meine Reise planen",
+      language: "Sprache ändern",
+    },
+    fr: {
+      skip: "Aller au contenu",
+      main: "Navigation principale",
+      plan: "Préparer le voyage",
+      planMobile: "Préparer mon voyage",
+      language: "Changer de langue",
+    },
+  }[locale];
   const links = [
-    { href: `${routes.home(locale)}#experiencia`, label: dict.nav.experience },
-    { href: routes.tours(locale), label: dict.nav.tours },
-    { href: routes.lodge(locale), label: dict.nav.lodge },
-    { href: routes.gallery(locale), label: dict.nav.gallery },
-    { href: routes.journey(locale), label: dict.nav.journey },
+    [routes.cuyabeno(locale), nav.cuyabeno],
+    [routes.tours(locale), nav.tours],
+    [routes.lodge(locale), nav.lodge],
+    [routes.gallery(locale), nav.gallery],
+    [routes.about(locale), aboutLabel],
+    [routes.journey(locale), nav.journey],
   ];
-
-  /** Misma página, otro idioma. */
-  const otherLocalePath = (target: Locale) => {
-    const rest = pathname.split("/").slice(2).join("/");
-    return `/${target}${rest ? `/${rest}` : ""}`;
-  };
-
+  const language = useRef<HTMLDetailsElement>(null);
+  /* El `<details>` de idiomas no se cierra solo con Esc ni con un clic
+     afuera, como cualquier otro menú desplegable. */
+  useEffect(() => {
+    const el = language.current;
+    if (!el) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && el.open) {
+        el.open = false;
+        el.querySelector("summary")?.focus();
+      }
+    };
+    const onClick = (e: MouseEvent) => {
+      if (el.open && !el.contains(e.target as Node)) el.open = false;
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("click", onClick);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("click", onClick);
+    };
+  }, []);
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > 32);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
+  useEffect(() => {
+    dialog.current?.close();
+    document.body.style.overflow = "";
+  }, [pathname]);
+  useEffect(
+    () => () => {
+      document.body.style.overflow = "";
+    },
+    [],
+  );
+  function close() {
+    dialog.current?.close();
+    document.body.style.overflow = "";
+  }
   return (
     <>
-      <a
-        href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-accent focus:px-4 focus:py-2 focus:text-accent-ink"
-      >
-        {locale === "es" ? "Saltar al contenido" : "Skip to content"}
+      <a href="#main" className="exp-skip">
+        {ui.skip}
       </a>
-
-      <header
-        className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-500",
-          scrolled
-            ? "border-b border-line/60 bg-bg/85 backdrop-blur-xl"
-            : "border-b border-transparent bg-transparent",
-        )}
-      >
-        {/* Sobre la foto del hero el cielo es casi blanco y el menú se perdía.
-            Este velo con caída larga le devuelve contraste sin ensuciar la
-            imagen — y desaparece apenas la barra se vuelve sólida. */}
-        <div
-          aria-hidden
-          className={cn(
-            "pointer-events-none absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-black/60 via-black/25 to-transparent transition-opacity duration-500",
-            scrolled ? "opacity-0" : "opacity-100",
-          )}
-        />
-
-        <div className="shell relative flex h-[68px] items-center justify-between gap-6 md:h-[76px]">
-          {/* Marca */}
+      <header className={"exp-nav " + (solid ? "is-solid" : "is-transparent")}>
+        <div className="shell exp-nav-inner">
           <Link
             href={routes.home(locale)}
-            className={cn(
-              "font-display text-[1.35rem] leading-none tracking-[0.14em] transition-colors duration-500 md:text-[1.5rem]",
-              scrolled ? "text-ink" : "text-on-deep",
-            )}
+            className="exp-brand"
+            aria-label="Canangueno Lodge"
           >
-            CANANGUENO
+            <Logo />
           </Link>
-
-          {/* Enlaces — escritorio */}
-          <nav className="hidden items-center gap-9 lg:flex">
-            {links.map((l) => (
+          <nav
+            className="exp-desktop-links"
+            aria-label={ui.main}
+          >
+            {links.map(([href, label]) => (
               <Link
-                key={l.href}
-                href={l.href}
-                className={cn(
-                  "text-[0.82rem] font-medium tracking-wide transition-colors duration-300",
-                  scrolled
-                    ? "text-ink-soft hover:text-ink"
-                    : "text-on-deep/90 hover:text-on-deep",
-                )}
+                href={href}
+                key={href}
+                aria-current={pathname === href ? "page" : undefined}
               >
-                {l.label}
+                {label}
               </Link>
             ))}
           </nav>
-
-          <div className="flex items-center gap-4">
-            {/* Idioma */}
-            <div
-              className={cn(
-                "hidden items-center gap-1.5 text-[0.72rem] font-medium tracking-[0.14em] sm:flex",
-                scrolled ? "text-ink-faint" : "text-on-deep/70",
-              )}
-            >
-              {LOCALES.map((l, i) => (
-                <span key={l} className="flex items-center gap-1.5">
-                  {i > 0 && <span aria-hidden>/</span>}
+          <div className="exp-nav-actions">
+            <details className="exp-language" ref={language}>
+              <summary aria-label={ui.language} title={ui.language}>
+                <FlagIcon locale={locale} />
+                <ChevronDown size={14} aria-hidden="true" />
+              </summary>
+              <div className="exp-language-popover">
+                {LOCALES.map((target) => (
                   <Link
-                    href={otherLocalePath(l)}
-                    hrefLang={l}
-                    aria-current={l === locale ? "true" : undefined}
-                    className={cn(
-                      "transition-colors",
-                      l === locale
-                        ? scrolled
-                          ? "text-ink"
-                          : "text-on-deep"
-                        : "hover:opacity-70",
-                    )}
+                    key={target}
+                    href={translatedPath(target)}
+                    hrefLang={target}
+                    lang={target}
+                    aria-current={target === locale ? "page" : undefined}
+                    aria-label={LOCALE_LABELS[target].aria}
                   >
-                    {LOCALE_LABELS[l].short}
+                    <FlagIcon locale={target} />
+                    <span>{LOCALE_LABELS[target].long}</span>
+                    {target === locale && <Check size={15} aria-hidden="true" />}
                   </Link>
-                </span>
-              ))}
-            </div>
-
+                ))}
+              </div>
+            </details>
             <Link
+              className="exp-button exp-nav-book"
               href={routes.book(locale)}
-              className={cn(
-                "hidden rounded-[var(--radius)] px-5 py-2.5 text-[0.78rem] font-medium tracking-wide transition-colors duration-300 sm:inline-flex",
-                scrolled
-                  ? "bg-accent text-accent-ink hover:bg-accent-soft"
-                  : "border border-on-deep/40 text-on-deep hover:bg-on-deep/10",
-              )}
             >
-              {dict.nav.book}
+              {ui.plan}
+              <ArrowUpRight size={15} />
             </Link>
-
-            {/* Hamburguesa */}
             <button
-              type="button"
-              onClick={() => setOpen(true)}
-              aria-label={dict.nav.openMenu}
-              className={cn(
-                "-mr-1 p-2 transition-colors lg:hidden",
-                scrolled ? "text-ink" : "text-on-deep",
-              )}
+              className="exp-menu-button"
+              aria-label={nav.openMenu}
+              onClick={() => {
+                dialog.current?.showModal();
+                document.body.style.overflow = "hidden";
+              }}
             >
-              <Menu size={22} strokeWidth={1.4} />
+              <Menu size={23} />
             </button>
           </div>
         </div>
       </header>
-
-      {/* Menú móvil */}
-      <div
-        className={cn(
-          "fixed inset-0 z-[60] bg-bg-deep transition-opacity duration-400 lg:hidden",
-          open ? "opacity-100" : "pointer-events-none opacity-0",
-        )}
-        aria-hidden={!open}
+      <dialog
+        ref={dialog}
+        className="exp-menu"
+        aria-label={nav.menu}
+        onClose={() => {
+          document.body.style.overflow = "";
+        }}
       >
-        <div className="shell flex h-[68px] items-center justify-between">
-          <span className="font-display text-[1.35rem] leading-none tracking-[0.14em] text-on-deep">
-            CANANGUENO
-          </span>
-          <button
-            type="button"
-            onClick={() => setOpen(false)}
-            aria-label={dict.nav.close}
-            className="-mr-1 p-2 text-on-deep"
-          >
-            <X size={22} strokeWidth={1.4} />
-          </button>
-        </div>
-
-        <nav className="shell mt-10 flex flex-col gap-1">
-          {links.map((l, i) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              tabIndex={open ? 0 : -1}
-              className="border-b border-line-deep/60 py-5 font-display text-[2rem] leading-none text-on-deep"
-            >
-              <span className="ordinal mr-4 align-middle text-[0.7rem] text-on-deep-faint">
-                0{i + 1}
-              </span>
-              {l.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="shell mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
+        <div className="shell">
+          <div className="exp-menu-top">
+            {/* El menú vive sobre `--c-bg-deep`, así que siempre el negativo. */}
+            <span className="exp-brand exp-brand-ondark">
+              <Logo />
+            </span>
+            <button onClick={close} aria-label={nav.close} autoFocus>
+              <X size={25} />
+            </button>
+          </div>
+          <nav>
+            {links.map(([href, label]) => (
+              <Link key={href} href={href} onClick={close}>
+                {label}
+                <ArrowUpRight size={22} />
+              </Link>
+            ))}
+          </nav>
           <Link
+            className="exp-button"
             href={routes.book(locale)}
-            tabIndex={open ? 0 : -1}
-            className="rounded-[var(--radius)] bg-accent px-7 py-3.5 text-sm font-medium text-accent-ink"
+            onClick={close}
           >
-            {dict.nav.book}
+            {ui.planMobile}
           </Link>
-          <a
-            href={`tel:${site.contact.phone.replace(/\s/g, "")}`}
-            tabIndex={open ? 0 : -1}
-            className="text-sm text-on-deep-soft"
+          <div
+            className="exp-menu-language"
+            role="group"
+            aria-label={ui.language}
           >
-            {site.contact.phone}
-          </a>
-          <div className="flex items-center gap-2 text-[0.72rem] tracking-[0.14em] text-on-deep-faint">
-            {LOCALES.map((l, i) => (
-              <span key={l} className="flex items-center gap-2">
-                {i > 0 && <span aria-hidden>/</span>}
-                <Link
-                  href={otherLocalePath(l)}
-                  hrefLang={l}
-                  tabIndex={open ? 0 : -1}
-                  className={l === locale ? "text-on-deep" : ""}
-                >
-                  {LOCALE_LABELS[l].short}
-                </Link>
-              </span>
+            {LOCALES.map((target) => (
+              <Link
+                key={target}
+                href={translatedPath(target)}
+                hrefLang={target}
+                lang={target}
+                onClick={close}
+                aria-current={target === locale ? "page" : undefined}
+              >
+                <FlagIcon locale={target} />
+                <span>{LOCALE_LABELS[target].long}</span>
+                {target === locale && <Check size={15} aria-hidden="true" />}
+              </Link>
             ))}
           </div>
         </div>
-      </div>
+      </dialog>
     </>
   );
 }

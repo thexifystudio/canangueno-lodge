@@ -1,0 +1,93 @@
+/* ── Galería ───────────────────────────────────────────────────────────────
+   La rejilla, los filtros y el visor a pantalla completa. */
+.exp-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 18px;
+  list-style: none;
+  padding: 0;
+  margin: 40px 0 0;
+}
+.exp-gallery-grid > li > button {
+  aspect-ratio: 4/5;
+  cursor: zoom-in;
+}
+.exp-gallery-grid img {
+  transition: transform 0.9s cubic-bezier(0.22, 0.68, 0.24, 1);
+}
+.exp-gallery-grid > li > button:hover img {
+  transform: scale(1.05);
+}
+@media (max-width: 560px) {
+  .exp-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+.exp-gallery-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.exp-gallery-filters button {
+  padding: 12px 20px;
+  border: 1px solid var(--c-line);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.exp-gallery-filters button[aria-pressed="true"] {
+  background: var(--c-bg-deep);
+  color: var(--c-on-deep);
+  border-color: var(--c-bg-deep);
+}
+/* La foto, el pie y los botones comparten el mismo margen que la barra de
+   arriba: antes el pie arrancaba pegado al borde y el contador no. */
+.exp-gallery-stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin-inline: var(--gutter);
+}
+.exp-gallery-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  padding: 18px var(--gutter) clamp(20px, 3vh, 32px);
+  font-size: 0.85rem;
+  color: var(--c-on-deep-soft);
+}
+.exp-gallery-caption > div {
+  display: flex;
+  gap: 10px;
+}
+.exp-gallery-caption button {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--c-line-deep);
+  color: var(--c-on-deep);
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.exp-gallery-caption button:hover {
+  border-color: var(--c-on-deep-soft);
+}
+@media (max-width: 760px) {
+  .exp-gallery-caption {
+    align-items: start;
+  }
+}
+
+/* El número de fotos al lado de cada filtro, más tenue que la etiqueta. */
+.exp-gallery-filters button small {
+  margin-left: 4px;
+  font-size: 0.75em;
+  opacity: 0.6;
+}
+.exp-gallery-more {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(28px, 3.4vw, 44px);
+}

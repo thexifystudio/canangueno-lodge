@@ -14,7 +14,8 @@ const variants: Record<Variant, string> = {
   /** El único botón con relleno del sitio. Se usa poco, a propósito. */
   primary: "bg-accent text-accent-ink hover:bg-accent-soft",
   /** Sobre fondos claros. */
-  outline: "border border-ink/25 text-ink hover:border-ink/60 hover:bg-ink/[0.03]",
+  outline:
+    "border border-ink/25 text-ink hover:border-ink/60 hover:bg-ink/[0.03]",
   /** Sobre fondos oscuros (bloques `bg-bg-deep` y el hero). */
   light:
     "border border-on-deep/35 text-on-deep hover:border-on-deep hover:bg-on-deep/10 backdrop-blur-sm",
@@ -44,7 +45,10 @@ export function Button({
   ...rest
 }: CommonProps & ComponentPropsWithoutRef<"button">) {
   return (
-    <button className={cn(base, variants[variant], sizes[size], className)} {...rest}>
+    <button
+      className={cn(base, variants[variant], sizes[size], className)}
+      {...rest}
+    >
       {children}
     </button>
   );
@@ -66,7 +70,13 @@ export function ButtonLink({
 
   if (external) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={classes} {...rest}>
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={classes}
+        {...rest}
+      >
         {children}
       </a>
     );

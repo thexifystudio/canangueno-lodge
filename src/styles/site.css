@@ -1,0 +1,20 @@
+/*
+ * ───────────────────────────────────────────────────────────────────────────
+ *  ESTILOS DEL SITIO — un archivo por pieza
+ * ───────────────────────────────────────────────────────────────────────────
+ *  El orden importa (es la cascada): lo general arriba, las páginas abajo.
+ *  Para cambiar una sección, se abre sólo su archivo.
+ */
+@import "./site/base.css";
+@import "./site/hero.css";
+@import "./site/cards.css";
+@import "./site/home.css";
+@import "./site/closing.css";
+@import "./site/nav.css";
+@import "./site/whatsapp.css";
+@import "./site/pages.css";
+@import "./site/booking.css";
+@import "./site/gallery.css";
+@import "./site/tour-page.css";
+@import "./site/lodge-page.css";
+@import "./site/notfound.css";

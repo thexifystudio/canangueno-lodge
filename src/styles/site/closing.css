@@ -1,0 +1,119 @@
+/* ── Cierre ─────────────────────────────────────────────────────────────────
+   El atardecer en la Laguna Grande a todo el ancho, con un velo del verde
+   del hero para que el texto se lea sobre cualquier parte de la foto. Es el
+   par del hero: la página abre y cierra sobre el río. */
+.exp-closing {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: end;
+  min-height: clamp(520px, 72svh, 760px);
+  color: var(--c-on-deep);
+  background: var(--c-bg-deep);
+  overflow: hidden;
+}
+.exp-closing-media,
+.exp-closing-veil {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+/* El horizonte de la foto cae a media altura: se lo sube un poco para que
+   el cielo encendido quede detrás del titular y no el agua. */
+.exp-closing-media img {
+  object-position: center 58%;
+}
+/* Velo parejo con el centro un poco más oscuro: el texto va centrado sobre
+   el horizonte y tiene que leerse sin tapar el atardecer. */
+.exp-closing-veil {
+  background:
+    radial-gradient(
+      ellipse 60% 70% at 50% 55%,
+      color-mix(in srgb, var(--c-bg-deep) 62%, transparent) 0%,
+      color-mix(in srgb, var(--c-bg-deep) 30%, transparent) 70%,
+      transparent 100%
+    ),
+    linear-gradient(0deg, color-mix(in srgb, var(--c-bg-deep) 55%, transparent) 0%, transparent 60%);
+}
+.exp-closing-content {
+  padding-block: var(--section-y);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.exp-closing h2 {
+  font-size: clamp(2.2rem, 4.2vw, 3.8rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  font-weight: 400;
+  max-width: 18ch;
+  text-wrap: balance;
+  text-shadow: 0 2px 24px color-mix(in srgb, var(--c-bg-deep) 70%, transparent);
+}
+.exp-closing-content > p:not(.exp-closing-mail) {
+  margin-top: 18px;
+  max-width: 44ch;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--c-on-deep);
+  text-shadow: 0 1px 14px color-mix(in srgb, var(--c-bg-deep) 85%, transparent);
+}
+.exp-closing-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 32px;
+}
+.exp-closing-actions .exp-button {
+  gap: 12px;
+  min-width: 250px;
+  justify-content: center;
+}
+/* El botón del correo: mismo tamaño que el de WhatsApp, con borde claro y
+   un vidrio oscuro detrás para que se lea sobre el cielo encendido. */
+.exp-button-ghost-light {
+  background: color-mix(in srgb, var(--c-bg-deep) 40%, transparent);
+  color: var(--c-on-deep);
+  border: 1px solid color-mix(in srgb, var(--c-on-deep) 60%, transparent);
+  backdrop-filter: blur(6px);
+}
+.exp-button-ghost-light:hover {
+  background: var(--c-on-deep);
+  color: var(--c-bg-deep);
+  border-color: var(--c-on-deep);
+}
+.exp-closing-mail {
+  margin-top: 16px;
+  font-size: 0.85rem;
+  color: var(--c-on-deep-soft);
+  letter-spacing: 0.01em;
+}
+@media (max-width: 760px) {
+  .exp-closing {
+    min-height: 0;
+  }
+  .exp-closing-content {
+    padding-top: 220px;
+    padding-bottom: 56px;
+  }
+  .exp-closing-media img {
+    object-position: 38% center;
+  }
+  .exp-closing-veil {
+    background: linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--c-bg-deep) 92%, transparent) 0%,
+      color-mix(in srgb, var(--c-bg-deep) 70%, transparent) 55%,
+      transparent 100%
+    );
+  }
+  .exp-closing-actions {
+    width: 100%;
+  }
+  .exp-closing-actions .exp-button {
+    width: 100%;
+    min-width: 0;
+  }
+}

@@ -2,146 +2,218 @@
  * ───────────────────────────────────────────────────────────────────────────
  *  PALETAS
  * ───────────────────────────────────────────────────────────────────────────
+ *  Cada paleta define sus colores CRUDOS y después los TOKENS SEMÁNTICOS,
+ *  que son los únicos que usan los componentes.
  *
- *  Cada paleta define primero sus colores CRUDOS (los hex de marca) y después
- *  los TOKENS SEMÁNTICOS, que son los únicos que usan los componentes.
+ *  Cambiar de paleta: `src/config/theme.ts` → `palette: "..."`.
+ *  Retocar un color: editá el hex crudo acá y se propaga solo.
  *
- *  Para cambiar de paleta: `src/config/theme.ts` → `palette: "..."`.
- *  Para retocar un color puntual: editá el hex crudo acá y se propaga solo.
- *
- *  Tokens semánticos (usar SIEMPRE estos en los componentes, nunca un hex):
- *    Fondos      --c-bg  --c-bg-warm  --c-bg-deep  --c-surface
- *    Texto       --c-ink  --c-ink-soft  --c-ink-faint
+ *  Tokens (usar SIEMPRE estos, nunca un hex en un componente):
+ *    Fondos   --c-bg  --c-bg-warm  --c-bg-deep  --c-surface
+ *    Texto    --c-ink  --c-ink-soft  --c-ink-faint
  *    Sobre deep  --c-on-deep  --c-on-deep-soft  --c-on-deep-faint
- *    Acento      --c-accent  --c-accent-ink  --c-accent-soft
- *    Líneas      --c-line  --c-line-deep
- *    Imagen      --c-img-1 … --c-img-4   (capas de los placeholders)
+ *    Acento   --c-accent  --c-accent-ink  --c-accent-soft  --c-accent-text
+ *    Líneas   --c-line  --c-line-deep
+ *    Imagen   --c-img-1 … --c-img-4
  */
 
 /* ══════════════════════════════════════════════════════════════════════════
-   1 · ECO-LUXURY · Amazon Luxury / Boutique Lodge                  [ACTIVA]
-   Proporción: 60% ivory+arena · 25% jungle+forest · 10% foto · 5% acento
+   AGUAS NEGRAS  ·  alternativa oscura [no activa]
+   ──────────────────────────────────────────────────────────────────────────
+   Los ríos del Cuyabeno son de agua negra: teñida de taninos, casi un espejo.
+   Toda la competencia usa "verde eco" claro; este sitio vive en la oscuridad
+   del agua, y ahí las fotografías brillan en vez de competir con el fondo.
+
+   Los tres colores de marca salen DEL LOGO real (tucán del PNG):
+     · naranja  #E48424 — el wordmark "Canangueno Lodge"
+     · dorado   #F0A83C — el amarillo del pico del tucán
+     · carbón   #2B2B2B — el plumaje y la palabra "Cuyabeno"
+   El verde no es de marca: es la Amazonía, y es el suelo de todo el sitio.
+
+   El gesto de firma es el GRADIENTE DEL PICO (--c-beak): dorado → naranja,
+   exactamente el degradado que tiene el pico del tucán. Va en los detalles
+   que "marcan" (filo de la tarjeta destacada, etiqueta de duración, punto
+   del localizador). El naranja sólido se reserva para los botones, que
+   necesitan el máximo contraste.
+
+   Contrastes sobre --c-bg-deep (#05100C):
+     on-deep 16,8:1 · dorado (texto chico) 8,4:1 · naranja del botón 6,9:1
+   ══════════════════════════════════════════════════════════════════════════ */
+[data-palette="aguas-negras"] {
+  /* — crudos — */
+  --raw-water: #05100c; /* el agua negra: fondo más profundo */
+  --raw-deep: #0a1310; /* suelo de sección */
+  --raw-canopy: #141e19; /* superficies y tarjetas */
+  --raw-moss: #26382e; /* líneas */
+  --raw-fern: #8fae99; /* texto secundario */
+  --raw-mist: #ecf1ea; /* texto principal */
+  --raw-charcoal: #2b2b2b; /* carbón del logo — negro neutro de marca */
+  --raw-toucan: #e48424; /* naranja del wordmark */
+  --raw-gold: #f0a83c; /* amarillo del pico — segundo acento */
+  --raw-sun: #f4b24a; /* dorado claro, para hover */
+
+  /* — semánticos — */
+  --c-bg: var(--raw-deep);
+  --c-bg-warm: var(--raw-canopy);
+  --c-bg-deep: var(--raw-water);
+  --c-surface: #18221e;
+
+  --c-ink: var(--raw-mist);
+  --c-ink-soft: #b7c8bb;
+  --c-ink-faint: var(--raw-fern);
+
+  --c-on-deep: var(--raw-mist);
+  --c-on-deep-soft: #b7c8bb;
+  --c-on-deep-faint: var(--raw-fern);
+
+  --c-accent: var(--raw-toucan); /* relleno de botón: naranja sólido */
+  --c-accent-ink: #0a1210; /* tinta oscura sobre el acento: 6,9:1 */
+  --c-accent-soft: var(--raw-sun); /* hover */
+  --c-accent-text: var(--raw-gold); /* texto chico de acento: dorado, 8,4:1 */
+  --c-accent-gold: var(--raw-gold);
+  /* El pico del tucán: dorado arriba, naranja abajo. `background:` únicamente. */
+  --c-beak: linear-gradient(118deg, var(--raw-gold) 0%, var(--raw-toucan) 72%);
+
+  --c-focus: var(--raw-gold); /* anillo de foco: 8,4:1 */
+  --c-focus-halo: var(--raw-water);
+  --c-danger: #ff8a7a; /* errores de formulario */
+
+  --c-line: var(--raw-moss);
+  --c-line-deep: #1c2c24;
+
+  /* Suelo de las secciones que alternan (tours, fauna). Cada paleta decide
+     si su banda alterna es la más oscura o la más cálida. */
+  --c-band: var(--c-bg-deep);
+
+  --c-img-1: #08130f;
+  --c-img-2: #16281f;
+  --c-img-3: #35543f;
+  --c-img-4: #86a98c;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SELVA VIVA  ·  [ACTIVA]
+   ──────────────────────────────────────────────────────────────────────────
+   La Amazonía de día, no de noche. Suelo claro con luz de mañana sobre el
+   río; el verde profundo queda para las bandas fuertes (franja de datos,
+   formulario, pie) y para el hero, donde manda la fotografía.
+
+   Es lo contrario de "aguas negras": ahí el sitio vivía en la oscuridad del
+   agua y las fotos brillaban sobre negro. Acá el sitio respira, la
+   vegetación recortada se lee verde de verdad y la sensación es de
+   exploración a plena luz.
+
+   Los tres colores de marca siguen saliendo del logo: naranja del wordmark,
+   dorado del pico, verde de la selva.
+
+   Contrastes sobre --c-bg (#F4F7F0):
+     ink 13,7:1 · ink-soft 6,9:1 · ink-faint 4,8:1 · accent-text 5,5:1
+     tinta del botón sobre el naranja: 4,7:1
+   Sobre --c-bg-deep (#10291C):
+     on-deep 12,9:1 · on-deep-soft 8,9:1 · dorado 7,1:1
    ══════════════════════════════════════════════════════════════════════════ */
 :root,
-[data-palette="eco-luxury"] {
+[data-palette="selva-viva"] {
   /* — crudos — */
-  --raw-jungle: #102a20;
-  --raw-forest: #294c3a;
-  --raw-moss: #65765b;
-  --raw-sand: #e8dfc9;
-  --raw-ivory: #f5f3ed;
-  --raw-terracotta: #a96645;
-  --raw-charcoal: #171a17;
+  --raw-mist: #f4f7f0; /* luz de mañana sobre el río: el suelo */
+  --raw-sand: #efe9dc; /* banda cálida: lino, la tarde. Alterna con la
+                          niebla fría de la mañana y hace de pareja al naranja */
+  --raw-paper: #fbfcf7; /* tarjetas */
+  --raw-canopy: #10291c; /* verde profundo del dosel: las bandas fuertes */
+  --raw-moss: #d6ddcb; /* líneas sobre claro */
+  --raw-fern: #56685b; /* texto terciario: 4,9:1 sobre la banda */
+  --raw-bark: #14261c; /* tinta principal */
+  --raw-toucan: #e07f22; /* naranja del wordmark */
+  --raw-gold: #f0a83c; /* dorado del pico */
+  --raw-ember: #9b520d; /* naranja oscuro: texto de acento sobre claro, 4,8:1 */
+  --raw-sun: #f2a552; /* hover */
 
-  /* — semánticos —
-     Los valores de texto están elegidos por CONTRASTE medido, no a ojo.
-     Contra el ivory de fondo: ink 14:1 · ink-soft 9:1 · ink-faint 5,1:1
-     Contra el jungle profundo: on-deep 13:1 · on-deep-soft 8,4:1 · faint 5:1 */
-  --c-bg: var(--raw-ivory);
+  /* — semánticos — */
+  --c-bg: var(--raw-mist);
   --c-bg-warm: var(--raw-sand);
-  --c-bg-deep: var(--raw-jungle);
-  --c-surface: #fdfcf8;
+  --c-bg-deep: var(--raw-canopy);
+  --c-surface: var(--raw-paper);
 
-  --c-ink: var(--raw-charcoal);
-  --c-ink-soft: #3f4740;
-  --c-ink-faint: #5f6a5e;
+  --c-ink: var(--raw-bark);
+  --c-ink-soft: #41544a;
+  --c-ink-faint: var(--raw-fern);
 
-  --c-on-deep: #f2f0e8;
-  --c-on-deep-soft: #c3cdbf;
-  --c-on-deep-faint: #8b9a88;
+  --c-on-deep: #f3f7ee;
+  --c-on-deep-soft: #c5d3c1;
+  --c-on-deep-faint: #9aae9a;
 
-  /* Terracota. El #A96645 original quedaba apagado para un botón y no llegaba
-     a contraste AA con texto blanco; se oscureció para el relleno y se
-     reservó una variante más clara para el hover. */
-  --c-accent: #a0512e;
-  --c-accent-ink: #fffdf8;
-  --c-accent-soft: #c06b40;
-  /* Para texto en terracota sobre fondo claro (el relleno no da AA en 14px). */
-  --c-accent-text: #8a4526;
+  --c-accent: var(--raw-toucan);
+  --c-accent-ink: #1b2b1f; /* verde muy oscuro sobre el naranja: 4,7:1 */
+  --c-accent-soft: var(--raw-sun);
+  --c-accent-text: var(--raw-ember); /* legible sobre claro y la banda */
+  --c-accent-gold: var(--raw-gold); /* sólo sobre las bandas oscuras */
+  --c-beak: linear-gradient(118deg, var(--raw-gold) 0%, var(--raw-toucan) 72%);
+  /* Anillo de foco en dos tonos: el naranja oscuro se ve sobre el suelo claro
+     (5,5:1) y el halo claro lo despega sobre las bandas verdes. El naranja
+     del botón solo daba 2,7:1 sobre claro y no llegaba al mínimo de 3:1. */
+  --c-focus: var(--raw-ember);
+  --c-focus-halo: var(--raw-mist);
+  --c-danger: #b3261e; /* errores de formulario: 6,1:1 sobre claro */
 
-  --c-line: #dcd5c1;
-  --c-line-deep: #2f4d3d;
+  --c-line: var(--raw-moss);
+  --c-line-deep: #24402e;
 
-  --c-img-1: var(--raw-jungle);
-  --c-img-2: var(--raw-forest);
-  --c-img-3: var(--raw-moss);
-  --c-img-4: var(--raw-sand);
+  /* Acá la banda alterna es la cálida, no la oscura. */
+  --c-band: var(--c-bg-warm);
+
+  --c-img-1: #cfd9c4;
+  --c-img-2: #dee6d3;
+  --c-img-3: #b6c7a9;
+  --c-img-4: #8ba37d;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   2 · NIGHT CANOPY · oscuro cinematográfico, la foto es la única luz
+   BLACKWATER CLARO  ·  alternativa en crema, por si se quiere comparar
    ══════════════════════════════════════════════════════════════════════════ */
-[data-palette="night-canopy"] {
-  --raw-jungle: #08130e;
-  --raw-forest: #14291e;
-  --raw-moss: #48604f;
-  --raw-sand: #1c2b22;
-  --raw-ivory: #e9efe7;
-  --raw-terracotta: #c9a227;
-  --raw-charcoal: #e9efe7;
+[data-palette="blackwater-light"] {
+  --c-bg: #f0ebdd;
+  --c-bg-warm: #e5dcca;
+  --c-bg-deep: #0b1c18;
+  --c-surface: #f6f2e9;
 
-  --c-bg: #08130e;
-  --c-bg-warm: #102018;
-  --c-bg-deep: #050d09;
-  --c-surface: #12211a;
+  --c-ink: #162b24;
+  --c-ink-soft: #435449;
+  --c-ink-faint: #596354;
 
-  --c-ink: #e9efe7;
-  --c-ink-soft: #b3c1b4;
-  --c-ink-faint: #7d8c7f;
+  --c-on-deep: #f0ebdd;
+  --c-on-deep-soft: #ced1bd;
+  --c-on-deep-faint: #a5b3a4;
 
-  --c-on-deep: #e9efe7;
-  --c-on-deep-soft: #b3c1b4;
-  --c-on-deep-faint: #7d8c7f;
+  --c-accent: #b98342;
+  --c-accent-ink: #101e19;
+  --c-accent-soft: #c79860;
+  --c-accent-text: #765127;
+  --c-accent-gold: #a97a2f;
+  --c-beak: linear-gradient(118deg, #c79036 0%, #b06a2c 72%);
+  --c-focus: #765127;
+  --c-focus-halo: #f0ebdd;
+  --c-danger: #a3261c;
 
-  --c-accent: #c9a227;
-  --c-accent-ink: #0b1610;
-  --c-accent-soft: #dcbd5e;
-  --c-accent-text: #dcbd5e;
+  --c-line: #cec6b2;
+  --c-line-deep: #34483d;
 
-  --c-line: #22362a;
-  --c-line-deep: #1a2b21;
+  --c-band: var(--c-bg-warm);
 
-  --c-img-1: #050d09;
-  --c-img-2: #14291e;
-  --c-img-3: #2e6b5e;
-  --c-img-4: #4a6154;
+  --c-img-1: #b4b29d;
+  --c-img-2: #d7c9ac;
+  --c-img-3: #d7c9ac;
+  --c-img-4: #f0ebdd;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   3 · RIVER MIST · claro editorial frío, acento delfín rosado
+   COLORES DE TERCEROS  ·  iguales en todas las paletas
+   ──────────────────────────────────────────────────────────────────────────
+   El verde de WhatsApp es la única excepción de color fuera de la marca: es
+   lo que hace que el botón se reconozca antes de leer nada.
    ══════════════════════════════════════════════════════════════════════════ */
-[data-palette="river-mist"] {
-  --raw-jungle: #0e211b;
-  --raw-forest: #1d5a52;
-  --raw-moss: #5a6f63;
-  --raw-sand: #e3e8e2;
-  --raw-ivory: #f2f4f0;
-  --raw-terracotta: #c46b7e;
-  --raw-charcoal: #101c18;
-
-  --c-bg: var(--raw-ivory);
-  --c-bg-warm: var(--raw-sand);
-  --c-bg-deep: var(--raw-jungle);
-  --c-surface: #ffffff;
-
-  --c-ink: var(--raw-charcoal);
-  --c-ink-soft: #46534d;
-  --c-ink-faint: #798379;
-
-  --c-on-deep: #eef2ec;
-  --c-on-deep-soft: #b0c0b8;
-  --c-on-deep-faint: #7c8c85;
-
-  --c-accent: #b25668;
-  --c-accent-ink: #ffffff;
-  --c-accent-soft: #c97387;
-  --c-accent-text: #9c4457;
-
-  --c-line: #d6ddd6;
-  --c-line-deep: #245c53;
-
-  --c-img-1: var(--raw-jungle);
-  --c-img-2: var(--raw-forest);
-  --c-img-3: var(--raw-moss);
-  --c-img-4: var(--raw-sand);
+:root {
+  --c-whatsapp: #25d366;
+  --c-whatsapp-hover: #20bd5a;
+  --c-whatsapp-glyph: #ffffff; /* el globo blanco del botón redondo */
+  --c-whatsapp-ink: #062612; /* texto sobre el verde: 8,6:1 (blanco da 2:1) */
 }

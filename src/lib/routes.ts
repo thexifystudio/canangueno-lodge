@@ -16,7 +16,9 @@ import type { Locale } from "./i18n";
  *  rewrites en `next.config.ts`. Ningún componente se entera.
  */
 export const routes = {
+  about: (l: Locale) => `/${l}/about`,
   home: (l: Locale) => `/${l}`,
+  cuyabeno: (l: Locale) => `/${l}/cuyabeno`,
   tours: (l: Locale) => `/${l}/tours`,
   tour: (l: Locale, slug: string) => `/${l}/tours/${slug}`,
   lodge: (l: Locale) => `/${l}/el-lodge`,

@@ -1,0 +1,214 @@
+/* ── Páginas interiores ────────────────────────────────────────────────────
+   Cabecera de página, foto y texto a dos columnas, inclusiones y recorridos. */
+.exp-page-intro {
+  padding-top: 155px;
+  padding-bottom: 55px;
+}
+.exp-page-intro h1 {
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+  max-width: 15ch;
+}
+.exp-page-intro p {
+  max-width: 60ch;
+  margin-top: 24px;
+  color: var(--c-ink-soft);
+  font-size: 1rem;
+}
+.exp-page-intro > a {
+  display: inline-flex;
+  margin-bottom: 30px;
+  gap: 10px;
+  font-size: 0.8rem;
+}
+.exp-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+}
+/* Foto y texto a dos columnas (/about). La foto no pasa del 45 % del ancho:
+   a pantalla completa se veía blanda, porque el original no da para tanto. */
+.exp-split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+  gap: clamp(40px, 6vw, 96px);
+  align-items: center;
+  padding-bottom: var(--section-y);
+}
+.exp-split-media {
+  position: relative;
+  aspect-ratio: 4/5;
+}
+.exp-split-copy > p {
+  margin-top: 28px;
+  max-width: 60ch;
+  color: var(--c-ink-soft);
+}
+.exp-split-copy dl {
+  display: grid;
+  gap: 18px;
+  margin-top: 34px;
+  padding-top: 24px;
+  border-top: 1px solid var(--c-line);
+  font-size: 0.9rem;
+}
+.exp-split-copy dt {
+  font-size: 0.78rem;
+  color: var(--c-ink-faint);
+}
+.exp-split-copy dd {
+  margin-top: 4px;
+}
+@media (max-width: 760px) {
+  .exp-split {
+    grid-template-columns: 1fr;
+  }
+}
+.exp-inclusions {
+  padding-block: var(--section-y);
+  background: var(--c-bg-warm);
+}
+.exp-itinerary-grid {
+  display: grid;
+  grid-template-columns: 0.7fr 1.3fr;
+  gap: 70px;
+}
+.exp-tours-note {
+  margin-top: 28px;
+  max-width: 65ch;
+}
+@media (max-width: 1100px) {
+  .exp-itinerary-grid {
+    gap: 40px;
+  }
+}
+@media (max-width: 760px) {
+  .exp-page-intro {
+    padding-top: 120px;
+    padding-bottom: 35px;
+  }
+}
+@media (max-width: 760px) {
+  .exp-itinerary-grid {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+
+  .exp-itinerary-grid h2 {
+    max-width: 16ch;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CUYABENO — la reserva
+   ═════════════════════════════════════════════════════════════════════════ */
+.exp-cuyabeno-eyebrow {
+  margin: 0 0 14px !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-accent-text) !important;
+  font-weight: 600;
+}
+.exp-cuyabeno-banner {
+  position: relative;
+  aspect-ratio: 21/9;
+  overflow: hidden;
+}
+.exp-cuyabeno-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.exp-cuyabeno-facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  padding-block: clamp(30px, 4vw, 48px);
+  border-bottom: 1px solid var(--c-line);
+}
+.exp-cuyabeno-facts dt {
+  font-family: var(--ff-display), Georgia, serif;
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.exp-cuyabeno-facts dd {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: var(--c-ink-soft);
+}
+/* Los capítulos reusan `.exp-dayblock` de la página de tour; el primero no
+   necesita la raya de arriba porque ya la pone la franja de datos. */
+.exp-cuyabeno .exp-dayblock:first-child {
+  border-top: 0;
+}
+
+.exp-cuyabeno-wildlife {
+  background: var(--c-band);
+  border-top: 1px solid var(--c-line);
+  padding-block: var(--section-y);
+}
+.exp-cuyabeno-animals {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(20px, 2.4vw, 32px);
+}
+.exp-cuyabeno-animal-media {
+  position: relative;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+}
+.exp-cuyabeno-animal-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.22, 0.68, 0.24, 1);
+}
+.exp-cuyabeno-animals li:hover img {
+  transform: scale(1.04);
+}
+.exp-cuyabeno-animals h3 {
+  margin-top: 16px;
+  font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+.exp-cuyabeno-animals p {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: var(--c-ink-soft);
+}
+.exp-cuyabeno-also {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--c-line);
+  font-size: 0.95rem;
+  color: var(--c-ink-soft);
+}
+.exp-cuyabeno-also strong {
+  color: var(--c-ink);
+  font-weight: 600;
+}
+.exp-cuyabeno-when {
+  align-items: start;
+  margin-bottom: 0;
+}
+.exp-cuyabeno-when p {
+  max-width: 60ch;
+}
+.exp-cuyabeno-cta {
+  padding-top: 0;
+}
+
+@media (max-width: 900px) {
+  .exp-cuyabeno-facts,
+  .exp-cuyabeno-animals {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .exp-cuyabeno-banner {
+    aspect-ratio: 4/3;
+  }
+}

@@ -1,0 +1,159 @@
+/* ── Reservar ──────────────────────────────────────────────────────────────
+   El formulario de consulta y su resumen. */
+.exp-book-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 0.85fr;
+  gap: 90px;
+  align-items: start;
+}
+.exp-book-form fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0 0 35px;
+  min-width: 0;
+}
+.exp-book-form legend {
+  font-family: var(--ff-display), Georgia, serif;
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+}
+.exp-book-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px 22px;
+}
+.exp-field-full {
+  grid-column: 1/-1;
+}
+.exp-book-fields label {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--c-ink-soft);
+}
+.exp-field-hint {
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: var(--c-ink-faint);
+}
+/* El error va debajo del campo, en el idioma de la página, y dice cómo
+   corregirlo. El color no es la única señal: el texto está siempre. */
+.exp-field-error {
+  margin-top: 8px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--c-danger);
+}
+.exp-book-fields [aria-invalid="true"] {
+  border-color: var(--c-danger);
+  box-shadow: inset 0 0 0 1px var(--c-danger);
+}
+.exp-book-fields input,
+.exp-book-fields select,
+.exp-book-fields textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: 0;
+  color: var(--c-ink);
+  padding: 13px 12px;
+  margin-top: 10px;
+  font: inherit;
+  font-size: 0.91rem;
+  min-height: 50px;
+}
+.exp-book-fields textarea {
+  resize: vertical;
+}
+.exp-book-form > .exp-button {
+  margin-top: 24px;
+}
+.exp-book-summary {
+  background: var(--c-bg-warm);
+  padding: 35px;
+  position: sticky;
+  top: 115px;
+}
+.exp-book-summary h2 {
+  font-size: 2.4rem;
+  margin: 20px 0;
+}
+.exp-book-summary > p {
+  font-size: 0.84rem;
+  color: var(--c-ink-soft);
+}
+.exp-book-summary dl {
+  margin: 25px 0;
+}
+.exp-book-summary dl > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  border-bottom: 1px solid var(--c-line);
+  padding: 13px 0;
+  font-size: 0.77rem;
+}
+.exp-book-summary dd {
+  white-space: nowrap;
+}
+.exp-book-summary h3 {
+  font-family: var(--ff-sans), sans-serif;
+  font-size: 0.8rem;
+  margin: 25px 0 10px;
+  font-weight: 600;
+}
+.exp-book-summary p.exp-small {
+  font-size: 0.78rem;
+}
+.exp-book-availability {
+  margin-top: 25px;
+}
+.exp-enquiry-result {
+  padding: 28px;
+  margin-top: 30px;
+  border: 1px solid var(--c-line);
+  background: var(--c-surface);
+}
+.exp-enquiry-result h2 {
+  font-size: 2rem;
+}
+.exp-enquiry-result p {
+  font-size: 0.84rem;
+  margin: 20px 0;
+}
+.exp-enquiry-result pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font: inherit;
+  font-size: 0.78rem;
+  line-height: 1.8;
+  margin: 20px 0 30px;
+  color: var(--c-ink-soft);
+}
+@media (max-width: 1050px) {
+  .exp-book-layout {
+    gap: 40px;
+  }
+}
+@media (max-width: 760px) {
+  .exp-book-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .exp-book-summary {
+    position: static;
+    padding: 27px;
+    grid-row: 1;
+  }
+  .exp-book-fields {
+    gap: 23px 15px;
+  }
+  .exp-enquiry-result {
+    padding: 22px;
+  }
+  .exp-book-form > .exp-button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,202 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   PÁGINA DEL LODGE
+   ───────────────────────────────────────────────────────────────────────────
+   Dónde dormís → dónde comés → qué pasa entre salida y salida. Las fotos son
+   del cliente y traen el logo abajo a la derecha: los recortes centran la
+   imagen y nunca cortan más de un costado.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+/* Foto con pie: el contenedor fija la proporción y la imagen lo llena. */
+.lodge-shot > div {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c-ink) 10%, transparent);
+}
+.lodge-shot > div img {
+  transition: transform 0.8s cubic-bezier(0.22, 0.68, 0.24, 1);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lodge-shot:hover > div img {
+    transform: scale(1.035);
+  }
+}
+.lodge-shot figcaption {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: var(--c-ink-soft);
+}
+.lodge-tall > div {
+  aspect-ratio: 3/4;
+}
+
+/* ── Título + el edificio ───────────────────────────────────────────────── */
+.lodge-intro {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(36px, 6vw, 96px);
+  align-items: end;
+  padding-top: clamp(120px, 14vh, 180px);
+  padding-bottom: var(--section-y);
+}
+.lodge-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-accent-text);
+  font-weight: 600;
+}
+.lodge-intro h1 {
+  margin-top: 16px;
+  font-size: clamp(2.6rem, 5.4vw, 5rem);
+  line-height: 1.03;
+  letter-spacing: -0.04em;
+  font-weight: 400;
+  max-width: 13ch;
+  text-wrap: balance;
+}
+.lodge-lead {
+  margin-top: 24px;
+  max-width: 50ch;
+  font-size: 1.08rem;
+  line-height: 1.6;
+  color: var(--c-ink-soft);
+}
+.lodge-facts {
+  margin-top: clamp(36px, 5vw, 60px);
+  padding-top: 26px;
+  border-top: 1px solid var(--c-line);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.lodge-facts dt {
+  font-family: var(--ff-display), Georgia, serif;
+  font-size: clamp(2rem, 3.2vw, 2.8rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.lodge-facts dd {
+  margin-top: 8px;
+  font-size: 0.88rem;
+  color: var(--c-ink-soft);
+  max-width: 18ch;
+}
+.lodge-intro-media {
+  position: relative;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+}
+
+/* ── Habitaciones y baños: una grande y tres al costado ─────────────────── */
+.lodge-rooms {
+  background: var(--c-band);
+  border-top: 1px solid var(--c-line);
+  padding-block: var(--section-y);
+}
+.lodge-rooms-grid {
+  display: grid;
+  grid-template-columns: 1.45fr 0.5fr 0.5fr;
+  grid-template-rows: auto auto;
+  gap: clamp(16px, 2vw, 26px);
+}
+.lodge-rooms-grid .is-main {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+}
+.lodge-rooms-grid .is-main > div {
+  flex: 1;
+  aspect-ratio: auto;
+  min-height: 320px;
+}
+.lodge-rooms-grid .is-twin {
+  grid-column: 2 / span 2;
+}
+
+/* ── La mesa: el texto y dos fotos verticales ───────────────────────────── */
+.lodge-table {
+  display: grid;
+  grid-template-columns: 0.9fr 1fr 1fr;
+  gap: clamp(18px, 2.4vw, 32px);
+  align-items: center;
+}
+.lodge-table-copy {
+  padding-right: clamp(0px, 2vw, 30px);
+}
+.lodge-table-copy h2,
+.lodge-rooms h2,
+.lodge-between h2 {
+  font-size: clamp(2rem, 3.6vw, 3.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 400;
+}
+.lodge-table-copy p {
+  margin-top: 20px;
+  color: var(--c-ink-soft);
+  max-width: 44ch;
+}
+
+/* ── Entre salida y salida ──────────────────────────────────────────────── */
+.lodge-between {
+  background: var(--c-band);
+  border-top: 1px solid var(--c-line);
+  padding-block: var(--section-y);
+}
+.lodge-between-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 26px);
+}
+.lodge-gear {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--c-line);
+  font-size: 0.95rem;
+  color: var(--c-ink-soft);
+  max-width: 90ch;
+}
+.lodge-gear strong {
+  color: var(--c-ink);
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .lodge-intro {
+    grid-template-columns: 1fr;
+    padding-bottom: 56px;
+  }
+  .lodge-intro-media {
+    aspect-ratio: 4/3;
+  }
+  .lodge-rooms-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .lodge-rooms-grid .is-main,
+  .lodge-rooms-grid .is-twin {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+  .lodge-rooms-grid .is-main > div {
+    aspect-ratio: 4/3;
+    min-height: 0;
+  }
+  .lodge-table {
+    grid-template-columns: 1fr 1fr;
+  }
+  .lodge-table-copy {
+    grid-column: 1 / -1;
+    padding-right: 0;
+  }
+  .lodge-between-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .lodge-between-grid figure:first-child {
+    grid-column: 1 / -1;
+  }
+  .lodge-between-grid figure:first-child > div {
+    aspect-ratio: 4/3;
+  }
+}

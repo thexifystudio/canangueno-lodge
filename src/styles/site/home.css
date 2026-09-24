@@ -1,0 +1,398 @@
+/* ── Portada ───────────────────────────────────────────────────────────────
+   Franja de datos, el lodge, la fauna, las fotos, las opiniones y la llegada. */
+/* ── Franja de datos bajo el hero ───────────────────────────────────────────
+   Cuatro números verificables sobre el verde profundo, leídos como una placa
+   de credenciales. Reemplazó a "Guías bilingües · Alojamiento y comidas ·
+   Entrada por el río": eso ya lo dice el hero, y lo dice igual toda la
+   competencia. */
+.exp-trust {
+  background: var(--c-bg-deep);
+  color: var(--c-on-deep-soft);
+}
+.exp-trust > .shell {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 30px;
+  padding-block: clamp(30px, 4vw, 48px);
+}
+.exp-trust dl {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 26px clamp(24px, 3vw, 52px);
+  flex: 1;
+}
+.exp-trust dt {
+  font-family: var(--ff-display), Georgia, serif;
+  font-size: clamp(1.35rem, 2.1vw, 1.95rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--c-on-deep);
+}
+.exp-trust dd {
+  margin-top: 9px;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--c-on-deep-faint);
+  max-width: 24ch;
+}
+.exp-trust a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  font-size: 0.78rem;
+  color: var(--c-on-deep);
+  padding-bottom: 5px;
+  border-bottom: 1px solid color-mix(in srgb, var(--c-on-deep) 45%, transparent);
+}
+.exp-trust a:hover {
+  color: var(--c-accent-gold);
+  border-color: var(--c-accent-gold);
+}
+.exp-tours,
+.exp-stay,
+.exp-reviews,
+.exp-arrival {
+  padding-block: var(--section-y);
+}
+/* ── El lodge en la portada ─────────────────────────────────────────────────
+   Titular, cuatro fotos y un botón. Lo que vende el alojamiento son las
+   fotos; el detalle vive en `/el-lodge`. */
+.exp-stay-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px 48px;
+  margin-bottom: clamp(28px, 3.4vw, 44px);
+}
+.exp-stay-head > div {
+  max-width: 60ch;
+}
+.exp-stay-head p {
+  margin-top: 16px;
+  font-size: 1.12rem;
+  line-height: 1.6;
+  color: var(--c-ink);
+}
+.exp-stay-head .exp-button {
+  flex-shrink: 0;
+}
+.exp-stay-shots {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 0;
+}
+.exp-stay-shots figure > div {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+}
+/* `figure > div img` y no `.exp-stay-shots img`: el tucán también es un
+   `<img>` dentro de este bloque, y con el selector ancho se estiraba. */
+.exp-stay-shots figure > div img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.22, 0.68, 0.24, 1);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .exp-stay-shots figure:hover > div img {
+    transform: scale(1.04);
+  }
+}
+.exp-stay-shots figcaption {
+  font-size: 0.75rem;
+  margin-top: 11px;
+  color: var(--c-ink-faint);
+}
+.exp-reviews {
+  background: var(--c-surface);
+}
+/* ── Las reseñas ────────────────────────────────────────────────────────────
+   Tres tarjetas del mismo alto, no una grande y dos chicas: son tres
+   opiniones de tres personas y ninguna vale más que las otras. Lo que las
+   iguala es `align-items: stretch` en la rejilla y `margin-top: auto` en el
+   pie, así los tres nombres quedan a la misma línea aunque una cita sea más
+   larga.
+
+   La comilla es un `::before` tipográfico y no un icono: a este tamaño una
+   comilla de verdad dibuja mejor que cualquier SVG. */
+.exp-review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+.exp-review {
+  display: flex;
+  flex-direction: column;
+  background: var(--c-bg);
+  border: 1px solid var(--c-line);
+  padding: 30px 28px 26px;
+  position: relative;
+  transition:
+    transform 0.4s cubic-bezier(0.22, 0.68, 0.24, 1),
+    border-color 0.4s,
+    box-shadow 0.4s;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .exp-review:hover {
+    transform: translateY(-5px);
+  }
+}
+.exp-review:hover {
+  border-color: color-mix(in srgb, var(--c-accent) 38%, var(--c-line));
+  box-shadow: 0 20px 38px -18px
+    color-mix(in srgb, var(--c-ink) 26%, transparent);
+}
+.exp-review::before {
+  content: "“";
+  font-family: var(--ff-display), Georgia, serif;
+  font-size: 4.4rem;
+  line-height: 0.75;
+  color: var(--c-accent);
+  display: block;
+  margin-bottom: 12px;
+}
+.exp-review blockquote {
+  font-family: var(--ff-display), Georgia, serif;
+  font-size: 1.22rem;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: var(--c-ink);
+}
+.exp-review figcaption {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: auto;
+  padding-top: 26px;
+}
+/* El monograma: las iniciales del propio nombre de usuario. No es una foto de
+   perfil inventada — es el ancla visual que a la tarjeta le faltaba, hecha con
+   un dato que sí tenemos. */
+.exp-review-mono {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--c-beak);
+  color: var(--c-accent-ink);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.exp-review-who strong {
+  display: block;
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+.exp-review-who small {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--c-ink-faint);
+  margin-top: 3px;
+}
+.exp-arrival ol {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  list-style: none;
+  margin: 50px 0 0;
+  padding: 0;
+}
+.exp-arrival li {
+  border-top: 1px solid var(--c-line);
+  position: relative;
+  padding: 24px 20px 0 0;
+}
+.exp-arrival li > span {
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c-accent);
+}
+.exp-arrival li strong {
+  display: block;
+  font-family: var(--ff-display), Georgia, serif;
+  font-weight: 400;
+  font-size: 1.55rem;
+}
+.exp-arrival li small {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--c-ink-faint);
+  margin-top: 9px;
+}
+
+@media (max-width: 760px) {
+  .exp-trust > .shell {
+    flex-direction: column;
+    align-items: start;
+    gap: 26px;
+    padding-block: 30px;
+  }
+  .exp-trust dl {
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    width: 100%;
+  }
+  /* Cuatro fotos verticales en una fila no entran en un teléfono: dos y dos. */
+  .exp-stay-head {
+    flex-direction: column;
+    align-items: start;
+  }
+  .exp-stay-shots {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .exp-review-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .exp-arrival ol {
+    grid-template-columns: 1fr;
+    margin-top: 30px;
+  }
+  .exp-arrival li {
+    margin-left: 4px;
+    border-top: 0;
+    border-left: 1px solid var(--c-line);
+    padding: 0 0 32px 24px;
+  }
+  .exp-arrival li:last-child {
+    padding-bottom: 0;
+  }
+  .exp-arrival li > span {
+    left: -4px;
+    top: 9px;
+  }
+}
+/* ── Ritmo de secciones ─────────────────────────────────────────────────────
+   La portada se lee como el viaje: se llega por el río (hero, verde
+   profundo), se elige el recorrido y se ve el lodge a la luz del día, se
+   entra al bosque (fauna, otra vez el verde del dosel), y se termina en el
+   atardecer de la Laguna Grande (`ClosingBand`).
+
+   Suelos, de arriba abajo:
+     hero + datos ▸ deep · tours ▸ band · lodge ▸ bg · fauna ▸ deep
+     fotos ▸ bg · opiniones ▸ surface · llegada ▸ band · cierre ▸ foto
+
+   Nunca dos secciones seguidas en el mismo suelo, así que no hace falta
+   ninguna línea para separarlas; la única que queda es entre fotos y
+   opiniones, dos claros que se parecen mucho. */
+.exp-tours,
+.exp-arrival {
+  background: var(--c-band);
+}
+.exp-reviews {
+  border-top: 1px solid var(--c-line);
+}
+
+/* ── Cuyabeno en la portada ────────────────────────────────────────────────
+   El lugar antes que el producto: foto grande, cuatro datos, cuatro animales
+   y un botón a `/cuyabeno`. Sobre el verde profundo: es "entrar al bosque". */
+.exp-cuyabeno-teaser {
+  background: var(--c-bg-deep);
+  color: var(--c-on-deep-soft);
+  padding-block: var(--section-y);
+}
+.exp-cuyabeno-teaser-top {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: clamp(32px, 5vw, 80px);
+  align-items: center;
+}
+.exp-cuyabeno-teaser-media {
+  position: relative;
+  aspect-ratio: 4/5;
+  max-height: 640px;
+  width: 100%;
+  overflow: hidden;
+}
+.exp-cuyabeno-teaser-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-accent-gold);
+  font-weight: 600;
+}
+.exp-cuyabeno-teaser h2 {
+  margin-top: 14px;
+  font-size: clamp(3rem, 6.4vw, 5.8rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 400;
+  color: var(--c-on-deep);
+}
+.exp-cuyabeno-teaser-copy > p:not(:first-child) {
+  margin-top: 22px;
+  max-width: 46ch;
+  font-size: 1.02rem;
+  line-height: 1.65;
+}
+.exp-cuyabeno-teaser dl {
+  margin: 34px 0 36px;
+  padding-top: 26px;
+  border-top: 1px solid color-mix(in srgb, var(--c-on-deep) 18%, transparent);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px 28px;
+}
+.exp-cuyabeno-teaser dt {
+  font-family: var(--ff-display), Georgia, serif;
+  font-size: clamp(1.7rem, 2.6vw, 2.3rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--c-on-deep);
+}
+.exp-cuyabeno-teaser dd {
+  margin-top: 6px;
+  font-size: 0.82rem;
+  color: var(--c-on-deep-faint);
+}
+.exp-cuyabeno-teaser-animals {
+  margin-top: clamp(28px, 4vw, 48px);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(12px, 1.6vw, 22px);
+}
+.exp-cuyabeno-teaser-animals a {
+  display: block;
+}
+.exp-cuyabeno-teaser-animals a > div {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+.exp-cuyabeno-teaser-animals img {
+  transition: transform 0.7s cubic-bezier(0.22, 0.68, 0.24, 1);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .exp-cuyabeno-teaser-animals a:hover img {
+    transform: scale(1.05);
+  }
+}
+.exp-cuyabeno-teaser-animals span {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--c-on-deep);
+}
+@media (max-width: 900px) {
+  .exp-cuyabeno-teaser-top {
+    grid-template-columns: 1fr;
+  }
+  .exp-cuyabeno-teaser-media {
+    aspect-ratio: 4/3;
+  }
+  .exp-cuyabeno-teaser-animals {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

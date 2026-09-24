@@ -4,7 +4,16 @@ import { tours } from "@/content/tours";
 import { site } from "@/config/site";
 
 /** Rutas fijas del sitio (los slugs de tour se agregan aparte, por idioma). */
-const STATIC_PATHS = ["", "/tours", "/el-lodge", "/galeria", "/como-llegar", "/preguntas"];
+const STATIC_PATHS = [
+  "",
+  "/cuyabeno",
+  "/tours",
+  "/el-lodge",
+  "/galeria",
+  "/como-llegar",
+  "/preguntas",
+  "/about",
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [];
@@ -33,7 +42,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.9,
         alternates: {
           languages: Object.fromEntries(
-            LOCALES.map((l) => [l, `${site.url}/${l}/tours/${pick(tour.slug, l)}`]),
+            LOCALES.map((l) => [
+              l,
+              `${site.url}/${l}/tours/${pick(tour.slug, l)}`,
+            ]),
           ),
         },
       });
