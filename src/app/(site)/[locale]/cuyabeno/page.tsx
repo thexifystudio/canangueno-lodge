@@ -17,6 +17,7 @@ import {
 } from "@/content/cuyabeno";
 import { Media } from "@/components/ui/Media";
 import { ClosingBand } from "@/components/expedition/ClosingBand";
+import { TourCards } from "@/components/expedition/TourCards";
 
 export async function generateMetadata({
   params,
@@ -41,7 +42,7 @@ export async function generateMetadata({
  *  gente, los animales y cuándo ir. Cierra mandando a los tours.
  *
  *      título + foto ancha + datos → capítulos (texto/foto alternando)
- *      → animales → cuándo ir → a los tours → cierre
+ *      → animales (4 × 4) → cuándo ir (temporadas + clima) → los tours → cierre
  *
  *  Todo el texto vive en `content/cuyabeno.ts`.
  */
@@ -65,9 +66,9 @@ export default async function Page({
           <Media id="gal-lagoon-2" locale={l} priority sizes="100vw" />
         </div>
         <dl className="exp-cuyabeno-facts">
-          {cuyabenoFacts.map((f) => (
-            <div key={f.value}>
-              <dt>{f.value}</dt>
+          {cuyabenoFacts.map((f, i) => (
+            <div key={i}>
+              <dt>{pick(f.value, l)}</dt>
               <dd>{pick(f.label, l)}</dd>
             </div>
           ))}
@@ -95,7 +96,7 @@ export default async function Page({
         </div>
       </section>
 
-      <section className="exp-cuyabeno-wildlife">
+      <section className="exp-cuyabeno-wildlife" id="animales">
         <div className="shell">
           <div className="exp-heading">
             <h2>{pick(cuyabenoWildlifeCopy.title, l)}</h2>
@@ -123,21 +124,58 @@ export default async function Page({
         </div>
       </section>
 
-      <section className="shell section-y exp-heading exp-cuyabeno-when">
-        <h2>{pick(cuyabenoWhen.title, l)}</h2>
-        <p>{pick(cuyabenoWhen.body, l)}</p>
+      {/* ── Cuándo ir: la foto de la lluvia, las tres temporadas y el clima ── */}
+      <section className="shell section-y exp-cuyabeno-when">
+        <div className="exp-cuyabeno-when-media">
+          <Media
+            id="when-rain"
+            locale={l}
+            sizes="(max-width: 900px) 100vw, 42vw"
+          />
+        </div>
+        <div className="exp-cuyabeno-when-copy">
+          <p className="exp-cuyabeno-eyebrow">{pick(cuyabenoWhen.eyebrow, l)}</p>
+          <h2>{pick(cuyabenoWhen.title, l)}</h2>
+          <p className="exp-cuyabeno-when-lead">{pick(cuyabenoWhen.body, l)}</p>
+          <ol className="exp-cuyabeno-seasons">
+            {cuyabenoWhen.seasons.map((season) => (
+              <li key={season.months.es}>
+                <p className="exp-cuyabeno-season-months">
+                  {pick(season.months, l)}
+                </p>
+                <h3>{pick(season.name, l)}</h3>
+                <p>{pick(season.text, l)}</p>
+              </li>
+            ))}
+          </ol>
+          <dl className="exp-cuyabeno-climate">
+            {cuyabenoWhen.climate.map((c) => (
+              <div key={c.value}>
+                <dt>{c.value}</dt>
+                <dd>{pick(c.label, l)}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </section>
 
-      <section className="exp-bookband exp-cuyabeno-cta">
+      {/* ── Nuestros tours: de mirar el lugar a elegir cómo vivirlo ───── */}
+      <section className="exp-cuyabeno-tours">
         <div className="shell">
-          <h2>{pick(cuyabenoCta.title, l)}</h2>
-          <p>{pick(cuyabenoCta.body, l)}</p>
-          <div className="exp-bookband-actions">
-            <Link href={routes.tours(l)} className="exp-button">
-              {pick(cuyabenoCta.link, l)}
-              <ArrowRight size={17} />
-            </Link>
+          <div className="exp-heading">
+            <div>
+              <p className="exp-cuyabeno-eyebrow">{pick(cuyabenoCta.eyebrow, l)}</p>
+              <h2>{pick(cuyabenoCta.title, l)}</h2>
+            </div>
+            <div>
+              <p>{pick(cuyabenoCta.body, l)}</p>
+              <Link href={routes.tours(l)} className="exp-text-link">
+                {pick(cuyabenoCta.link, l)}
+                <ArrowRight size={16} />
+              </Link>
+            </div>
           </div>
+          <TourCards locale={l} />
         </div>
       </section>
 

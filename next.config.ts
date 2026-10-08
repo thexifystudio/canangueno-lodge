@@ -9,6 +9,19 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/", destination: "/en", permanent: false },
+      // La página "Nosotros" (/about) se eliminó: quien tenga el enlace de la
+      // URL provisional llega a la del lodge en vez de a un 404.
+      {
+        source: "/:locale(es|en|de|fr)/about",
+        destination: "/:locale/el-lodge",
+        permanent: true,
+      },
+      // La página de políticas se integró en /tours (y en cada tour).
+      {
+        source: "/:locale(es|en|de|fr)/politicas",
+        destination: "/:locale/tours#condiciones",
+        permanent: true,
+      },
       ...legacyRedirects,
     ];
   },
@@ -33,12 +46,6 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     // Lista blanca para cuando las fotos vivan en R2 o en un CDN.
     remotePatterns: [],
-  },
-
-  // `app/global-not-found.tsx`: el 404 de las URLs sin un idioma válido,
-  // que el layout de `[locale]` no puede atender.
-  experimental: {
-    globalNotFound: true,
   },
 
   eslint: {

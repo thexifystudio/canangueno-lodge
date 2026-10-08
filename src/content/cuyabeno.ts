@@ -9,8 +9,8 @@ import type { MediaId } from "@/config/media";
  *  animales se ven y cuándo ir. Los animales son los que nombran los propios
  *  itinerarios del lodge (ver `fauna.ts`), no una lista genérica del Amazonas.
  *
- *  ⚠️ Datos generales de la reserva (año de creación, superficie, número de
- *  lagunas y de aves) tomados de fuentes públicas: revisarlos con el cliente
+ *  ⚠️ Datos generales de la reserva (año de creación, superficie y número de
+ *  lagunas) tomados de fuentes públicas: revisarlos con el cliente
  *  antes de publicar.
  */
 
@@ -43,9 +43,9 @@ export const cuyabenoPage = {
 } as const;
 
 /** La franja de datos bajo el título. */
-export const cuyabenoFacts: { value: string; label: Localized }[] = [
+export const cuyabenoFacts: { value: Localized; label: Localized }[] = [
   {
-    value: "1979",
+    value: { es: "1979", en: "1979", de: "1979", fr: "1979" },
     label: {
       es: "año en que se creó la reserva",
       en: "year the reserve was created",
@@ -54,7 +54,7 @@ export const cuyabenoFacts: { value: string; label: Localized }[] = [
     },
   },
   {
-    value: "603.380 ha",
+    value: { es: "603.380 ha", en: "603.380 ha", de: "603.380 ha", fr: "603.380 ha" },
     label: {
       es: "de selva protegida",
       en: "of protected rainforest",
@@ -63,7 +63,7 @@ export const cuyabenoFacts: { value: string; label: Localized }[] = [
     },
   },
   {
-    value: "14",
+    value: { es: "14", en: "14", de: "14", fr: "14" },
     label: {
       es: "lagunas unidas por ríos",
       en: "lagoons linked by rivers",
@@ -72,12 +72,12 @@ export const cuyabenoFacts: { value: string; label: Localized }[] = [
     },
   },
   {
-    value: "+500",
+    value: { es: "Miles", en: "Thousands", de: "Tausende", fr: "Des milliers" },
     label: {
-      es: "especies de aves",
-      en: "bird species",
-      de: "Vogelarten",
-      fr: "espèces d’oiseaux",
+      es: "de especies de plantas y animales",
+      en: "of plant and animal species",
+      de: "von Pflanzen- und Tierarten",
+      fr: "d’espèces de plantes et d’animaux",
     },
   },
 ];
@@ -125,7 +125,7 @@ export const cuyabenoChapters: CuyabenoChapter[] = [
   },
   {
     id: "bosque",
-    mediaId: "exp-jungle",
+    mediaId: "cuyabeno-forest",
     title: {
       es: "Bosque primario",
       en: "Primary forest",
@@ -289,6 +289,94 @@ export const cuyabenoAnimals: CuyabenoAnimal[] = [
       fr: "Cachées dans les héliconias et les feuilles : la nuit est à elles.",
     },
   },
+  {
+    id: "hoatzin",
+    mediaId: "animal-hoatzin",
+    name: { es: "Hoatzín", en: "Hoatzin", de: "Hoatzin", fr: "Hoazin" },
+    note: {
+      es: "Anida en las ramas sobre el agua, en grupos ruidosos.",
+      en: "It nests in branches over the water, in noisy groups.",
+      de: "Er nistet in lauten Gruppen auf Ästen über dem Wasser.",
+      fr: "Il niche sur les branches au-dessus de l’eau, en groupes bruyants.",
+    },
+  },
+  {
+    id: "tortugas",
+    mediaId: "animal-turtles",
+    name: { es: "Tortugas de río", en: "River turtles", de: "Flussschildkröten", fr: "Tortues de rivière" },
+    note: {
+      es: "Toman el sol en los troncos caídos de la orilla.",
+      en: "They sunbathe on fallen logs along the bank.",
+      de: "Sie sonnen sich auf umgestürzten Stämmen am Ufer.",
+      fr: "Elles prennent le soleil sur les troncs tombés de la rive.",
+    },
+  },
+  {
+    id: "capibara",
+    mediaId: "animal-capybara",
+    name: { es: "Capibara", en: "Capybara", de: "Wasserschwein", fr: "Capybara" },
+    note: {
+      es: "El roedor más grande del mundo, siempre cerca del agua.",
+      en: "The world’s largest rodent, never far from the water.",
+      de: "Das größte Nagetier der Welt, immer in Wassernähe.",
+      fr: "Le plus grand rongeur du monde, toujours près de l’eau.",
+    },
+  },
+  {
+    id: "garza",
+    mediaId: "animal-heron",
+    name: { es: "Garza", en: "Heron", de: "Reiher", fr: "Héron" },
+    note: {
+      es: "Quieta en la orilla, esperando el momento de pescar.",
+      en: "Still on the bank, waiting for the moment to fish.",
+      de: "Reglos am Ufer, wartet sie auf den Moment zum Fischen.",
+      fr: "Immobile sur la rive, il attend le moment de pêcher.",
+    },
+  },
+  {
+    id: "pirana",
+    mediaId: "animal-piranha",
+    name: { es: "Piraña", en: "Piranha", de: "Piranha", fr: "Piranha" },
+    note: {
+      es: "Vive en los ríos y lagunas; de cerca, sus dientes impresionan.",
+      en: "It lives in the rivers and lagoons; up close, its teeth are impressive.",
+      de: "Sie lebt in Flüssen und Lagunen; aus der Nähe beeindrucken ihre Zähne.",
+      fr: "Il vit dans les rivières et les lagunes ; de près, ses dents impressionnent.",
+    },
+  },
+  {
+    id: "saki",
+    mediaId: "animal-saki",
+    name: { es: "Mono saki", en: "Saki monkey", de: "Saki-Affe", fr: "Singe saki" },
+    note: {
+      es: "Tímido y de pelo largo, se mueve alto entre los árboles.",
+      en: "Shy and long-haired, it moves high up in the trees.",
+      de: "Scheu und langhaarig, bewegt er sich hoch oben in den Bäumen.",
+      fr: "Timide et à poils longs, il se déplace en haut des arbres.",
+    },
+  },
+  {
+    id: "rana-venenosa",
+    mediaId: "animal-dartfrog",
+    name: { es: "Rana venenosa", en: "Poison dart frog", de: "Pfeilgiftfrosch", fr: "Dendrobate" },
+    note: {
+      es: "Pequeña y de colores vivos: es su forma de avisar que es tóxica.",
+      en: "Small and brightly coloured: its way of warning that it’s toxic.",
+      de: "Klein und knallbunt: So warnt er, dass er giftig ist.",
+      fr: "Petite et très colorée : sa façon d’avertir qu’elle est toxique.",
+    },
+  },
+  {
+    id: "mariposas",
+    mediaId: "animal-butterfly",
+    name: { es: "Mariposas", en: "Butterflies", de: "Schmetterlinge", fr: "Papillons" },
+    note: {
+      es: "Aparecen en los claros y en la arena a la orilla del río.",
+      en: "They appear in clearings and on the sand along the river.",
+      de: "Sie zeigen sich auf Lichtungen und im Sand am Flussufer.",
+      fr: "Ils apparaissent dans les clairières et sur le sable au bord du fleuve.",
+    },
+  },
 ];
 
 /** Los que se nombran en los itinerarios pero todavía no tienen foto propia. */
@@ -296,13 +384,21 @@ export const cuyabenoAlso: Localized[] = [
   { es: "Delfín rosado", en: "Pink river dolphin", de: "Rosa Flussdelfin", fr: "Dauphin rose" },
   { es: "Anaconda", en: "Anaconda", de: "Anakonda", fr: "Anaconda" },
   { es: "Martín pescador", en: "Kingfisher", de: "Eisvogel", fr: "Martin-pêcheur" },
-  { es: "Garzas", en: "Herons", de: "Reiher", fr: "Hérons" },
   { es: "Loros y papagayos", en: "Parrots", de: "Papageien", fr: "Perroquets" },
   { es: "Serpientes arbóreas", en: "Tree snakes", de: "Baumschlangen", fr: "Serpents arboricoles" },
-  { es: "Mariposas", en: "Butterflies", de: "Schmetterlinge", fr: "Papillons" },
 ];
 
+/**
+ * Cuándo ir. Las temporadas y el clima salen de las FAQ de
+ * cananguenolodge.com ("¿Cómo es el clima en la reserva Cuyabeno?").
+ */
 export const cuyabenoWhen = {
+  eyebrow: {
+    es: "Clima y temporadas",
+    en: "Weather and seasons",
+    de: "Klima und Jahreszeiten",
+    fr: "Climat et saisons",
+  },
   title: {
     es: "Cuándo ir",
     en: "When to go",
@@ -310,46 +406,114 @@ export const cuyabenoWhen = {
     fr: "Quand y aller",
   },
   body: {
-    es: "Cuyabeno se visita todo el año. Es selva tropical húmeda: llueve entre 3.000 y 4.000 mm al año y la humedad ronda el 85–95 %, así que la lluvia es parte del viaje y el lodge da botas y poncho. El nivel del agua cambia con las estaciones: en los meses de más lluvia el bosque se inunda y la canoa llega más lejos; en los meses secos el agua baja y la Laguna Grande puede quedar más baja de lo normal.",
-    en: "Cuyabeno can be visited year-round. It’s tropical rainforest: annual rainfall is 3,000–4,000 mm and humidity sits around 85–95%, so rain is part of the trip and the lodge provides boots and a poncho. The water level changes with the seasons: in the wettest months the forest floods and the canoe reaches further; in the drier months the water drops and Laguna Grande can be lower than usual.",
-    de: "Cuyabeno kann man das ganze Jahr besuchen. Es ist tropischer Regenwald: Pro Jahr fallen 3.000–4.000 mm Regen, die Luftfeuchtigkeit liegt bei etwa 85–95 %, Regen gehört also zur Reise, und die Lodge stellt Gummistiefel und Poncho. Der Wasserstand ändert sich mit den Jahreszeiten: In den regenreichsten Monaten wird der Wald überflutet und das Kanu kommt weiter; in den trockeneren Monaten sinkt das Wasser und die Laguna Grande kann niedriger sein als gewöhnlich.",
-    fr: "Cuyabeno se visite toute l’année. C’est une forêt tropicale humide : il tombe entre 3 000 et 4 000 mm de pluie par an et l’humidité tourne autour de 85–95 %. La pluie fait donc partie du voyage, et le lodge fournit bottes et poncho. Le niveau de l’eau change avec les saisons : pendant les mois les plus pluvieux, la forêt est inondée et la pirogue va plus loin ; pendant les mois plus secs, l’eau baisse et la Laguna Grande peut être plus basse que d’habitude.",
+    es: "Cuyabeno se visita todo el año. Es selva tropical: la lluvia es parte del viaje y el lodge te da botas y poncho. Lo que cambia con los meses es el agua.",
+    en: "Cuyabeno can be visited all year round. It’s rainforest: rain is part of the trip, and the lodge provides boots and a poncho. What changes through the year is the water.",
+    de: "Cuyabeno kann man das ganze Jahr besuchen. Es ist Regenwald: Regen gehört zur Reise, und die Lodge stellt Stiefel und Poncho. Was sich mit den Monaten ändert, ist das Wasser.",
+    fr: "Cuyabeno se visite toute l’année. C’est la forêt tropicale : la pluie fait partie du voyage, et le lodge fournit bottes et poncho. Ce qui change au fil des mois, c’est l’eau.",
+  },
+  seasons: [
+    {
+      months: { es: "Diciembre – marzo", en: "December – March", de: "Dezember – März", fr: "Décembre – mars" },
+      name: { es: "Temporada seca", en: "Dry season", de: "Trockenzeit", fr: "Saison sèche" },
+      text: {
+        es: "Llueve menos y el agua baja. La Laguna Grande puede quedar más baja de lo normal.",
+        en: "Less rain and lower water. Laguna Grande can be lower than usual.",
+        de: "Weniger Regen, niedrigeres Wasser. Die Laguna Grande kann niedriger sein als sonst.",
+        fr: "Moins de pluie, l’eau baisse. La Laguna Grande peut être plus basse que d’habitude.",
+      },
+    },
+    {
+      months: { es: "Abril – julio", en: "April – July", de: "April – Juli", fr: "Avril – juillet" },
+      name: { es: "Temporada de lluvias", en: "Rainy season", de: "Regenzeit", fr: "Saison des pluies" },
+      text: {
+        es: "Los ríos crecen y el bosque se inunda: la canoa llega más lejos, entre los árboles.",
+        en: "The rivers rise and the forest floods: the canoe reaches further, in among the trees.",
+        de: "Die Flüsse steigen und der Wald wird überflutet: Das Kanu kommt weiter, mitten zwischen die Bäume.",
+        fr: "Les rivières montent et la forêt est inondée : la pirogue va plus loin, entre les arbres.",
+      },
+    },
+    {
+      months: { es: "Agosto – noviembre", en: "August – November", de: "August – November", fr: "Août – novembre" },
+      name: { es: "Lluvia moderada", en: "Moderate rain", de: "Mäßiger Regen", fr: "Pluie modérée" },
+      text: {
+        es: "Un punto medio: agua suficiente para navegar y días más estables.",
+        en: "A middle ground: enough water to navigate and steadier days.",
+        de: "Ein Mittelweg: genug Wasser zum Befahren und beständigere Tage.",
+        fr: "Un entre-deux : assez d’eau pour naviguer et des journées plus stables.",
+      },
+    },
+  ],
+  climate: [
+    { value: "25 °C", label: { es: "temperatura media", en: "average temperature", de: "Durchschnittstemperatur", fr: "température moyenne" } },
+    { value: "85–95 %", label: { es: "humedad", en: "humidity", de: "Luftfeuchtigkeit", fr: "humidité" } },
+    { value: "3.000–4.000 mm", label: { es: "de lluvia al año", en: "of rain a year", de: "Regen pro Jahr", fr: "de pluie par an" } },
+  ],
+} as const;
+
+/** La sección final: los tres tours, para pasar de mirar a reservar. */
+export const cuyabenoCta = {
+  eyebrow: {
+    es: "Nuestros tours",
+    en: "Our tours",
+    de: "Unsere Touren",
+    fr: "Nos circuits",
+  },
+  title: {
+    es: "Vive Cuyabeno con nosotros",
+    en: "Experience Cuyabeno with us",
+    de: "Erlebe Cuyabeno mit uns",
+    fr: "Vivez Cuyabeno avec nous",
+  },
+  body: {
+    es: "Tres recorridos desde el lodge, de 3, 4 y 5 días. Todos entran por el río, todos pasan por la Laguna Grande y todos van con guías bilingües.",
+    en: "Three routes from the lodge, of 3, 4 and 5 days. All of them enter by river, all of them visit Laguna Grande, and all go with bilingual guides.",
+    de: "Drei Routen ab der Lodge, mit 3, 4 und 5 Tagen. Alle beginnen auf dem Fluss, alle führen zur Laguna Grande und alle mit zweisprachigen Guides.",
+    fr: "Trois circuits au départ du lodge, de 3, 4 et 5 jours. Tous entrent par le fleuve, tous passent par la Laguna Grande et tous avec des guides bilingues.",
+  },
+  link: {
+    es: "Ver todos los tours",
+    en: "See all the tours",
+    de: "Alle Touren ansehen",
+    fr: "Voir tous les circuits",
   },
 } as const;
 
-export const cuyabenoCta = {
-  title: {
-    es: "Conocerla por dentro",
-    en: "See it from the inside",
-    de: "Es von innen erleben",
-    fr: "La découvrir de l’intérieur",
-  },
-  body: {
-    es: "Tres recorridos desde el lodge, de 3, 4 y 5 días. Todos entran por el río, todos pasan por la Laguna Grande.",
-    en: "Three routes from the lodge, of 3, 4 and 5 days. All of them enter by river, all of them pass through Laguna Grande.",
-    de: "Drei Routen ab der Lodge, mit 3, 4 und 5 Tagen. Alle beginnen auf dem Fluss, alle führen zur Laguna Grande.",
-    fr: "Trois circuits au départ du lodge, de 3, 4 et 5 jours. Tous entrent par le fleuve, tous passent par la Laguna Grande.",
-  },
-  link: {
-    es: "Ver los tours",
-    en: "See the tours",
-    de: "Die Touren ansehen",
-    fr: "Voir les circuits",
-  },
-} as const;
+/**
+ * Los animales del adelanto de la portada. Distintos de los de `/cuyabeno`:
+ * la página completa tiene que mostrar más, no repetir los mismos cuatro.
+ */
+export const cuyabenoTeaserAnimals: { id: string; name: Localized; mediaId: MediaId }[] = [
+  { id: "hoatzin", mediaId: "animal-hoatzin", name: { es: "Hoatzín", en: "Hoatzin", de: "Hoatzin", fr: "Hoazin" } },
+  { id: "tortugas", mediaId: "animal-turtles", name: { es: "Tortugas de río", en: "River turtles", de: "Flussschildkröten", fr: "Tortues de rivière" } },
+  { id: "capibara", mediaId: "animal-capybara", name: { es: "Capibara", en: "Capybara", de: "Wasserschwein", fr: "Capybara" } },
+  { id: "garza", mediaId: "animal-heron", name: { es: "Garza", en: "Heron", de: "Reiher", fr: "Héron" } },
+];
 
 /** El bloque de Cuyabeno en la portada: un adelanto que lleva a `/cuyabeno`. */
 export const cuyabenoTeaser = {
   body: {
-    es: "Una reserva de selva inundada al noreste de Ecuador: ríos de aguas negras, lagunas unidas por el río, bosque primario y animales que se ven desde la canoa. Es el lugar donde está el lodge.",
-    en: "A flooded rainforest reserve in northeastern Ecuador: blackwater rivers, lagoons linked by the river, primary forest and wildlife you can see from the canoe. It’s where the lodge stands.",
-    de: "Ein überfluteter Regenwald im Nordosten Ecuadors: Schwarzwasserflüsse, durch den Fluss verbundene Lagunen, Primärwald und Tiere, die man vom Kanu aus sieht. Hier steht die Lodge.",
-    fr: "Une réserve de forêt inondée au nord-est de l’Équateur : rivières d’eaux noires, lagunes reliées par le fleuve, forêt primaire et animaux visibles depuis la pirogue. C’est là que se trouve le lodge.",
+    es: "Ríos oscuros que reflejan el cielo como un espejo, lagunas escondidas en medio de la selva y un bosque que nunca se taló. En Cuyabeno los animales viven a la orilla del agua, y la mejor forma de verlos es en silencio, desde la canoa.",
+    en: "Dark rivers that mirror the sky, lagoons hidden in the middle of the forest and woodland that has never been logged. In Cuyabeno, wildlife lives along the water’s edge, and the best way to see it is quietly, from the canoe.",
+    de: "Dunkle Flüsse, die den Himmel spiegeln, Lagunen mitten im Regenwald und ein Wald, der nie abgeholzt wurde. In Cuyabeno leben die Tiere am Ufer, und am besten sieht man sie leise, vom Kanu aus.",
+    fr: "Des rivières sombres qui reflètent le ciel comme un miroir, des lagunes cachées au milieu de la forêt et des bois jamais exploités. À Cuyabeno, les animaux vivent au bord de l’eau, et le meilleur moyen de les voir, c’est en silence, depuis la pirogue.",
   },
   cta: {
     es: "Conocer Cuyabeno",
     en: "Discover Cuyabeno",
     de: "Cuyabeno entdecken",
     fr: "Découvrir Cuyabeno",
+  },
+  /** Los dos enlaces debajo de las fotos de animales. */
+  allSpecies: {
+    es: "Ver todas las especies",
+    en: "See all the species",
+    de: "Alle Arten ansehen",
+    fr: "Voir toutes les espèces",
+  },
+  allPhotos: {
+    es: "Ver todas las fotos de Cuyabeno",
+    en: "See all the photos of Cuyabeno",
+    de: "Alle Fotos von Cuyabeno ansehen",
+    fr: "Voir toutes les photos de Cuyabeno",
   },
 } as const;

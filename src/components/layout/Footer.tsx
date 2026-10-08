@@ -4,21 +4,21 @@ import type { Dictionary } from "@/i18n";
 import { routes } from "@/lib/routes";
 import { site, whatsappLink } from "@/config/site";
 import { Logo } from "@/components/layout/Logo";
-import {
-  FacebookIcon,
-  InstagramIcon,
-  TripadvisorIcon,
-} from "@/components/ui/BrandIcons";
+import { Credentials } from "@/components/ui/Credentials";
+import { FacebookIcon, InstagramIcon } from "@/components/ui/BrandIcons";
 
-/* Cada enlace del pie mide 44 px de alto: en el teléfono son blancos de
-   dedo, no de puntero. El espacio entre ellos lo da ese alto, no un `gap`. */
+/* Cada enlace del pie mide 44 px de alto en el teléfono (blancos de dedo,
+   no de puntero) y 36 px en escritorio. El espacio entre ellos lo da ese
+   alto, no un `gap`. */
 const LINK =
-  "inline-flex min-h-11 items-center transition-colors hover:text-accent-text";
+  "inline-flex min-h-11 items-center transition-colors hover:text-accent-text lg:min-h-9";
+
+/* El título de cada columna. */
+const TITLE = "eyebrow mb-2 text-ink-faint";
 
 const SOCIAL = [
   { name: "Instagram", href: site.social.instagram, Icon: InstagramIcon },
   { name: "Facebook", href: site.social.facebook, Icon: FacebookIcon },
-  { name: "Tripadvisor", href: site.social.tripadvisor, Icon: TripadvisorIcon },
 ];
 
 export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
@@ -27,18 +27,23 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
 
   /* Los tours no se listan uno por uno: "Tours" ya lleva a los tres. */
   const links: [string, string][] = [
+    /* El mismo orden que la barra de arriba. */
     [routes.tours(locale), dict.nav.tours],
-    [routes.cuyabeno(locale), dict.nav.cuyabeno],
     [routes.lodge(locale), dict.nav.lodge],
-    [routes.gallery(locale), dict.nav.gallery],
+    [routes.cuyabeno(locale), dict.nav.cuyabeno],
     [routes.journey(locale), dict.nav.journey],
-    [routes.about(locale), dict.about.navLabel],
+    [routes.gallery(locale), dict.nav.gallery],
     [routes.faq(locale), dict.nav.faq],
   ];
 
   return (
     <footer className="exp-footer bg-bg-warm text-ink">
-      <div className="shell grid gap-8 py-12 md:grid-cols-[auto_1fr_auto] md:items-start md:gap-12 md:py-14">
+      {/*
+       * Cuatro columnas, cada una con su título: la marca, adónde ir, cómo
+       * escribir y quién avala la operación. En el teléfono se apilan y los
+       * enlaces van a dos columnas.
+       */}
+      <div className="shell grid gap-10 py-12 sm:grid-cols-2 md:py-16 lg:grid-cols-[1.2fr_1.1fr_1fr_1fr] lg:gap-12">
         <div>
           <Link
             href={routes.home(locale)}
@@ -47,15 +52,32 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           >
             <Logo />
           </Link>
-          <p className="mt-4 max-w-[34ch] text-sm leading-relaxed text-ink-soft">
+          <p className="mt-4 max-w-[30ch] text-sm leading-relaxed text-ink-soft">
             {dict.footer.tagline}
           </p>
+          {/* Las redes, con su nombre escrito: un ícono solo obliga a adivinar.
+              Tripadvisor no va acá: su logo, en los avales, ya lleva a las
+              reseñas. */}
+          <ul className="mt-4 flex flex-wrap gap-x-5 text-sm text-ink-soft">
+            {SOCIAL.map(({ href, name, Icon }) => (
+              <li key={name}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${LINK} gap-2`}
+                >
+                  <Icon />
+                  {name}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {/* Una sola lista corrida en vez de columnas: el pie era más alto
-            que la mitad de la pantalla. */}
         <nav aria-label={dict.footer.explore}>
-          <ul className="flex flex-wrap gap-x-6 text-sm text-ink-soft md:justify-center">
+          <p className={TITLE}>{dict.footer.explore}</p>
+          <ul className="grid grid-cols-2 gap-x-6 text-sm text-ink-soft">
             {links.map(([href, label]) => (
               <li key={href}>
                 <Link href={href} className={LINK}>
@@ -66,8 +88,9 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           </ul>
         </nav>
 
-        <div className="text-sm text-ink-soft">
-          <ul className="flex flex-wrap gap-x-6 md:flex-col md:items-end">
+        <div>
+          <p className={TITLE}>{dict.footer.contact}</p>
+          <ul className="text-sm text-ink-soft">
             <li>
               <a
                 href={whatsappLink(dict.faq.whatsappMessage)}
@@ -84,41 +107,22 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
               </a>
             </li>
           </ul>
-          {/* Las redes, con su nombre escrito: un ícono solo obliga a adivinar,
-              y Tripadvisor no lo reconoce todo el mundo por el búho. */}
-          <ul className="flex flex-wrap gap-x-5 md:justify-end">
-            {SOCIAL.map(({ href, name, Icon }) => (
-              <li key={name}>
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${LINK} gap-2`}
-                >
-                  <Icon />
-                  {name}
-                </a>
-              </li>
-            ))}
-          </ul>
         </div>
+
+        {/* Los avales: los dos ministerios que autorizan la operación y
+            Tripadvisor, que lleva a las reseñas (ver `ui/Credentials`). */}
+        <Credentials locale={locale} variant="compact" />
       </div>
 
       {/* Lo legal va en la franja de abajo, en una línea: tiene que estar,
           pero nadie lo busca como un bloque propio. */}
       <div className="border-t border-line">
-        <div className="shell flex flex-col gap-2 py-5 text-xs text-ink-faint lg:flex-row lg:items-center lg:justify-between">
+        <div className="shell flex flex-col gap-2 py-5 text-xs text-ink-faint sm:flex-row sm:items-center sm:justify-between">
           <p>
             {/* La razón social ya termina en punto ("CIA. LTDA."): no se le
                 agrega otro. */}
             © {year} {company}
             {company.endsWith(".") ? "" : "."} {dict.footer.rights}
-          </p>
-          <p>
-            {dict.lodge.registryLabel}{" "}
-            <span className="tabular-nums">{site.legal.forestryRegistry}</span>
-            {" · "}
-            {site.office.street}, {site.office.city}
           </p>
           <p>{dict.footer.builtBy}</p>
         </div>

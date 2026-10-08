@@ -19,66 +19,80 @@ export type JourneyStep = {
 export const journeySteps: JourneyStep[] = [
   {
     n: "01",
-    place: { es: "Quito", en: "Quito",
-    de: "Quito",
-    fr: "Quito" },
+    place: { es: "Quito", en: "Quito", de: "Quito", fr: "Quito" },
     detail: {
       es: "El viaje arranca la noche anterior al día 1 del tour.",
       en: "The journey starts the night before day 1 of the tour.",
       de: "Die Anreise beginnt in der Nacht vor Tag 1 der Tour.",
       fr: "Le trajet commence la veille du jour 1 du circuit.",
     },
-    duration: { es: "Punto de partida", en: "Starting point",
-    de: "Ausgangspunkt",
-    fr: "Point de départ" },
+    duration: {
+      es: "Punto de partida",
+      en: "Starting point",
+      de: "Ausgangspunkt",
+      fr: "Point de départ",
+    },
     mode: "bus",
   },
   {
     n: "02",
-    place: { es: "Puente de Cuyabeno", en: "Cuyabeno Bridge",
-    de: "Cuyabeno-Brücke",
-    fr: "Pont de Cuyabeno" },
+    place: {
+      es: "Puente de Cuyabeno",
+      en: "Cuyabeno Bridge",
+      de: "Cuyabeno-Brücke",
+      fr: "Pont de Cuyabeno",
+    },
     detail: {
       es: "Nuestro punto de encuentro. Los guías te esperan, explican la logística y te embarcan en la canoa. Hay que llegar antes de las 11:00.",
       en: "Our meeting point. The guides are waiting for you, explain the logistics and get you on board the canoe. You need to arrive before 11:00.",
       de: "Unser Treffpunkt. Die Guides erwarten dich, erklären den Ablauf und bringen dich an Bord des Kanus. Du musst vor 11:00 Uhr dort sein.",
       fr: "Notre point de rendez-vous. Les guides vous attendent, expliquent l’organisation et vous font embarquer en pirogue. Il faut arriver avant 11h00.",
     },
-    duration: { es: "≈ 8 h en bus desde Quito", en: "≈ 8 h by bus from Quito",
-    de: "≈ 8 Std. mit dem Bus ab Quito",
-    fr: "≈ 8 h de bus depuis Quito" },
+    duration: {
+      es: "≈ 8 h en bus desde Quito",
+      en: "≈ 8 h by bus from Quito",
+      de: "≈ 8 Std. mit dem Bus ab Quito",
+      fr: "≈ 8 h de bus depuis Quito",
+    },
     mode: "bus",
   },
   {
     n: "03",
-    place: { es: "Río Cuyabeno", en: "Cuyabeno River",
-    de: "Río Cuyabeno",
-    fr: "Río Cuyabeno" },
+    place: {
+      es: "Río Cuyabeno",
+      en: "Cuyabeno River",
+      de: "Río Cuyabeno",
+      fr: "Río Cuyabeno",
+    },
     detail: {
       es: "Canoa río adentro. Los guías van explicando la flora y la fauna: con suerte aparecen papagayos, tucanes y el martín pescador antes de llegar.",
       en: "Canoe deep into the reserve. The guides explain the flora and fauna along the way — with luck, macaws, toucans and kingfishers appear before you arrive.",
       de: "Mit dem Kanu tief in das Reservat hinein. Die Guides erklären unterwegs die Pflanzen- und Tierwelt — mit Glück zeigen sich schon vor der Ankunft Aras, Tukane und Eisvögel.",
       fr: "En pirogue au cœur de la réserve. Les guides expliquent la flore et la faune en chemin — avec un peu de chance, des aras, des toucans et des martins-pêcheurs apparaissent avant l’arrivée.",
     },
-    duration: { es: "≈ 3 h en canoa", en: "≈ 3 h by canoe",
-    de: "≈ 3 Std. mit dem Kanu",
-    fr: "≈ 3 h en pirogue" },
+    duration: {
+      es: "≈ 3 h en canoa",
+      en: "≈ 3 h by canoe",
+      de: "≈ 3 Std. mit dem Kanu",
+      fr: "≈ 3 h en pirogue",
+    },
     mode: "canoe",
   },
   {
     n: "04",
-    place: { es: "Canangueno Lodge", en: "Canangueno Lodge",
-    de: "Canangueno Lodge",
-    fr: "Canangueno Lodge" },
+    place: {
+      es: "Canangueno Lodge",
+      en: "Canangueno Lodge",
+      de: "Canangueno Lodge",
+      fr: "Canangueno Lodge",
+    },
     detail: {
       es: "Check-in y almuerzo. La primera salida es esa misma tarde.",
       en: "Check-in and lunch. The first excursion is that same afternoon.",
       de: "Check-in und Mittagessen. Der erste Ausflug findet noch am selben Nachmittag statt.",
       fr: "Arrivée et déjeuner. La première excursion a lieu l’après-midi même.",
     },
-    duration: { es: "Llegada", en: "Arrival",
-    de: "Ankunft",
-    fr: "Arrivée" },
+    duration: { es: "Llegada", en: "Arrival", de: "Ankunft", fr: "Arrivée" },
     mode: "lodge",
   },
 ];
@@ -96,9 +110,12 @@ export const journeyOptions: JourneyOption[] = [
   {
     id: "avion",
     mode: "plane",
-    title: { es: "En avión", en: "By plane",
-    de: "Mit dem Flugzeug",
-    fr: "En avion" },
+    title: {
+      es: "En avión",
+      en: "By plane",
+      de: "Mit dem Flugzeug",
+      fr: "En avion",
+    },
     body: {
       es: "La opción más rápida. Vuelo Quito – El Coca con LATAM, según los horarios de la aerolínea, y desde ahí transporte privado hasta el Puente de Cuyabeno.",
       en: "The fastest option. A Quito – El Coca flight with LATAM, subject to the airline's schedule, and private transport from there to the Cuyabeno Bridge.",
@@ -127,9 +144,7 @@ export const journeyOptions: JourneyOption[] = [
   {
     id: "bus",
     mode: "bus",
-    title: { es: "En bus", en: "By bus",
-    de: "Mit dem Bus",
-    fr: "En bus" },
+    title: { es: "En bus", en: "By bus", de: "Mit dem Bus", fr: "En bus" },
     body: {
       es: "La opción más común y económica. Hay bus directo hasta el puente desde el terminal de Quitumbe con la cooperativa Putumayo, y también salidas desde la zona de La Mariscal. La alternativa es viajar a Lago Agrio (Nueva Loja) desde el terminal de Carcelén y tomar allí otro bus hasta el puente.",
       en: "The most common and affordable option. There is a direct bus to the bridge from Quitumbe terminal with the Putumayo company, and departures from the La Mariscal area too. The alternative is to travel to Lago Agrio (Nueva Loja) from Carcelén terminal and take another bus from there to the bridge.",
@@ -172,3 +187,49 @@ export const privateTransfer: Localized<string> = {
   de: "Wir können auch einen privaten Landtransport ab deinem Hotel in Quito organisieren. Schreib uns, und wir kümmern uns darum.",
   fr: "Nous pouvons aussi organiser un transport terrestre privé depuis votre hôtel à Quito. Écrivez-nous et nous nous en chargeons.",
 };
+
+/** Los tres datos que hay que tener claros, arriba de todo en `/como-llegar`. */
+export const journeyFacts: { value: Localized; label: Localized }[] = [
+  {
+    value: {
+      es: "Puente de Cuyabeno",
+      en: "Cuyabeno Bridge",
+      de: "Cuyabeno-Brücke",
+      fr: "Pont de Cuyabeno",
+    },
+    label: {
+      es: "punto de encuentro",
+      en: "meeting point",
+      de: "Treffpunkt",
+      fr: "point de rendez-vous",
+    },
+  },
+  {
+    value: {
+      es: "Antes de las 11:00",
+      en: "Before 11:00",
+      de: "Vor 11:00 Uhr",
+      fr: "Avant 11h00",
+    },
+    label: {
+      es: "hora de llegada al puente",
+      en: "arrival time at the bridge",
+      de: "Ankunft an der Brücke",
+      fr: "heure d’arrivée au pont",
+    },
+  },
+  {
+    value: {
+      es: "≈ 8 h + 3 h",
+      en: "≈ 8 h + 3 h",
+      de: "≈ 8 Std. + 3 Std.",
+      fr: "≈ 8 h + 3 h",
+    },
+    label: {
+      es: "desde Quito: bus hasta el puente y canoa hasta el lodge",
+      en: "from Quito: bus to the bridge, then canoe to the lodge",
+      de: "ab Quito: Bus zur Brücke, dann Kanu zur Lodge",
+      fr: "depuis Quito : bus jusqu’au pont, puis pirogue jusqu’au lodge",
+    },
+  },
+];

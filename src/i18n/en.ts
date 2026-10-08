@@ -92,8 +92,6 @@ export const en: Dictionary = {
     tableBestFor: "Best for",
     disclaimer: "A note on itineraries",
     pageTitle: "The three routes.",
-    pageLead:
-      "The same lodge, the same guides, the same forest. What changes is how many nights you stay — and how much you get to see.",
     priceNote:
       "Rates are quoted based on dates, group size and room type. Message us on WhatsApp or fill in the form and we'll send you the details.",
     metaTitle: "Cuyabeno tours: 3, 4 and 5 days",
@@ -184,7 +182,6 @@ export const en: Dictionary = {
     visionTitle: "Vision",
     facilitiesTitle: "Facilities",
     credentialsTitle: "Licensed operation",
-    registryLabel: "Forestry registration",
     companyLabel: "Registered company",
     sinceLabel: "In tourism since",
     pageTitle: "Sleep surrounded by the forest.",
@@ -197,20 +194,6 @@ export const en: Dictionary = {
     peopleLink: "Meet Canangueno",
   },
 
-  about: {
-    pageTitle: "A place. And its people.",
-    pageLead:
-      "Canangueno Lodge and the Siona-Seoqueya communities: a relationship woven into every journey.",
-    behindTitle: "Know who is behind your journey.",
-    operatorLabel: "Operator",
-    paceTitle: "The forest sets the pace.",
-    paceBody:
-      "We explore the reserve with Spanish- and English-speaking guides and work with local communities. Wildlife sightings depend on nature; guides adapt each outing to the conditions.",
-    navLabel: "Our story",
-    metaTitle: "The people behind Canangueno",
-    metaDescription:
-      "Who runs Canangueno Lodge and how we work alongside the Siona-Seoqueya communities inside the Cuyabeno Reserve.",
-  },
 
   reviews: {
     eyebrow: "Reviews",
@@ -294,7 +277,7 @@ export const en: Dictionary = {
     namePlaceholder: "Your name",
     emailLabel: "Email",
     emailPlaceholder: "you@email.com",
-    phoneLabel: "Phone or WhatsApp",
+    phoneLabel: "Phone / WhatsApp",
     phonePlaceholder: "With country code",
     countryLabel: "Country",
     countryPlaceholder: "Where you're writing from",
@@ -321,34 +304,34 @@ export const en: Dictionary = {
     preparingForm: "Preparing the form…",
     beforeTitle: "Before you confirm.",
     beforeBody:
-      "We will confirm your room type, transport and cancellation terms in writing. Full payment secures your booking together with the voucher issued by the lodge.",
+      "We will confirm your room type, transport and the payment and cancellation terms in writing. Your booking is secured with the voucher issued by the lodge.",
     metaTitle: "Plan your Cuyabeno trip",
 
     formJourneyLegend: "Your journey",
-    formAboutLegend: "A little about you",
+    formAboutLegend: "Your details",
     routeLabel: "Itinerary",
     preferredDateLabel: "Preferred date",
     yourNameLabel: "Your name",
-    notesLabel: "Room preference, children or special requirements (optional)",
-    notesPlaceholder: "For example: double room, two adults.",
+    notesLabel: "Additional comments (optional)",
+    notesPlaceholder: "Anything else you’d like to tell us: room, children, allergies…",
     noChargeNote:
       "We will prepare a message for you to send via WhatsApp or email. No payment is taken.",
     prepareCta: "Prepare my enquiry",
-    contactLabel: "Your email or WhatsApp",
-    contactHint: "So we can reply even if the message never gets sent.",
     errDate: "Choose the date you'd like to start the tour.",
     errDatePast: "That date has already passed. Choose one from today onwards.",
     errPax: "Tell us how many are travelling: between 1 and 40 people.",
     errName: "Enter your name (at least 2 letters).",
-    errContact: "Leave an email or a phone number with country code so we can reply.",
-    msgContact: "Contact: ",
+    errEmail: "Enter a valid email, for example name@email.com.",
+    errPhone: "Enter your number with the country code, for example +1 555 123 4567.",
+    msgEmail: "Email: ",
+    msgPhone: "Phone: ",
     emailSubject: "Canangueno enquiry",
 
     msgIntro: "Hello, I would like to enquire about this Canangueno Lodge trip:",
     msgDate: "Preferred date: ",
     msgTravelers: "Travellers: ",
     msgName: "Name: ",
-    msgNotes: "Notes: ",
+    msgNotes: "Comments: ",
     msgClosing:
       "Please confirm availability, room type, extras and payment terms.",
 
@@ -375,7 +358,6 @@ export const en: Dictionary = {
     eyebrow: "Where we are",
     title: "Cuyabeno Reserve,",
     titleEmphasis: "Sucumbíos",
-    officeTitle: "Quito office",
     meetingTitle: "Meeting point",
     mapLabel: "View on the map",
   },

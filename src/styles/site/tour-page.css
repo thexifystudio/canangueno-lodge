@@ -36,10 +36,6 @@
   color: var(--c-ink-soft);
   text-wrap: pretty;
 }
-.exp-bookband-actions.exp-tourpage-actions {
-  justify-content: start;
-  gap: 28px;
-}
 
 /* ── Los días ───────────────────────────────────────────────────────────────
    Texto y fotografía a dos columnas, y la imagen cambia de lado en los días
@@ -94,46 +90,6 @@
 .exp-tourpage-note {
   margin-top: 30px;
   max-width: 70ch;
-}
-
-/* ── Qué incluye ────────────────────────────────────────────────────────── */
-.exp-includes {
-  background: var(--c-band);
-  border-top: 1px solid var(--c-line);
-  padding-block: var(--section-y);
-}
-.exp-includes h2 {
-  font-size: clamp(1.7rem, 2.8vw, 2.4rem);
-  font-weight: 400;
-  letter-spacing: -0.025em;
-}
-.exp-includes ul {
-  margin-top: 30px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px clamp(28px, 4vw, 60px);
-}
-.exp-includes li {
-  display: flex;
-  gap: 13px;
-  align-items: start;
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-.exp-includes svg {
-  color: var(--c-accent-text);
-  flex-shrink: 0;
-  margin-top: 3px;
-}
-.exp-includes-extra {
-  margin-top: 34px;
-  padding-top: 20px;
-  border-top: 1px solid var(--c-line);
-  max-width: 90ch;
-}
-.exp-includes-extra strong {
-  color: var(--c-ink);
-  font-weight: 600;
 }
 
 /* ── Reservar ───────────────────────────────────────────────────────────── */
@@ -231,8 +187,74 @@
   .exp-dayblock:nth-child(even) .exp-dayblock-media {
     order: 0;
   }
-  .exp-includes ul,
   .exp-nextup-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Qué incluye, qué no y antes de reservar (`TourTerms`) ──────────────────
+   Dos tarjetas del mismo peso. */
+.exp-terms {
+  background: var(--c-band);
+  border-top: 1px solid var(--c-line);
+  padding-block: var(--section-y);
+}
+.exp-terms h2 {
+  font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+.exp-terms-cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+.exp-terms-card {
+  padding: clamp(26px, 3vw, 40px);
+  border: 1px solid var(--c-line);
+}
+.exp-terms-card.is-in {
+  background: var(--c-surface);
+  border-top: 3px solid var(--c-accent);
+}
+.exp-terms-card.is-out {
+  background: color-mix(in srgb, var(--c-surface) 45%, transparent);
+}
+.exp-terms-card ul {
+  margin-top: 24px;
+  display: grid;
+  gap: 14px;
+}
+.exp-terms-card li {
+  display: flex;
+  gap: 12px;
+  align-items: start;
+  line-height: 1.5;
+}
+.exp-terms-card li > span {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: 50%;
+}
+.exp-terms-card.is-in li > span {
+  background: var(--c-accent);
+  color: var(--c-accent-ink);
+}
+.exp-terms-card.is-out li > span {
+  background: color-mix(in srgb, var(--c-ink) 10%, transparent);
+  color: var(--c-ink-soft);
+}
+.exp-terms-card.is-out li {
+  color: var(--c-ink-soft);
+}
+
+@media (max-width: 760px) {
+  .exp-terms-cols {
     grid-template-columns: 1fr;
   }
 }

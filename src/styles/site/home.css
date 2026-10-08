@@ -120,10 +120,27 @@
 
    La comilla es un `::before` tipográfico y no un icono: a este tamaño una
    comilla de verdad dibuja mejor que cualquier SVG. */
+/* Título y enlace a Tripadvisor en una fila; debajo, la foto del grupo a la
+   izquierda (del alto de las reseñas) y seis tarjetas en dos columnas. */
+.exp-reviews-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px 40px;
+  flex-wrap: wrap;
+  margin-bottom: clamp(28px, 3.4vw, 44px);
+}
+.exp-reviews-head h2 {
+  max-width: 18ch;
+}
+/* Mosaico de tres columnas: cada tarjeta con su alto natural. */
 .exp-review-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 22px;
+  columns: 3;
+  column-gap: 22px;
+}
+.exp-review-grid > .exp-review {
+  break-inside: avoid;
+  margin-bottom: 22px;
 }
 .exp-review {
   display: flex;
@@ -150,15 +167,18 @@
 .exp-review::before {
   content: "“";
   font-family: var(--ff-display), Georgia, serif;
-  font-size: 4.4rem;
-  line-height: 0.75;
+  font-size: 4rem;
+  /* La comilla se dibuja arriba de su caja: con una caja más baja que la
+     letra, el texto de la reseña queda pegado a ella y no a 70 px. */
+  line-height: 1;
+  height: 0.5em;
   color: var(--c-accent);
   display: block;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 .exp-review blockquote {
   font-family: var(--ff-display), Georgia, serif;
-  font-size: 1.22rem;
+  font-size: 1.12rem;
   line-height: 1.5;
   letter-spacing: -0.01em;
   color: var(--c-ink);
@@ -252,9 +272,23 @@
     grid-template-columns: 1fr 1fr;
     gap: 12px;
   }
+  /* En el teléfono: las reseñas en un carrusel que se desliza de costado,
+     en vez de seis tarjetas apiladas. */
   .exp-review-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    columns: auto;
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    scroll-padding-inline: var(--gutter);
+    padding-bottom: 6px;
+  }
+  .exp-review-grid .exp-review {
+    flex: 0 0 84%;
+    margin-bottom: 0;
+    scroll-snap-align: start;
   }
   .exp-arrival ol {
     grid-template-columns: 1fr;
@@ -293,6 +327,13 @@
 }
 .exp-reviews {
   border-top: 1px solid var(--c-line);
+}
+
+/* Tablet: dos columnas de reseñas. */
+@media (max-width: 1050px) and (min-width: 761px) {
+  .exp-review-grid {
+    columns: 2;
+  }
 }
 
 /* ── Cuyabeno en la portada ────────────────────────────────────────────────
@@ -395,4 +436,25 @@
   .exp-cuyabeno-teaser-animals {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+
+/* Los dos enlaces debajo de los animales, sobre el verde profundo. */
+.exp-cuyabeno-teaser-more {
+  margin-top: clamp(24px, 3vw, 36px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 36px;
+}
+.exp-cuyabeno-teaser-more .exp-text-link {
+  color: var(--c-on-deep);
+  border-color: color-mix(in srgb, var(--c-on-deep) 45%, transparent);
+}
+.exp-cuyabeno-teaser-more .exp-text-link:hover {
+  color: var(--c-accent-gold);
+  border-color: var(--c-accent-gold);
+}
+
+/* "Nuestros tours." solo, sin bajada: el título y debajo las tarjetas. */
+.exp-tours-title {
+  margin-bottom: clamp(28px, 3.4vw, 44px);
 }

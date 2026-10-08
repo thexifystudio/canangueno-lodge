@@ -2,42 +2,9 @@ import type { Localized } from "@/lib/i18n";
 import type { MediaId } from "@/config/media";
 
 /**
- * El lodge y la empresa. Contenido real de cananguenolodge.com/nosotros
- * (misión, visión, registro legal) y de las inclusiones del tour
- * (instalaciones). Nada agregado.
+ * El lodge: instalaciones (de las inclusiones del tour) y los textos de la
+ * página `/el-lodge`. Nada agregado.
  */
-
-export const about: {
-  intro: Localized;
-  mission: Localized;
-  vision: Localized;
-  company: Localized;
-} = {
-  intro: {
-    es: "Canangueno Lodge está en la comunidad Siona–Seoqueya, dentro de la Reserva de Producción Faunística de Cuyabeno, a tres horas de canoa río adentro. No es un hotel con excursiones: es una casa en medio de la selva desde la que se sale a caminar, a remar y a mirar.",
-    en: "Canangueno Lodge sits in the Siona–Seoqueya community, inside the Cuyabeno Wildlife Production Reserve, three hours upriver by canoe. It is not a hotel with excursions attached: it is a house in the middle of the rainforest that you set out from — to walk, to paddle and to look.",
-    de: "Die Canangueno Lodge liegt in der Gemeinschaft Siona–Seoqueya, innerhalb des Cuyabeno-Wildreservats, drei Stunden flussaufwärts mit dem Kanu. Sie ist kein Hotel mit angehängten Ausflügen: Sie ist ein Haus mitten im Regenwald, von dem aus du aufbrichst — um zu wandern, zu paddeln und zu schauen.",
-    fr: "Le Canangueno Lodge se trouve dans la communauté Siona–Seoqueya, à l’intérieur de la réserve de production faunique de Cuyabeno, à trois heures de pirogue en amont. Ce n’est pas un hôtel avec des excursions en supplément : c’est une maison au milieu de la forêt d’où l’on part — pour marcher, pour pagayer et pour observer.",
-  },
-  company: {
-    es: "Somos una operadora de turismo legalmente autorizada por el Ministerio de Turismo y el Ministerio del Ambiente del Ecuador, con registro forestal RNAB20168950448 para operar dentro del Patrimonio de Áreas Naturales del Estado. Nuestro representante legal, Pablo Flores, trabaja en turismo desde 2006 y mantiene una relación estrecha con las comunidades Siona–Seoqueya, con las que la empresa opera en conjunto.",
-    en: "We are a tour operator legally licensed by Ecuador's Ministry of Tourism and Ministry of the Environment, holding forestry registration RNAB20168950448 to operate within the State's Natural Areas. Our legal representative, Pablo Flores, has worked in tourism since 2006 and maintains a close relationship with the Siona–Seoqueya communities, with whom the company works directly.",
-    de: "Wir sind ein vom ecuadorianischen Tourismus- und Umweltministerium offiziell lizenzierter Reiseveranstalter mit dem Forstregister RNAB20168950448 für den Betrieb in den Naturschutzgebieten des Staates. Unser gesetzlicher Vertreter, Pablo Flores, ist seit 2006 im Tourismus tätig und pflegt eine enge Beziehung zu den Gemeinschaften der Siona–Seoqueya, mit denen das Unternehmen direkt zusammenarbeitet.",
-    fr: "Nous sommes un tour-opérateur légalement autorisé par le ministère du Tourisme et le ministère de l’Environnement de l’Équateur, titulaire du registre forestier RNAB20168950448 pour opérer dans les aires naturelles de l’État. Notre représentant légal, Pablo Flores, travaille dans le tourisme depuis 2006 et entretient une relation étroite avec les communautés Siona–Seoqueya, avec lesquelles l’entreprise collabore directement.",
-  },
-  mission: {
-    es: "Garantizar una aventura amazónica inolvidable, mostrando responsabilidad por el medio ambiente y promoviendo un vínculo estrecho entre los viajeros, la naturaleza y la cultura de la Amazonía. Cuidamos la seguridad de visitantes y tripulación, promovemos el intercambio cultural con la comunidad Siona y trabajamos por la conservación de la biodiversidad y los ecosistemas de la Reserva Cuyabeno.",
-    en: "To guarantee an unforgettable Amazon adventure, showing responsibility towards the environment and building a close bond between travellers, nature and Amazonian culture. We look after the safety of visitors and crew, encourage cultural exchange with the Siona community, and work for the conservation of the biodiversity and ecosystems of the Cuyabeno Reserve.",
-    de: "Ein unvergessliches Amazonas-Abenteuer zu ermöglichen, mit Verantwortung gegenüber der Umwelt und einer engen Verbindung zwischen Reisenden, Natur und amazonischer Kultur. Wir achten auf die Sicherheit von Gästen und Crew, fördern den kulturellen Austausch mit der Siona-Gemeinschaft und setzen uns für den Erhalt der Artenvielfalt und der Ökosysteme des Cuyabeno-Reservats ein.",
-    fr: "Garantir une aventure amazonienne inoubliable, en faisant preuve de responsabilité envers l’environnement et en créant un lien étroit entre les voyageurs, la nature et la culture amazonienne. Nous veillons à la sécurité des visiteurs et de l’équipage, encourageons l’échange culturel avec la communauté Siona et œuvrons à la conservation de la biodiversité et des écosystèmes de la réserve de Cuyabeno.",
-  },
-  vision: {
-    es: "Ser un touroperador social y eco-responsable, con servicios y tours de excelencia, que opere según las preferencias de sus huéspedes y las frágiles condiciones de la selva amazónica, ofreciendo formas creativas de ecoturismo e intercambio cultural.",
-    en: "To be a socially and ecologically responsible tour operator, with excellent service and tours, working around both our guests' preferences and the fragile conditions of the Amazon rainforest, offering creative forms of ecotourism and cultural exchange.",
-    de: "Ein sozial und ökologisch verantwortungsvoller Reiseveranstalter zu sein, mit exzellentem Service und exzellenten Touren, der sich sowohl an den Wünschen unserer Gäste als auch an den fragilen Bedingungen des Amazonas-Regenwaldes orientiert und kreative Formen von Ökotourismus und kulturellem Austausch anbietet.",
-    fr: "Être un tour-opérateur socialement et écologiquement responsable, offrant un service et des circuits d’excellence, en tenant compte à la fois des préférences de nos hôtes et de la fragilité de la forêt amazonienne, et en proposant des formes créatives d’écotourisme et d’échange culturel.",
-  },
-};
 
 export type Facility = {
   id: string;
@@ -98,12 +65,12 @@ export const facilities: Facility[] = [
 export const lodgePage = {
   facts: [
     {
-      value: "40",
+      value: "2006",
       label: {
-        es: "huéspedes como máximo",
-        en: "guests at most",
-        de: "Gäste höchstens",
-        fr: "hôtes au maximum",
+        es: "operando en la Reserva Cuyabeno",
+        en: "operating in the Cuyabeno Reserve",
+        de: "im Cuyabeno-Reservat tätig",
+        fr: "en activité dans la réserve de Cuyabeno",
       },
     },
     {
@@ -225,6 +192,82 @@ export const lodgePage = {
         de: "Die Gruppenrunde",
         fr: "La discussion de groupe",
       },
+    },
+  },
+  map: {
+    title: {
+      es: "Dónde vas a estar",
+      en: "Where you’ll stay",
+      de: "Wo du wohnst",
+      fr: "Où vous serez",
+    },
+    body: {
+      es: "Canangueno Lodge está dentro de la Reserva Cuyabeno, en la comunidad Siona–Seoqueya, a orillas del río. No hay carretera hasta el lodge: se llega en canoa desde el Puente de Cuyabeno.",
+      en: "Canangueno Lodge is inside the Cuyabeno Reserve, in the Siona–Seoqueya community, on the riverbank. There is no road to the lodge: you arrive by canoe from the Cuyabeno Bridge.",
+      de: "Die Canangueno Lodge liegt im Cuyabeno-Reservat, in der Gemeinschaft Siona–Seoqueya, direkt am Fluss. Es führt keine Straße zur Lodge: Man kommt mit dem Kanu von der Cuyabeno-Brücke.",
+      fr: "Le Canangueno Lodge se trouve dans la réserve de Cuyabeno, dans la communauté Siona–Seoqueya, au bord du fleuve. Aucune route ne mène au lodge : on y arrive en pirogue depuis le pont de Cuyabeno.",
+    },
+    facts: [
+      {
+        label: {
+          es: "Desde el Puente de Cuyabeno",
+          en: "From the Cuyabeno Bridge",
+          de: "Ab der Cuyabeno-Brücke",
+          fr: "Depuis le pont de Cuyabeno",
+        },
+        value: {
+          es: "3 h en canoa",
+          en: "3 h by canoe",
+          de: "3 Std. im Kanu",
+          fr: "3 h en pirogue",
+        },
+      },
+      {
+        label: {
+          es: "Desde Quito hasta el puente",
+          en: "From Quito to the bridge",
+          de: "Von Quito zur Brücke",
+          fr: "De Quito au pont",
+        },
+        value: {
+          es: "8–9 h en bus nocturno",
+          en: "8–9 h by overnight bus",
+          de: "8–9 Std. im Nachtbus",
+          fr: "8–9 h en bus de nuit",
+        },
+      },
+      {
+        label: {
+          es: "Coordenadas",
+          en: "Coordinates",
+          de: "Koordinaten",
+          fr: "Coordonnées",
+        },
+        value: {
+          es: "0°06′31″ S · 76°04′18″ O",
+          en: "0°06′31″ S · 76°04′18″ W",
+          de: "0°06′31″ S · 76°04′18″ W",
+          fr: "0°06′31″ S · 76°04′18″ O",
+        },
+      },
+    ],
+    openMaps: {
+      es: "Abrir en Google Maps",
+      en: "Open in Google Maps",
+      de: "In Google Maps öffnen",
+      fr: "Ouvrir dans Google Maps",
+    },
+    howTo: {
+      es: "Cómo llegar",
+      en: "How to get here",
+      de: "Anreise",
+      fr: "Comment venir",
+    },
+    frameTitle: {
+      es: "Mapa con la ubicación de Canangueno Lodge en la Reserva Cuyabeno",
+      en: "Map showing Canangueno Lodge in the Cuyabeno Reserve",
+      de: "Karte mit der Lage der Canangueno Lodge im Cuyabeno-Reservat",
+      fr: "Carte de l’emplacement du Canangueno Lodge dans la réserve de Cuyabeno",
     },
   },
   gearTitle: {

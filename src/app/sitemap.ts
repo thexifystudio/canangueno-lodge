@@ -12,7 +12,6 @@ const STATIC_PATHS = [
   "/galeria",
   "/como-llegar",
   "/preguntas",
-  "/about",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

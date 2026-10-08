@@ -15,7 +15,7 @@ export type BookingTour = {
   tagline: string;
 };
 
-type Field = "date" | "pax" | "name" | "contact";
+type Field = "date" | "pax" | "name" | "email" | "phone";
 type Errors = Partial<Record<Field, string>>;
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -68,9 +68,10 @@ export function BookingForm({
     else if (date < localDateISO()) e.date = t9n.errDatePast;
     if (!validCount) e.pax = t9n.errPax;
     if (String(fd.get("name") ?? "").trim().length < 2) e.name = t9n.errName;
-    const contact = String(fd.get("contact") ?? "").trim();
-    if (!EMAIL.test(contact) && !PHONE.test(contact))
-      e.contact = t9n.errContact;
+    if (!EMAIL.test(String(fd.get("email") ?? "").trim()))
+      e.email = t9n.errEmail;
+    if (!PHONE.test(String(fd.get("phone") ?? "").trim()))
+      e.phone = t9n.errPhone;
     return e;
   }
 
@@ -81,9 +82,7 @@ export function BookingForm({
     setErrors(found);
     const first = Object.keys(found)[0];
     if (first) {
-      form.current
-        ?.querySelector<HTMLElement>(`[name="${first}"]`)
-        ?.focus();
+      form.current?.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
       return;
     }
     const date = String(fd.get("date"));
@@ -99,7 +98,8 @@ export function BookingForm({
         t9n.msgDate + readable,
         t9n.msgTravelers + count,
         t9n.msgName + String(fd.get("name")).trim(),
-        t9n.msgContact + String(fd.get("contact")).trim(),
+        t9n.msgEmail + String(fd.get("email")).trim(),
+        t9n.msgPhone + String(fd.get("phone")).trim(),
         ...(notes ? [t9n.msgNotes + notes] : []),
         t9n.msgClosing,
       ].join("\n"),
@@ -128,7 +128,8 @@ export function BookingForm({
         onChange={(e) => {
           setPrepared("");
           const name = (e.target as unknown as HTMLInputElement).name as Field;
-          if (errors[name]) setErrors((prev) => ({ ...prev, [name]: undefined }));
+          if (errors[name])
+            setErrors((prev) => ({ ...prev, [name]: undefined }));
         }}
         onSubmit={onSubmit}
       >
@@ -199,22 +200,40 @@ export function BookingForm({
               </label>
               {error("name")}
             </div>
-            <div className="exp-field-full">
+            {/* Nombre, correo y teléfono: los tres obligatorios. El correo
+                y el teléfono van separados para que el lodge pueda responder
+                por el canal que prefiera. */}
+            <div>
               <label>
-                {t9n.contactLabel}
+                {t9n.emailLabel}
                 <input
-                  name="contact"
+                  name="email"
+                  type="email"
                   autoComplete="email"
                   inputMode="email"
                   maxLength={120}
+                  placeholder={t9n.emailPlaceholder}
                   required
-                  {...a11y("contact", "hint-contact")}
+                  {...a11y("email")}
                 />
               </label>
-              <p id="hint-contact" className="exp-field-hint">
-                {t9n.contactHint}
-              </p>
-              {error("contact")}
+              {error("email")}
+            </div>
+            <div>
+              <label>
+                {t9n.phoneLabel}
+                <input
+                  name="phone"
+                  type="tel"
+                  autoComplete="tel"
+                  inputMode="tel"
+                  maxLength={30}
+                  placeholder={t9n.phonePlaceholder}
+                  required
+                  {...a11y("phone")}
+                />
+              </label>
+              {error("phone")}
             </div>
             <label className="exp-field-full">
               {t9n.notesLabel}
@@ -289,7 +308,9 @@ export function BookingForm({
         <p>{t9n.includedBody}</p>
         <h3>{t9n.extraTitle}</h3>
         <p>{t9n.extraBody}</p>
-        <p className="exp-small exp-book-availability">{t9n.availabilityNote}</p>
+        <p className="exp-small exp-book-availability">
+          {t9n.availabilityNote}
+        </p>
       </aside>
     </div>
   );

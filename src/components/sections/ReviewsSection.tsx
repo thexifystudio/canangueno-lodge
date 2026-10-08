@@ -8,23 +8,19 @@ import { expeditionCopy } from "@/content/expedition-copy";
  * ────────────────────────────────────────────────────────────────────────────
  *  LO QUE DICEN LOS HUÉSPEDES
  * ────────────────────────────────────────────────────────────────────────────
- *  Tres reseñas REALES de Tripadvisor, en tarjetas del mismo alto.
+ *  Seis reseñas REALES de Tripadvisor en tres columnas tipo mosaico (cada
+ *  tarjeta mide lo que mide su texto: sin huecos), cada una en el idioma de
+ *  la página (ver `content/reviews.ts`:
+ *  en inglés va el original; en los otros idiomas, una traducción fiel que
+ *  la tarjeta marca como tal).
  *
  *  Lo que NO lleva, y por qué:
- *   · Estrellas. La reseña original las tiene, pero ese dato no está en
- *     `content/reviews.ts`. Pintar cinco estrellas "porque suena bien" es
- *     inventarse una calificación.
- *   · El país del huésped. Tampoco lo tenemos. Sería lo más bonito de la
- *     tarjeta y es justo lo que no se puede fabricar.
- *   · El logotipo de Tripadvisor. Usar la marca sin el kit oficial es
- *     apropiación; va el nombre en texto hasta que el cliente lo entregue.
+ *   · Estrellas ni país del huésped: no los tenemos, y no se inventan.
+ *   · El logotipo de Tripadvisor en cada tarjeta: va el nombre en texto; el
+ *     logo oficial está en los avales.
  *
- *  El monograma NO es una foto de perfil inventada: son las iniciales del
- *  propio nombre de usuario, generadas del texto. Da a la tarjeta el ancla
- *  visual que le faltaba sin fingir que sabemos quién es esa persona.
- *
- *  Cuando llegue el widget oficial de Tripadvisor, esto se reemplaza entero y
- *  los datos vienen en vivo. Ver la nota en `content/reviews.ts`.
+ *  El monograma son las iniciales del propio nombre de usuario, no una foto
+ *  de perfil inventada.
  */
 
 /** Iniciales de un nombre de usuario: "MelanieB919" → "MB", "Cesar C" → "CC". */
@@ -38,48 +34,45 @@ function initials(name: string) {
   ).toUpperCase();
 }
 
-/* Las reseñas van en su idioma original (traducirlas las volvería falsas);
-   en las páginas en otro idioma se avisa, para que no parezca un descuido. */
-const ORIGINAL: Record<Locale, string> = {
-  es: "Reseña original en inglés",
-  en: "",
-  de: "Originalbewertung auf Englisch",
-  fr: "Avis original en anglais",
+const TRANSLATED: Record<Locale, string> = {
+  es: "Traducida del inglés",
+  en: "Translated",
+  de: "Aus dem Englischen übersetzt",
+  fr: "Traduit de l’anglais",
 };
+
+/** Cuántas reseñas se muestran: seis, dos por columna. */
+const SHOWN = 6;
 
 export function ReviewsSection({ locale }: { locale: Locale }) {
   const c = expeditionCopy(locale);
-  const selected = ["hamzan", "melanieb919", "cesarc"]
-    .map((id) => reviews.find((r) => r.id === id)!)
-    .filter(Boolean);
+  const selected = reviews.slice(0, SHOWN);
 
   return (
     <section className="exp-reviews">
       <div className="shell">
-        <div className="exp-heading">
+        <div className="exp-reviews-head">
           <h2>{c.reviewsTitle}</h2>
-          <div>
-            <p>{c.reviewsBody}</p>
-            <a
-              className="exp-text-link"
-              href={site.social.tripadvisor}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {c.reviewsCta}
-              <ArrowUpRight size={16} />
-            </a>
-          </div>
+          <a
+            className="exp-text-link"
+            href={site.social.tripadvisor}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {c.reviewsCta}
+            <ArrowUpRight size={16} />
+          </a>
         </div>
 
         <div className="exp-review-grid">
           {selected.map((r) => (
             <figure key={r.id} className="exp-review">
-              <blockquote lang="en">
-                {r.quote}
-                {/* Extracto: en el original sigue. Sin los puntos parecía
-                    una cita completa. */}
-                {r.excerpt && "…"}
+              <blockquote lang={locale}>
+                {/* Extracto: en el original sigue. El punto final se cambia
+                      por los puntos suspensivos (si no, quedaba ".…"). */}
+                {r.excerpt
+                  ? pick(r.quote, locale).replace(/[.…\s]+$/, "") + "…"
+                  : pick(r.quote, locale)}
               </blockquote>
               <figcaption>
                 <span className="exp-review-mono" aria-hidden>
@@ -89,7 +82,7 @@ export function ReviewsSection({ locale }: { locale: Locale }) {
                   <strong>{r.author}</strong>
                   <small>
                     {pick(r.date, locale)} · {r.source}
-                    {ORIGINAL[locale] && <> · {ORIGINAL[locale]}</>}
+                    {r.original !== locale && <> · {TRANSLATED[locale]}</>}
                   </small>
                 </span>
               </figcaption>

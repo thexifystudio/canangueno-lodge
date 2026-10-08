@@ -41,6 +41,12 @@ export function OrganizationJsonLd({ locale }: { locale: Locale }) {
           addressRegion: site.location.region,
           addressCountry: "EC",
         },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: site.location.lat,
+          longitude: site.location.lng,
+        },
+        hasMap: site.location.googleMaps,
         containedInPlace: {
           "@type": "TouristAttraction",
           name: "Reserva de Producción de Fauna Cuyabeno",

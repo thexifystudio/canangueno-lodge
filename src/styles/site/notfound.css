@@ -1,34 +1,137 @@
 /* ── 404 ────────────────────────────────────────────────────────────────────
-   Sobre el verde del dosel, como el hero: el que llega por un enlace roto
-   sigue sintiendo que está en el sitio, con la cabecera y el pie de siempre. */
+   Una foto del bosque con un velo verde, como el hero: el que llega por un
+   enlace roto sigue en el sitio. Texto a la izquierda; a la derecha, una
+   tarjeta con las páginas a las que probablemente quería ir. */
 .exp-notfound {
-  min-height: 80svh;
+  position: relative;
+  isolation: isolate;
+  min-height: 86svh;
   display: flex;
   align-items: center;
-  padding-block: clamp(140px, 18vh, 200px) var(--section-y);
+  padding-block: clamp(130px, 16vh, 180px) var(--section-y);
   background: var(--c-bg-deep);
   color: var(--c-on-deep);
+  overflow: hidden;
 }
-.exp-notfound-code {
-  font-family: var(--ff-display), Georgia, serif;
-  font-size: clamp(4rem, 10vw, 7rem);
-  line-height: 1;
+.exp-notfound-media,
+.exp-notfound-veil {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+.exp-notfound-veil {
+  background:
+    linear-gradient(
+      100deg,
+      color-mix(in srgb, var(--c-bg-deep) 90%, transparent) 0%,
+      color-mix(in srgb, var(--c-bg-deep) 70%, transparent) 55%,
+      color-mix(in srgb, var(--c-bg-deep) 55%, transparent) 100%
+    );
+}
+.exp-notfound-inner {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(36px, 6vw, 96px);
+  align-items: center;
+}
+.exp-notfound-eyebrow {
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
   color: var(--c-accent-gold);
+  border: 1px solid color-mix(in srgb, var(--c-accent-gold) 55%, transparent);
 }
 .exp-notfound h1 {
-  margin-top: 18px;
-  max-width: 18ch;
-  font-size: clamp(2.4rem, 5vw, 4.2rem);
-  line-height: 1.05;
+  margin-top: 22px;
+  max-width: 16ch;
+  font-size: clamp(2.5rem, 5.2vw, 4.6rem);
+  line-height: 1.03;
   letter-spacing: -0.035em;
   font-weight: 400;
+  text-wrap: balance;
 }
-.exp-notfound h1 + p {
-  margin: 22px 0 38px;
-  max-width: 52ch;
+.exp-notfound-body {
+  margin: 20px 0 34px;
+  max-width: 46ch;
+  font-size: 1.05rem;
+  line-height: 1.65;
   color: var(--c-on-deep-soft);
 }
-.exp-notfound .exp-text-link:hover {
+
+/* La tarjeta de sugerencias: vidrio oscuro sobre la foto. */
+.exp-notfound-card {
+  background: color-mix(in srgb, var(--c-bg-deep) 60%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c-on-deep) 20%, transparent);
+  backdrop-filter: blur(10px);
+  padding: clamp(20px, 2.4vw, 28px);
+}
+.exp-notfound-card-title {
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--c-on-deep-faint);
+  margin-bottom: 8px;
+}
+.exp-notfound-card li + li {
+  border-top: 1px solid color-mix(in srgb, var(--c-on-deep) 14%, transparent);
+}
+.exp-notfound-card li a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 10px;
+  margin-inline: -10px;
+  color: var(--c-on-deep);
+  transition:
+    background 0.25s,
+    color 0.25s;
+}
+.exp-notfound-card li a:hover {
+  background: color-mix(in srgb, var(--c-on-deep) 8%, transparent);
   color: var(--c-accent-gold);
-  border-color: var(--c-accent-gold);
+}
+.exp-notfound-card li a > span {
+  display: grid;
+  gap: 2px;
+}
+.exp-notfound-card strong {
+  font-family: var(--ff-display), Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+}
+.exp-notfound-card small {
+  font-size: 0.82rem;
+  color: var(--c-on-deep-faint);
+}
+.exp-notfound-card li a > svg {
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+.exp-notfound-help {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid color-mix(in srgb, var(--c-on-deep) 14%, transparent);
+  font-size: 0.88rem;
+  color: var(--c-on-deep-soft);
+}
+.exp-notfound-help a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--c-accent-gold);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 900px) {
+  .exp-notfound-inner {
+    grid-template-columns: 1fr;
+  }
 }

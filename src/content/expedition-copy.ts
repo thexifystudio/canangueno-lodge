@@ -34,7 +34,6 @@ const es = {
    *   · 590 112 ha — superficie oficial de la Reserva de Producción de Fauna
    *     Cuyabeno. Es un dato público de la reserva, no una cifra del negocio.
    *   · Siona y Seoqueya — las dos comunidades con las que opera la empresa.
-   *   · El registro forestal está en `config/site.ts`, sale del PDF legal.
    *
    * FALTAN LOS DOS QUE PIDIÓ EL CLIENTE y que NO se pueden inventar:
    * "+10 000 pasajeros" y "+80 países". En cuanto los confirme, se descomenta
@@ -51,8 +50,6 @@ const es = {
   ],
   statsCta: "Opiniones de viajeros",
   tourTitle: "Nuestros tours.",
-  tourIntro:
-    "El mismo lodge y los mismos guías en los tres. Cambia cuántas noches te quedas.",
   days: "días",
   nights: "noches",
   itinerary: "Ver el itinerario",
@@ -68,7 +65,7 @@ const es = {
   shotCabins: "Las cabañas",
   shotRoom: "La habitación",
   shotDining: "La comida",
-  shotDeck: "Las hamacas",
+  shotDeck: "El área común, de noche",
   galleryTitle: "El Cuyabeno que vas a recorrer.",
   galleryBody:
     "Río, bosque, comunidad. Cada parte del viaje merece su espacio.",
@@ -88,8 +85,6 @@ const es = {
     ],
   ],
   reviewsTitle: "El viaje, contado por quienes estuvieron.",
-  reviewsBody:
-    "Experiencias compartidas en Tripadvisor y recogidas en la web de Canangueno.",
   reviewsCta: "Leer opiniones en Tripadvisor",
   journeyTitle: "La carretera termina. El río sigue.",
   journeyBody:
@@ -101,12 +96,17 @@ const es = {
     "Embarque · aprox. 3 h en canoa",
     "Tu base en la reserva",
   ],
+  closingEyebrow: "Reservas y consultas",
   closingTitle: "Cuéntanos cuándo quieres venir.",
   closingBody:
-    "Escríbenos y el equipo del lodge te responde en persona, con fechas, disponibilidad y la tarifa para tu grupo.",
+    "Escríbenos con tus fechas y cuántos viajan. El equipo del lodge te responde con la disponibilidad, el tipo de habitación y la tarifa para tu grupo.",
   closingWhatsapp: "Escribir por WhatsApp",
   closingMessage: "Hola, quiero planificar un viaje a Canangueno Lodge.",
   closingEmail: "Escribir un correo",
+  closingWhatsappHint: "Chat directo con el lodge",
+  closingEmailLabel: "Correo",
+  closingEmailHint: "Ideal para grupos y cotizaciones",
+  closingSubject: "Consulta de viaje — Canangueno Lodge",
 };
 
 const en: typeof es = {
@@ -127,8 +127,6 @@ const en: typeof es = {
   ],
   statsCta: "Guest reviews",
   tourTitle: "Our tours.",
-  tourIntro:
-    "Same lodge, same guides in all three. What changes is how many nights you stay.",
   days: "days",
   nights: "nights",
   itinerary: "See the itinerary",
@@ -144,7 +142,7 @@ const en: typeof es = {
   shotCabins: "The cabins",
   shotRoom: "The room",
   shotDining: "The food",
-  shotDeck: "The hammocks",
+  shotDeck: "The common area at night",
   galleryTitle: "The places along your route.",
   galleryBody:
     "River, forest, community. A closer look at each part of Cuyabeno.",
@@ -167,8 +165,6 @@ const en: typeof es = {
     ],
   ],
   reviewsTitle: "The journey, in their words.",
-  reviewsBody:
-    "Experiences shared on Tripadvisor and featured on Canangueno's website.",
   reviewsCta: "Read reviews on Tripadvisor",
   journeyTitle: "The road ends. The river continues.",
   journeyBody:
@@ -180,12 +176,17 @@ const en: typeof es = {
     "Board your canoe · approx. 3 h",
     "Your base in the reserve",
   ],
+  closingEyebrow: "Bookings and enquiries",
   closingTitle: "Tell us when you’d like to come.",
   closingBody:
-    "Write to us and the lodge team will reply in person, with dates, availability and a rate for your group.",
+    "Send us your dates and how many of you are travelling. The lodge team will reply with availability, room type and the rate for your group.",
   closingWhatsapp: "Message us on WhatsApp",
   closingMessage: "Hi, I’d like to plan a trip to Canangueno Lodge.",
   closingEmail: "Send an email",
+  closingWhatsappHint: "Chat directly with the lodge",
+  closingEmailLabel: "Email",
+  closingEmailHint: "Best for groups and quotes",
+  closingSubject: "Trip enquiry — Canangueno Lodge",
 };
 
 const de: typeof es = {
@@ -206,8 +207,6 @@ const de: typeof es = {
   ],
   statsCta: "Gästebewertungen",
   tourTitle: "Unsere Touren.",
-  tourIntro:
-    "Dieselbe Lodge und dieselben Guides bei allen drei Touren. Nur die Zahl der Nächte ändert sich.",
   days: "Tage",
   nights: "Nächte",
   itinerary: "Reiseverlauf ansehen",
@@ -223,7 +222,7 @@ const de: typeof es = {
   shotCabins: "Die Hütten",
   shotRoom: "Das Zimmer",
   shotDining: "Das Essen",
-  shotDeck: "Die Hängematten",
+  shotDeck: "Der Gemeinschaftsbereich am Abend",
   galleryTitle: "Das Cuyabeno auf deiner Route.",
   galleryBody:
     "Fluss, Wald, Gemeinschaft. Jeder Teil der Reise verdient seinen eigenen Blick.",
@@ -237,8 +236,6 @@ const de: typeof es = {
     ["Bei der Gemeinschaft", "Besuch der Siona- und Seoqueya-Gemeinschaften und Zubereitung von Maniokbrot mit einer lokalen Familie."],
   ],
   reviewsTitle: "Die Reise, erzählt von unseren Gästen.",
-  reviewsBody:
-    "Erlebnisse, die auf Tripadvisor geteilt und auf der Website von Canangueno vorgestellt wurden.",
   reviewsCta: "Bewertungen auf Tripadvisor lesen",
   journeyTitle: "Die Straße endet. Der Fluss führt weiter.",
   journeyBody:
@@ -250,12 +247,17 @@ const de: typeof es = {
     "Einstieg · ca. 3 h im Kanu",
     "Deine Basis im Reservat",
   ],
+  closingEyebrow: "Buchungen und Anfragen",
   closingTitle: "Sag uns, wann du kommen möchtest.",
   closingBody:
-    "Schreib uns, und das Team der Lodge antwortet dir persönlich – mit Terminen, Verfügbarkeit und einem Preis für deine Gruppe.",
+    "Schreib uns deine Reisedaten und mit wie vielen Personen du reist. Das Team der Lodge antwortet mit Verfügbarkeit, Zimmertyp und dem Preis für deine Gruppe.",
   closingWhatsapp: "Per WhatsApp schreiben",
   closingMessage: "Hallo, ich möchte eine Reise zur Canangueno Lodge planen.",
   closingEmail: "E-Mail schreiben",
+  closingWhatsappHint: "Direkter Chat mit der Lodge",
+  closingEmailLabel: "E-Mail",
+  closingEmailHint: "Ideal für Gruppen und Angebote",
+  closingSubject: "Reiseanfrage — Canangueno Lodge",
 };
 
 const fr: typeof es = {
@@ -276,8 +278,6 @@ const fr: typeof es = {
   ],
   statsCta: "Avis des voyageurs",
   tourTitle: "Nos circuits.",
-  tourIntro:
-    "Le même lodge et les mêmes guides pour les trois. Seul le nombre de nuits change.",
   days: "jours",
   nights: "nuits",
   itinerary: "Voir l’itinéraire",
@@ -293,7 +293,7 @@ const fr: typeof es = {
   shotCabins: "Les cabanes",
   shotRoom: "La chambre",
   shotDining: "La cuisine",
-  shotDeck: "Les hamacs",
+  shotDeck: "L’espace commun, le soir",
   galleryTitle: "Le Cuyabeno que vous allez parcourir.",
   galleryBody:
     "Rivière, forêt, communauté. Chaque partie du voyage mérite qu’on s’y attarde.",
@@ -307,8 +307,6 @@ const fr: typeof es = {
     ["Avec la communauté", "Visite des communautés Siona et Seoqueya et préparation du pain de manioc avec une famille locale."],
   ],
   reviewsTitle: "Le voyage raconté par celles et ceux qui l’ont vécu.",
-  reviewsBody:
-    "Des expériences partagées sur Tripadvisor et présentées sur le site de Canangueno.",
   reviewsCta: "Lire les avis sur Tripadvisor",
   journeyTitle: "La route s’arrête. La rivière continue.",
   journeyBody:
@@ -320,12 +318,17 @@ const fr: typeof es = {
     "Embarquement · environ 3 h en pirogue",
     "Votre base dans la réserve",
   ],
+  closingEyebrow: "Réservations et demandes",
   closingTitle: "Dites-nous quand vous aimeriez venir.",
   closingBody:
-    "Écrivez-nous : l’équipe du lodge vous répond personnellement, avec les dates, les disponibilités et un tarif pour votre groupe.",
+    "Envoyez-nous vos dates et le nombre de voyageurs. L’équipe du lodge vous répond avec les disponibilités, le type de chambre et le tarif pour votre groupe.",
   closingWhatsapp: "Écrire sur WhatsApp",
   closingMessage: "Bonjour, je souhaite organiser un séjour à Canangueno Lodge.",
   closingEmail: "Envoyer un e-mail",
+  closingWhatsappHint: "Échange direct avec le lodge",
+  closingEmailLabel: "E-mail",
+  closingEmailHint: "Idéal pour les groupes et les devis",
+  closingSubject: "Demande de voyage — Canangueno Lodge",
 };
 
 const COPY: Record<Locale, typeof es> = { es, en, de, fr };

@@ -66,12 +66,10 @@ function FlagIcon({ locale }: { locale: Locale }) {
 export function Header({
   locale,
   nav,
-  aboutLabel,
   tourSlugs,
 }: {
   locale: Locale;
   nav: Dictionary["nav"];
-  aboutLabel: string;
   /** Los slugs de cada tour en los cuatro idiomas, para traducir la URL. */
   tourSlugs: Record<Locale, string>[];
 }) {
@@ -117,13 +115,18 @@ export function Header({
       language: "Changer de langue",
     },
   }[locale];
+  /*
+   * El orden sigue la decisión de quien llega: qué se compra (tours), dónde
+   * se duerme (el lodge), dónde queda (Cuyabeno), cómo se llega, las fotos
+   * para convencerse y, al final, las dudas que quedan (preguntas).
+   */
   const links = [
-    [routes.cuyabeno(locale), nav.cuyabeno],
     [routes.tours(locale), nav.tours],
     [routes.lodge(locale), nav.lodge],
-    [routes.gallery(locale), nav.gallery],
-    [routes.about(locale), aboutLabel],
+    [routes.cuyabeno(locale), nav.cuyabeno],
     [routes.journey(locale), nav.journey],
+    [routes.gallery(locale), nav.gallery],
+    [routes.faq(locale), nav.faq],
   ];
   const language = useRef<HTMLDetailsElement>(null);
   /* El `<details>` de idiomas no se cierra solo con Esc ni con un clic

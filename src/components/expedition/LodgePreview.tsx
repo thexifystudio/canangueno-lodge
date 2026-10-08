@@ -30,10 +30,12 @@ export function LodgePreview({
 }) {
   const c = expeditionCopy(locale);
   const shots = [
-    ["lodge-building", c.shotCabins],
-    ["lodge-room-double", c.shotRoom],
-    ["lodge-meal", c.shotDining],
-    ["lodge-hammocks", c.shotDeck],
+    /* Fotos distintas de las de `/el-lodge`: quien entra después a la página
+       del lodge ve más, no lo mismo otra vez. */
+    ["home-cabins", c.shotCabins],
+    ["home-room", c.shotRoom],
+    ["home-food", c.shotDining],
+    ["home-evening", c.shotDeck],
   ] as const;
 
   return (

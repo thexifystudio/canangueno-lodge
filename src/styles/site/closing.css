@@ -23,79 +23,115 @@
 .exp-closing-media img {
   object-position: center 58%;
 }
-/* Velo parejo con el centro un poco más oscuro: el texto va centrado sobre
-   el horizonte y tiene que leerse sin tapar el atardecer. */
+/* Velo: más oscuro a la izquierda (detrás del texto) y abajo; el cielo
+   encendido queda libre arriba a la derecha. */
 .exp-closing-veil {
   background:
-    radial-gradient(
-      ellipse 60% 70% at 50% 55%,
-      color-mix(in srgb, var(--c-bg-deep) 62%, transparent) 0%,
-      color-mix(in srgb, var(--c-bg-deep) 30%, transparent) 70%,
-      transparent 100%
+    linear-gradient(
+      96deg,
+      color-mix(in srgb, var(--c-bg-deep) 86%, transparent) 0%,
+      color-mix(in srgb, var(--c-bg-deep) 50%, transparent) 50%,
+      color-mix(in srgb, var(--c-bg-deep) 25%, transparent) 100%
     ),
-    linear-gradient(0deg, color-mix(in srgb, var(--c-bg-deep) 55%, transparent) 0%, transparent 60%);
+    linear-gradient(0deg, color-mix(in srgb, var(--c-bg-deep) 60%, transparent) 0%, transparent 60%);
 }
 .exp-closing-content {
   padding-block: var(--section-y);
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(32px, 5vw, 80px);
   align-items: center;
-  text-align: center;
+}
+.exp-closing-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--c-accent-gold);
 }
 .exp-closing h2 {
-  font-size: clamp(2.2rem, 4.2vw, 3.8rem);
-  line-height: 1.05;
+  margin-top: 14px;
+  font-size: clamp(2.3rem, 4.6vw, 4.2rem);
+  line-height: 1.03;
   letter-spacing: -0.035em;
   font-weight: 400;
-  max-width: 18ch;
+  max-width: 15ch;
   text-wrap: balance;
-  text-shadow: 0 2px 24px color-mix(in srgb, var(--c-bg-deep) 70%, transparent);
 }
-.exp-closing-content > p:not(.exp-closing-mail) {
-  margin-top: 18px;
-  max-width: 44ch;
+.exp-closing-copy > p:last-child {
+  margin-top: 20px;
+  max-width: 46ch;
   font-size: 1.05rem;
-  line-height: 1.6;
-  color: var(--c-on-deep);
+  line-height: 1.65;
+  color: var(--c-on-deep-soft);
   text-shadow: 0 1px 14px color-mix(in srgb, var(--c-bg-deep) 85%, transparent);
 }
-.exp-closing-actions {
+/* La tarjeta de contacto: vidrio oscuro sobre la foto. */
+.exp-closing-card {
+  background: color-mix(in srgb, var(--c-bg-deep) 62%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c-on-deep) 22%, transparent);
+  backdrop-filter: blur(10px);
+  padding: 10px;
+}
+.exp-closing-card a {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 14px;
-  margin-top: 32px;
-}
-.exp-closing-actions .exp-button {
-  gap: 12px;
-  min-width: 250px;
-  justify-content: center;
-}
-/* El botón del correo: mismo tamaño que el de WhatsApp, con borde claro y
-   un vidrio oscuro detrás para que se lea sobre el cielo encendido. */
-.exp-button-ghost-light {
-  background: color-mix(in srgb, var(--c-bg-deep) 40%, transparent);
+  align-items: center;
+  gap: 16px;
+  padding: 18px 16px;
   color: var(--c-on-deep);
-  border: 1px solid color-mix(in srgb, var(--c-on-deep) 60%, transparent);
-  backdrop-filter: blur(6px);
+  transition: background 0.25s;
 }
-.exp-button-ghost-light:hover {
-  background: var(--c-on-deep);
-  color: var(--c-bg-deep);
-  border-color: var(--c-on-deep);
+.exp-closing-card li + li {
+  border-top: 1px solid color-mix(in srgb, var(--c-on-deep) 16%, transparent);
 }
-.exp-closing-mail {
-  margin-top: 16px;
-  font-size: 0.85rem;
+.exp-closing-card a:hover {
+  background: color-mix(in srgb, var(--c-on-deep) 8%, transparent);
+}
+.exp-closing-card a > svg {
+  margin-left: auto;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+.exp-closing-icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--c-accent);
+  color: var(--c-accent-ink);
+}
+.exp-closing-card a:not(.is-whatsapp) .exp-closing-icon {
+  background: color-mix(in srgb, var(--c-on-deep) 14%, transparent);
+  color: var(--c-on-deep);
+  border: 1px solid color-mix(in srgb, var(--c-on-deep) 35%, transparent);
+}
+.exp-closing-row {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.exp-closing-row strong {
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+.exp-closing-row > span {
+  font-size: 0.95rem;
   color: var(--c-on-deep-soft);
-  letter-spacing: 0.01em;
+  overflow-wrap: anywhere;
 }
-@media (max-width: 760px) {
+.exp-closing-row small {
+  font-size: 0.76rem;
+  color: var(--c-on-deep-faint);
+}
+@media (max-width: 900px) {
   .exp-closing {
     min-height: 0;
   }
   .exp-closing-content {
-    padding-top: 220px;
+    grid-template-columns: 1fr;
+    padding-top: 200px;
     padding-bottom: 56px;
   }
   .exp-closing-media img {
@@ -104,16 +140,9 @@
   .exp-closing-veil {
     background: linear-gradient(
       0deg,
-      color-mix(in srgb, var(--c-bg-deep) 92%, transparent) 0%,
-      color-mix(in srgb, var(--c-bg-deep) 70%, transparent) 55%,
+      color-mix(in srgb, var(--c-bg-deep) 94%, transparent) 0%,
+      color-mix(in srgb, var(--c-bg-deep) 75%, transparent) 60%,
       transparent 100%
     );
-  }
-  .exp-closing-actions {
-    width: 100%;
-  }
-  .exp-closing-actions .exp-button {
-    width: 100%;
-    min-width: 0;
   }
 }

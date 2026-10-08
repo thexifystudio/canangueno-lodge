@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { notFound } from "next/navigation";
 import { isLocale, pick } from "@/lib/i18n";
 import { getDictionary } from "@/i18n";
@@ -10,6 +8,7 @@ import { facilities, lodgePage } from "@/content/lodge";
 import { Media } from "@/components/ui/Media";
 import { ReviewsSection } from "@/components/sections/ReviewsSection";
 import { ClosingBand } from "@/components/expedition/ClosingBand";
+import { LodgeMap } from "@/components/expedition/LodgeMap";
 export async function generateMetadata({
   params,
 }: {
@@ -34,7 +33,8 @@ export async function generateMetadata({
  *
  *      título + el edificio → habitaciones y baños → la mesa
  *      → entre salida y salida (hamacas, estiramientos, charla)
- *      → quiénes somos → opiniones → cierre
+ *      → dónde vas a estar (el mapa)
+ *      → opiniones → cierre
  *
  *  El texto vive en `content/lodge.ts` (`lodgePage`).
  */
@@ -168,16 +168,9 @@ export default async function Page({
         </div>
       </section>
 
-      <section className="shell section-y exp-heading">
-        <h2>{t9n.peopleTitle}</h2>
-        <div>
-          <p>{t9n.peopleBody}</p>
-          <Link href={routes.about(l)} className="exp-text-link">
-            {t9n.peopleLink}
-            <ArrowRight size={17} />
-          </Link>
-        </div>
-      </section>
+      {/* ── Dónde vas a estar ─────────────────────────────────────────── */}
+      <LodgeMap locale={l} />
+
       <ReviewsSection locale={l} />
       <ClosingBand locale={l} />
     </div>

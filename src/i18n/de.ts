@@ -77,8 +77,6 @@ export const de: Dictionary = {
     tableBestFor: "Ideal für",
     disclaimer: "Hinweis zum Reiseverlauf",
     pageTitle: "Die drei Routen.",
-    pageLead:
-      "Dieselbe Lodge, dieselben Guides, derselbe Regenwald. Der Unterschied: wie viele Nächte du bleibst – und wie viel du zu sehen bekommst.",
     priceNote:
       "Der Preis richtet sich nach Termin, Gruppengröße und Zimmertyp. Schreib uns auf WhatsApp oder nutze das Formular — wir senden dir die Details.",
     metaTitle: "Touren in Cuyabeno: 3, 4 und 5 Tage",
@@ -142,7 +140,6 @@ export const de: Dictionary = {
     visionTitle: "Vision",
     facilitiesTitle: "Ausstattung",
     credentialsTitle: "Lizenzierter Betrieb",
-    registryLabel: "Forstregister",
     companyLabel: "Eingetragenes Unternehmen",
     sinceLabel: "Im Tourismus seit",
     pageTitle: "Schlafen, mitten im Regenwald.",
@@ -155,20 +152,6 @@ export const de: Dictionary = {
     peopleLink: "Lerne Canangueno kennen",
   },
 
-  about: {
-    pageTitle: "Ein Ort. Und die Menschen dahinter.",
-    pageLead:
-      "Die Canangueno Lodge und die Siona-Seoqueya-Gemeinschaften: eine Verbindung, die in jeder Tour steckt.",
-    behindTitle: "Lerne kennen, wer hinter deiner Reise steht.",
-    operatorLabel: "Veranstalter",
-    paceTitle: "Der Regenwald gibt den Takt vor.",
-    paceBody:
-      "Wir erkunden das Reservat mit Guides auf Spanisch und Englisch und arbeiten mit den lokalen Gemeinschaften zusammen. Tierbeobachtungen hängen von der Natur ab; die Guides passen jede Ausfahrt an die Bedingungen an.",
-    navLabel: "Über uns",
-    metaTitle: "Das Team hinter Canangueno",
-    metaDescription:
-      "Wer die Canangueno Lodge betreibt und wie wir gemeinsam mit den Siona-Seoqueya-Gemeinschaften im Cuyabeno-Reservat arbeiten.",
-  },
   reviews: {
     eyebrow: "Bewertungen",
     title: "Was Menschen sagen,",
@@ -245,7 +228,7 @@ export const de: Dictionary = {
     namePlaceholder: "Dein Name",
     emailLabel: "E-Mail",
     emailPlaceholder: "du@email.com",
-    phoneLabel: "Telefon oder WhatsApp",
+    phoneLabel: "Telefon / WhatsApp",
     phonePlaceholder: "Mit Ländervorwahl",
     countryLabel: "Land",
     countryPlaceholder: "Aus welchem Land schreibst du?",
@@ -270,27 +253,27 @@ export const de: Dictionary = {
     preparingForm: "Formular wird vorbereitet …",
     beforeTitle: "Bevor du bestätigst.",
     beforeBody:
-      "Wir bestätigen dir Zimmertyp, Transport und Stornierungsbedingungen schriftlich. Die vollständige Zahlung sichert die Buchung zusammen mit dem Voucher der Lodge.",
+      "Wir bestätigen dir Zimmertyp, Transport sowie Zahlungs- und Stornobedingungen schriftlich. Die Buchung wird mit dem Voucher der Lodge gesichert.",
     metaTitle: "Plane deine Reise nach Cuyabeno",
 
     formJourneyLegend: "Deine Reise",
-    formAboutLegend: "Ein wenig über dich",
+    formAboutLegend: "Deine Angaben",
     routeLabel: "Route",
     preferredDateLabel: "Wunschdatum",
     yourNameLabel: "Dein Name",
-    notesLabel: "Zimmer, Kinder oder besondere Wünsche (optional)",
-    notesPlaceholder: "Zum Beispiel: Doppelzimmer, zwei Erwachsene.",
+    notesLabel: "Weitere Anmerkungen (optional)",
+    notesPlaceholder: "Was du uns sonst noch sagen möchtest: Zimmer, Kinder, Allergien …",
     noChargeNote:
       "Wir bereiten eine Nachricht vor, die du per WhatsApp oder E-Mail senden kannst. Es wird nichts abgebucht.",
     prepareCta: "Meine Anfrage vorbereiten",
-    contactLabel: "Deine E-Mail oder WhatsApp",
-    contactHint: "Damit wir dir antworten können, auch wenn die Nachricht nicht abgeschickt wird.",
     errDate: "Wähle das Datum, an dem die Tour beginnen soll.",
     errDatePast: "Dieses Datum liegt in der Vergangenheit. Wähle ein Datum ab heute.",
     errPax: "Gib an, wie viele reisen: zwischen 1 und 40 Personen.",
     errName: "Gib deinen Namen ein (mindestens 2 Buchstaben).",
-    errContact: "Hinterlasse eine E-Mail oder eine Telefonnummer mit Ländervorwahl, damit wir antworten können.",
-    msgContact: "Kontakt: ",
+    errEmail: "Gib eine gültige E-Mail ein, zum Beispiel name@email.com.",
+    errPhone: "Gib deine Nummer mit Ländervorwahl ein, zum Beispiel +49 151 1234567.",
+    msgEmail: "E-Mail: ",
+    msgPhone: "Telefon: ",
     emailSubject: "Anfrage Canangueno",
 
     msgIntro: "Hallo, ich möchte diese Reise zur Canangueno Lodge anfragen:",
@@ -323,7 +306,6 @@ export const de: Dictionary = {
     eyebrow: "Unser Standort",
     title: "Cuyabeno-Reservat,",
     titleEmphasis: "Sucumbíos",
-    officeTitle: "Büro in Quito",
     meetingTitle: "Treffpunkt",
     mapLabel: "Auf der Karte ansehen",
   },

@@ -1,23 +1,13 @@
 import Link from "next/link";
-import {
-  ArrowLeft,
-  ArrowRight,
-  ArrowUpRight,
-  Check,
-  MessageCircle,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { pick, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/i18n";
-import {
-  included,
-  notIncluded,
-  itineraryDisclaimer,
-  type Tour,
-} from "@/content/tours";
+import { itineraryDisclaimer, type Tour } from "@/content/tours";
 import { routes } from "@/lib/routes";
 import { whatsappLink } from "@/config/site";
 import { Media } from "@/components/ui/Media";
 import { TourJsonLd } from "@/components/seo/JsonLd";
+import { TourTerms } from "./TourTerms";
 
 /**
  * ────────────────────────────────────────────────────────────────────────────
@@ -28,7 +18,8 @@ import { TourJsonLd } from "@/components/seo/JsonLd";
  *  acordeones que esconden el contenido, ni reseñas, ni un bloque del lodge
  *  metido en medio. Se entra a leer qué se hace cada día y se sale a reservar.
  *
- *      "3 días / 2 noches" + bajada → DÍA 1, 2, 3… (texto + foto) → qué incluye → reservar
+ *      "3 días / 2 noches" + bajada → DÍA 1, 2, 3… (texto + foto)
+ *      → qué incluye / qué no / antes de reservar → reservar
  *      → el lodge y la galería → fin
  *
  *  Los días se muestran ABIERTOS y con su fotografía, alternando el lado de
@@ -57,53 +48,41 @@ export function TourDetail({
   return (
     <div className="exp-detail exp-tourpage">
       {/* ── Título ─────────────────────────────────────────────────────── */}
+      {/* Sin botones ni foto arriba: el título y la bajada, y enseguida el
+          itinerario. "Reserva este tour" está al final, después de los días. */}
       <section className="shell exp-tourpage-head">
-        <Link href={routes.tours(l)} className="exp-text-link">
-          <ArrowLeft size={15} />
-          {t9n.allTours}
-        </Link>
-        <p className="exp-tourpage-eyebrow">{t9n.eyebrow}</p>
-        {/* El título es la duración: es lo que la gente compara entre los
-            tres tours y lo primero que busca al entrar. */}
-        <h1>{nights}</h1>
-        <p className="exp-tourpage-lead">{pick(tour.intro, l)}</p>
-        {/* Reservar o preguntar, arriba: el itinerario es largo y el botón de
-            abajo queda a varias pantallas de distancia. */}
-        <div className="exp-bookband-actions exp-tourpage-actions">
-          <Link href={book} className="exp-button">
-            {t9n.bookCta}
-            <ArrowRight size={17} />
+        <div className="exp-tourpage-head-copy">
+          <Link href={routes.tours(l)} className="exp-text-link">
+            <ArrowLeft size={15} />
+            {t9n.allTours}
           </Link>
-          <a
-            href={whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="exp-text-link"
-          >
-            <MessageCircle size={16} aria-hidden />
-            {t9n.askWhatsapp}
-          </a>
+          <p className="exp-tourpage-eyebrow">{t9n.eyebrow}</p>
+          {/* El título es la duración: es lo que la gente compara entre los
+              tres tours y lo primero que busca al entrar. */}
+          <h1>{nights}</h1>
+          <p className="exp-tourpage-lead">{pick(tour.intro, l)}</p>
         </div>
       </section>
 
       {/* ── Los días ───────────────────────────────────────────────────── */}
       <section className="exp-days" id="itinerary">
         <div className="shell">
-          {tour.itinerary.map((day, i) => (
+          {tour.itinerary.map((day) => (
             <article className="exp-dayblock" key={day.n}>
               <div className="exp-dayblock-copy">
                 <h2>
                   {dayLabel} {day.n}
                 </h2>
                 {/* El "·" se pega a la palabra de antes: nunca abre un renglón. */}
-                <p className="exp-dayblock-title">{pick(day.title, l).replaceAll(" · ", " · ")}</p>
+                <p className="exp-dayblock-title">
+                  {pick(day.title, l).replaceAll(" · ", " · ")}
+                </p>
                 <p className="exp-dayblock-text">{pick(day.body, l)}</p>
               </div>
               <div className="exp-dayblock-media">
                 <Media
                   id={day.mediaId}
                   locale={l}
-                  priority={i === 0}
                   sizes="(max-width: 900px) 100vw, 46vw"
                 />
               </div>
@@ -115,31 +94,8 @@ export function TourDetail({
         </div>
       </section>
 
-      {/* ── Qué incluye ────────────────────────────────────────────────── */}
-      <section className="exp-includes">
-        <div className="shell">
-          <h2>{t9n.includesTitle}</h2>
-          <ul>
-            {pick(included, l).map((item) => (
-              <li key={item}>
-                <Check size={16} strokeWidth={2.5} aria-hidden />
-                {item}
-              </li>
-            ))}
-          </ul>
-          {/*
-           * Los extras no van en una segunda columna con el mismo peso que lo
-           * incluido —eso convertía la página en una tabla de dos listas— pero
-           * tampoco se esconden: que alguien reserve sin saber que el bus de
-           * Quito va aparte es un problema el día de la llegada, no un detalle
-           * de diseño.
-           */}
-          <p className="exp-small exp-includes-extra">
-            <strong>{t9n.notIncludedLabel}</strong>{" "}
-            {pick(notIncluded, l).join(" · ")}
-          </p>
-        </div>
-      </section>
+      {/* ── Qué incluye, qué no y antes de reservar ───────────────────── */}
+      <TourTerms locale={l} />
 
       {/* ── Reservar ───────────────────────────────────────────────────── */}
       <section className="exp-bookband">
@@ -178,7 +134,7 @@ export function TourDetail({
                 routes.gallery(l),
                 t9n.nextGalleryTitle,
                 t9n.nextGalleryBody,
-                "gal-lagoon-1" as const,
+                "nextup-gallery" as const,
               ],
             ] as const
           ).map(([href, title, body, mediaId]) => (

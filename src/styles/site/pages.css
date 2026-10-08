@@ -28,44 +28,6 @@
   align-items: center;
   gap: 24px;
 }
-/* Foto y texto a dos columnas (/about). La foto no pasa del 45 % del ancho:
-   a pantalla completa se veía blanda, porque el original no da para tanto. */
-.exp-split {
-  display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
-  gap: clamp(40px, 6vw, 96px);
-  align-items: center;
-  padding-bottom: var(--section-y);
-}
-.exp-split-media {
-  position: relative;
-  aspect-ratio: 4/5;
-}
-.exp-split-copy > p {
-  margin-top: 28px;
-  max-width: 60ch;
-  color: var(--c-ink-soft);
-}
-.exp-split-copy dl {
-  display: grid;
-  gap: 18px;
-  margin-top: 34px;
-  padding-top: 24px;
-  border-top: 1px solid var(--c-line);
-  font-size: 0.9rem;
-}
-.exp-split-copy dt {
-  font-size: 0.78rem;
-  color: var(--c-ink-faint);
-}
-.exp-split-copy dd {
-  margin-top: 4px;
-}
-@media (max-width: 760px) {
-  .exp-split {
-    grid-template-columns: 1fr;
-  }
-}
 .exp-inclusions {
   padding-block: var(--section-y);
   background: var(--c-bg-warm);
@@ -192,17 +154,80 @@
   color: var(--c-ink);
   font-weight: 600;
 }
+/* ── Cuándo ir: foto a la izquierda; temporadas y clima a la derecha ───── */
 .exp-cuyabeno-when {
-  align-items: start;
-  margin-bottom: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(32px, 5vw, 80px);
+  align-items: center;
 }
-.exp-cuyabeno-when p {
-  max-width: 60ch;
+.exp-cuyabeno-when-media {
+  position: relative;
+  aspect-ratio: 4/5;
+  overflow: hidden;
 }
-.exp-cuyabeno-cta {
-  padding-top: 0;
+.exp-cuyabeno-when h2,
+.exp-cuyabeno-tours h2 {
+  margin-top: 10px;
 }
-
+.exp-cuyabeno-when-lead {
+  margin-top: 16px;
+  max-width: 52ch;
+  color: var(--c-ink-soft);
+  line-height: 1.6;
+}
+.exp-cuyabeno-seasons {
+  margin-top: 28px;
+  border-top: 1px solid var(--c-line);
+}
+.exp-cuyabeno-seasons li {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 4px 24px;
+  padding-block: 18px;
+  border-bottom: 1px solid var(--c-line);
+}
+.exp-cuyabeno-season-months {
+  grid-row: span 2;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--c-accent-text);
+  padding-top: 4px;
+}
+.exp-cuyabeno-seasons h3 {
+  font-size: 1.3rem;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+}
+.exp-cuyabeno-seasons li > p:last-child {
+  color: var(--c-ink-soft);
+  font-size: 0.94rem;
+}
+.exp-cuyabeno-climate {
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.exp-cuyabeno-climate dt {
+  font-family: var(--ff-display), Georgia, serif;
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.exp-cuyabeno-climate dd {
+  margin-top: 6px;
+  font-size: 0.82rem;
+  color: var(--c-ink-soft);
+}
+/* ── Nuestros tours, al final ───────────────────────────────────────────── */
+.exp-cuyabeno-tours {
+  background: var(--c-band);
+  border-top: 1px solid var(--c-line);
+  padding-block: var(--section-y);
+}
 @media (max-width: 900px) {
   .exp-cuyabeno-facts,
   .exp-cuyabeno-animals {
@@ -210,5 +235,519 @@
   }
   .exp-cuyabeno-banner {
     aspect-ratio: 4/3;
+  }
+  .exp-cuyabeno-when {
+    grid-template-columns: 1fr;
+  }
+  .exp-cuyabeno-when-media {
+    aspect-ratio: 4/3;
+  }
+  .exp-cuyabeno-seasons li {
+    grid-template-columns: 1fr;
+  }
+  .exp-cuyabeno-season-months {
+    grid-row: auto;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CÓMO LLEGAR
+   ═════════════════════════════════════════════════════════════════════════ */
+.exp-journey-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(36px, 6vw, 96px);
+  align-items: center;
+  padding-top: clamp(120px, 14vh, 180px);
+  padding-bottom: var(--section-y);
+}
+.exp-journey-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--c-accent-text);
+}
+.exp-journey-intro h1 {
+  margin-top: 16px;
+  font-size: clamp(2.6rem, 5.4vw, 5rem);
+  line-height: 1.03;
+  letter-spacing: -0.04em;
+  font-weight: 400;
+  max-width: 14ch;
+  text-wrap: balance;
+}
+.exp-journey-lead {
+  margin-top: 22px;
+  max-width: 50ch;
+  font-size: 1.08rem;
+  line-height: 1.6;
+  color: var(--c-ink-soft);
+}
+/* Los tres datos clave: cada uno en su fila, el dato grande y la etiqueta. */
+.exp-journey-facts {
+  margin-top: 34px;
+  border-top: 1px solid var(--c-line);
+}
+.exp-journey-facts > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 4px 24px;
+  align-items: baseline;
+  padding-block: 14px;
+  border-bottom: 1px solid var(--c-line);
+}
+.exp-journey-facts dt {
+  font-family: var(--ff-display), Georgia, serif;
+  font-size: clamp(1.35rem, 2.1vw, 1.8rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.exp-journey-facts dd {
+  font-size: 0.9rem;
+  color: var(--c-ink-soft);
+}
+.exp-journey-photo {
+  position: relative;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+}
+
+/* ── La ruta: cuatro tramos unidos por una línea ────────────────────────── */
+.exp-journey-route {
+  background: var(--c-band);
+  border-top: 1px solid var(--c-line);
+  border-bottom: 1px solid var(--c-line);
+  padding-block: var(--section-y);
+}
+.exp-journey-steps {
+  margin-top: clamp(30px, 4vw, 48px);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px;
+  position: relative;
+}
+/* La línea que une los íconos, detrás de ellos. */
+.exp-journey-steps::before {
+  content: "";
+  position: absolute;
+  top: 27px;
+  left: 28px;
+  right: 28px;
+  border-top: 2px dashed color-mix(in srgb, var(--c-accent) 55%, transparent);
+}
+.exp-journey-steps li {
+  position: relative;
+}
+.exp-journey-step-icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--c-accent);
+  color: var(--c-accent-ink);
+  box-shadow: 0 0 0 6px var(--c-band);
+}
+.exp-journey-step-n {
+  margin-top: 20px;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  font-weight: 600;
+  color: var(--c-accent-text);
+}
+.exp-journey-steps h3 {
+  margin-top: 4px;
+  font-size: clamp(1.35rem, 2vw, 1.7rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+.exp-journey-step-time {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+}
+.exp-journey-step-text {
+  margin-top: 12px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--c-ink-soft);
+}
+
+/* ── Bus o avión ────────────────────────────────────────────────────────── */
+.exp-journey-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+.exp-journey-option {
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  padding: clamp(24px, 3vw, 36px);
+}
+.exp-journey-option-icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--c-band);
+  color: var(--c-accent-text);
+}
+.exp-journey-option h3 {
+  margin-top: 18px;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+.exp-journey-option > p {
+  margin-top: 12px;
+  color: var(--c-ink-soft);
+  line-height: 1.6;
+}
+.exp-journey-option ul {
+  margin-top: 20px;
+  border-top: 1px solid var(--c-line);
+}
+.exp-journey-option li {
+  display: flex;
+  gap: 10px;
+  align-items: start;
+  padding-block: 12px;
+  border-bottom: 1px solid var(--c-line);
+  font-size: 0.92rem;
+}
+.exp-journey-option li svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--c-accent-text);
+}
+
+/* ── Otras ciudades y traslado privado ──────────────────────────────────── */
+.exp-journey-extra {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+.exp-journey-extra article {
+  display: flex;
+  gap: 16px;
+  align-items: start;
+  padding: clamp(22px, 2.6vw, 30px);
+  border: 1px solid var(--c-line);
+}
+.exp-journey-extra article > svg {
+  flex-shrink: 0;
+  margin-top: 4px;
+  color: var(--c-accent-text);
+}
+.exp-journey-extra .is-transfer {
+  background: var(--c-band);
+}
+.exp-journey-extra h3 {
+  font-size: 1.3rem;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+}
+.exp-journey-extra p {
+  margin-top: 8px;
+  color: var(--c-ink-soft);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+.exp-journey-extra .exp-button {
+  margin-top: 18px;
+}
+/* El mapa va sobre el mismo fondo; con el padding del bloque de arriba
+   alcanza, así que arranca sin padding propio arriba. */
+.exp-journey-map .lodge-map {
+  padding-top: 0;
+}
+
+@media (max-width: 900px) {
+  .exp-journey-intro,
+  .exp-journey-options,
+  .exp-journey-extra {
+    grid-template-columns: 1fr;
+  }
+  .exp-journey-photo {
+    aspect-ratio: 4/3;
+  }
+  /* La ruta pasa a vertical: la línea baja por la izquierda. */
+  .exp-journey-steps {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .exp-journey-steps::before {
+    top: 28px;
+    bottom: 28px;
+    left: 27px;
+    right: auto;
+    border-top: 0;
+    border-left: 2px dashed color-mix(in srgb, var(--c-accent) 55%, transparent);
+  }
+  .exp-journey-steps li {
+    padding-left: 76px;
+  }
+  .exp-journey-step-icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .exp-journey-step-n {
+    margin-top: 2px;
+  }
+  .exp-journey-facts > div {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PREGUNTAS FRECUENTES
+   ═════════════════════════════════════════════════════════════════════════ */
+.exp-faq-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(36px, 6vw, 96px);
+  align-items: center;
+  padding-top: clamp(120px, 14vh, 180px);
+  padding-bottom: clamp(40px, 5vw, 64px);
+}
+.exp-faq-eyebrow,
+.exp-faq-topics-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--c-accent-text);
+}
+.exp-faq-intro h1 {
+  margin-top: 16px;
+  font-size: clamp(2.6rem, 5.4vw, 5rem);
+  line-height: 1.03;
+  letter-spacing: -0.04em;
+  font-weight: 400;
+  max-width: 14ch;
+  text-wrap: balance;
+}
+.exp-faq-lead {
+  margin-top: 20px;
+  max-width: 46ch;
+  font-size: 1.08rem;
+  line-height: 1.6;
+  color: var(--c-ink-soft);
+}
+.exp-faq-photo {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+
+/* ── Las tarjetas de tema ───────────────────────────────────────────────── */
+.exp-faq-topics {
+  padding-bottom: clamp(48px, 6vw, 80px);
+}
+.exp-faq-topics > div {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.exp-faq-topic {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 24px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  transition:
+    border-color 0.25s,
+    transform 0.3s cubic-bezier(0.22, 0.68, 0.24, 1),
+    box-shadow 0.3s;
+}
+.exp-faq-topic:hover {
+  border-color: color-mix(in srgb, var(--c-accent) 45%, var(--c-line));
+  box-shadow: 0 16px 32px -18px color-mix(in srgb, var(--c-ink) 28%, transparent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .exp-faq-topic:hover {
+    transform: translateY(-3px);
+  }
+}
+.exp-faq-topic-icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--c-accent);
+  color: var(--c-accent-ink);
+}
+.exp-faq-topic-text {
+  display: grid;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+.exp-faq-topic-text strong {
+  font-family: var(--ff-display), Georgia, serif;
+  font-size: 1.45rem;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+}
+.exp-faq-topic-text small {
+  font-size: 0.88rem;
+  color: var(--c-ink-soft);
+}
+.exp-faq-topic-count {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--c-accent-text);
+}
+
+/* ── Cada tema: título fijo al costado y las preguntas ──────────────────── */
+.exp-faq-group {
+  display: grid;
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.6fr);
+  gap: clamp(28px, 5vw, 80px);
+  align-items: start;
+  padding-block: clamp(48px, 6vw, 80px);
+  border-top: 1px solid var(--c-line);
+  scroll-margin-top: 100px;
+}
+.exp-faq-group-head {
+  position: sticky;
+  top: 120px;
+}
+.exp-faq-group-head h2 {
+  margin-top: 18px;
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  font-weight: 400;
+}
+.exp-faq-group-head p {
+  margin-top: 12px;
+  max-width: 34ch;
+  color: var(--c-ink-soft);
+  line-height: 1.6;
+}
+.exp-faq-list {
+  display: grid;
+  gap: 12px;
+}
+.exp-faq-item {
+  background: color-mix(in srgb, var(--c-surface) 55%, transparent);
+  border: 1px solid var(--c-line);
+  transition:
+    background 0.25s,
+    border-color 0.25s;
+}
+.exp-faq-item[open] {
+  background: var(--c-surface);
+  border-color: color-mix(in srgb, var(--c-accent) 40%, var(--c-line));
+  box-shadow: inset 3px 0 0 var(--c-accent);
+}
+.exp-faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 22px;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--ff-display), Georgia, serif;
+  font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+.exp-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.exp-faq-item summary:hover {
+  color: var(--c-accent-text);
+}
+.exp-faq-toggle {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--c-line);
+  color: var(--c-accent-text);
+  transition:
+    transform 0.3s,
+    background 0.25s,
+    color 0.25s;
+}
+.exp-faq-item[open] .exp-faq-toggle {
+  transform: rotate(45deg);
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  color: var(--c-accent-ink);
+}
+.exp-faq-answer {
+  padding: 0 22px 22px;
+  color: var(--c-ink-soft);
+  line-height: 1.7;
+  max-width: 72ch;
+}
+.exp-faq-answer .exp-text-link {
+  margin-top: 14px;
+}
+/* "Qué llevar", como lista de casillas en dos columnas. */
+.exp-faq-checklist {
+  margin-top: 14px;
+  columns: 2;
+  column-gap: 28px;
+}
+.exp-faq-checklist li {
+  display: flex;
+  gap: 10px;
+  align-items: start;
+  break-inside: avoid;
+  padding-block: 5px;
+  font-size: 0.94rem;
+}
+.exp-faq-checklist svg {
+  flex-shrink: 0;
+  margin-top: 5px;
+  color: var(--c-accent-text);
+}
+
+@media (max-width: 900px) {
+  .exp-faq-intro,
+  .exp-faq-group {
+    grid-template-columns: 1fr;
+  }
+  .exp-faq-topics > div {
+    grid-template-columns: 1fr;
+  }
+  .exp-faq-group-head {
+    position: static;
+  }
+}
+@media (max-width: 560px) {
+  .exp-faq-checklist {
+    columns: 1;
+  }
+  .exp-faq-topic {
+    padding: 18px;
+    gap: 14px;
+  }
+  .exp-faq-topic-count {
+    display: none;
   }
 }

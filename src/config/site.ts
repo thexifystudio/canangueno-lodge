@@ -24,8 +24,6 @@ export const site = {
   legal: {
     companyName: "EMOTIONPLANET CIA. LTDA.",
     tradeName: "Canangueno Lodge",
-    /** Registro forestal para operar en el Patrimonio de Áreas Naturales del Estado. */
-    forestryRegistry: "RNAB20168950448",
     legalRepresentative: "Pablo Flores",
     representativeExperienceSince: 2006,
     authorities: [
@@ -49,23 +47,21 @@ export const site = {
     salesEmail: "sales@cananguenolodge.com",
   },
 
-  /* El título ("Oficina en Quito") está traducido en
-     `dict.location.officeTitle`; acá sólo la dirección. */
-  office: {
-    street: "Francisco de Caldas OE3-34 y Venezuela",
-    city: "Quito",
-    country: "Ecuador",
-  },
-
   location: {
     label: "Reserva de Producción de Fauna Cuyabeno",
     region: "Sucumbíos",
     country: "Ecuador",
     /** Punto de encuentro real de todos los tours. */
     meetingPoint: "Puente de Cuyabeno",
-    /** Aproximado de la reserva — se ajusta cuando el cliente confirme el punto exacto. */
-    lat: -0.0,
-    lng: -76.18,
+    /**
+     * Ubicación del lodge, tomada de su ficha de Google Maps ("Canangueno
+     * Lodge Cuyabeno"; la de la habitación da el mismo punto).
+     */
+    lat: -0.1085053,
+    lng: -76.0716701,
+    /** La ficha del lodge en Google Maps, para el botón "Abrir en Google Maps". */
+    googleMaps:
+      "https://www.google.com/maps/search/?api=1&query=Canangueno+Lodge+Cuyabeno",
   },
 
   /**

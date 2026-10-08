@@ -63,21 +63,25 @@ export const tours: Tour[] = [
   /* ═══════════════════════════════════════════════════════════ 3 DÍAS ═══ */
   {
     id: "3-dias",
-    slug: { es: "3-dias", en: "3-days",
-    de: "3-tage",
-    fr: "3-jours" },
+    slug: { es: "3-dias", en: "3-days", de: "3-tage", fr: "3-jours" },
     order: 1,
     days: 3,
     nights: 2,
     price: 280,
     priceRack: 330, // PROVISIONAL — ver nota en el type Tour
-    mediaId: "tour-3-dias",
-    name: { es: "Tres días en Cuyabeno", en: "Three days in Cuyabeno",
-    de: "Drei Tage in Cuyabeno",
-    fr: "Trois jours à Cuyabeno" },
-    tagline: { es: "La Amazonía esencial", en: "The essential Amazon",
-    de: "Der Amazonas in seiner Essenz",
-    fr: "L’Amazonie essentielle" },
+    mediaId: "tour-card-3",
+    name: {
+      es: "Tres días en Cuyabeno",
+      en: "Three days in Cuyabeno",
+      de: "Drei Tage in Cuyabeno",
+      fr: "Trois jours à Cuyabeno",
+    },
+    tagline: {
+      es: "La Amazonía esencial",
+      en: "The essential Amazon",
+      de: "Der Amazonas in seiner Essenz",
+      fr: "L’Amazonie essentielle",
+    },
     summary: {
       es: "El recorrido más corto sin renunciar a lo importante: la Laguna Grande, los caimanes de noche y un día completo con las comunidades Siona y Seoqueya.",
       en: "The shortest route without giving up what matters: Laguna Grande, caimans after dark and a full day with the Siona and Seoqueya communities.",
@@ -125,7 +129,7 @@ export const tours: Tour[] = [
     itinerary: [
       {
         n: 1,
-        mediaId: "story-canoe",
+        mediaId: "day-3-1",
         title: {
           es: "Quito · Puente de Cuyabeno · Lodge",
           en: "Quito · Cuyabeno Bridge · Lodge",
@@ -141,10 +145,13 @@ export const tours: Tour[] = [
       },
       {
         n: 2,
-        mediaId: "exp-culture",
-        title: { es: "Comunidad nativa", en: "Native community",
-        de: "Indigene Gemeinschaft",
-        fr: "Communauté native" },
+        mediaId: "day-3-2",
+        title: {
+          es: "Comunidad nativa",
+          en: "Native community",
+          de: "Indigene Gemeinschaft",
+          fr: "Communauté native",
+        },
         body: {
           es: "Después del desayuno salimos en canoa a remo hasta un sendero de una hora y media que lleva a la comunidad Siona Taraveya de Tarapuy, a orillas del río Cuyabeno. Los guías explican su cultura y sus tradiciones. Seguimos hacia la comunidad de Seoqueya, donde una familia hace la demostración de casabe —el pan de yuca— y se encuentran artesanías hechas en el lugar: pulseras, collares, shigras y cerámica. Por la tarde volvemos al lodge en canoa a remo, escuchando aves, monos y buscando delfines rosados. Cena, y el guía cierra con una charla repasando todo lo visto.",
           en: "After breakfast we set out by paddle canoe to a trail that takes about an hour and a half to the Siona Taraveya community of Tarapuy, on the bank of the Cuyabeno river. The guides explain their culture and traditions. We continue to the Seoqueya community, where a family demonstrates how casabe — cassava bread — is made, alongside locally made crafts: bracelets, necklaces, shigras and ceramics. In the afternoon we paddle back to the lodge, listening for birds and monkeys and watching for pink dolphins. Dinner, and the guide closes with a talk recapping everything we saw.",
@@ -154,7 +161,7 @@ export const tours: Tour[] = [
       },
       {
         n: 3,
-        mediaId: "story-dawn",
+        mediaId: "day-3-3",
         title: {
           es: "Amanecer en el río · regreso",
           en: "Sunrise on the river · departure",
@@ -174,22 +181,26 @@ export const tours: Tour[] = [
   /* ═══════════════════════════════════════════════════════════ 4 DÍAS ═══ */
   {
     id: "4-dias",
-    slug: { es: "4-dias", en: "4-days",
-    de: "4-tage",
-    fr: "4-jours" },
+    slug: { es: "4-dias", en: "4-days", de: "4-tage", fr: "4-jours" },
     order: 2,
     days: 4,
     nights: 3,
     price: 350,
     priceRack: 410, // PROVISIONAL — ver nota en el type Tour
-    mediaId: "tour-4-dias",
+    mediaId: "tour-card-4",
     featured: true,
-    name: { es: "Cuatro días en Cuyabeno", en: "Four days in Cuyabeno",
-    de: "Vier Tage in Cuyabeno",
-    fr: "Quatre jours à Cuyabeno" },
-    tagline: { es: "La experiencia completa", en: "The complete experience",
-    de: "Das vollständige Erlebnis",
-    fr: "L’expérience complète" },
+    name: {
+      es: "Cuatro días en Cuyabeno",
+      en: "Four days in Cuyabeno",
+      de: "Vier Tage in Cuyabeno",
+      fr: "Quatre jours à Cuyabeno",
+    },
+    tagline: {
+      es: "La experiencia completa",
+      en: "The complete experience",
+      de: "Das vollständige Erlebnis",
+      fr: "L’expérience complète",
+    },
     summary: {
       es: "El recorrido que más recomendamos. Todo lo del programa de tres días más un día entero dedicado al bosque primario: los árboles más grandes de la Amazonía, baño en el río y una segunda caminata nocturna.",
       en: "The route we recommend most. Everything in the three-day programme plus a full day devoted to the primary forest: the largest trees in the Amazon, a swim in the river and a second night walk.",
@@ -237,7 +248,7 @@ export const tours: Tour[] = [
     itinerary: [
       {
         n: 1,
-        mediaId: "story-canoe",
+        mediaId: "day-4-1",
         title: {
           es: "Quito · Puente de Cuyabeno · Lodge",
           en: "Quito · Cuyabeno Bridge · Lodge",
@@ -253,7 +264,7 @@ export const tours: Tour[] = [
       },
       {
         n: 2,
-        mediaId: "exp-culture",
+        mediaId: "day-4-2",
         title: {
           es: "Comunidad nativa · día completo",
           en: "Native community · full day",
@@ -269,7 +280,7 @@ export const tours: Tour[] = [
       },
       {
         n: 3,
-        mediaId: "exp-jungle",
+        mediaId: "day-4-3",
         title: {
           es: "Contacto directo con la naturaleza",
           en: "Face to face with the forest",
@@ -285,7 +296,7 @@ export const tours: Tour[] = [
       },
       {
         n: 4,
-        mediaId: "story-dawn",
+        mediaId: "day-4-4",
         title: {
           es: "Amanecer en el río · regreso",
           en: "Sunrise on the river · departure",
@@ -305,18 +316,19 @@ export const tours: Tour[] = [
   /* ═══════════════════════════════════════════════════════════ 5 DÍAS ═══ */
   {
     id: "5-dias",
-    slug: { es: "5-dias", en: "5-days",
-    de: "5-tage",
-    fr: "5-jours" },
+    slug: { es: "5-dias", en: "5-days", de: "5-tage", fr: "5-jours" },
     order: 3,
     days: 5,
     nights: 4,
     price: 440,
     priceRack: 520, // PROVISIONAL — ver nota en el type Tour
-    mediaId: "tour-5-dias",
-    name: { es: "Cinco días en Cuyabeno", en: "Five days in Cuyabeno",
-    de: "Fünf Tage in Cuyabeno",
-    fr: "Cinq jours à Cuyabeno" },
+    mediaId: "tour-card-5",
+    name: {
+      es: "Cinco días en Cuyabeno",
+      en: "Five days in Cuyabeno",
+      de: "Fünf Tage in Cuyabeno",
+      fr: "Cinq jours à Cuyabeno",
+    },
     tagline: {
       es: "Selva, laguna y cultura",
       en: "Forest, lagoon and culture",
@@ -370,7 +382,7 @@ export const tours: Tour[] = [
     itinerary: [
       {
         n: 1,
-        mediaId: "story-canoe",
+        mediaId: "day-5-1",
         title: {
           es: "Quito · Puente de Cuyabeno · Lodge",
           en: "Quito · Cuyabeno Bridge · Lodge",
@@ -386,7 +398,7 @@ export const tours: Tour[] = [
       },
       {
         n: 2,
-        mediaId: "exp-culture",
+        mediaId: "day-5-2",
         title: {
           es: "Comunidad nativa · Casa del Chamán",
           en: "Native community · the Shaman's House",
@@ -402,10 +414,13 @@ export const tours: Tour[] = [
       },
       {
         n: 3,
-        mediaId: "exp-wildlife",
-        title: { es: "Laguna Grande", en: "Laguna Grande",
-        de: "Laguna Grande",
-        fr: "Laguna Grande" },
+        mediaId: "day-5-3",
+        title: {
+          es: "Laguna Grande",
+          en: "Laguna Grande",
+          de: "Laguna Grande",
+          fr: "Laguna Grande",
+        },
         body: {
           es: "Después del desayuno navegamos río arriba por el Cuyabeno con la oportunidad de ver delfines rosados, gran variedad de aves y monos, hasta llegar a la Laguna Grande. Damos un recorrido alrededor de los macrolobios buscando anacondas y, después del almuerzo, caminamos por el bosque primario. Los guías explican los ecosistemas lacustres, la flora y la fauna, y el uso de plantas medicinales. Cerramos nadando frente a un atardecer de colores sobre el horizonte de Cuyabeno. Regreso al lodge y cena.",
           en: "After breakfast we head upriver along the Cuyabeno with the chance to see pink dolphins, a wide variety of birds and monkeys, until we reach Laguna Grande. We circle the macrolobium trees searching for anacondas and, after lunch, walk through the primary forest. The guides explain the lake ecosystems, the flora and fauna, and the use of medicinal plants. We close the day swimming in front of a coloured sunset over the Cuyabeno horizon. Back to the lodge and dinner.",
@@ -415,7 +430,7 @@ export const tours: Tour[] = [
       },
       {
         n: 4,
-        mediaId: "exp-jungle",
+        mediaId: "day-5-4",
         title: {
           es: "Contacto directo con la naturaleza",
           en: "Face to face with the forest",
@@ -431,7 +446,7 @@ export const tours: Tour[] = [
       },
       {
         n: 5,
-        mediaId: "story-dawn",
+        mediaId: "day-5-5",
         title: {
           es: "Amanecer en el río · regreso",
           en: "Sunrise on the river · departure",
@@ -504,7 +519,7 @@ export const notIncluded: Localized<string[]> = {
     "Comidas antes y después del tour",
     "Actividad del chamán (costo aparte, por persona)",
     "Actividad de casabe (costo aparte, por persona)",
-    "Bebidas alcohólicas y gaseosas",
+    "Bebidas adicionales",
     "Propinas",
   ],
   en: [
@@ -512,7 +527,7 @@ export const notIncluded: Localized<string[]> = {
     "Meals before and after the tour",
     "Shaman activity (extra cost, per person)",
     "Casabe activity (extra cost, per person)",
-    "Alcoholic and soft drinks",
+    "Additional drinks",
     "Tips",
   ],
   de: [
@@ -520,7 +535,7 @@ export const notIncluded: Localized<string[]> = {
     "Mahlzeiten vor und nach der Tour",
     "Schamanen-Aktivität (Aufpreis, pro Person)",
     "Casabe-Aktivität (Aufpreis, pro Person)",
-    "Alkoholische Getränke und Softdrinks",
+    "Zusätzliche Getränke",
     "Trinkgelder",
   ],
   fr: [
@@ -528,116 +543,8 @@ export const notIncluded: Localized<string[]> = {
     "Repas avant et après le circuit",
     "Activité chamane (coût en supplément, par personne)",
     "Activité casabe (coût en supplément, par personne)",
-    "Boissons alcoolisées et sodas",
+    "Boissons supplémentaires",
     "Pourboires",
-  ],
-};
-
-/* ─────────────────────────────── Tarifas ──────────────────────────────── */
-
-export const pricingRules: Localized<{ label: string; value: string }[]> = {
-  es: [
-    { label: "Niños de 0 a 3 años", value: "Gratis" },
-    { label: "Niños de 4 a 8 años", value: "50 % del precio" },
-    { label: "Niños de 9 a 12 años", value: "25 % de descuento" },
-    { label: "Habitación simple o suite", value: "+ USD 70" },
-    { label: "Grupos de 15 pasajeros o más", value: "1 pasajero gratis" },
-  ],
-  en: [
-    { label: "Children aged 0 to 3", value: "Free" },
-    { label: "Children aged 4 to 8", value: "50% of the price" },
-    { label: "Children aged 9 to 12", value: "25% discount" },
-    { label: "Single room or suite", value: "+ USD 70" },
-    { label: "Groups of 15 or more", value: "1 traveller free" },
-  ],
-  de: [
-    { label: "Kinder von 0 bis 3 Jahren", value: "Kostenlos" },
-    { label: "Kinder von 4 bis 8 Jahren", value: "50 % des Preises" },
-    { label: "Kinder von 9 bis 12 Jahren", value: "25 % Rabatt" },
-    { label: "Einzelzimmer oder Suite", value: "+ USD 70" },
-    { label: "Gruppen ab 15 Personen", value: "1 Person kostenlos" },
-  ],
-  fr: [
-    { label: "Enfants de 0 à 3 ans", value: "Gratuit" },
-    { label: "Enfants de 4 à 8 ans", value: "50 % du prix" },
-    { label: "Enfants de 9 à 12 ans", value: "25 % de réduction" },
-    { label: "Chambre individuelle ou suite", value: "+ USD 70" },
-    { label: "Groupes de 15 personnes ou plus", value: "1 voyageur gratuit" },
-  ],
-};
-
-export const bookingPolicy: Localized<{ title: string; body: string }[]> = {
-  es: [
-    {
-      title: "Confirmación",
-      body: "La reserva queda confirmada únicamente con el voucher escrito del lodge.",
-    },
-    {
-      title: "Pago",
-      body: "Se solicita el 100 % del valor del tour por adelantado para garantizar el cupo.",
-    },
-    {
-      title: "Cancelación",
-      body: "Con 31 días o más de anticipación se devuelve el 100 %. Entre 30 y 16 días, el 50 %. Con menos de 15 días no hay devolución.",
-    },
-    {
-      title: "Facturación",
-      body: "A extranjeros sin IVA, a ecuatorianos con IVA. A empresas, con retención.",
-    },
-  ],
-  en: [
-    {
-      title: "Confirmation",
-      body: "A booking is confirmed only with a written voucher from the lodge.",
-    },
-    {
-      title: "Payment",
-      body: "Full payment is required in advance to secure your place.",
-    },
-    {
-      title: "Cancellation",
-      body: "Cancelling 31 days or more in advance is refunded in full. Between 30 and 16 days, 50%. Less than 15 days, no refund.",
-    },
-    {
-      title: "Invoicing",
-      body: "Foreign visitors are invoiced without VAT, Ecuadorian residents with VAT. Companies with withholding.",
-    },
-  ],
-  de: [
-    {
-      title: "Bestätigung",
-      body: "Die Buchung gilt erst mit dem schriftlichen Voucher der Lodge als bestätigt.",
-    },
-    {
-      title: "Zahlung",
-      body: "Zur Sicherung des Platzes wird der volle Tourpreis im Voraus verlangt.",
-    },
-    {
-      title: "Stornierung",
-      body: "Bei einer Stornierung 31 Tage oder früher vor Reisebeginn werden 100 % erstattet. Zwischen 30 und 16 Tagen 50 %. Bei weniger als 15 Tagen erfolgt keine Erstattung.",
-    },
-    {
-      title: "Rechnungsstellung",
-      body: "Für ausländische Gäste ohne Mehrwertsteuer, für Personen aus Ecuador mit Mehrwertsteuer. Für Unternehmen mit Steuereinbehalt.",
-    },
-  ],
-  fr: [
-    {
-      title: "Confirmation",
-      body: "La réservation n’est confirmée qu’avec le voucher écrit du lodge.",
-    },
-    {
-      title: "Paiement",
-      body: "Le paiement intégral du circuit est demandé à l’avance pour garantir la place.",
-    },
-    {
-      title: "Annulation",
-      body: "En cas d’annulation 31 jours ou plus à l’avance, 100 % est remboursé. Entre 30 et 16 jours, 50 %. À moins de 15 jours, aucun remboursement.",
-    },
-    {
-      title: "Facturation",
-      body: "Les visiteurs étrangers sont facturés hors TVA, les résidents équatoriens avec TVA. Les entreprises avec retenue à la source.",
-    },
   ],
 };
 

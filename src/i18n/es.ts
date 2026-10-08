@@ -97,8 +97,6 @@ export const es = {
     disclaimer: "Aviso sobre los itinerarios",
     /* Página /tours */
     pageTitle: "Los tres recorridos.",
-    pageLead:
-      "El mismo lodge, los mismos guías, la misma selva. Cambia cuántas noches te quedas — y cuánto llegas a ver.",
     priceNote:
       "La tarifa se cotiza según fechas, tamaño del grupo y tipo de habitación. Escríbenos por WhatsApp o completa el formulario y te enviamos el detalle.",
     metaTitle: "Tours en Cuyabeno: 3, 4 y 5 días",
@@ -191,7 +189,6 @@ export const es = {
     visionTitle: "Visión",
     facilitiesTitle: "Instalaciones",
     credentialsTitle: "Operación autorizada",
-    registryLabel: "Registro forestal",
     companyLabel: "Razón social",
     sinceLabel: "En turismo desde",
     /* Página /el-lodge */
@@ -205,21 +202,6 @@ export const es = {
     peopleLink: "Conoce nuestra historia",
   },
 
-  /* Página /about */
-  about: {
-    pageTitle: "Un lugar. Y quienes lo hacen posible.",
-    pageLead:
-      "Canangueno Lodge y las comunidades Siona-Seoqueya: una relación que forma parte de cada recorrido.",
-    behindTitle: "Conoce quién está detrás de tu viaje.",
-    operatorLabel: "Operador",
-    paceTitle: "La selva marca el ritmo.",
-    paceBody:
-      "Recorremos la reserva con guías en español e inglés y trabajamos con las comunidades locales. La observación de animales depende de la naturaleza; los guías adaptan cada salida a las condiciones del momento.",
-    navLabel: "Nosotros",
-    metaTitle: "El equipo detrás de Canangueno",
-    metaDescription:
-      "Quiénes operan Canangueno Lodge y cómo trabajamos junto a las comunidades Siona-Seoqueya dentro de la Reserva Cuyabeno.",
-  },
 
   reviews: {
     eyebrow: "Opiniones",
@@ -308,7 +290,7 @@ export const es = {
     namePlaceholder: "Cómo te llamas",
     emailLabel: "Correo electrónico",
     emailPlaceholder: "tu@correo.com",
-    phoneLabel: "Teléfono o WhatsApp",
+    phoneLabel: "Teléfono / WhatsApp",
     phonePlaceholder: "Con código de país",
     countryLabel: "País",
     countryPlaceholder: "De dónde nos escribes",
@@ -337,28 +319,28 @@ export const es = {
     preparingForm: "Preparando el formulario…",
     beforeTitle: "Antes de confirmar.",
     beforeBody:
-      "Te confirmaremos el tipo de habitación, el transporte y las condiciones de cancelación por escrito. El pago completo asegura la reserva junto con el voucher emitido por el lodge.",
+      "Te confirmaremos por escrito el tipo de habitación, el transporte y las condiciones de pago y de cancelación. La reserva queda asegurada con el voucher que emite el lodge.",
     metaTitle: "Planifica tu viaje a Cuyabeno",
 
     /* Formulario: secciones y campos */
     formJourneyLegend: "Tu viaje",
-    formAboutLegend: "Para conocerte un poco",
+    formAboutLegend: "Tus datos",
     routeLabel: "Recorrido",
     preferredDateLabel: "Fecha deseada",
     yourNameLabel: "Tu nombre",
-    notesLabel: "Habitación, niños o necesidades especiales (opcional)",
-    notesPlaceholder: "Por ejemplo: habitación doble, dos adultos.",
+    notesLabel: "Comentarios adicionales (opcional)",
+    notesPlaceholder: "Algo más que quieras contarnos: habitación, niños, alergias…",
     noChargeNote:
       "Prepararemos un mensaje para que elijas enviarlo por WhatsApp o correo. No se realiza ningún cobro.",
     prepareCta: "Preparar mi consulta",
-    contactLabel: "Tu email o WhatsApp",
-    contactHint: "Para responderte si el mensaje no llega a salir.",
     errDate: "Elige la fecha en que quieres empezar el tour.",
     errDatePast: "Esa fecha ya pasó. Elige una a partir de hoy.",
     errPax: "Indica cuántos viajan: entre 1 y 40 personas.",
     errName: "Escribe tu nombre (al menos 2 letras).",
-    errContact: "Deja un email o un número con código de país para poder responderte.",
-    msgContact: "Contacto: ",
+    errEmail: "Escribe un correo válido, por ejemplo nombre@correo.com.",
+    errPhone: "Escribe tu número con el código de país, por ejemplo +593 99 123 4567.",
+    msgEmail: "Correo: ",
+    msgPhone: "Teléfono: ",
     emailSubject: "Consulta Canangueno",
 
     /* Mensaje que se arma para WhatsApp o correo */
@@ -366,7 +348,7 @@ export const es = {
     msgDate: "Fecha deseada: ",
     msgTravelers: "Viajeros: ",
     msgName: "Nombre: ",
-    msgNotes: "Notas: ",
+    msgNotes: "Comentarios: ",
     msgClosing:
       "Por favor confirmen disponibilidad, tipo de habitación, extras y condiciones de pago.",
 
@@ -395,7 +377,6 @@ export const es = {
     eyebrow: "Dónde estamos",
     title: "Reserva Cuyabeno,",
     titleEmphasis: "Sucumbíos",
-    officeTitle: "Oficina en Quito",
     meetingTitle: "Punto de encuentro",
     mapLabel: "Ver en el mapa",
   },

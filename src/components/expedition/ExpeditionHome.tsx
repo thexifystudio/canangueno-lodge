@@ -5,7 +5,7 @@ import { pick, type Locale } from "@/lib/i18n";
 import {
   cuyabenoPage,
   cuyabenoFacts,
-  cuyabenoAnimals,
+  cuyabenoTeaserAnimals,
   cuyabenoTeaser,
 } from "@/content/cuyabeno";
 import { routes } from "@/lib/routes";
@@ -16,6 +16,7 @@ import { TourCards } from "./TourCards";
 import { LodgePreview } from "./LodgePreview";
 import { ReviewsSection } from "@/components/sections/ReviewsSection";
 import { ClosingBand } from "./ClosingBand";
+import { Credentials } from "@/components/ui/Credentials";
 import { ToursListJsonLd } from "@/components/seo/JsonLd";
 export function ExpeditionHome({ locale }: { locale: Locale }) {
   const c = expeditionCopy(locale);
@@ -66,12 +67,12 @@ export function ExpeditionHome({ locale }: { locale: Locale }) {
           </a>
         </div>
       </div>
+      {/* Los avales, a la vista apenas termina el hero: quién autoriza la
+          operación es lo primero que mira quien no conoce el lodge. */}
+      <Credentials locale={locale} />
       <section className="exp-tours" id="tours">
         <div className="shell">
-          <div className="exp-heading">
-            <h2>{c.tourTitle}</h2>
-            <p>{c.tourIntro}</p>
-          </div>
+          <h2 className="exp-tours-title">{c.tourTitle}</h2>
           <TourCards locale={locale} />
           <div className="exp-cards-foot">
             <span>{c.inclusions}</span>
@@ -94,7 +95,7 @@ export function ExpeditionHome({ locale }: { locale: Locale }) {
           <div className="exp-cuyabeno-teaser-top">
             <div className="exp-cuyabeno-teaser-media">
               <Media
-                id="exp-river"
+                id="teaser-river"
                 locale={locale}
                 sizes="(max-width: 900px) 100vw, 50vw"
               />
@@ -106,9 +107,9 @@ export function ExpeditionHome({ locale }: { locale: Locale }) {
               <h2>{pick(cuyabenoPage.title, locale)}</h2>
               <p>{pick(cuyabenoTeaser.body, locale)}</p>
               <dl>
-                {cuyabenoFacts.map((f) => (
-                  <div key={f.value}>
-                    <dt>{f.value}</dt>
+                {cuyabenoFacts.map((f, i) => (
+                  <div key={i}>
+                    <dt>{pick(f.value, locale)}</dt>
                     <dd>{pick(f.label, locale)}</dd>
                   </div>
                 ))}
@@ -120,7 +121,7 @@ export function ExpeditionHome({ locale }: { locale: Locale }) {
             </div>
           </div>
           <ul className="exp-cuyabeno-teaser-animals">
-            {cuyabenoAnimals.slice(0, 4).map((a) => (
+            {cuyabenoTeaserAnimals.map((a) => (
               <li key={a.id}>
                 <Link href={routes.cuyabeno(locale)}>
                   <div>
@@ -135,6 +136,19 @@ export function ExpeditionHome({ locale }: { locale: Locale }) {
               </li>
             ))}
           </ul>
+          <div className="exp-cuyabeno-teaser-more">
+            <Link
+              href={`${routes.cuyabeno(locale)}#animales`}
+              className="exp-text-link"
+            >
+              {pick(cuyabenoTeaser.allSpecies, locale)}
+              <ArrowRight size={16} />
+            </Link>
+            <Link href={routes.gallery(locale)} className="exp-text-link">
+              {pick(cuyabenoTeaser.allPhotos, locale)}
+              <ArrowRight size={16} />
+            </Link>
+          </div>
         </div>
       </section>
       <div id="guest-reviews">

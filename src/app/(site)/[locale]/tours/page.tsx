@@ -7,6 +7,7 @@ import { getDictionary } from "@/i18n";
 
 import { TourCards } from "@/components/expedition/TourCards";
 import { ToursListJsonLd } from "@/components/seo/JsonLd";
+import { TourTerms } from "@/components/expedition/TourTerms";
 import { ClosingBand } from "@/components/expedition/ClosingBand";
 
 export async function generateMetadata({
@@ -37,7 +38,6 @@ export default async function Page({
     <div className="exp-detail">
       <section className="shell exp-page-intro">
         <h1>{t9n.pageTitle}</h1>
-        <p>{t9n.pageLead}</p>
       </section>
 
       <section
@@ -48,6 +48,10 @@ export default async function Page({
         <TourCards locale={l} heading="h2" />
         <p className="exp-small exp-tours-note">{t9n.priceNote}</p>
       </section>
+
+      {/* Qué incluye, qué no y las condiciones de reserva (antes en
+          /politicas): valen para los tres tours. */}
+      <TourTerms locale={l} id="condiciones" />
 
       <ClosingBand locale={l} />
       <ToursListJsonLd locale={l} />

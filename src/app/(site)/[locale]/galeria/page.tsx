@@ -20,7 +20,7 @@ export async function generateMetadata({
     title: dict.meta.galleryTitle,
     description: dict.meta.galleryDescription,
     path: (l) => routes.gallery(l),
-    image: "gal-lagoon-1",
+    image: "gallery-header",
   });
 }
 
@@ -38,7 +38,7 @@ export default async function GalleryPage({
     <>
       <PageHeader
         locale={l}
-        mediaId="gal-lagoon-1"
+        mediaId="gallery-header"
         eyebrow={dict.gallery.eyebrow}
         title={dict.gallery.title}
         emphasis={dict.gallery.titleEmphasis}

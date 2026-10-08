@@ -130,3 +130,38 @@
     max-width: 20ch;
   }
 }
+
+/* ── Avales: Ministerio de Turismo, Ministerio del Ambiente y Tripadvisor ──
+   Franja clara propia (los logos oficiales necesitan fondo claro): el texto
+   a la izquierda, los tres logos grandes a la derecha. */
+.exp-credentials {
+  background: var(--c-surface);
+  border-bottom: 1px solid var(--c-line);
+}
+.exp-credentials-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px clamp(32px, 5vw, 80px);
+  padding-block: clamp(30px, 4vw, 48px);
+}
+.exp-credentials-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-accent-text);
+  font-weight: 600;
+}
+.exp-credentials-body {
+  margin-top: 10px;
+  max-width: 52ch;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--c-ink);
+}
+@media (max-width: 900px) {
+  .exp-credentials-inner {
+    flex-direction: column;
+    align-items: start;
+  }
+}

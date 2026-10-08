@@ -83,7 +83,6 @@ export default async function LocaleLayout({
         <Header
           locale={typedLocale}
           nav={dict.nav}
-          aboutLabel={dict.about.navLabel}
           tourSlugs={tours.map((t) => t.slug)}
         />
         <main id="main">{children}</main>
