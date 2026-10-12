@@ -17,7 +17,12 @@ export const galleryCategories: {
 }[] = [
   {
     id: "fauna",
-    label: { es: "Flora y fauna", en: "Flora & fauna", de: "Flora & Fauna", fr: "Faune & flore" },
+    label: {
+      es: "Flora y fauna",
+      en: "Flora & fauna",
+      de: "Flora & Fauna",
+      fr: "Faune & flore",
+    },
     alt: {
       es: "Flora y fauna de la Reserva Cuyabeno",
       en: "Wildlife and plants of the Cuyabeno Reserve",
@@ -27,7 +32,12 @@ export const galleryCategories: {
   },
   {
     id: "paisajes",
-    label: { es: "Paisajes", en: "Landscapes", de: "Landschaften", fr: "Paysages" },
+    label: {
+      es: "Paisajes",
+      en: "Landscapes",
+      de: "Landschaften",
+      fr: "Paysages",
+    },
     alt: {
       es: "Paisaje del río y las lagunas de Cuyabeno",
       en: "Landscape of the Cuyabeno river and lagoons",
@@ -47,7 +57,12 @@ export const galleryCategories: {
   },
   {
     id: "personas",
-    label: { es: "Viajeros", en: "Travellers", de: "Reisende", fr: "Voyageurs" },
+    label: {
+      es: "Viajeros",
+      en: "Travellers",
+      de: "Reisende",
+      fr: "Voyageurs",
+    },
     alt: {
       es: "Viajeros durante un tour en Cuyabeno",
       en: "Travellers on a tour in Cuyabeno",

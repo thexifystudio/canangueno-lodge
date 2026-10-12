@@ -20,6 +20,7 @@ const BASE = process.env.SHOTS_BASE_URL || "http://localhost:3000";
 const PATHS = [
   "/es",
   "/es/tours",
+  "/es/cuyabeno",
   "/es/tours/4-dias",
   "/es/el-lodge",
   "/es/galeria",

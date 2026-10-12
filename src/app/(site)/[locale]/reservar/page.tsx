@@ -6,7 +6,6 @@ import { isLocale, pick } from "@/lib/i18n";
 import { getDictionary } from "@/i18n";
 import { tours } from "@/content/tours";
 import { validTravelDate } from "@/lib/travel-date";
-import { Credentials } from "@/components/ui/Credentials";
 import { BookingForm } from "@/components/booking/BookingForm";
 export async function generateMetadata({
   params,
@@ -72,13 +71,6 @@ export default async function Page({
           }))}
           initial={initial}
         />
-      </section>
-      <Credentials locale={l} />
-      <section className="exp-inclusions">
-        <div className="shell exp-heading" style={{ marginBottom: 0 }}>
-          <h2>{t9n.beforeTitle}</h2>
-          <p>{t9n.beforeBody}</p>
-        </div>
       </section>
     </div>
   );

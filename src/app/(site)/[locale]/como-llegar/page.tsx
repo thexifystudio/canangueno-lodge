@@ -28,7 +28,7 @@ export async function generateMetadata({
   if (!isLocale(locale)) return {};
   const dict = getDictionary(locale);
   return pageMetadata(locale, {
-    title: dict.journey.metaTitle,
+    title: dict.meta.journeyTitle,
     description: dict.meta.journeyDescription,
     path: (l) => routes.journey(l),
     image: "journey-sign",

@@ -41,6 +41,7 @@ const VIEWPORTS = [
 const PAGES = [
   { name: "home", path: "/es" },
   { name: "tours", path: "/es/tours" },
+  { name: "cuyabeno", path: "/es/cuyabeno" },
   { name: "tour-4d", path: "/es/tours/4-dias" },
   { name: "lodge", path: "/es/el-lodge" },
   { name: "galeria", path: "/es/galeria" },

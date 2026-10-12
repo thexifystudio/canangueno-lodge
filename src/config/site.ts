@@ -7,52 +7,46 @@
  *  tarifas e itinerarios que entregó el cliente. Nada inventado.
  */
 
+/**
+ * ⚠️ EL INTERRUPTOR DE PUBLICACIÓN
+ *
+ * `false` mientras el sitio vive en la URL provisional de Cloudflare:
+ *   · todas las páginas van con `noindex` y robots.txt bloquea todo, para que
+ *     Google no indexe la versión de prueba ni compita con la web actual;
+ *   · los enlaces absolutos (canonical, sitemap, Open Graph, JSON-LD,
+ *     llms.txt) apuntan a la URL provisional, así al compartirla por
+ *     WhatsApp se ve la foto de la página.
+ *
+ * El día que `cananguenolodge.com` apunte a este sitio: `true`, y listo.
+ */
+const LIVE = false;
+
 export const site = {
   name: "Canangueno Lodge",
-  /** Cómo se lee la marca en el hero, sin la palabra "Lodge". */
-  shortName: "Canangueno",
-  domain: "cananguenolodge.com",
-  url: "https://www.cananguenolodge.com",
-  /**
-   * ⚠️ `false` mientras el sitio vive en la URL provisional de Cloudflare:
-   * todas las páginas van con `noindex` y robots.txt bloquea todo, para que
-   * Google no indexe la versión de prueba ni compita con la web actual.
-   * Se pasa a `true` el día que se conecta el dominio real.
-   */
-  live: false,
+  live: LIVE,
+  url: LIVE
+    ? "https://www.cananguenolodge.com"
+    : "https://canangueno.thexifystudio.workers.dev",
 
   legal: {
     companyName: "EMOTIONPLANET CIA. LTDA.",
-    tradeName: "Canangueno Lodge",
-    legalRepresentative: "Pablo Flores",
-    representativeExperienceSince: 2006,
-    authorities: [
-      "Ministerio de Turismo del Ecuador",
-      "Ministerio del Ambiente del Ecuador",
-    ],
   },
 
   contact: {
     /**
      * ⚠️ PENDIENTE OPERATIVO: este número es el celular personal de un miembro
-     * de la familia dueña. Antes de publicar hay que migrar a una línea
-     * dedicada del negocio (ver "Plan de Ejecución - Canangueno", sección
-     * WhatsApp Business) y actualizarlo acá una sola vez.
+     * de la familia dueña. Cuando el lodge tenga una línea de WhatsApp
+     * Business propia, se cambia acá (los dos campos) y se actualiza solo en
+     * todo el sitio.
      */
     phone: "+593 99 277 3360",
-    phoneAlt: "+593 98 972 6295",
     /** Sólo dígitos, formato wa.me */
     whatsapp: "593992773360",
     email: "info@cananguenolodge.com",
-    salesEmail: "sales@cananguenolodge.com",
   },
 
   location: {
-    label: "Reserva de Producción de Fauna Cuyabeno",
     region: "Sucumbíos",
-    country: "Ecuador",
-    /** Punto de encuentro real de todos los tours. */
-    meetingPoint: "Puente de Cuyabeno",
     /**
      * Ubicación del lodge, tomada de su ficha de Google Maps ("Canangueno
      * Lodge Cuyabeno"; la de la habitación da el mismo punto).
@@ -65,10 +59,8 @@ export const site = {
   },
 
   /**
-   * Video oficial del lodge en YouTube (material propio del cliente).
-   * Se incrusta con la técnica de "fachada": primero se muestra el póster y
-   * el iframe se carga recién al hacer clic. Así el video no penaliza el
-   * tiempo de carga ni mete cookies de terceros a todo el que entra.
+   * Video oficial del lodge en YouTube (material propio del cliente). Va de
+   * fondo en el hero, sin sonido, y completo en el botón "Ver el video".
    */
   video: {
     youtubeId: "Auj1H9UziKM",
@@ -81,13 +73,6 @@ export const site = {
     tripadvisor:
       "https://www.tripadvisor.com/Attraction_Review-g1603627-d17623241-Reviews-Tour_Cuyabeno_Canangueno_Lodge-Nueva_Loja_Sucumbios_Province.html",
   },
-
-  capacity: {
-    /** Confirmado por el cliente: 40 pax entre simples, dobles y compartidas. */
-    maxGuests: 40,
-  },
-
-  /** Reseñas públicas del lodge (TripAdvisor). Ver `src/content/reviews.ts`. */
 } as const;
 
 /** Arma un enlace de WhatsApp con mensaje pre-escrito. */

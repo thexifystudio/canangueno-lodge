@@ -4,9 +4,9 @@ import { pick, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/i18n";
 import { itineraryDisclaimer, type Tour } from "@/content/tours";
 import { routes } from "@/lib/routes";
-import { whatsappLink } from "@/config/site";
+import { site, whatsappLink } from "@/config/site";
 import { Media } from "@/components/ui/Media";
-import { TourJsonLd } from "@/components/seo/JsonLd";
+import { TourBreadcrumbJsonLd, TourJsonLd } from "@/components/seo/JsonLd";
 import { TourTerms } from "./TourTerms";
 
 /**
@@ -160,6 +160,11 @@ export function TourDetail({
       </section>
 
       <TourJsonLd tour={tour} locale={l} />
+      <TourBreadcrumbJsonLd
+        tour={tour}
+        locale={l}
+        labels={{ home: site.name, tours: dict.nav.tours }}
+      />
     </div>
   );
 }

@@ -19,9 +19,12 @@ export type FaqGroup = {
 export const faqGroups: FaqGroup[] = [
   {
     id: "viaje",
-    title: { es: "Planear tu viaje", en: "Planning your trip",
-    de: "Reiseplanung",
-    fr: "Préparer votre voyage" },
+    title: {
+      es: "Planear tu viaje",
+      en: "Planning your trip",
+      de: "Reiseplanung",
+      fr: "Préparer votre voyage",
+    },
     items: [
       {
         q: {
@@ -52,9 +55,12 @@ export const faqGroups: FaqGroup[] = [
         },
       },
       {
-        q: { es: "¿Qué debo llevar?", en: "What should I bring?",
-        de: "Was soll ich mitnehmen?",
-        fr: "Que dois-je emporter ?" },
+        q: {
+          es: "¿Qué debo llevar?",
+          en: "What should I bring?",
+          de: "Was soll ich mitnehmen?",
+          fr: "Que dois-je emporter ?",
+        },
         a: {
           es: "La ropa es informal y cómoda: pantalones cortos o largos y camisetas ligeras, preferentemente de manga larga. Recomendamos: dos o más pantalones largos (no jeans), dos o más shorts, tres o más camisetas de algodón, un par de calcetines por día, zapatos y sandalias cómodos para caminar, cortavientos o suéter, traje de baño, ropa interior de algodón, gafas de sol, cámara, mochila pequeña impermeable, repelente de insectos, bolsas herméticas para mantener la ropa seca, binoculares (opcional), linterna con pilas de repuesto, bloqueador solar, botella de agua reutilizable, libro y cuaderno, toalla, botiquín de primeros auxilios, jabón y champú biodegradables, sombrero o gorra, y el pasaporte original.",
           en: "Clothing is casual and comfortable: shorts or long trousers and light shirts, preferably long-sleeved. We recommend: two or more pairs of long trousers (not jeans), two or more pairs of shorts, three or more cotton shirts, a pair of socks per day, comfortable walking shoes and sandals, a windbreaker or sweater, swimwear, cotton underwear, sunglasses, a camera, a small waterproof backpack, insect repellent, sealable bags to keep clothes dry, binoculars (optional), a torch with spare batteries, sunscreen, a reusable water bottle, a book and notebook, a towel, a first-aid kit, biodegradable soap and shampoo, a hat or cap, and your original passport.",
@@ -108,9 +114,12 @@ export const faqGroups: FaqGroup[] = [
   },
   {
     id: "reservas",
-    title: { es: "Reservas y pagos", en: "Bookings and payments",
-    de: "Buchung und Zahlung",
-    fr: "Réservations et paiements" },
+    title: {
+      es: "Reservas y pagos",
+      en: "Bookings and payments",
+      de: "Buchung und Zahlung",
+      fr: "Réservations et paiements",
+    },
     items: [
       {
         q: {

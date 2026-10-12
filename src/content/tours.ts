@@ -7,13 +7,10 @@ import type { MediaId } from "@/config/media";
  * ────────────────────────────────────────────────────────────────────────────
  *  Itinerarios: transcritos de cananguenolodge.com (páginas Tour 3/4/5 días),
  *  reordenados para leerse mejor pero SIN agregar ni quitar actividades.
- *  Precios: hoja de tarifas del cliente (precio de venta al público).
- *  Inclusiones, descuentos y políticas: PDF "TOUR TARIFA Cuyabeno".
- *
- *  Para cambiar un precio: editá `price` y listo — se propaga a la home, al
- *  índice de tours, a la landing, al formulario de reserva y al JSON-LD.
- *  (Cuando esté el panel admin, este archivo pasa a ser el valor por defecto
- *  y la base de datos manda.)
+ *  Precio: hoja de tarifas del cliente. NO se muestra en la web (decisión
+ *  del cliente: la tarifa se cotiza por WhatsApp o correo); queda acá como
+ *  referencia interna.
+ *  Qué incluye y qué no: FAQ de cananguenolodge.com.
  */
 
 export type TourDay = {
@@ -26,32 +23,17 @@ export type TourDay = {
 export type Tour = {
   id: string;
   slug: Localized<string>;
-  order: number;
   days: number;
   nights: number;
-  /** Precio de venta al público, por persona, en USD. Lo que se cobra hoy. */
+  /** Precio de venta al público por persona (USD). No se muestra en la web. */
   price: number;
-  /**
-   * Tarifa de mostrador / precio de lista, por persona, en USD.
-   *
-   * ⚠️ PENDIENTE DE CONFIRMAR CON EL CLIENTE ⚠️
-   * Estos valores son PROVISIONALES. La web los muestra tachados al lado del
-   * precio actual ("Antes USD X · Ahora USD Y"). Para que eso sea legal y
-   * honesto con un público de la UE, EE. UU. y Reino Unido, el `priceRack`
-   * tiene que ser un precio que Canangueno realmente haya cobrado o publicado
-   * (tarifa de agencia, temporada alta, precio de mostrador), NO un número
-   * inflado para simular descuento.
-   *
-   * Si el cliente NO tiene una tarifa de lista real: borrar este campo del
-   * tour y la web vuelve a mostrar sólo "Desde USD Y", sin tachado. El resto
-   * del sitio no se toca.
-   */
-  priceRack?: number;
   name: Localized;
   tagline: Localized;
   summary: Localized;
   /** Bajada de la página del tour, debajo de "3 días / 2 noches". */
   intro: Localized;
+  /** Descripción para Google y redes (≤ 160 caracteres). */
+  seoDescription: Localized;
   bestFor: Localized;
   highlights: Localized<string[]>;
   itinerary: TourDay[];
@@ -64,11 +46,9 @@ export const tours: Tour[] = [
   {
     id: "3-dias",
     slug: { es: "3-dias", en: "3-days", de: "3-tage", fr: "3-jours" },
-    order: 1,
     days: 3,
     nights: 2,
     price: 280,
-    priceRack: 330, // PROVISIONAL — ver nota en el type Tour
     mediaId: "tour-card-3",
     name: {
       es: "Tres días en Cuyabeno",
@@ -87,6 +67,12 @@ export const tours: Tour[] = [
       en: "The shortest route without giving up what matters: Laguna Grande, caimans after dark and a full day with the Siona and Seoqueya communities.",
       de: "Die kürzeste Route, ohne auf das Wesentliche zu verzichten: die Laguna Grande, Kaimane bei Nacht und ein ganzer Tag mit den Gemeinschaften der Siona und Seoqueya.",
       fr: "Le circuit le plus court sans renoncer à l’essentiel : la Laguna Grande, les caïmans à la nuit tombée et une journée entière avec les communautés Siona et Seoqueya.",
+    },
+    seoDescription: {
+      es: "Tour de 3 días y 2 noches en la Reserva Cuyabeno: canoa por el río, Laguna Grande, caimanes de noche y las comunidades Siona y Seoqueya.",
+      en: "3-day, 2-night tour in the Cuyabeno Reserve: canoe trips, Laguna Grande, caimans at night and the Siona and Seoqueya communities.",
+      de: "3-Tage-Tour mit 2 Nächten im Cuyabeno-Reservat: Kanu, Laguna Grande, Kaimane bei Nacht und die Gemeinschaften der Siona und Seoqueya.",
+      fr: "Circuit de 3 jours et 2 nuits dans la réserve de Cuyabeno : pirogue, Laguna Grande, caïmans de nuit et communautés Siona et Seoqueya.",
     },
     intro: {
       es: "Entras a la reserva en canoa, nadas en la Laguna Grande al caer la tarde y pasas un día con las comunidades Siona y Seoqueya. Al tercer día, el río al amanecer y el regreso.",
@@ -182,11 +168,9 @@ export const tours: Tour[] = [
   {
     id: "4-dias",
     slug: { es: "4-dias", en: "4-days", de: "4-tage", fr: "4-jours" },
-    order: 2,
     days: 4,
     nights: 3,
     price: 350,
-    priceRack: 410, // PROVISIONAL — ver nota en el type Tour
     mediaId: "tour-card-4",
     featured: true,
     name: {
@@ -206,6 +190,12 @@ export const tours: Tour[] = [
       en: "The route we recommend most. Everything in the three-day programme plus a full day devoted to the primary forest: the largest trees in the Amazon, a swim in the river and a second night walk.",
       de: "Die Route, die wir am häufigsten empfehlen. Alles aus dem Drei-Tage-Programm und dazu ein ganzer Tag im Primärwald: die größten Bäume des Amazonas, ein Bad im Fluss und eine zweite Nachtwanderung.",
       fr: "Le circuit que nous recommandons le plus. Tout le programme de trois jours, plus une journée entière consacrée à la forêt primaire : les plus grands arbres d’Amazonie, une baignade dans le fleuve et une deuxième marche nocturne.",
+    },
+    seoDescription: {
+      es: "Tour de 4 días y 3 noches en Cuyabeno: Laguna Grande, comunidades Siona y Seoqueya, bosque primario, caminatas nocturnas y baño en el río.",
+      en: "4-day, 3-night Cuyabeno tour: Laguna Grande, the Siona and Seoqueya communities, primary forest, night walks and a swim in the river.",
+      de: "4-Tage-Tour mit 3 Nächten in Cuyabeno: Laguna Grande, Siona und Seoqueya, Primärwald, Nachtwanderungen und ein Bad im Fluss.",
+      fr: "Circuit de 4 jours et 3 nuits à Cuyabeno : Laguna Grande, communautés Siona et Seoqueya, forêt primaire, marches de nuit et baignade.",
     },
     intro: {
       es: "Tres noches en el lodge con tiempo para todo: el atardecer en la Laguna Grande, un día con las comunidades Siona y Seoqueya y otro entero en el bosque primario, entre ceibas gigantes, con baño en el río y caminata nocturna.",
@@ -317,11 +307,9 @@ export const tours: Tour[] = [
   {
     id: "5-dias",
     slug: { es: "5-dias", en: "5-days", de: "5-tage", fr: "5-jours" },
-    order: 3,
     days: 5,
     nights: 4,
     price: 440,
-    priceRack: 520, // PROVISIONAL — ver nota en el type Tour
     mediaId: "tour-card-5",
     name: {
       es: "Cinco días en Cuyabeno",
@@ -340,6 +328,12 @@ export const tours: Tour[] = [
       en: "The most complete programme. It adds the Shaman's House and a full day at Laguna Grande searching for anacondas among the macrolobium trees, with the guides explaining the lake ecosystems and the use of medicinal plants.",
       de: "Das vollständigste Programm. Es kommen das Haus des Schamanen und ein ganzer Tag an der Laguna Grande hinzu, auf der Suche nach Anakondas zwischen den Macrolobium-Bäumen, während die Guides die Ökosysteme des Sees und die Verwendung von Heilpflanzen erklären.",
       fr: "Le programme le plus complet. Il ajoute la Maison du Chaman et une journée entière à la Laguna Grande, à la recherche d’anacondas parmi les macrolobiums, pendant que les guides expliquent les écosystèmes du lac et l’usage des plantes médicinales.",
+    },
+    seoDescription: {
+      es: "Tour de 5 días y 4 noches en Cuyabeno: un día entero en la Laguna Grande, comunidades Siona y Seoqueya y caminatas por el bosque primario.",
+      en: "5-day, 4-night Cuyabeno tour: a full day at Laguna Grande, the Siona and Seoqueya communities and walks in the primary forest.",
+      de: "5-Tage-Tour mit 4 Nächten in Cuyabeno: ein ganzer Tag an der Laguna Grande, Siona und Seoqueya und Wanderungen im Primärwald.",
+      fr: "Circuit de 5 jours et 4 nuits à Cuyabeno : une journée à la Laguna Grande, communautés Siona et Seoqueya, marches en forêt primaire.",
     },
     intro: {
       es: "Cuatro noches para recorrer Cuyabeno sin apuro: las comunidades Siona y Seoqueya, un día entero en la Laguna Grande buscando anacondas entre los macrolobios y otro caminando el bosque primario.",
@@ -558,10 +552,3 @@ export const notIncluded: Localized<string[]> = {
 export function tourBySlug(slug: string): Tour | undefined {
   return tours.find((t) => LOCALES.some((l) => t.slug[l] === slug));
 }
-
-export function tourById(id: string): Tour | undefined {
-  return tours.find((t) => t.id === id);
-}
-
-/** Precio más bajo del catálogo, para el "desde USD …" del hero. */
-export const priceFrom = Math.min(...tours.map((t) => t.price));

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { LOCALES, pick, type Locale } from "@/lib/i18n";
+import { DEFAULT_LOCALE, LOCALES, pick, type Locale } from "@/lib/i18n";
 import { site } from "@/config/site";
 import { getMedia, type MediaId } from "@/config/media";
 
@@ -43,7 +43,7 @@ export function pageMetadata(
       canonical: path(locale),
       languages: {
         ...Object.fromEntries(LOCALES.map((l) => [l, path(l)])),
-        "x-default": path("en"),
+        "x-default": path(DEFAULT_LOCALE),
       },
     },
     openGraph: {
@@ -54,6 +54,12 @@ export function pageMetadata(
       description,
       url: path(locale),
       images: img.src ? [{ url: img.src, alt: pick(img.alt, locale) }] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} · ${site.name}`,
+      description,
+      images: img.src ? [img.src] : [],
     },
   };
 }

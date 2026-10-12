@@ -33,7 +33,7 @@ export async function generateMetadata({
 
   return pageMetadata(l, {
     title,
-    description: pick(tour.summary, l),
+    description: pick(tour.seoDescription, l),
     path: (target) => routes.tour(target, pick(tour.slug, target)),
     image: tour.mediaId,
   });

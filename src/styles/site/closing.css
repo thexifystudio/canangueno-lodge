@@ -33,7 +33,11 @@
       color-mix(in srgb, var(--c-bg-deep) 50%, transparent) 50%,
       color-mix(in srgb, var(--c-bg-deep) 25%, transparent) 100%
     ),
-    linear-gradient(0deg, color-mix(in srgb, var(--c-bg-deep) 60%, transparent) 0%, transparent 60%);
+    linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--c-bg-deep) 60%, transparent) 0%,
+      transparent 60%
+    );
 }
 .exp-closing-content {
   padding-block: var(--section-y);

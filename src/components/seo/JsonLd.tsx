@@ -3,6 +3,11 @@ import { pick, type Locale } from "@/lib/i18n";
 import { tours, type Tour } from "@/content/tours";
 import { faqGroups } from "@/content/faqs";
 import { getDictionary } from "@/i18n";
+import { getMedia } from "@/config/media";
+
+/** URL absoluta de una foto del registro de imágenes. */
+const imageUrl = (id: Parameters<typeof getMedia>[0]) =>
+  `${site.url}${getMedia(id).src}`;
 
 function Script({ data }: { data: Record<string, unknown> }) {
   return (
@@ -33,6 +38,7 @@ export function OrganizationJsonLd({ locale }: { locale: Locale }) {
         /* Google usa este logo en los resultados enriquecidos y en el panel de
            conocimiento. Es el mismo archivo que sirve la barra de navegación. */
         logo: `${site.url}/marca/logo.webp`,
+        image: [imageUrl("lodge-building"), imageUrl("lodge-room-double")],
         telephone: site.contact.phone,
         email: site.contact.email,
         priceRange: "$$",
@@ -88,6 +94,7 @@ export function TourJsonLd({ tour, locale }: { tour: Tour; locale: Locale }) {
         name: pick(tour.name, locale),
         description: pick(tour.summary, locale),
         url: `${site.url}/${locale}/tours/${pick(tour.slug, locale)}`,
+        image: imageUrl(tour.mediaId),
         touristType: pick(tour.bestFor, locale),
         itinerary: {
           "@type": "ItemList",
@@ -99,6 +106,38 @@ export function TourJsonLd({ tour, locale }: { tour: Tour; locale: Locale }) {
           })),
         },
         provider: { "@id": `${site.url}/#lodge` },
+      }}
+    />
+  );
+}
+
+/** Migas de pan de un tour: Inicio › Tours › el tour. */
+export function TourBreadcrumbJsonLd({
+  tour,
+  locale,
+  labels,
+}: {
+  tour: Tour;
+  locale: Locale;
+  labels: { home: string; tours: string };
+}) {
+  return (
+    <Script
+      data={{
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { name: labels.home, item: `${site.url}/${locale}` },
+          { name: labels.tours, item: `${site.url}/${locale}/tours` },
+          {
+            name: pick(tour.name, locale),
+            item: `${site.url}/${locale}/tours/${pick(tour.slug, locale)}`,
+          },
+        ].map((crumb, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          ...crumb,
+        })),
       }}
     />
   );

@@ -13,7 +13,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
         // `/reservar` NO se bloquea acá: lleva `noindex`, y si el robot no
         // puede entrar nunca llega a leerlo (y la URL igual se indexa sola).
-        disallow: ["/api/"],
       },
     ],
     sitemap: `${site.url}/sitemap.xml`,

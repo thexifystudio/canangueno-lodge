@@ -18,10 +18,6 @@ const es = {
   intro:
     "Tours de 3, 4 y 5 días en la Reserva Cuyabeno: canoa, guías bilingües, cabaña y comidas incluidas.",
   explore: "Ver los tours",
-  availability: "Planificar mi viaje",
-  perPerson: "por persona",
-  from: "Desde",
-  place: "Reserva Cuyabeno · Ecuador",
   /*
    * LA FRANJA DE DATOS BAJO EL HERO
    * ──────────────────────────────────────────────────────────────────────
@@ -29,8 +25,11 @@ const es = {
    * río": eso ya lo dice el hero y no convence a nadie, porque lo dice
    * también toda la competencia. Un dato sí convence.
    *
-   * ⚠️ LOS CUATRO SON VERIFICABLES. No se inventa ninguno:
-   *   · 2006 — año en que Pablo Flores empieza en turismo (ver content/lodge).
+   * ⚠️ LOS TRES SON VERIFICABLES. No se inventa ninguno. (Que la operación
+   * está autorizada lo dice la franja de avales, justo debajo.)
+   *   · 2006 — año en que Pablo Flores, representante del lodge, empieza en
+   *     turismo (página "Nosotros" de la web anterior). Por eso dice
+   *     "experiencia en turismo" y no "operando en la reserva".
    *   · 590 112 ha — superficie oficial de la Reserva de Producción de Fauna
    *     Cuyabeno. Es un dato público de la reserva, no una cifra del negocio.
    *   · Siona y Seoqueya — las dos comunidades con las que opera la empresa.
@@ -41,19 +40,14 @@ const es = {
    * pasajeros inventada es publicidad engañosa ante un público de la UE.
    */
   stats: [
-    { n: "Desde 2006", label: "Operando en la Reserva Cuyabeno" },
-    { n: "590 112 ha", label: "De reserva alrededor del lodge" },
+    { n: "Desde 2006", label: "Experiencia en turismo" },
+    { n: "590.112 ha", label: "De reserva alrededor del lodge" },
     { n: "Siona · Seoqueya", label: "Comunidades socias del lodge" },
-    { n: "Autorizados", label: "Ministerio de Turismo y del Ambiente" },
     // { n: "+10 000", label: "Pasajeros desde 2006" },   ← CONFIRMAR
     // { n: "+80", label: "Países que nos han visitado" }, ← CONFIRMAR
   ],
   statsCta: "Opiniones de viajeros",
   tourTitle: "Nuestros tours.",
-  days: "días",
-  nights: "noches",
-  itinerary: "Ver el itinerario",
-  compare: "Comparar los tres tours",
   allTours: "Conoce todos nuestros tours",
   inclusions: "Alojamiento, comidas, guía y canoa incluidos.",
   play: "Ver el video",
@@ -66,24 +60,6 @@ const es = {
   shotRoom: "La habitación",
   shotDining: "La comida",
   shotDeck: "El área común, de noche",
-  galleryTitle: "El Cuyabeno que vas a recorrer.",
-  galleryBody:
-    "Río, bosque, comunidad. Cada parte del viaje merece su espacio.",
-  galleryCta: "Explorar la galería",
-  wildlifeTitle: "La fauna, con guía.",
-  wildlifeBody:
-    "En canoa y a pie, los guías ayudan a reconocer sonidos, rastros y especies. La fauna vive libre: los avistamientos dependen del clima, el río y un poco de suerte.",
-  moments: [
-    ["Por el río", "Canoas por el Cuyabeno y atardeceres en la Laguna Grande."],
-    [
-      "Dentro del bosque",
-      "Caminatas diurnas y nocturnas acompañadas por guías bilingües.",
-    ],
-    [
-      "Con la comunidad",
-      "Visita a las comunidades Siona y Seoqueya y preparación de casabe con una familia local.",
-    ],
-  ],
   reviewsTitle: "El viaje, contado por quienes estuvieron.",
   reviewsCta: "Leer opiniones en Tripadvisor",
   journeyTitle: "La carretera termina. El río sigue.",
@@ -104,7 +80,6 @@ const es = {
   closingMessage: "Hola, quiero planificar un viaje a Canangueno Lodge.",
   closingEmail: "Escribir un correo",
   closingWhatsappHint: "Chat directo con el lodge",
-  closingEmailLabel: "Correo",
   closingEmailHint: "Ideal para grupos y cotizaciones",
   closingSubject: "Consulta de viaje — Canangueno Lodge",
 };
@@ -115,22 +90,13 @@ const en: typeof es = {
   intro:
     "3, 4 and 5-day tours in the Cuyabeno Reserve: canoe, bilingual guides, cabin and meals included.",
   explore: "See the tours",
-  availability: "Plan my trip",
-  perPerson: "per person",
-  from: "From",
-  place: "Cuyabeno Reserve · Ecuador",
   stats: [
-    { n: "Since 2006", label: "Operating in the Cuyabeno Reserve" },
+    { n: "Since 2006", label: "Experience in tourism" },
     { n: "590,112 ha", label: "Of reserve around the lodge" },
     { n: "Siona · Seoqueya", label: "Partner communities of the lodge" },
-    { n: "Licensed", label: "Ministries of Tourism and Environment" },
   ],
   statsCta: "Guest reviews",
   tourTitle: "Our tours.",
-  days: "days",
-  nights: "nights",
-  itinerary: "See the itinerary",
-  compare: "Compare the three tours",
   allTours: "See all our tours",
   inclusions: "Lodging, meals, guide and canoe included.",
   play: "Watch the film",
@@ -143,27 +109,6 @@ const en: typeof es = {
   shotRoom: "The room",
   shotDining: "The food",
   shotDeck: "The common area at night",
-  galleryTitle: "The places along your route.",
-  galleryBody:
-    "River, forest, community. A closer look at each part of Cuyabeno.",
-  galleryCta: "Explore the gallery",
-  wildlifeTitle: "Wildlife, with a guide.",
-  wildlifeBody:
-    "On the water and on foot, guides help you recognise sounds, tracks and species. Wildlife is free to roam: sightings depend on the weather, river conditions and a little luck.",
-  moments: [
-    [
-      "On the river",
-      "Canoe journeys along the Cuyabeno and sunsets at Laguna Grande.",
-    ],
-    [
-      "Under the canopy",
-      "Daytime hikes and night walks with bilingual guides.",
-    ],
-    [
-      "With the community",
-      "Visit the Siona and Seoqueya communities and make cassava bread with a local family.",
-    ],
-  ],
   reviewsTitle: "The journey, in their words.",
   reviewsCta: "Read reviews on Tripadvisor",
   journeyTitle: "The road ends. The river continues.",
@@ -184,7 +129,6 @@ const en: typeof es = {
   closingMessage: "Hi, I’d like to plan a trip to Canangueno Lodge.",
   closingEmail: "Send an email",
   closingWhatsappHint: "Chat directly with the lodge",
-  closingEmailLabel: "Email",
   closingEmailHint: "Best for groups and quotes",
   closingSubject: "Trip enquiry — Canangueno Lodge",
 };
@@ -195,22 +139,13 @@ const de: typeof es = {
   intro:
     "Touren mit 3, 4 und 5 Tagen im Cuyabeno-Reservat: Kanu, zweisprachige Guides, Hütte und Mahlzeiten inklusive.",
   explore: "Touren ansehen",
-  availability: "Reise planen",
-  perPerson: "pro Person",
-  from: "Ab",
-  place: "Cuyabeno-Reservat · Ecuador",
   stats: [
-    { n: "Seit 2006", label: "Im Cuyabeno-Reservat tätig" },
+    { n: "Seit 2006", label: "Erfahrung im Tourismus" },
     { n: "590.112 ha", label: "Reservat rund um die Lodge" },
     { n: "Siona · Seoqueya", label: "Partnergemeinschaften der Lodge" },
-    { n: "Lizenziert", label: "Tourismus- und Umweltministerium" },
   ],
   statsCta: "Gästebewertungen",
   tourTitle: "Unsere Touren.",
-  days: "Tage",
-  nights: "Nächte",
-  itinerary: "Reiseverlauf ansehen",
-  compare: "Die drei Touren vergleichen",
   allTours: "Alle Touren entdecken",
   inclusions: "Lodge, Mahlzeiten, Guide und Kanu inklusive.",
   play: "Film ansehen",
@@ -223,18 +158,6 @@ const de: typeof es = {
   shotRoom: "Das Zimmer",
   shotDining: "Das Essen",
   shotDeck: "Der Gemeinschaftsbereich am Abend",
-  galleryTitle: "Das Cuyabeno auf deiner Route.",
-  galleryBody:
-    "Fluss, Wald, Gemeinschaft. Jeder Teil der Reise verdient seinen eigenen Blick.",
-  galleryCta: "Galerie entdecken",
-  wildlifeTitle: "Tierwelt, mit Guide.",
-  wildlifeBody:
-    "Auf dem Wasser und zu Fuß helfen die Guides, Geräusche, Spuren und Arten zu erkennen. Die Tiere leben frei: Sichtungen hängen von Wetter, Fluss und etwas Glück ab.",
-  moments: [
-    ["Auf dem Fluss", "Kanufahrten auf dem Cuyabeno und Sonnenuntergänge an der Laguna Grande."],
-    ["Unter dem Blätterdach", "Wanderungen bei Tag und Nacht mit zweisprachigen Guides."],
-    ["Bei der Gemeinschaft", "Besuch der Siona- und Seoqueya-Gemeinschaften und Zubereitung von Maniokbrot mit einer lokalen Familie."],
-  ],
   reviewsTitle: "Die Reise, erzählt von unseren Gästen.",
   reviewsCta: "Bewertungen auf Tripadvisor lesen",
   journeyTitle: "Die Straße endet. Der Fluss führt weiter.",
@@ -255,7 +178,6 @@ const de: typeof es = {
   closingMessage: "Hallo, ich möchte eine Reise zur Canangueno Lodge planen.",
   closingEmail: "E-Mail schreiben",
   closingWhatsappHint: "Direkter Chat mit der Lodge",
-  closingEmailLabel: "E-Mail",
   closingEmailHint: "Ideal für Gruppen und Angebote",
   closingSubject: "Reiseanfrage — Canangueno Lodge",
 };
@@ -266,22 +188,13 @@ const fr: typeof es = {
   intro:
     "Circuits de 3, 4 et 5 jours dans la réserve de Cuyabeno : pirogue, guides bilingues, cabane et repas inclus.",
   explore: "Voir les circuits",
-  availability: "Préparer mon voyage",
-  perPerson: "par personne",
-  from: "À partir de",
-  place: "Réserve de Cuyabeno · Équateur",
   stats: [
-    { n: "Depuis 2006", label: "Présents dans la réserve de Cuyabeno" },
+    { n: "Depuis 2006", label: "Expérience dans le tourisme" },
     { n: "590 112 ha", label: "De réserve autour du lodge" },
     { n: "Siona · Seoqueya", label: "Communautés partenaires du lodge" },
-    { n: "Agréés", label: "Ministères du Tourisme et de l’Environnement" },
   ],
   statsCta: "Avis des voyageurs",
   tourTitle: "Nos circuits.",
-  days: "jours",
-  nights: "nuits",
-  itinerary: "Voir l’itinéraire",
-  compare: "Comparer les trois circuits",
   allTours: "Découvrir tous nos circuits",
   inclusions: "Hébergement, repas, guide et pirogue inclus.",
   play: "Voir le film",
@@ -294,18 +207,6 @@ const fr: typeof es = {
   shotRoom: "La chambre",
   shotDining: "La cuisine",
   shotDeck: "L’espace commun, le soir",
-  galleryTitle: "Le Cuyabeno que vous allez parcourir.",
-  galleryBody:
-    "Rivière, forêt, communauté. Chaque partie du voyage mérite qu’on s’y attarde.",
-  galleryCta: "Explorer la galerie",
-  wildlifeTitle: "La faune, avec un guide.",
-  wildlifeBody:
-    "Sur l’eau et à pied, les guides vous aident à reconnaître sons, traces et espèces. Les animaux vivent en liberté : les observations dépendent du climat, de la rivière et d’un peu de chance.",
-  moments: [
-    ["Sur la rivière", "Balades en pirogue sur le Cuyabeno et couchers de soleil à la Laguna Grande."],
-    ["Sous la canopée", "Randonnées de jour et marches nocturnes avec des guides bilingues."],
-    ["Avec la communauté", "Visite des communautés Siona et Seoqueya et préparation du pain de manioc avec une famille locale."],
-  ],
   reviewsTitle: "Le voyage raconté par celles et ceux qui l’ont vécu.",
   reviewsCta: "Lire les avis sur Tripadvisor",
   journeyTitle: "La route s’arrête. La rivière continue.",
@@ -323,10 +224,10 @@ const fr: typeof es = {
   closingBody:
     "Envoyez-nous vos dates et le nombre de voyageurs. L’équipe du lodge vous répond avec les disponibilités, le type de chambre et le tarif pour votre groupe.",
   closingWhatsapp: "Écrire sur WhatsApp",
-  closingMessage: "Bonjour, je souhaite organiser un séjour à Canangueno Lodge.",
+  closingMessage:
+    "Bonjour, je souhaite organiser un séjour à Canangueno Lodge.",
   closingEmail: "Envoyer un e-mail",
   closingWhatsappHint: "Échange direct avec le lodge",
-  closingEmailLabel: "E-mail",
   closingEmailHint: "Idéal pour les groupes et les devis",
   closingSubject: "Demande de voyage — Canangueno Lodge",
 };

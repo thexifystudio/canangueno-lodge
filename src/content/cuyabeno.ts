@@ -7,11 +7,12 @@ import type { MediaId } from "@/config/media";
  * ────────────────────────────────────────────────────────────────────────────
  *  Todo el texto de `/cuyabeno`: qué es la reserva, cómo funciona el agua, qué
  *  animales se ven y cuándo ir. Los animales son los que nombran los propios
- *  itinerarios del lodge (ver `fauna.ts`), no una lista genérica del Amazonas.
+ *  itinerarios del lodge o que salen en sus fotos, no una lista genérica del
+ *  Amazonas.
  *
- *  ⚠️ Datos generales de la reserva (año de creación, superficie y número de
- *  lagunas) tomados de fuentes públicas: revisarlos con el cliente
- *  antes de publicar.
+ *  Superficie: 590.112 ha, la misma cifra oficial que usa la portada.
+ *  ⚠️ El año de creación (1979) y las 14 lagunas son datos públicos de la
+ *  reserva: conviene que el cliente los confirme.
  */
 
 export const cuyabenoPage = {
@@ -54,7 +55,12 @@ export const cuyabenoFacts: { value: Localized; label: Localized }[] = [
     },
   },
   {
-    value: { es: "603.380 ha", en: "603.380 ha", de: "603.380 ha", fr: "603.380 ha" },
+    value: {
+      es: "590.112 ha",
+      en: "590,112 ha",
+      de: "590.112 ha",
+      fr: "590 112 ha",
+    },
     label: {
       es: "de selva protegida",
       en: "of protected rainforest",
@@ -303,7 +309,12 @@ export const cuyabenoAnimals: CuyabenoAnimal[] = [
   {
     id: "tortugas",
     mediaId: "animal-turtles",
-    name: { es: "Tortugas de río", en: "River turtles", de: "Flussschildkröten", fr: "Tortues de rivière" },
+    name: {
+      es: "Tortugas de río",
+      en: "River turtles",
+      de: "Flussschildkröten",
+      fr: "Tortues de rivière",
+    },
     note: {
       es: "Toman el sol en los troncos caídos de la orilla.",
       en: "They sunbathe on fallen logs along the bank.",
@@ -314,7 +325,12 @@ export const cuyabenoAnimals: CuyabenoAnimal[] = [
   {
     id: "capibara",
     mediaId: "animal-capybara",
-    name: { es: "Capibara", en: "Capybara", de: "Wasserschwein", fr: "Capybara" },
+    name: {
+      es: "Capibara",
+      en: "Capybara",
+      de: "Wasserschwein",
+      fr: "Capybara",
+    },
     note: {
       es: "El roedor más grande del mundo, siempre cerca del agua.",
       en: "The world’s largest rodent, never far from the water.",
@@ -347,7 +363,12 @@ export const cuyabenoAnimals: CuyabenoAnimal[] = [
   {
     id: "saki",
     mediaId: "animal-saki",
-    name: { es: "Mono saki", en: "Saki monkey", de: "Saki-Affe", fr: "Singe saki" },
+    name: {
+      es: "Mono saki",
+      en: "Saki monkey",
+      de: "Saki-Affe",
+      fr: "Singe saki",
+    },
     note: {
       es: "Tímido y de pelo largo, se mueve alto entre los árboles.",
       en: "Shy and long-haired, it moves high up in the trees.",
@@ -358,7 +379,12 @@ export const cuyabenoAnimals: CuyabenoAnimal[] = [
   {
     id: "rana-venenosa",
     mediaId: "animal-dartfrog",
-    name: { es: "Rana venenosa", en: "Poison dart frog", de: "Pfeilgiftfrosch", fr: "Dendrobate" },
+    name: {
+      es: "Rana venenosa",
+      en: "Poison dart frog",
+      de: "Pfeilgiftfrosch",
+      fr: "Dendrobate",
+    },
     note: {
       es: "Pequeña y de colores vivos: es su forma de avisar que es tóxica.",
       en: "Small and brightly coloured: its way of warning that it’s toxic.",
@@ -369,7 +395,12 @@ export const cuyabenoAnimals: CuyabenoAnimal[] = [
   {
     id: "mariposas",
     mediaId: "animal-butterfly",
-    name: { es: "Mariposas", en: "Butterflies", de: "Schmetterlinge", fr: "Papillons" },
+    name: {
+      es: "Mariposas",
+      en: "Butterflies",
+      de: "Schmetterlinge",
+      fr: "Papillons",
+    },
     note: {
       es: "Aparecen en los claros y en la arena a la orilla del río.",
       en: "They appear in clearings and on the sand along the river.",
@@ -381,11 +412,26 @@ export const cuyabenoAnimals: CuyabenoAnimal[] = [
 
 /** Los que se nombran en los itinerarios pero todavía no tienen foto propia. */
 export const cuyabenoAlso: Localized[] = [
-  { es: "Delfín rosado", en: "Pink river dolphin", de: "Rosa Flussdelfin", fr: "Dauphin rose" },
+  {
+    es: "Delfín rosado",
+    en: "Pink river dolphin",
+    de: "Rosa Flussdelfin",
+    fr: "Dauphin rose",
+  },
   { es: "Anaconda", en: "Anaconda", de: "Anakonda", fr: "Anaconda" },
-  { es: "Martín pescador", en: "Kingfisher", de: "Eisvogel", fr: "Martin-pêcheur" },
+  {
+    es: "Martín pescador",
+    en: "Kingfisher",
+    de: "Eisvogel",
+    fr: "Martin-pêcheur",
+  },
   { es: "Loros y papagayos", en: "Parrots", de: "Papageien", fr: "Perroquets" },
-  { es: "Serpientes arbóreas", en: "Tree snakes", de: "Baumschlangen", fr: "Serpents arboricoles" },
+  {
+    es: "Serpientes arbóreas",
+    en: "Tree snakes",
+    de: "Baumschlangen",
+    fr: "Serpents arboricoles",
+  },
 ];
 
 /**
@@ -413,8 +459,18 @@ export const cuyabenoWhen = {
   },
   seasons: [
     {
-      months: { es: "Diciembre – marzo", en: "December – March", de: "Dezember – März", fr: "Décembre – mars" },
-      name: { es: "Temporada seca", en: "Dry season", de: "Trockenzeit", fr: "Saison sèche" },
+      months: {
+        es: "Diciembre – marzo",
+        en: "December – March",
+        de: "Dezember – März",
+        fr: "Décembre – mars",
+      },
+      name: {
+        es: "Temporada seca",
+        en: "Dry season",
+        de: "Trockenzeit",
+        fr: "Saison sèche",
+      },
       text: {
         es: "Llueve menos y el agua baja. La Laguna Grande puede quedar más baja de lo normal.",
         en: "Less rain and lower water. Laguna Grande can be lower than usual.",
@@ -423,8 +479,18 @@ export const cuyabenoWhen = {
       },
     },
     {
-      months: { es: "Abril – julio", en: "April – July", de: "April – Juli", fr: "Avril – juillet" },
-      name: { es: "Temporada de lluvias", en: "Rainy season", de: "Regenzeit", fr: "Saison des pluies" },
+      months: {
+        es: "Abril – julio",
+        en: "April – July",
+        de: "April – Juli",
+        fr: "Avril – juillet",
+      },
+      name: {
+        es: "Temporada de lluvias",
+        en: "Rainy season",
+        de: "Regenzeit",
+        fr: "Saison des pluies",
+      },
       text: {
         es: "Los ríos crecen y el bosque se inunda: la canoa llega más lejos, entre los árboles.",
         en: "The rivers rise and the forest floods: the canoe reaches further, in among the trees.",
@@ -433,8 +499,18 @@ export const cuyabenoWhen = {
       },
     },
     {
-      months: { es: "Agosto – noviembre", en: "August – November", de: "August – November", fr: "Août – novembre" },
-      name: { es: "Lluvia moderada", en: "Moderate rain", de: "Mäßiger Regen", fr: "Pluie modérée" },
+      months: {
+        es: "Agosto – noviembre",
+        en: "August – November",
+        de: "August – November",
+        fr: "Août – novembre",
+      },
+      name: {
+        es: "Lluvia moderada",
+        en: "Moderate rain",
+        de: "Mäßiger Regen",
+        fr: "Pluie modérée",
+      },
       text: {
         es: "Un punto medio: agua suficiente para navegar y días más estables.",
         en: "A middle ground: enough water to navigate and steadier days.",
@@ -444,9 +520,33 @@ export const cuyabenoWhen = {
     },
   ],
   climate: [
-    { value: "25 °C", label: { es: "temperatura media", en: "average temperature", de: "Durchschnittstemperatur", fr: "température moyenne" } },
-    { value: "85–95 %", label: { es: "humedad", en: "humidity", de: "Luftfeuchtigkeit", fr: "humidité" } },
-    { value: "3.000–4.000 mm", label: { es: "de lluvia al año", en: "of rain a year", de: "Regen pro Jahr", fr: "de pluie par an" } },
+    {
+      value: "25 °C",
+      label: {
+        es: "temperatura media",
+        en: "average temperature",
+        de: "Durchschnittstemperatur",
+        fr: "température moyenne",
+      },
+    },
+    {
+      value: "85–95 %",
+      label: {
+        es: "humedad",
+        en: "humidity",
+        de: "Luftfeuchtigkeit",
+        fr: "humidité",
+      },
+    },
+    {
+      value: "3.000–4.000 mm",
+      label: {
+        es: "de lluvia al año",
+        en: "of rain a year",
+        de: "Regen pro Jahr",
+        fr: "de pluie par an",
+      },
+    },
   ],
 } as const;
 
@@ -482,11 +582,41 @@ export const cuyabenoCta = {
  * Los animales del adelanto de la portada. Distintos de los de `/cuyabeno`:
  * la página completa tiene que mostrar más, no repetir los mismos cuatro.
  */
-export const cuyabenoTeaserAnimals: { id: string; name: Localized; mediaId: MediaId }[] = [
-  { id: "hoatzin", mediaId: "animal-hoatzin", name: { es: "Hoatzín", en: "Hoatzin", de: "Hoatzin", fr: "Hoazin" } },
-  { id: "tortugas", mediaId: "animal-turtles", name: { es: "Tortugas de río", en: "River turtles", de: "Flussschildkröten", fr: "Tortues de rivière" } },
-  { id: "capibara", mediaId: "animal-capybara", name: { es: "Capibara", en: "Capybara", de: "Wasserschwein", fr: "Capybara" } },
-  { id: "garza", mediaId: "animal-heron", name: { es: "Garza", en: "Heron", de: "Reiher", fr: "Héron" } },
+export const cuyabenoTeaserAnimals: {
+  id: string;
+  name: Localized;
+  mediaId: MediaId;
+}[] = [
+  {
+    id: "hoatzin",
+    mediaId: "animal-hoatzin",
+    name: { es: "Hoatzín", en: "Hoatzin", de: "Hoatzin", fr: "Hoazin" },
+  },
+  {
+    id: "tortugas",
+    mediaId: "animal-turtles",
+    name: {
+      es: "Tortugas de río",
+      en: "River turtles",
+      de: "Flussschildkröten",
+      fr: "Tortues de rivière",
+    },
+  },
+  {
+    id: "capibara",
+    mediaId: "animal-capybara",
+    name: {
+      es: "Capibara",
+      en: "Capybara",
+      de: "Wasserschwein",
+      fr: "Capybara",
+    },
+  },
+  {
+    id: "garza",
+    mediaId: "animal-heron",
+    name: { es: "Garza", en: "Heron", de: "Reiher", fr: "Héron" },
+  },
 ];
 
 /** El bloque de Cuyabeno en la portada: un adelanto que lleva a `/cuyabeno`. */

@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { isLocale, pick } from "@/lib/i18n";
 import { getDictionary } from "@/i18n";
 import { routes } from "@/lib/routes";
-import { facilities, lodgePage } from "@/content/lodge";
+import { fieldGear, lodgePage } from "@/content/lodge";
 import { Media } from "@/components/ui/Media";
 import { ReviewsSection } from "@/components/sections/ReviewsSection";
 import { ClosingBand } from "@/components/expedition/ClosingBand";
@@ -47,7 +47,6 @@ export default async function Page({
   if (!isLocale(l)) notFound();
   const t9n = getDictionary(l).lodge;
   const { rooms, table, between } = lodgePage;
-  const gear = facilities.find((f) => f.id === "equipo");
 
   return (
     <div className="exp-detail lodge-page">
@@ -159,12 +158,10 @@ export default async function Page({
               </figure>
             ))}
           </div>
-          {gear && (
-            <p className="lodge-gear">
-              <strong>{pick(lodgePage.gearTitle, l)}:</strong>{" "}
-              {pick(gear.body, l)}
-            </p>
-          )}
+          <p className="lodge-gear">
+            <strong>{pick(lodgePage.gearTitle, l)}:</strong>{" "}
+            {pick(fieldGear, l)}
+          </p>
         </div>
       </section>
 

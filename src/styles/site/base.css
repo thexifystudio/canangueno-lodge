@@ -3,7 +3,6 @@
 .exp-home h2,
 .exp-stay h2,
 .exp-reviews h2,
-.exp-plan h2,
 .exp-detail h2 {
   font-size: clamp(2.05rem, 3.5vw, 3.65rem);
   line-height: 1.08;

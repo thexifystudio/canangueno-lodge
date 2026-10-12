@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { LOCALES, pick } from "@/lib/i18n";
+import { DEFAULT_LOCALE, LOCALES, pick } from "@/lib/i18n";
 import { tours } from "@/content/tours";
 import { site } from "@/config/site";
 
@@ -26,9 +26,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
         changeFrequency: path === "" ? "weekly" : "monthly",
         priority: path === "" ? 1 : 0.8,
         alternates: {
-          languages: Object.fromEntries(
-            LOCALES.map((l) => [l, `${site.url}/${l}${path}`]),
-          ),
+          languages: {
+            ...Object.fromEntries(
+              LOCALES.map((l) => [l, `${site.url}/${l}${path}`]),
+            ),
+            "x-default": `${site.url}/${DEFAULT_LOCALE}${path}`,
+          },
         },
       });
     }
@@ -40,12 +43,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
         changeFrequency: "monthly",
         priority: 0.9,
         alternates: {
-          languages: Object.fromEntries(
-            LOCALES.map((l) => [
-              l,
-              `${site.url}/${l}/tours/${pick(tour.slug, l)}`,
-            ]),
-          ),
+          languages: {
+            ...Object.fromEntries(
+              LOCALES.map((l) => [
+                l,
+                `${site.url}/${l}/tours/${pick(tour.slug, l)}`,
+              ]),
+            ),
+            "x-default": `${site.url}/${DEFAULT_LOCALE}/tours/${pick(tour.slug, DEFAULT_LOCALE)}`,
+          },
         },
       });
     }

@@ -121,7 +121,8 @@
    * respaldo para cuando no hay patrón de división (nombres propios, URLs).
    * No se aplica a español ni inglés, que no tienen este problema.
    */
-  :is(html[lang="de"], html[lang="fr"]) :is(h1, h2, h3, h4, p, li, dt, dd, th, td, label, legend) {
+  :is(html[lang="de"], html[lang="fr"])
+    :is(h1, h2, h3, h4, p, li, dt, dd, th, td, label, legend) {
     hyphens: auto;
     overflow-wrap: break-word;
   }
@@ -140,23 +141,12 @@
 }
 
 /* ───────────────────────────────────────────────────────────────────────────
-   REVEALS — arranque seguro
+   MOVIMIENTO REDUCIDO
    ───────────────────────────────────────────────────────────────────────────
-   Lección del vault: si el estado inicial de la animación se escribe en el
-   HTML del servidor, sin JS la página queda invisible para siempre.
-
-   Acá NADA se esconde desde CSS. El estado inicial lo pone GSAP dentro de un
-   layout effect (antes del primer pintado), así que:
-     · con JS   → hay animación y no hay parpadeo
-     · sin JS   → la página se ve entera, simplemente sin animar
+   Quien pide menos movimiento en su sistema no ve transiciones ni
+   animaciones: el sitio funciona igual, sin moverse.
    ─────────────────────────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  [data-reveal],
-  [data-reveal] > * {
-    opacity: 1 !important;
-    clip-path: none !important;
-    transform: none !important;
-  }
   *,
   *::before,
   *::after {
@@ -177,13 +167,6 @@
   padding-inline: var(--gutter);
 }
 
-@utility shell-narrow {
-  width: 100%;
-  margin-inline: auto;
-  max-width: 58rem;
-  padding-inline: var(--gutter);
-}
-
 @utility section-y {
   padding-block: var(--section-y);
 }
@@ -195,46 +178,6 @@
   font-weight: 500;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-}
-
-/* Números de secuencia (01 — 02 — 03) */
-@utility ordinal {
-  font-family: var(--ff-sans), system-ui, sans-serif;
-  font-size: var(--text-eyebrow);
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  font-variant-numeric: tabular-nums;
-}
-
-@utility display-hero {
-  font-family: var(--ff-display), Georgia, serif;
-  font-size: var(--text-hero);
-  line-height: 0.94;
-  letter-spacing: -0.025em;
-}
-
-/* Grano de película: se aplica sobre fotos y bloques oscuros */
-@utility grain {
-  position: relative;
-}
-@utility grain-layer {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: var(--grain-strength, 0.045);
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
-}
-
-/* Cinta de fauna: la lista va duplicada, así que mover el 50 % es un bucle
-   perfecto. Ver `components/sections/FaunaMarquee.tsx`. */
-@keyframes marquee {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
 }
 
 /* Barra de scroll discreta, en tono de marca */

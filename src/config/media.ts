@@ -40,17 +40,6 @@ export type MediaEntry = {
 };
 
 export const media = {
-  "lodge-bathroom": {
-    src: "/fotos/bano.webp",
-    alt: {
-      es: "Baño privado de las cabañas de Canangueno",
-      en: "Private bathroom in a Canangueno cabin",
-      de: "Eigenes Bad in einer Hütte von Canangueno",
-      fr: "Salle de bain privée dans une cabane de Canangueno",
-    },
-    tone: "lodge",
-    ratio: "3/4",
-  },
   /* ─── Portada ─── */
   /**
    * ✅ FOTO REAL. Fotograma del video oficial del propio lodge
@@ -67,17 +56,6 @@ export const media = {
     },
     tone: "river",
     ratio: "16/9",
-  },
-  "home-statement": {
-    src: "/fotos/canoa-rio-grupo.webp",
-    alt: {
-      es: "Selva primaria de la Reserva Cuyabeno vista desde el agua",
-      en: "Primary rainforest of the Cuyabeno Reserve seen from the water",
-      de: "Primärwald des Cuyabeno-Reservats, vom Wasser aus gesehen",
-      fr: "Forêt primaire de la réserve de Cuyabeno vue depuis l’eau",
-    },
-    tone: "canopy",
-    ratio: "21/9",
   },
   "home-closing": {
     src: "/fotos/atardecer-laguna-2.webp",
@@ -114,80 +92,16 @@ export const media = {
     tone: "river",
     ratio: "4/5",
   },
-  "exp-wildlife": {
-    src: "/fotos/guacamayos.webp",
-    alt: {
-      es: "Pareja de guacamayos escarlata entre las hojas",
-      en: "A pair of scarlet macaws among the leaves",
-      de: "Ein Paar Hellrote Aras zwischen den Blättern",
-      fr: "Un couple d’aras rouges parmi les feuilles",
-    },
-    tone: "fauna",
-    ratio: "4/5",
-  },
-  "exp-culture": {
-    src: "/fotos/comunidad-artesania.webp",
-    alt: {
-      es: "Visitantes con una niña de la comunidad Siona",
-      en: "Visitors with a young girl from the Siona community",
-      de: "Besucher mit einem Mädchen aus der Siona-Gemeinschaft",
-      fr: "Des visiteurs avec une fillette de la communauté siona",
-    },
-    tone: "community",
-    ratio: "4/5",
-  },
-
-  /* ─── Tours ─── */
-  "tour-3-dias": {
-    src: "/fotos/canoa-rio-grupo.webp",
-    alt: { es: "Tour de 3 días en Cuyabeno", en: "3-day Cuyabeno tour",
-    de: "Cuyabeno-Tour über 3 Tage",
-    fr: "Circuit de 3 jours à Cuyabeno" },
-    tone: "river",
-    ratio: "3/4",
-  },
-  "tour-4-dias": {
-    src: "/fotos/canoa-espejo.webp",
-    alt: { es: "Tour de 4 días en Cuyabeno", en: "4-day Cuyabeno tour",
-    de: "Cuyabeno-Tour über 4 Tage",
-    fr: "Circuit de 4 jours à Cuyabeno" },
-    tone: "canopy",
-    ratio: "3/4",
-  },
-  "tour-5-dias": {
-    src: "/fotos/atardecer-laguna.webp",
-    alt: { es: "Tour de 5 días en Cuyabeno", en: "5-day Cuyabeno tour",
-    de: "Cuyabeno-Tour über 5 Tage",
-    fr: "Circuit de 5 jours à Cuyabeno" },
-    tone: "lagoon",
-    ratio: "3/4",
-  },
 
   /* ─── Relato del día (storytelling) ─── */
-  "story-dawn": {
-    src: "/fotos/atardecer-laguna-2.webp",
-    alt: {
-      es: "La niebla cubre el río al amanecer",
-      en: "Mist covering the river at dawn",
-      de: "Nebel über dem Fluss im Morgengrauen",
-      fr: "Brume sur le fleuve à l’aube",
-    },
-    tone: "dawn",
-    ratio: "3/2",
-  },
-  "story-canoe": {
-    src: "/fotos/canoa-rio-grupo.webp",
-    alt: { es: "Subiendo a la canoa", en: "Boarding the canoe",
-    de: "Einstieg ins Kanu",
-    fr: "Embarquement en pirogue" },
-    tone: "river",
-    ratio: "3/2",
-  },
   "story-wildlife": {
     src: "/fotos/mono-ardilla.webp",
-    alt: { es: "Monos entre los árboles", en: "Monkeys among the trees",
-    de: "Affen zwischen den Bäumen",
-    fr: "Singes parmi les arbres" },
+    alt: {
+      es: "Monos entre los árboles",
+      en: "Monkeys among the trees",
+      de: "Affen zwischen den Bäumen",
+      fr: "Singes parmi les arbres",
+    },
     tone: "fauna",
     ratio: "3/2",
   },
@@ -206,59 +120,25 @@ export const media = {
   /* ─── El lodge ─── */
   "lodge-exterior": {
     src: "/fotos/lodge-cabanas.webp",
-    alt: { es: "Cabañas de Canangueno Lodge", en: "Canangueno Lodge cabins",
-    de: "Hütten der Canangueno Lodge",
-    fr: "Cabanes du Canangueno Lodge" },
+    alt: {
+      es: "Cabañas de Canangueno Lodge",
+      en: "Canangueno Lodge cabins",
+      de: "Hütten der Canangueno Lodge",
+      fr: "Cabanes du Canangueno Lodge",
+    },
     tone: "lodge",
     ratio: "16/10",
-  },
-  "lodge-room": {
-    src: "/fotos/habitacion.webp",
-    alt: {
-      es: "Habitación con baño privado y mosquitero",
-      en: "Room with private bathroom and mosquito net",
-      de: "Zimmer mit eigenem Bad und Moskitonetz",
-      fr: "Chambre avec salle de bain privée et moustiquaire",
-    },
-    tone: "lodge",
-    ratio: "4/3",
-  },
-  "lodge-dining": {
-    src: "/fotos/comedor.webp",
-    alt: { es: "Comedor del lodge", en: "Lodge dining area",
-    de: "Essbereich der Lodge",
-    fr: "Salle à manger du lodge" },
-    tone: "lodge",
-    ratio: "4/3",
-  },
-  "lodge-deck": {
-    src: "/fotos/hamacas.webp",
-    alt: { es: "Mirador sobre el río", en: "Deck overlooking the river",
-    de: "Terrasse mit Blick auf den Fluss",
-    fr: "Terrasse donnant sur le fleuve" },
-    tone: "river",
-    ratio: "4/3",
-  },
-
-  /* ─── Cómo llegar ─── */
-  "journey-road": {
-    src: "/fotos/pasarela.webp",
-    alt: {
-      es: "Viajeros caminando por la pasarela hacia el lodge",
-      en: "Travellers walking along the boardwalk to the lodge",
-      de: "Reisende auf dem Holzsteg zur Lodge",
-      fr: "Des voyageurs marchent sur la passerelle vers le lodge",
-    },
-    tone: "canopy",
-    ratio: "16/9",
   },
 
   /* ─── Galería ─── */
   "gal-lagoon-1": {
     src: "/fotos/atardecer-laguna.webp",
-    alt: { es: "Laguna Grande al atardecer", en: "Laguna Grande at sunset",
-    de: "Laguna Grande bei Sonnenuntergang",
-    fr: "La Laguna Grande au coucher du soleil" },
+    alt: {
+      es: "Laguna Grande al atardecer",
+      en: "Laguna Grande at sunset",
+      de: "Laguna Grande bei Sonnenuntergang",
+      fr: "La Laguna Grande au coucher du soleil",
+    },
     tone: "lagoon",
     ratio: "3/2",
   },
@@ -286,9 +166,12 @@ export const media = {
   },
   "gal-fauna-2": {
     src: "/fotos/caiman.webp",
-    alt: { es: "Caimán en la orilla", en: "Caiman on the riverbank",
-    de: "Kaiman am Flussufer",
-    fr: "Caïman sur la berge" },
+    alt: {
+      es: "Caimán en la orilla",
+      en: "Caiman on the riverbank",
+      de: "Kaiman am Flussufer",
+      fr: "Caïman sur la berge",
+    },
     tone: "night",
     ratio: "3/2",
   },
@@ -302,83 +185,6 @@ export const media = {
     },
     tone: "canopy",
     ratio: "2/3",
-  },
-  "gal-forest-1": {
-    src: "/fotos/pasarela-bosque.webp",
-    alt: {
-      es: "Pasarela de madera entre la vegetación del bosque",
-      en: "Wooden boardwalk through the forest vegetation",
-      de: "Holzsteg durch die Vegetation des Waldes",
-      fr: "Passerelle en bois à travers la végétation de la forêt",
-    },
-    tone: "canopy",
-    ratio: "2/3",
-  },
-  "gal-forest-2": {
-    src: "/fotos/sendero-bosque.webp",
-    alt: {
-      es: "Grupo de caminata con su guía en el bosque",
-      en: "A hiking group with their guide in the forest",
-      de: "Eine Wandergruppe mit ihrem Guide im Wald",
-      fr: "Un groupe de randonnée avec son guide en forêt",
-    },
-    tone: "canopy",
-    ratio: "3/2",
-  },
-  "gal-community-1": {
-    src: "/fotos/comunidad-artesania.webp",
-    alt: {
-      es: "Visitantes con una niña de la comunidad Siona",
-      en: "Visitors with a young girl from the Siona community",
-      de: "Besucher mit einem Mädchen aus der Siona-Gemeinschaft",
-      fr: "Des visiteurs avec une fillette de la communauté siona",
-    },
-    tone: "community",
-    ratio: "3/2",
-  },
-  "gal-community-2": {
-    src: "/fotos/casabe.webp",
-    alt: {
-      es: "Viajeros rallando yuca para preparar casabe",
-      en: "Travellers grating cassava to make casabe bread",
-      de: "Reisende reiben Maniok für Casabe-Brot",
-      fr: "Des voyageurs râpent du manioc pour préparer le casabe",
-    },
-    tone: "community",
-    ratio: "2/3",
-  },
-  "gal-lodge-1": {
-    src: "/fotos/lodge-cabanas.webp",
-    alt: {
-      es: "Cabañas entre la vegetación",
-      en: "Cabins among the vegetation",
-      de: "Hütten inmitten der Vegetation",
-      fr: "Cabanes au milieu de la végétation",
-    },
-    tone: "lodge",
-    ratio: "3/2",
-  },
-  "gal-lodge-2": {
-    src: "/fotos/habitacion-mosquitero.webp",
-    alt: {
-      es: "Habitación del lodge con cama y mosquitero",
-      en: "Lodge room with a bed and mosquito net",
-      de: "Zimmer der Lodge mit Bett und Moskitonetz",
-      fr: "Chambre du lodge avec lit et moustiquaire",
-    },
-    tone: "lodge",
-    ratio: "3/2",
-  },
-  "gal-river-1": {
-    src: "/fotos/canoa-rio-grupo.webp",
-    alt: {
-      es: "Canoa a remo por el Cuyabeno",
-      en: "Paddle canoe on the Cuyabeno",
-      de: "Paddelkanu auf dem Cuyabeno",
-      fr: "Pirogue à rame sur le Cuyabeno",
-    },
-    tone: "river",
-    ratio: "3/2",
   },
   "gal-fauna-4": {
     src: "/fotos/monos-aulladores.webp",
@@ -423,39 +229,6 @@ export const media = {
     },
     tone: "community",
     ratio: "3/2",
-  },
-  "gal-lodge-3": {
-    src: "/fotos/hamacas.webp",
-    alt: {
-      es: "Hamacas en la terraza del lodge frente al río",
-      en: "Hammocks on the lodge deck facing the river",
-      de: "Hängematten auf der Terrasse der Lodge mit Blick auf den Fluss",
-      fr: "Hamacs sur la terrasse du lodge face au fleuve",
-    },
-    tone: "lodge",
-    ratio: "3/2",
-  },
-  "gal-river-3": {
-    src: "/fotos/canoa-espejo.webp",
-    alt: {
-      es: "Canoa navegando el Cuyabeno sobre el agua espejada",
-      en: "A canoe travelling the Cuyabeno over mirror-still water",
-      de: "Ein Kanu auf dem Cuyabeno über spiegelglattem Wasser",
-      fr: "Une pirogue sur le Cuyabeno, sur une eau lisse comme un miroir",
-    },
-    tone: "river",
-    ratio: "2/3",
-  },
-  "gal-river-2": {
-    src: "/fotos/nadando.webp",
-    alt: {
-      es: "Viajeros nadando en la Laguna Grande",
-      en: "Travellers swimming in Laguna Grande",
-      de: "Reisende schwimmen in der Laguna Grande",
-      fr: "Des voyageurs nagent dans la Laguna Grande",
-    },
-    tone: "dawn",
-    ratio: "2/3",
   },
   /* ─── Página del lodge (fotos del cliente, set 2026-09) ─── */
   "lodge-building": {

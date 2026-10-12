@@ -56,13 +56,7 @@ const COPY: Record<
   },
 };
 
-function Logos({
-  locale,
-  size,
-}: {
-  locale: Locale;
-  size: "sm" | "lg";
-}) {
+function Logos({ locale, size }: { locale: Locale; size: "sm" | "lg" }) {
   const c = COPY[locale];
   const h = size === "lg" ? "h-20 sm:h-24" : "h-14";
   return (
@@ -74,6 +68,7 @@ function Logos({
     >
       <li>
         <Image
+          unoptimized
           src="/marca/avales/ministerio-turismo.webp"
           alt={c.tourism}
           width={134}
@@ -83,6 +78,7 @@ function Logos({
       </li>
       <li>
         <Image
+          unoptimized
           src="/marca/avales/ministerio-ambiente.webp"
           alt={c.environment}
           width={110}
@@ -101,6 +97,7 @@ function Logos({
           {/* El círculo de Tripadvisor llena su caja; los de los ministerios
               tienen texto debajo. Un poco más chico se ven del mismo peso. */}
           <Image
+          unoptimized
             src="/marca/avales/tripadvisor.webp"
             alt=""
             width={120}

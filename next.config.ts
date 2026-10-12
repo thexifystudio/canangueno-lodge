@@ -3,12 +3,11 @@ import { legacyRedirects } from "./legacy-redirects";
 import { site } from "./src/config/site";
 
 const nextConfig: NextConfig = {
-  // La raíz manda al idioma por defecto. Cuando llegue el momento se puede
-  // cambiar por detección de idioma del navegador en un middleware.
-  // Después, las URLs de la web vieja de WordPress (ver `legacy-redirects.ts`).
+  // La raíz `/` la resuelve `src/middleware.ts` (idioma del navegador). Acá:
+  // páginas que se eliminaron y las URLs de la web vieja de WordPress (ver
+  // `legacy-redirects.ts`).
   async redirects() {
     return [
-      { source: "/", destination: "/en", permanent: false },
       // La página "Nosotros" (/about) se eliminó: quien tenga el enlace de la
       // URL provisional llega a la del lodge en vez de a un 404.
       {
@@ -39,13 +38,15 @@ const nextConfig: NextConfig = {
   },
 
   images: {
-    // Las fotos ya salen optimizadas (WebP, lado largo ≤ 1800 px, ver
-    // `scripts/galeria.mjs`) y en Workers la optimización de `next/image`
-    // necesita el servicio pago de Cloudflare Images. Se sirven tal cual.
-    unoptimized: true,
-    formats: ["image/avif", "image/webp"],
-    // Lista blanca para cuando las fotos vivan en R2 o en un CDN.
-    remotePatterns: [],
+    // En Workers no hay optimización de imágenes sin el servicio pago de
+    // Cloudflare Images. `scripts/imagenes.mjs` deja hechas copias de 480 y
+    // 800 px de cada foto y este cargador arma el `srcset` con ellas: cada
+    // pantalla baja la que necesita (ver src/lib/image-loader.ts).
+    loader: "custom",
+    loaderFile: "./src/lib/image-loader.ts",
+    // Los anchos del `srcset`: las dos copias y la original (≤ 1800 px).
+    deviceSizes: [480, 800, 1800],
+    imageSizes: [],
   },
 
   eslint: {

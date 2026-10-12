@@ -5,6 +5,7 @@ import type { Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/i18n";
 import { site, whatsappLink } from "@/config/site";
 import { localDateISO, validTravelDate } from "@/lib/travel-date";
+import { Credentials } from "@/components/ui/Credentials";
 
 /** Lo mínimo de cada tour que necesita el formulario, ya en su idioma. */
 export type BookingTour = {
@@ -311,6 +312,11 @@ export function BookingForm({
         <p className="exp-small exp-book-availability">
           {t9n.availabilityNote}
         </p>
+        {/* Quién avala la operación, al lado del formulario: es justo acá
+            donde alguien decide si confía en mandar sus datos. */}
+        <div className="exp-book-credentials">
+          <Credentials locale={l} variant="compact" />
+        </div>
       </aside>
     </div>
   );

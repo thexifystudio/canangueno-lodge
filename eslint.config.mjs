@@ -17,6 +17,9 @@ const eslintConfig = [
       ".next/**",
       "out/**",
       "build/**",
+      // Lo que genera el build de Cloudflare (OpenNext / wrangler).
+      ".open-next/**",
+      ".wrangler/**",
       "next-env.d.ts",
     ],
   },

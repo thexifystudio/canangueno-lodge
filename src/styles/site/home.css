@@ -18,7 +18,7 @@
 }
 .exp-trust dl {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 26px clamp(24px, 3vw, 52px);
   flex: 1;
 }
@@ -311,16 +311,16 @@
 /* ── Ritmo de secciones ─────────────────────────────────────────────────────
    La portada se lee como el viaje: se llega por el río (hero, verde
    profundo), se elige el recorrido y se ve el lodge a la luz del día, se
-   entra al bosque (fauna, otra vez el verde del dosel), y se termina en el
-   atardecer de la Laguna Grande (`ClosingBand`).
+   entra al bosque (Cuyabeno, otra vez el verde del dosel), y se termina en
+   el atardecer de la Laguna Grande (`ClosingBand`).
 
    Suelos, de arriba abajo:
-     hero + datos ▸ deep · tours ▸ band · lodge ▸ bg · fauna ▸ deep
-     fotos ▸ bg · opiniones ▸ surface · llegada ▸ band · cierre ▸ foto
+     hero + datos ▸ deep · avales ▸ surface · tours ▸ band · lodge ▸ bg
+     Cuyabeno ▸ deep · opiniones ▸ surface · llegada ▸ band · cierre ▸ foto
 
-   Nunca dos secciones seguidas en el mismo suelo, así que no hace falta
-   ninguna línea para separarlas; la única que queda es entre fotos y
-   opiniones, dos claros que se parecen mucho. */
+   Nunca dos secciones seguidas en el mismo suelo. La línea de arriba de las
+   opiniones es para `/el-lodge`, donde van después del mapa: dos claros que
+   se parecen mucho. */
 .exp-tours,
 .exp-arrival {
   background: var(--c-band);

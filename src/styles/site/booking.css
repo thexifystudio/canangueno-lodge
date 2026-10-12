@@ -30,11 +30,6 @@
   font-size: 0.82rem;
   color: var(--c-ink-soft);
 }
-.exp-field-hint {
-  margin-top: 8px;
-  font-size: 0.78rem;
-  color: var(--c-ink-faint);
-}
 /* El error va debajo del campo, en el idioma de la página, y dice cómo
    corregirlo. El color no es la única señal: el texto está siempre. */
 .exp-field-error {
@@ -156,4 +151,11 @@
   .exp-book-form > .exp-button {
     width: 100%;
   }
+}
+
+/* Los avales al pie del resumen lateral, separados por una línea. */
+.exp-book-credentials {
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid var(--c-line);
 }

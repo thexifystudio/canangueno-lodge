@@ -3,12 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ArrowUpRight, Check, ChevronDown } from "lucide-react";
-import {
-  LOCALES,
-  LOCALE_LABELS,
-  pick,
-  type Locale,
-} from "@/lib/i18n";
+import { LOCALES, LOCALE_LABELS, pick, type Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/i18n";
 import { routes } from "@/lib/routes";
 import { Logo } from "@/components/layout/Logo";
@@ -29,7 +24,13 @@ function FlagIcon({ locale }: { locale: Locale }) {
         <>
           <rect width="24" height="16" fill="#fff" />
           {Array.from({ length: 7 }, (_, i) => (
-            <rect key={i} y={i * (32 / 13)} width="24" height={16 / 13} fill="#B22234" />
+            <rect
+              key={i}
+              y={i * (32 / 13)}
+              width="24"
+              height={16 / 13}
+              fill="#B22234"
+            />
           ))}
           <rect width="10.5" height="8.7" fill="#3C3B6E" />
           {[1.4, 3.2, 5, 6.8, 8.6].flatMap((x, column) =>
@@ -184,10 +185,7 @@ export function Header({
           >
             <Logo />
           </Link>
-          <nav
-            className="exp-desktop-links"
-            aria-label={ui.main}
-          >
+          <nav className="exp-desktop-links" aria-label={ui.main}>
             {links.map(([href, label]) => (
               <Link
                 href={href}
@@ -216,7 +214,9 @@ export function Header({
                   >
                     <FlagIcon locale={target} />
                     <span>{LOCALE_LABELS[target].long}</span>
-                    {target === locale && <Check size={15} aria-hidden="true" />}
+                    {target === locale && (
+                      <Check size={15} aria-hidden="true" />
+                    )}
                   </Link>
                 ))}
               </div>

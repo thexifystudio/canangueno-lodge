@@ -196,10 +196,7 @@ export function GalleryGrid({
             <div className="exp-gallery-caption">
               <p aria-live="polite">{altOf(items[active])}</p>
               <div>
-                <button
-                  onClick={() => move(-1)}
-                  aria-label={labels.previous}
-                >
+                <button onClick={() => move(-1)} aria-label={labels.previous}>
                   <ChevronLeft size={22} />
                 </button>
                 <button onClick={() => move(1)} aria-label={labels.next}>

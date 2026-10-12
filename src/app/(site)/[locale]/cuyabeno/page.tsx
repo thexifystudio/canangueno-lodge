@@ -134,7 +134,9 @@ export default async function Page({
           />
         </div>
         <div className="exp-cuyabeno-when-copy">
-          <p className="exp-cuyabeno-eyebrow">{pick(cuyabenoWhen.eyebrow, l)}</p>
+          <p className="exp-cuyabeno-eyebrow">
+            {pick(cuyabenoWhen.eyebrow, l)}
+          </p>
           <h2>{pick(cuyabenoWhen.title, l)}</h2>
           <p className="exp-cuyabeno-when-lead">{pick(cuyabenoWhen.body, l)}</p>
           <ol className="exp-cuyabeno-seasons">
@@ -164,7 +166,9 @@ export default async function Page({
         <div className="shell">
           <div className="exp-heading">
             <div>
-              <p className="exp-cuyabeno-eyebrow">{pick(cuyabenoCta.eyebrow, l)}</p>
+              <p className="exp-cuyabeno-eyebrow">
+                {pick(cuyabenoCta.eyebrow, l)}
+              </p>
               <h2>{pick(cuyabenoCta.title, l)}</h2>
             </div>
             <div>

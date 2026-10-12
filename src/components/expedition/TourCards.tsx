@@ -100,7 +100,6 @@ export function TourCards({
                   ))}
               </ul>
 
-
               <div className="exp-card-actions">
                 {/*
                  * Enlace estirado: el ::after de este botón (en el CSS) cubre

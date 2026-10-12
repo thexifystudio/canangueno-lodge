@@ -1,59 +1,17 @@
 import type { Localized } from "@/lib/i18n";
-import type { MediaId } from "@/config/media";
 
 /**
  * El lodge: instalaciones (de las inclusiones del tour) y los textos de la
  * página `/el-lodge`. Nada agregado.
  */
 
-export type Facility = {
-  id: string;
-  title: Localized;
-  body: Localized;
-  mediaId: MediaId;
+/** El equipo que el lodge da a cada huésped (de las inclusiones del tour). */
+export const fieldGear: Localized = {
+  es: "Impermeable, botas de caucho, mosquitero y chaleco salvavidas para cada huésped. Hay electricidad por horas para cargar cámaras y baterías.",
+  en: "Rain jacket, rubber boots, mosquito net and life vest for every guest. Electricity is available at set hours to charge cameras and batteries.",
+  de: "Regenjacke, Gummistiefel, Moskitonetz und Schwimmweste für jeden Gast. Zu festgelegten Zeiten steht Strom zum Laden von Kameras und Akkus zur Verfügung.",
+  fr: "Veste de pluie, bottes en caoutchouc, moustiquaire et gilet de sauvetage pour chaque hôte. L’électricité est disponible à heures fixes pour recharger appareils photo et batteries.",
 };
-
-export const facilities: Facility[] = [
-  {
-    id: "cabanas",
-    title: { es: "Cabañas", en: "Cabins",
-    de: "Hütten",
-    fr: "Cabanes" },
-    body: {
-      es: "Habitaciones con baño privado —sanitario, ducha y lavabo—, mosquitero y capacidad total para 40 huéspedes entre simples, dobles y compartidas.",
-      en: "Rooms with a private bathroom — toilet, shower and sink — mosquito nets, and a total capacity of 40 guests across single, double and shared rooms.",
-      de: "Zimmer mit eigenem Bad — WC, Dusche und Waschbecken — Moskitonetzen und einer Gesamtkapazität von 40 Gästen in Einzel-, Doppel- und Gemeinschaftszimmern.",
-      fr: "Des chambres avec salle de bain privée — toilettes, douche et lavabo — des moustiquaires, et une capacité totale de 40 personnes en chambres simples, doubles et partagées.",
-    },
-    mediaId: "lodge-bathroom",
-  },
-  {
-    id: "comedor",
-    title: { es: "Comedor", en: "Dining",
-    de: "Verpflegung",
-    fr: "Restauration" },
-    body: {
-      es: "Todas las comidas del tour están incluidas: desayuno, almuerzo y cena, con agua purificada y té disponibles en el lodge.",
-      en: "All meals during the tour are included: breakfast, lunch and dinner, with purified water and tea available at the lodge.",
-      de: "Alle Mahlzeiten während der Tour sind inbegriffen: Frühstück, Mittag- und Abendessen, dazu gereinigtes Wasser und Tee in der Lodge.",
-      fr: "Tous les repas du circuit sont inclus : petit-déjeuner, déjeuner et dîner, avec de l’eau purifiée et du thé disponibles au lodge.",
-    },
-    mediaId: "lodge-dining",
-  },
-  {
-    id: "equipo",
-    title: { es: "Equipo de campo", en: "Field gear",
-    de: "Ausrüstung",
-    fr: "Équipement" },
-    body: {
-      es: "Impermeable, botas de caucho, mosquitero y chaleco salvavidas para cada huésped. Hay electricidad por horas para cargar cámaras y baterías.",
-      en: "Rain jacket, rubber boots, mosquito net and life vest for every guest. Electricity is available at set hours to charge cameras and batteries.",
-      de: "Regenjacke, Gummistiefel, Moskitonetz und Schwimmweste für jeden Gast. Zu festgelegten Zeiten steht Strom zum Laden von Kameras und Akkus zur Verfügung.",
-      fr: "Veste de pluie, bottes en caoutchouc, moustiquaire et gilet de sauvetage pour chaque hôte. L’électricité est disponible à heures fixes pour recharger appareils photo et batteries.",
-    },
-    mediaId: "journey-road",
-  },
-];
 
 /**
  * ────────────────────────────────────────────────────────────────────────────
@@ -67,10 +25,10 @@ export const lodgePage = {
     {
       value: "2006",
       label: {
-        es: "operando en la Reserva Cuyabeno",
-        en: "operating in the Cuyabeno Reserve",
-        de: "im Cuyabeno-Reservat tätig",
-        fr: "en activité dans la réserve de Cuyabeno",
+        es: "el año en que empezamos en turismo",
+        en: "the year we started in tourism",
+        de: "seit diesem Jahr im Tourismus",
+        fr: "l’année de nos débuts dans le tourisme",
       },
     },
     {

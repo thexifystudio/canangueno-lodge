@@ -19,9 +19,9 @@ export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
 }
 
-/* Sólo los cuatro idiomas existen como segmento: `/xx` no entra a este
-   layout (que no sabría en qué idioma hablar) y lo atiende
-   `app/global-not-found.tsx`. */
+/* Sólo los cuatro idiomas existen como segmento: `/xx` no llega a este
+   layout (que no sabría en qué idioma hablar): `src/middleware.ts` lo manda
+   al 404 del sitio en el idioma del navegador. */
 export const dynamicParams = false;
 
 export const viewport: Viewport = {
@@ -54,7 +54,8 @@ export async function generateMetadata({
        páginas pasan por el `template`. */
     title: { default: dict.meta.homeTitle, template: `%s · ${site.name}` },
     openGraph: { ...home.openGraph, title: dict.meta.homeTitle },
-    robots: { index: true, follow: true },
+    /* En la URL provisional nada se indexa (ver `live` en config/site). */
+    robots: { index: site.live, follow: site.live },
   };
 }
 

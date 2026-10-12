@@ -10,7 +10,12 @@
 export const LOCALES = ["es", "en", "de", "fr"] as const;
 export type Locale = (typeof LOCALES)[number];
 
-export const DEFAULT_LOCALE: Locale = "es";
+/**
+ * El idioma para quien no indica uno: la raíz `/` abre en el idioma del
+ * navegador si es uno de los cuatro, y si no en inglés (también para Google,
+ * que no manda idioma). Es el `x-default` del hreflang.
+ */
+export const DEFAULT_LOCALE: Locale = "en";
 
 /**
  * TODO contenido existe en LOS CUATRO idiomas. No es negociable y lo obliga
@@ -37,10 +42,7 @@ export function isLocale(value: string): value is Locale {
 }
 
 /** Etiquetas del selector de idioma. */
-export const LOCALE_LABELS: Record<
-  Locale,
-  { long: string; aria: string }
-> = {
+export const LOCALE_LABELS: Record<Locale, { long: string; aria: string }> = {
   es: { long: "Español", aria: "Ver en español" },
   en: { long: "English", aria: "View in English" },
   de: { long: "Deutsch", aria: "Auf Deutsch anzeigen" },
