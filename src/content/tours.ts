@@ -155,7 +155,7 @@ export const tours: Tour[] = [
           fr: "Lever du soleil sur le fleuve · retour",
         },
         body: {
-          es: "A las seis de la mañana salimos a observar animales por el río Cuyabeno mientras amanece: delfines rosados, tucanes, garzas, monos, mariposas y serpientes arbóreas. Volvemos al lodge para el desayuno. Salida a las 09:30 hacia el puente, donde tomás el bus de regreso.",
+          es: "A las seis de la mañana salimos a observar animales por el río Cuyabeno mientras amanece: delfines rosados, tucanes, garzas, monos, mariposas y serpientes arbóreas. Volvemos al lodge para el desayuno. Salida a las 09:30 hacia el puente, donde tomas el bus de regreso.",
           en: "At six in the morning we head out to watch wildlife along the Cuyabeno river as the sun comes up: pink dolphins, toucans, herons, monkeys, butterflies and tree snakes. We return to the lodge for breakfast. Departure at 09:30 to the bridge, where you take the bus back.",
           de: "Um sechs Uhr morgens fahren wir hinaus, um bei Sonnenaufgang Tiere am Río Cuyabeno zu beobachten: rosa Flussdelfine, Tukane, Reiher, Affen, Schmetterlinge und Baumschlangen. Zurück in der Lodge gibt es Frühstück. Abfahrt um 09:30 Uhr zur Brücke, wo du den Bus zurück nimmst.",
           fr: "À six heures du matin, nous partons observer les animaux le long du río Cuyabeno au lever du soleil : dauphins roses, toucans, hérons, singes, papillons et serpents arboricoles. Retour au lodge pour le petit-déjeuner. Départ à 09h30 vers le pont, où vous reprenez le bus.",

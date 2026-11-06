@@ -2,6 +2,28 @@ import type { NextConfig } from "next";
 import { legacyRedirects } from "./legacy-redirects";
 import { site } from "./src/config/site";
 
+/** Direcciones que sirven el mismo sitio pero no son la canónica (`site.url`). */
+const NON_CANONICAL_HOSTS = [
+  "cananguenolodge.com",
+  "canangueno.thexifystudio.workers.dev",
+];
+
+/**
+ * Cabeceras de seguridad básicas. Sin CSP a propósito: el hero embebe YouTube
+ * y una CSP mal ajustada lo rompería sin aviso. HSTS sin `includeSubDomains`,
+ * porque `mail.` y `webmail.` siguen en el hosting del correo.
+ */
+const SECURITY_HEADERS = [
+  { key: "Strict-Transport-Security", value: "max-age=31536000" },
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "X-Frame-Options", value: "SAMEORIGIN" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  {
+    key: "Permissions-Policy",
+    value: "camera=(), microphone=(), geolocation=(), payment=()",
+  },
+];
+
 const nextConfig: NextConfig = {
   // La raíz `/` la resuelve `src/middleware.ts` (idioma del navegador). Acá:
   // páginas que se eliminaron y las URLs de la web vieja de WordPress (ver
@@ -22,17 +44,35 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       ...legacyRedirects,
+      // Con el dominio conectado, una sola dirección por página: el dominio
+      // sin `www` y la URL provisional de Workers mandan a `www`. Sin esto
+      // Google ve tres copias del sitio. Conserva la ruta y los parámetros
+      // (UTM de las campañas): una URL vieja de WordPress en el dominio sin
+      // `www` hace dos saltos, la suya y ésta, y Google sigue los dos.
+      ...(site.live
+        ? NON_CANONICAL_HOSTS.map((host) => ({
+            source: "/:path*",
+            has: [{ type: "host" as const, value: host }],
+            destination: `${site.url}/:path*`,
+            permanent: true,
+          }))
+        : []),
     ];
   },
 
-  // URL provisional: además de robots.txt, cada respuesta dice `noindex`
-  // (robots.txt sólo frena el rastreo, no que una URL enlazada se indexe).
   async headers() {
-    if (site.live) return [];
     return [
       {
         source: "/:path*",
-        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+        headers: [
+          ...SECURITY_HEADERS,
+          // URL provisional: además de robots.txt, cada respuesta dice
+          // `noindex` (robots.txt sólo frena el rastreo, no que una URL
+          // enlazada se indexe).
+          ...(site.live
+            ? []
+            : [{ key: "X-Robots-Tag", value: "noindex, nofollow" }]),
+        ],
       },
     ];
   },

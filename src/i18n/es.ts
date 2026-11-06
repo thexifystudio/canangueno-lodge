@@ -185,7 +185,7 @@ export const es = {
   meta: {
     homeTitle: "Canangueno Lodge · Tours a Cuyabeno y la Amazonía ecuatoriana",
     homeDescription:
-      "Lodge en el corazón de la Reserva Cuyabeno. Tours de 3, 4 y 5 días con guías bilingües, delfines rosados, comunidad Siona y todas las comidas incluidas. Cotiza tu viaje.",
+      "Lodge en el corazón de la Reserva Cuyabeno. Tours de 3, 4 y 5 días con guías bilingües, delfines rosados, comunidad Siona y comidas incluidas. Cotiza tu viaje.",
     toursDescription:
       "Compara nuestros tres recorridos por la Reserva Cuyabeno: itinerarios completos y qué incluye cada uno.",
     lodgeTitle: "El lodge en la Reserva Cuyabeno",

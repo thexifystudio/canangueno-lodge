@@ -250,7 +250,7 @@ cambiar el video: `video.youtubeId` en `src/config/site.ts`.
   Gemini y otros asistentes citen bien al lodge (tours, qué incluyen, cómo
   llegar, cuándo ir, contacto). Se arma solo desde el mismo contenido del
   sitio (`src/app/llms.txt/route.ts`).
-- **Las 38 URLs de la web vieja** (WordPress) redirigen con 301 a las nuevas
+- **Las 40 URLs de la web vieja** (WordPress) redirigen con 301 a las nuevas
   (`legacy-redirects.ts`), para no perder el posicionamiento actual.
 - **Mientras `LIVE` sea `false`,** nada se indexa: `noindex` en cada página y
   en las cabeceras, y `robots.txt` bloquea todo.
@@ -345,7 +345,7 @@ node scripts/styles-diff.mjs .shots/antes.json .shots/despues.json
 
 ## 🌐 Pasar al dominio `cananguenolodge.com`
 
-### Cómo está hoy (DNS consultado en septiembre de 2026)
+### Cómo está hoy (DNS consultado en septiembre y otra vez en noviembre de 2026, sin cambios)
 
 | Registro                       | Apunta a                                   | Qué es                          |
 | ------------------------------ | ------------------------------------------ | ------------------------------- |
@@ -354,6 +354,7 @@ node scripts/styles-diff.mjs .shots/antes.json .shots/despues.json
 | `www` (CNAME)                  | `c2066713.tier1.quicns.com`                | QUIC.cloud (caché de LiteSpeed) |
 | MX                             | `mail.cananguenolodge.com` → `66.225.241.98` | **el correo, en el mismo cPanel** |
 | `webmail`, `mail` (A)          | `66.225.241.98`                            | webmail del cPanel              |
+| `cpanel`, `ftp` (A)            | `66.225.241.98`                            | panel y FTP del hosting         |
 | TXT (SPF)                      | `+a +mx +ip4:66.225.241.50 +include:relay.mailchannels.net` | quién puede enviar |
 | `default._domainkey` (TXT)     | clave DKIM                                 | firma de los correos            |
 | `_dmarc`                       | **no existe**                              | falta                           |
@@ -378,10 +379,16 @@ no alcanza con cambiar un registro en el cPanel.
    personalizados.
 5. En `src/config/site.ts`, poner **`LIVE = true`** y correr `npm run deploy`.
    Con eso, la canónica, el sitemap, el JSON-LD y `llms.txt` pasan al dominio
-   real, y Google ya puede indexar.
+   real, y Google ya puede indexar. También se activan solas las
+   redirecciones de `cananguenolodge.com` (sin `www`) y de la URL provisional
+   de Workers hacia `www.cananguenolodge.com` (`next.config.ts`), con ruta y
+   UTM incluidos.
 6. Dar de alta el sitio en **Google Search Console** y en Bing Webmaster
    Tools, y enviar `/sitemap.xml`.
-7. **Limpiar el SPF** (cambiar `+a` por las IPs fijas):
+7. **Limpiar el SPF en el mismo momento que el paso 3**, no después: `+a`
+   autoriza la IP del dominio, y en cuanto el dominio apunte a Cloudflare esa
+   IP deja de ser la del servidor de correo y los correos del lodge empiezan
+   a caer en spam. Cambiar `+a` por las IPs fijas:
    `v=spf1 +mx +ip4:66.225.241.98 +ip4:66.225.241.50 +include:relay.mailchannels.net ~all`
    y **agregar DMARC** (TXT en `_dmarc`):
    `v=DMARC1; p=none; rua=mailto:info@cananguenolodge.com`

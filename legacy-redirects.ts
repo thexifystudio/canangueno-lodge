@@ -7,7 +7,8 @@
  *  llevando a las URLs de WordPress. Sin esto, cada uno cae en un 404 y el
  *  sitio pierde el posicionamiento que tiene hoy.
  *
- *  Salen del sitemap real (`/page-sitemap.xml`, septiembre de 2026). Son 301
+ *  Salen de los dos sitemaps reales (`/sitemap.xml` y `/page-sitemap.xml`,
+ *  revisados de nuevo en noviembre de 2026). Son 301
  *  (permanentes): le dicen a Google que la página se mudó y que pase su
  *  posicionamiento a la nueva.
  *
@@ -54,6 +55,10 @@ const map: Record<string, string> = {
   "/en/about-us": "/en/el-lodge",
   "/en/how-to-get": "/en/como-llegar",
   "/en/gallery": "/en/galeria",
+  // Estas dos ya daban 404 en WordPress, pero siguen en su sitemap.xml y
+  // pueden estar en el índice de Google.
+  "/en/galery": "/en/galeria",
+  "/en/lodge-amazonia-ecuador-2": "/en",
   "/en/flora-and-fauna-of-cuyobeno": "/en/galeria",
   "/en/cuyabeno-lake": "/en/galeria",
   "/en/lake-cuyabeno": "/en/galeria",
