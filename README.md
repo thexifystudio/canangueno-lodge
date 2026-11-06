@@ -334,6 +334,14 @@ node scripts/styles-diff.mjs .shots/antes.json .shots/despues.json
 
 ### Técnico (próximas fases)
 
+- [ ] **Migrar a Next.js 16.** Next 15 salió del soporte oficial en octubre
+      de 2026 y OpenNext ya no compila sin permiso explícito: por eso
+      `npm run deploy` y `npm run preview` llevan
+      `--dangerouslyUseUnsupportedNextVersion`. Mientras tanto, mantener Next
+      en el último parche de seguridad de la 15 (`npm view next dist-tags`,
+      etiqueta `backport`; hoy 15.5.29). En la 16, `src/middleware.ts` pasa a
+      llamarse `proxy.ts`. Al migrar, quitar el flag de los dos scripts.
+
 - [ ] **Analítica:** no hay ninguna instalada. Lo mínimo y sin cookies:
       Cloudflare Web Analytics. Para campañas: GA4 y Meta Pixel (con aviso de
       cookies).
